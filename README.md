@@ -21,8 +21,7 @@
 * SPDX-License-Identifier: EPL-2.0 OR Apache-2.0 OR GPL-2.0 WITH
 * Classpath-exception-2.0 OR LicenseRef-GPL-2.0 WITH Assembly-exception
 -->
-
-"# openj9-docs-staging"
+# openj9-docs-staging
 
 This repository is used for staging draft changes to the Eclipse OpenJ9 user documentation. Updates to this repository are made only by
 the Eclipse Jenkins instance. Do not create pull requests against this repository. To contribute to the OpenJ9 user documentation, read the [Contributions guidelines](https://github.com/eclipse/openj9-docs/blob/master/CONTRIBUTING.md).
