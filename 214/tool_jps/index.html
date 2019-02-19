@@ -2768,6 +2768,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../tool_migration/" title="Switching to OpenJ9" class="md-nav__link">
+      Switching to OpenJ9
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -2945,23 +2957,23 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
 <p>where <code>lvm_id</code> is a local VM identifier for the Java process. This ID is often the same as the operating system <em>process ID</em>, but can be different, for example if you are running Java in CygWin.</p>
-<p>For example:
-  ````
-  $ jps -l
+<p>For example:</p>
+<p>$ jps -l
   5462 looper
   14332 openj9.tools.attach.diagnostics.Jps</p>
 <p>$ jps -q
   5462
-  14332
-  ````</p>
+  14332</p>
 <p><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Note:</strong> This tool is the OpenJ9 implementation of the <code>jps</code> tool in the Java reference implementation, and differs from the HotSpot implementation. The tool is not supported and is subject to change or removal in future releases.</p>
-<p>The tool uses the Attach API, and has the following limitations:
-- Does not list Java processes on other hosts, to enhance security
-- Does not list Java processes owned by other users
-- Does not list non-OpenJ9 Java processes
-- Does not list processes whose attach API is disabled. <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Note:</strong> The Attach API is disabled by default on z/OS.</p>
+<p>The tool uses the Attach API, and has the following limitations:</p>
+<ul>
+<li>Does not list Java processes on other hosts, to enhance security</li>
+<li>Does not list Java processes owned by other users</li>
+<li>Does not list non-OpenJ9 Java processes</li>
+<li>Does not list processes whose attach API is disabled. <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Note:</strong> The Attach API is disabled by default on z/OS.</li>
+</ul>
 <p>For more information about the Attach API, including how to enable and secure it, see <a href="https://www.ibm.com/support/knowledgecenter/SSYKE2_8.0.0/com.ibm.java.vm.80.doc/docs/attachapi.html">Support for the Java Attach API</a>.</p>
-<!-- ==== END OF TOPIC ==== tool_builder.md ==== -->
+<!-- ==== END OF TOPIC ==== tool_jps.md ==== -->
                 
                   
                 
@@ -3019,13 +3031,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                       </a>
                     
                     
-                      <a href="openj9_support/" title="Supported environments" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+                      <a href="tool_migration/" title="Switching to OpenJ9" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
                         <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
                           <span class="md-flex__ellipsis">
                             <span class="md-footer-nav__direction">
                               Next
                             </span>
-                            Supported environments
+                            Switching to OpenJ9
                           </span>
                         </div>
                         <div class="md-flex__cell md-flex__cell--shrink">

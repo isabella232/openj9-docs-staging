@@ -633,13 +633,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#equivalent-tools" title="Equivalent tools" class="md-nav__link">
-    Equivalent tools
-  </a>
-  
-</li>
-      
       
       
       
@@ -2811,6 +2804,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../tool_migration/" title="Switching to OpenJ9" class="md-nav__link">
+      Switching to OpenJ9
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -2946,13 +2951,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#equivalent-tools" title="Equivalent tools" class="md-nav__link">
-    Equivalent tools
-  </a>
-  
-</li>
-      
       
       
       
@@ -3000,6 +2998,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <h1 id="switching-to-openj9">Switching to OpenJ9</h1>
 <p>If you are already familiar with HotSpot command-line options but want the advantages of OpenJ9, the following information will prove helpful. In all cases, check individual topics for minor discrepancies in the way these options might work.</p>
+<p><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Note:</strong> For information about HotSpot equivalences and differences for items other than command-line options, see <a href="../openj9_newuser/">New to OpenJ9?</a>.</p>
 <h2 id="compatible-options">Compatible options</h2>
 <p>You can use the following command-line options in OpenJ9, just as you did in Hotspot; you can continue to use the HotSpot option in OpenJ9 without having to change your code:</p>
 <table>
@@ -3136,27 +3135,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li>If you are used to using <code>-XX:+UseNUMA</code> in Hotspot, you no longer need to explicitly turn on NUMA awareness; it's on by default.</li>
 </ul>
 </li>
-</ol>
-<h2 id="equivalent-tools">Equivalent tools</h2>
-<p>OpenJ9 provides some tools for compatibility with the reference implementation. These tools might differ in behavior from the HotSpot equivalent:</p>
-<table>
-<thead>
-<tr>
-<th>HotSpot Tool</th>
-<th>OpenJ9 Tool</th>
-<th>Usage</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>jps</code></td>
-<td><a href="../tool_jps/"><code>jps</code></a><strong><sup>1</sup></strong></td>
-<td>Displays information about running Java<sup>&trade;</sup> processes</td>
-</tr>
-</tbody>
-</table>
-<ol>
-<li>The main differences from HotSpot are as follows: <code>jps</code> uses the Attach API, you can use it for the current host only, and there is no <code>-V</code> option.</li>
 </ol>
 <!-- ==== END OF TOPIC ==== cmdline_migration.md ==== -->
                 
