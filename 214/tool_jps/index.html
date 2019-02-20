@@ -2938,7 +2938,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 -->
 
 <h1 id="java-process-status">Java process status</h1>
-<p>Use the <code>jps</code> tool to query running Java<sup>&trade;</sup> processes. The tool shows information for every Java process that is owned by your user, for every VM, on the current host. The command syntax is as follows:</p>
+<p>Use the <code>jps</code> tool to query running Java<sup>&trade;</sup> processes. The tool shows information for every Java process that is owned by the current user ID on the current host. The command syntax is as follows:</p>
 <div class="codehilite"><pre><span></span>jps [&lt;options&gt;]
 </pre></div>
 
@@ -2952,18 +2952,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li><code>-v</code>: prints the Java VM arguments, including those that are produced automatically</li>
 </ul>
 <p>The output has the following format:</p>
-<div class="codehilite"><pre><span></span>&lt;lvm_id&gt; [[&lt;class_name&gt;|&lt;jar_name&gt;|&quot;Unknown&quot;] [&lt;application_args&gt;][&lt;vm_args&gt;]]
+<div class="codehilite"><pre><span></span>&lt;VMID&gt; [[&lt;class_name&gt;|&lt;jar_name&gt;|&quot;Unknown&quot;] [&lt;application_args&gt;][&lt;vm_args&gt;]]
 </pre></div>
 
 
-<p>where <code>lvm_id</code> is a local VM identifier for the Java process. This ID is often the same as the operating system <em>process ID</em>, but can be different, for example if you are running Java in Cygwin.</p>
+<p>where <code>VMID</code> is the Attach API virtual machine identifier for the Java process. This ID is often, but not always, the same as the operating system <em>process ID</em>. One example where the ID might be different is if you specified the system property <code>-Dcom.ibm.tools.attach.id</code> when you started the process.</p>
 <p>For example:</p>
-<p>$ jps -l
-  5462 looper
-  14332 openj9.tools.attach.diagnostics.Jps</p>
-<p>$ jps -q
-  5462
-  14332</p>
+<div class="codehilite"><pre><span></span>$ jps -l
+<span class="m">5462</span>  org.foo.bar.MyApplication
+<span class="m">14332</span> openj9.tools.attach.diagnostics.Jps
+
+$ jps -q
+<span class="m">5462</span>
+<span class="m">14332</span>
+</pre></div>
+
+
 <p><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Note:</strong> This tool is the OpenJ9 implementation of the <code>jps</code> tool in the Java reference implementation, and differs from the HotSpot implementation. The tool is not supported and is subject to change or removal in future releases.</p>
 <p>The tool uses the Attach API, and has the following limitations:</p>
 <ul>
