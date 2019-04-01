@@ -3045,7 +3045,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 -->
 
 <h1 id="-xx91-93readipinfoforras">-XX:[+|-]ReadIPInfoForRAS</h1>
-<p>Use this command-line option to enable and disable network queries being used to determine the host name and IP address for remote access servers (RAS).</p>
+<p>Use this command-line option to enable and disable network queries being used to determine the host name and IP address for RAS (reliability, availability, and serviceability).</p>
 <h2 id="syntax">Syntax</h2>
 <div class="codehilite"><pre><span></span>    -XX:[+|-]ReadIPInfoForRAS
 </pre></div>
@@ -3072,7 +3072,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </tr>
 </tbody>
 </table>
-<p>If a network query is performed but a nameserver cannot be contacted, the program will hang until the resolver times out (approximately 60 seconds). You can avoid this situation by using the <code>-XX:-ReadIPInfoForRAS</code> command-line option to prevent the query being performed.</p>
+<p>OpenJ9 captures the host name and IP address by default, for use in diagnosing problems. But if a nameserver cannot be contacted when a network query is made, the program will wait until the resolver times out.</p>
+<p>You can avoid this situation by using the <code>-XX:-ReadIPInfoForRAS</code> command-line option to prevent the query from being performed.</p>
 <!-- ==== END OF TOPIC ==== xxreadipinfoforras.md ==== -->
                 
                   
