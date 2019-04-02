@@ -63,7 +63,7 @@
     
     
       
-        <title>Java stack tool -  </title>
+        <title>Java stack (jstack) tool -  </title>
       
     
     
@@ -134,7 +134,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="../#java-stack-tool" tabindex="1" class="md-skip">
+      <a href="../#java-stack-jstack-tool" tabindex="1" class="md-skip">
         
       </a>
     
@@ -2813,8 +2813,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
   <li class="md-nav__item">
-    <a href="../tool_jps/" title="Java process status" class="md-nav__link">
-      Java process status
+    <a href="../tool_jps/" title="Java process status (jps)" class="md-nav__link">
+      Java process status (jps)
     </a>
   </li>
 
@@ -2833,8 +2833,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       
     
     
-    <a href="./" title="Java stack tool" class="md-nav__link md-nav__link--active">
-      Java stack tool
+    <a href="./" title="Java stack (jstack) tool" class="md-nav__link md-nav__link--active">
+      Java stack (jstack) tool
     </a>
     
   </li>
@@ -3009,22 +3009,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 * Classpath-exception-2.0 OR LicenseRef-GPL-2.0 WITH Assembly-exception
 -->
 
-<h1 id="java-stack-tool">Java stack tool</h1>
+<h1 id="java-stack-jstack-tool">Java stack (<code>jstack</code>) tool</h1>
 <p>Use the <code>jstack</code> tool to obtain Java stack traces and thread information for processes. The tool is similar to the HotSpot tool of the same name; the OpenJ9 version of <code>jstack</code> is an independent implementation, added for compatibility.</p>
 <p>The command syntax is as follows:</p>
 <div class="codehilite"><pre><span></span>jstack &lt;options&gt;* &lt;pid&gt;*
 </pre></div>
 
 
-<p>Where <code>&lt;pid&gt;*</code> is a list of process IDs. If none are supplied, the process IDs are read from <code>stdin</code>, which allows a user to query all processes via <code>jps -q | jstack</code>. IDs of inactive processes are silently ignored. If this option is used on its own, the output contains Java stacks and thread information of the specified processes (equivalent to the information provided in <code>java.lang.managmenet.ThreadInfo</code>).</p>
+<p>Where <code>&lt;pid&gt;*</code> is a list of process IDs. If none are supplied, the process IDs are read from <code>stdin</code>, which allows a user running a Bourne or equivalent shell to query all processes via <code>jps -q | jstack</code>. IDs of inactive processes are silently ignored. The output contains Java stacks and thread information of the specified processes (equivalent to the information provided in <code>java.lang.management.ThreadInfo</code>).</p>
 <p>The values for <code>&lt;options&gt;*</code> are as follows:</p>
 <ul>
-<li><code>-p</code>: Prints the system and agent properties of the process</li>
 <li><code>-J</code>: supplies arguments to the Java VM that is running the <code>jstack</code> command. You can use multiple <code>-J</code> options, for example: <code>jstack -J-Xmx10m -J-Dcom.ibm.tools.attach.enable=yes</code></li>
-<li><code>-l</code>: prints the application package name</li>
-<li><code>-q</code>: prints only the virtual machine identifiers</li>
-<li><code>-m</code>: prints the application arguments</li>
-<li><code>-v</code>: prints the Java VM arguments, including those that are produced automatically</li>
+<li><code>-p</code>: prints the system and agent properties of the process</li>
+<li><code>-l</code>: prints more verbose output, including information about locks</li>
+<li><code>-h</code>: prints help information</li>
 </ul>
 <p><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> <strong>Restrictions:</strong></p>
 <ul>
@@ -3074,7 +3072,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- Ignore all this to remove previous/next links in footer, but leave nav block else lose highlighting in LH navigation
                     <img alt="" src="../cr/rule.png"> [!-- Separator --]
                     
-                      <a href="tool_jps/" title="Java process status" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+                      <a href="tool_jps/" title="Java process status (jps)" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
                         <div class="md-flex__cell md-flex__cell--shrink">
                           <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
                         </div>
@@ -3083,7 +3081,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                             <span class="md-footer-nav__direction">
                               Previous
                             </span>
-                            Java process status
+                            Java process status (jps)
                           </span>
                         </div>
                       </a>
