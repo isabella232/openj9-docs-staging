@@ -373,9 +373,65 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       
     
     
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Version 0.15.0
+      </label>
+    
     <a href="./" title="Version 0.15.0" class="md-nav__link md-nav__link--active">
       Version 0.15.0
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">On this page ...</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#features-and-changes" title="Features and changes" class="md-nav__link">
+    Features and changes
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#binaries-and-supported-environments" title="Binaries and supported environments" class="md-nav__link">
+    Binaries and supported environments
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#performance-improvements-for-jvmti-watched-fields" title="Performance improvements for JVMTI watched fields" class="md-nav__link">
+    Performance improvements for JVMTI watched fields
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#support-for-pause-less-garbage-collection-on-ibm-z-systems" title="Support for pause-less garbage collection on IBM Z systems" class="md-nav__link">
+    Support for pause-less garbage collection on IBM Z systems
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
     
   </li>
 
@@ -3006,6 +3062,49 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     
   
   
+    <label class="md-nav__title" for="__toc">On this page ...</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#features-and-changes" title="Features and changes" class="md-nav__link">
+    Features and changes
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#binaries-and-supported-environments" title="Binaries and supported environments" class="md-nav__link">
+    Binaries and supported environments
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#performance-improvements-for-jvmti-watched-fields" title="Performance improvements for JVMTI watched fields" class="md-nav__link">
+    Performance improvements for JVMTI watched fields
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#support-for-pause-less-garbage-collection-on-ibm-z-systems" title="Support for pause-less garbage collection on IBM Z systems" class="md-nav__link">
+    Support for pause-less garbage collection on IBM Z systems
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -3049,24 +3148,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>The following new features and notable changes since v.0.14.0 are included in this release:</p>
 <ul>
 <li><a href="#binaries-and-supported-environments">New binaries and changes to supported environments</a></li>
-<li><a href="#support-for-openssl-102">Support for OpenSSL 1.0.2</a></li>
-<li><a href="#new-option-for-ignoring-or-reporting-unrecognized-xx-options">New option for ignoring or reporting unrecognized -XX: options</a></li>
-<li><a href="#improved-support-for-pause-less-garbage-collection">Improved support for pause-less garbage collection</a></li>
-<li><a href="#new-jstack-tool-for-obtaining-stack-traces-and-thread-information">New Java stack (<code>jstack</code>) tool for obtaining stack traces and thread information</a></li>
-<li><a href="#new-jps-tool">New Java process status (<code>jps</code>) tool</a></li>
-<li><a href="#new-experimental-option-to-improve-the-performance-of-jvmti-watched-fields">New experimental option to improve the performance of JVMTI watched fields</a></li>
-<li><a href="#new-option-to-prevent-a-network-query-being-used-to-determine-host-name-and-ip-address">New option to prevent a network query being used to determine host name and IP address</a></li>
-<li><a href="#changes-to-the-shared-classes-cache-generation-number">Changes to the shared classes cache generation number</a></li>
-</ul>
-<h1 id="whats-new-in-version-0150_1">What's new in version 0.15.0</h1>
-<p>The following new features and notable changes since v.0.14.0 are included in this release:</p>
-<ul>
-<li><a href="#binaries-and-supported-environments">New binaries and changes to supported environments</a></li>
 <li><a href="#performance-improvements-for-jvmti-watched-fields">Performance improvements for JVMTI watched fields</a></li>
 <li><a href="#support-for-pause-less-garbage-collection-on-ibm-z-systems">Support for pause-less garbage collection on IBM Z systems</a></li>
 </ul>
-<p>## Features and changes</p>
-<p>### Binaries and supported environments</p>
+<h2 id="features-and-changes">Features and changes</h2>
+<h3 id="binaries-and-supported-environments">Binaries and supported environments</h3>
 <p>OpenJ9 release 0.15.0 supports OpenJDK 8, 11, and 12.</p>
 <!--Binaries are available from the AdoptOpenJDK community at the following links:
  - <a href="https://adoptopenjdk.net/archive.html?variant=openjdk8&amp;jvmVariant=openj9">OpenJDK version 8</a>
@@ -3074,7 +3160,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 - <a href="https://adoptopenjdk.net/archive.html?variant=openjdk12&amp;jvmVariant=openj9">OpenJDK version 12</a>-->
 
 <p>To learn more about support for OpenJ9 releases, including OpenJDK levels and platform support, see <a href="../openj9_support/">Supported environments</a>.</p>
-<p>### Performance improvements for JVMTI watched fields</p>
+<h3 id="performance-improvements-for-jvmti-watched-fields">Performance improvements for JVMTI watched fields</h3>
 <p>OpenJ9 version 0.14.0 introduced the <a href="../xxjitinlinewatches/"><code>-XX:[+|-]JITInlineWatches</code></a> option, which, when enabled, turned on experimental JIT operations to improve the performance of JVMTI watched fields. Following successful results, this option is now enabled by default. Currently, performance improvements are enabled only on x86 platforms (Windows&reg;, macOS&reg;, and Linux).</p>
 <h3 id="support-for-pause-less-garbage-collection-on-ibm-z-systems">Support for pause-less garbage collection on IBM Z systems</h3>
 <p>Support for Concurrent scavenge mode is now extended to Linux on IBM Z&reg; systems and z/OS&reg;. For more information, see <a href="../xgc/#concurrentscavenge"><code>-Xgc:concurrentScavenge</code></a>.</p>
