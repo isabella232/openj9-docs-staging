@@ -3141,8 +3141,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 -->
 
 <h1 id="dump-extractor-jextract">Dump extractor (<code>jextract</code>)</h1>
-<p><strong>(AIX&reg; &amp; Linux&trade; only)</strong></p>
-<p>For a full analysis of core dumps from Linux and AIX platforms, copies of executable files and libraries are required along with the system dump (you can get some information from the dump without these files, but not as much). Run the <code>jextract</code> utility to collect these files.</p>
+<p><strong>(AIX&reg;, Linux&trade;, <img alt="Start of content that applies only to Java 11 (LTS) and later" src="../cr/java11plus.png" /> macOS&reg;<img alt="End of content that applies only to Java 10 and later" src="../cr/java_close_lts.png" />)</strong></p>
+<p>On some operating systems, copies of executable files and libraries are required for a full analysis of a core dump (you can get some information from the dump without these files, but not as much). Run the <code>jextract</code> utility to collect these extra files and package them into an archive file along with the core dump.</p>
 <h2 id="syntax">Syntax</h2>
 <div class="codehilite"><pre><span></span>    jextract &lt;core file name&gt; [&lt;zip_file&gt;]
 </pre></div>
