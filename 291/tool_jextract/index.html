@@ -3142,7 +3142,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <h1 id="dump-extractor-jextract">Dump extractor (<code>jextract</code>)</h1>
 <p><strong>(AIX&reg;, Linux&trade;, <img alt="Start of content that applies only to Java 11 (LTS) and later" src="../cr/java11plus.png" /> macOS&reg;<img alt="End of content that applies only to Java 10 and later" src="../cr/java_close_lts.png" />)</strong></p>
-<p>On some operating systems, copies of executable files and libraries are required for a full analysis of a core dump (you can get some information from the dump without these files, but not as much). Run the <code>jextract</code> utility to collect these extra files and package them into an archive file along with the core dump.</p>
+<p>On some operating systems, copies of executable files and libraries are required for a full analysis of a core dump (you can get some information from the dump without these files, but not as much). Run the <code>jextract</code> utility to collect these extra files and package them into an archive file along with the core dump. To analyze the output, use the <a href="../tool_jdmpview/">dump viewer (<code>jdmpview</code>)</a>.</p>
 <h2 id="syntax">Syntax</h2>
 <div class="codehilite"><pre><span></span>    jextract &lt;core file name&gt; [&lt;zip_file&gt;]
 </pre></div>
@@ -3151,13 +3151,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>where:</p>
 <ul>
 <li><code>&lt;core file name&gt;</code> is the name of the system dump.</li>
-<li><code>&lt;zip_file&gt;</code> is the name you want to give to the processed file. If you do not specify a name, output is written to <code>&lt;core file name&gt;.zip</code> by default.</li>
+<li><code>&lt;zip_file&gt;</code> is the name you want to give to the processed file. If you do not specify a name, output is written to <code>&lt;core file name&gt;.zip</code> by default. The output is written to the same directory as the core file.</li>
 </ul>
 <dl>
 <dt>If you are analyzing a dump from a VM that used <a href="../xcompressedrefs/"><code>-Xcompressedrefs</code></a>, include the <code>-J-Xcompressedrefs</code> parameter to run <code>jextract</code> using compressed references.</dt>
 <dd>
-<p><i class="fa fa-exclamation-triangle"></i> <strong>Restriction: </strong> You must run <code>jextract</code> using the same VM level, on the same system that produced the system dump. The <code>jextract</code> utility compresses the dump, executable files, and libraries into a single .zip file for use in subsequent problem diagnosis. To analyze the output, use the <a href="../tool_jdmpview/">dump viewer (<code>jdmpview</code>)</a>.</p>
-<p>If you run <code>jextract</code> on a VM level that is different from the one on which the dump was produced you see the following messages:</p>
+<p><i class="fa fa-exclamation-triangle"></i> <strong>Restriction: </strong> You must run <code>jextract</code> using the same VM level, on the same system that produced the system dump. If you run <code>jextract</code> on a VM level that is different from the one on which the dump was produced you see the following messages:</p>
 <div class="codehilite"><pre><span></span>J9RAS.buildID is incorrect (found e8801ed67d21c6be, expecting eb4173107d21c673).
 This version of jextract is incompatible with this dump.
 Failure detected during jextract, see previous message(s).
