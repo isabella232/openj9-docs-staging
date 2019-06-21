@@ -3205,10 +3205,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <h1 id="-xxshareclassesdisablebci-xxshareclassesenablebci">-XX:ShareClassesDisableBCI / <br> -XX:ShareClassesEnableBCI</h1>
 <p>The option <code>-Xshareclasses:enableBCI</code> improves startup performance without using a modification context, when using JVMTI class modification. This suboption allows classes loaded from the shared cache to be modified using a JVMTI <code>ClassFileLoadHook</code>, or a <code>java.lang.instrument</code> agent, and prevents modified classes being stored in the shared classes cache. You can turn off this option by specifying <code>-XX:ShareClassesDisableBCI</code> when you start your Java&trade; application.</p>
 <h2 id="syntax">Syntax</h2>
-<div class="codehilite"><pre><span></span>    -XX:ShareClassesDisableBCI|ShareClassesEnableBCI
-</pre></div>
-
-
+<pre><code>    -XX:ShareClassesDisableBCI|ShareClassesEnableBCI
+</code></pre>
 <table>
 <thead>
 <tr>

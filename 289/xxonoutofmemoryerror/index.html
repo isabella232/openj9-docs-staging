@@ -3191,10 +3191,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <h1 id="-xxonoutofmemoryerror">-XX:OnOutOfMemoryError</h1>
 <p>You can use this Oracle Hotspot option to run commands when a <code>java.lang.OutOfMemoryError</code> is thrown. This option is recognized by OpenJ9 and provided for compatibility.</p>
 <h2 id="syntax">Syntax</h2>
-<div class="codehilite"><pre><span></span>    -XX:OnOutOfMemoryError=&quot;&lt;command_string&gt;&quot;
-</pre></div>
-
-
+<pre><code>    -XX:OnOutOfMemoryError="&lt;command_string&gt;"
+</code></pre>
 <p>where <code>&lt;command_string&gt;</code> is a command or list of commands to run when a <code>java.lang.OutOfMemoryError</code> occurs.</p>
 <p>For example, the following command specifies that the <code>java -version</code> command is run if the <code>Test</code> application throws a <code>java.lang.OutOfMemoryError</code> exception:</p>
 <p><code>java -XX:OnOutOfMemoryError="java -version" Test</code></p>

@@ -3193,10 +3193,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>This option sets the size of each block of memory that is allocated to store the native code of compiled Java&trade; methods. By default, this size is selected internally according to the processor architecture and the capability of your system. The maximum value you can specify is 32 MB. If you set a value larger than 32 MB, the JIT ignores the input and sets the value to 32 MB.</p>
 <p><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Note:</strong> The JIT compiler might allocate more than one code cache for an application. Use the <a href="../xcodecachetotal/"><code>-Xcodecachetotal</code></a> option to set the maximum amount of memory that is used by all code caches.</p>
 <h2 id="syntax">Syntax</h2>
-<div class="codehilite"><pre><span></span>    -Xcodecache&lt;size&gt;
-</pre></div>
-
-
+<pre><code>    -Xcodecache&lt;size&gt;
+</code></pre>
 <dl>
 <dd>See <a href="../x_jvm_commands/">Using -X command-line options</a> for more information about specifying the <code>&lt;size&gt;</code> parameter.</dd>
 </dl>

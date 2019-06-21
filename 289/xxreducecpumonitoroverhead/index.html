@@ -3207,9 +3207,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>This option relates to the CPU usage of thread categories that can be obtained with the <code>com.ibm.lang.management.JvmCpuMonitorMXBean</code> application programming interface. This option affects the way that the VM records the amount of CPU usage of non-Garbage Collection (GC) threads that do work on behalf of GC.</p>
 <p>Most GC policies require non-GC threads to do some GC housekeeping work in proportion to the amount of memory allocation that they do. Ideally the exact amount of CPU time that the thread spends doing this housekeeping work should be accounted for in the GC thread category. However there is an overhead that is associated with maintaining the CPU usage data in the correct thread category.</p>
 <p><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> <strong>Restriction:</strong> This option is not supported on z/OS&reg;. If you attempt to use this option, the following message is generated:</p>
-<div class="codehilite"><pre><span></span><span class="nv">JVMJ9VM145E</span> <span class="o">-</span><span class="nv">XX</span><span class="p">:-</span><span class="nv">ReduceCPUMonitorOverhead</span> <span class="o">is</span> <span class="s s-Atom">unsupported</span> <span class="s s-Atom">on</span> <span class="s s-Atom">z</span><span class="o">/</span><span class="nv">OS</span><span class="p">.</span> <span class="nv">Error</span><span class="s s-Atom">:</span> <span class="nv">Could</span> <span class="o">not</span> <span class="s s-Atom">create</span> <span class="s s-Atom">the</span> <span class="nv">Java</span> <span class="nv">Virtual</span> <span class="nv">Machine</span><span class="p">.</span>
-</pre></div>
-
+<pre><code>JVMJ9VM145E -XX:-ReduceCPUMonitorOverhead is unsupported on z/OS. Error: Could not create the Java Virtual Machine.
+</code></pre>
 
 <h2 id="syntax">Syntax</h2>
 <p>-XX:[+|-]ReduceCPUMonitorOverhead</p>

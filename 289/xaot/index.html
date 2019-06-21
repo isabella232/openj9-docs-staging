@@ -3438,18 +3438,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </tbody>
 </table>
 <h3 id="count"><code>count</code></h3>
-<div class="codehilite"><pre><span></span>    -Xaot:count=&lt;n&gt;
-</pre></div>
-
-
+<pre><code>    -Xaot:count=&lt;n&gt;
+</code></pre>
 <dl>
 <dd>where <code>&lt;n&gt;</code> is the number of times a method is called before it is compiled or loaded from an existing shared class cache. For example, setting <code>-Xaot:count=0</code> forces the AOT compiler to compile everything on first execution.</dd>
 </dl>
 <h3 id="exclude"><code>exclude</code></h3>
-<div class="codehilite"><pre><span></span>    -Xaot:exclude=&lt;method&gt;
-</pre></div>
-
-
+<pre><code>    -Xaot:exclude=&lt;method&gt;
+</code></pre>
 <dl>
 <dd>
 <p>where <code>&lt;method&gt;</code> is the Java method you want to exclude when AOT code is compiled or loaded from the shared classes cache.</p>
@@ -3457,42 +3453,32 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </dd>
 </dl>
 <h3 id="limitfile"><code>limitFile</code></h3>
-<div class="codehilite"><pre><span></span>    -Xaot:limitFile=(&lt;filename&gt;,&lt;m&gt;,&lt;n&gt;)
-</pre></div>
-
-
+<pre><code>    -Xaot:limitFile=(&lt;filename&gt;,&lt;m&gt;,&lt;n&gt;)
+</code></pre>
 <dl>
 <dd>Compile or load only the methods listed on lines <code>&lt;m&gt;</code> to <code>&lt;n&gt;</code> in the specified limit file (<code>&lt;filename&gt;</code>). Methods not listed in the limit file and methods listed on lines outside the range are not compiled or loaded.</dd>
 </dl>
 <h3 id="loadexclude"><code>loadExclude</code></h3>
-<div class="codehilite"><pre><span></span>    -Xaot:loadExclude=&lt;method_prefix&gt;
-</pre></div>
-
-
+<pre><code>    -Xaot:loadExclude=&lt;method_prefix&gt;
+</code></pre>
 <dl>
 <dd>Do not load methods beginning with <code>&lt;method_prefix&gt;</code>.</dd>
 </dl>
 <h3 id="loadlimit"><code>loadLimit</code></h3>
-<div class="codehilite"><pre><span></span>    -Xaot:loadLimit=&lt;method_prefix&gt;
-</pre></div>
-
-
+<pre><code>    -Xaot:loadLimit=&lt;method_prefix&gt;
+</code></pre>
 <dl>
 <dd>Load methods beginning with <code>&lt;method_prefix&gt;</code> only.</dd>
 </dl>
 <h3 id="loadlimitfile"><code>loadLimitFile</code></h3>
-<div class="codehilite"><pre><span></span>    -Xaot:loadLimitFile=(&lt;filename&gt;,&lt;m&gt;,&lt;n&gt;)
-</pre></div>
-
-
+<pre><code>    -Xaot:loadLimitFile=(&lt;filename&gt;,&lt;m&gt;,&lt;n&gt;)
+</code></pre>
 <dl>
 <dd>Load only the methods listed on lines <code>&lt;m&gt;</code> to <code>&lt;n&gt;</code> in the specified limit file (<code>&lt;filename&gt;</code>). Methods not listed in the limit file and methods listed on lines outside the range are not loaded.</dd>
 </dl>
 <h3 id="verbose"><code>verbose</code></h3>
-<div class="codehilite"><pre><span></span>    -Xaot:verbose
-</pre></div>
-
-
+<pre><code>    -Xaot:verbose
+</code></pre>
 <dl>
 <dd>Reports information about the AOT and JIT compiler configuration and method compilation.</dd>
 </dl>

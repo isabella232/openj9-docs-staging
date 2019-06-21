@@ -3220,10 +3220,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p><strong>(31-bit z/OS&reg; only)</strong></p>
 <p>Controls OpenJ9 VM Language Environment&reg; condition handling.</p>
 <h2 id="syntax">Syntax</h2>
-<div class="codehilite"><pre><span></span>    -XCEEHDLR
-</pre></div>
-
-
+<pre><code>    -XCEEHDLR
+</code></pre>
 <h2 id="explanation">Explanation</h2>
 <p>Use the <code>-XCEEHDLR</code> option if you want the new behavior for the Java&trade; and COBOL interoperability batch mode environment, because this option makes signal and condition handling behavior more predictable in a mixed Java and COBOL environment.</p>
 <p>When the <code>-XCEEHDLR</code> option is enabled, a condition triggered by an arithmetic operation while executing a Java Native Interface (JNI) component causes the VM to convert the Language Environment condition into a Java <code>ConditionException</code>.</p>

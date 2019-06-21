@@ -3305,10 +3305,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>If you use the <a href="../xgc/#preferredheapbase"><code>-Xgc:preferredHeapBase</code></a> option with <code>-Xlp</code>, the preferredHeapBase address must be a multiple of the large page size. If you specify an inaccurate heap base address, the heap is allocated with the default page size.</p>
 <p>To find out the large page sizes available and the current setting, use the <code>-verbose:sizes</code> option. Note that the current settings are the requested sizes and not the sizes obtained. For object heap size information, check the <code>-verbose:gc</code> output.</p>
 <h2 id="syntax">Syntax</h2>
-<div class="codehilite"><pre><span></span>    -Xlp[&lt;size&gt;]
-</pre></div>
-
-
+<pre><code>    -Xlp[&lt;size&gt;]
+</code></pre>
 <p>See <a href="../x_jvm_commands/">Using -X command-line options</a> for more information about the <code>&lt;size&gt;</code> parameter.</p>
 <h2 id="explanation">Explanation</h2>
 <h3 id="aix">AIX&reg;</h3>

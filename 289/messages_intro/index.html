@@ -3310,9 +3310,8 @@ mean can help you with problem determination.</p>
 <dd>Error messages are issued by the VM when normal processing cannot proceed, because of unexpected conditions.</dd>
 </dl>
 <p>OpenJ9 virtual machine messages have the following format:</p>
-<div class="codehilite"><pre><span></span>    JVM&lt;type&gt;&lt;number&gt;&lt;code&gt;
-</pre></div>
-
+<pre><code>    JVM&lt;type&gt;&lt;number&gt;&lt;code&gt;
+</code></pre>
 
 <p>where:</p>
 <ul>
@@ -3336,16 +3335,14 @@ mean can help you with problem determination.</p>
 <ol>
 <li>Set up a redirect in the file <code>syslog.conf</code> so that syslog messages are sent to the error log, by adding the following line:</li>
 </ol>
-<div class="codehilite"><pre><span></span>        user.debug errlog
-</pre></div>
-
+<pre><code>        user.debug errlog
+</code></pre>
 
 <ol>
 <li>If <strong>syslogd</strong> is already running, reload the updated configuration by running the following command:</li>
 </ol>
-<div class="codehilite"><pre><span></span>        refresh -s syslogd
-</pre></div>
-
+<pre><code>        refresh -s syslogd
+</code></pre>
 
 <ol>
 <li>The updated configuration is used each time <strong>syslogd</strong> starts. 4.  Use the AIX <strong>errpt</strong> command or the System Management Interface Tool (SMIT) to read the messages sent to the error log.</li>

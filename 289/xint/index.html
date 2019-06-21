@@ -3205,10 +3205,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <h1 id="-xint">-Xint</h1>
 <p>As described in the <a href="https://docs.oracle.com/javase/8/docs/technotes/tools/unix/java.html#BABHDABI">Oracle "Non-Standard Options" documentation</a>, this VM option runs an application in interpreted-only mode. For compatibility, this option is also supported by the OpenJ9 VM.</p>
 <h2 id="syntax">Syntax</h2>
-<div class="codehilite"><pre><span></span>    -Xint
-</pre></div>
-
-
+<pre><code>    -Xint
+</code></pre>
 <h2 id="explanation">Explanation</h2>
 <p>If you use this option, the OpenJ9 VM uses only the interpreter, disabling the OpenJ9 just-in-time (JIT) and ahead-of-time (AOT) compilers. By default, both these compilers are enabled, although the AOT compiler is not used by the VM unless <a href="../xshareclasses/">shared classes</a> are also enabled.</p>
 <!-- ==== END OF TOPIC ==== xint.md ==== -->

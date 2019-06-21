@@ -3259,34 +3259,24 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <h1 id="-xlockword">-Xlockword</h1>
 <p>Test whether performance optimizations are negatively impacting an application.</p>
 <h2 id="syntax">Syntax</h2>
-<div class="codehilite"><pre><span></span>    -Xlockword:&lt;parameters&gt;
-</pre></div>
-
-
+<pre><code>    -Xlockword:&lt;parameters&gt;
+</code></pre>
 <h2 id="parameters">Parameters</h2>
 <h3 id="mode"><code>mode</code></h3>
-<div class="codehilite"><pre><span></span>    -Xlockword:mode=all
+<pre><code>    -Xlockword:mode=all
     -Xlockword:mode=default
-</pre></div>
-
-
+</code></pre>
 <p>Locking optimizations typically reduce memory usage and improve performance. However, there might be some situations where a smaller heap size is achieved for an application, but overall application performance decreases.</p>
 <p>For example, if your application synchronizes on objects that are not typically synchronized on, such as <code>Java.lang.String</code>, run the following test:<br />
 Use the following command-line option to revert to behavior that is closer to earlier versions and monitor application performance:</p>
-<div class="codehilite"><pre><span></span>-Xlockword:mode=all
-</pre></div>
-
-
+<pre><code>-Xlockword:mode=all
+</code></pre>
 <p>If performance does not improve, remove the previous command-line options or use the following command-line option to reestablish the new behavior:</p>
-<div class="codehilite"><pre><span></span>-Xlockword:mode=default
-</pre></div>
-
-
+<pre><code>-Xlockword:mode=default
+</code></pre>
 <h3 id="nolockword"><code>nolockword</code></h3>
-<div class="codehilite"><pre><span></span>    -Xlockword:nolockword=&lt;class_name&gt;
-</pre></div>
-
-
+<pre><code>    -Xlockword:nolockword=&lt;class_name&gt;
+</code></pre>
 <dl>
 <dd>
 <p>Removes the lockword from object instances of the class <code>&lt;class_name&gt;</code>, reducing the space required for these objects. However, this action might have an adverse effect on synchronization for those objects.</p>
@@ -3294,10 +3284,8 @@ Use the following command-line option to revert to behavior that is closer to ea
 </dd>
 </dl>
 <h3 id="what"><code>what</code></h3>
-<div class="codehilite"><pre><span></span>    -Xlockword:what
-</pre></div>
-
-
+<pre><code>    -Xlockword:what
+</code></pre>
 <dl>
 <dd>Shows the current lockword configuration.</dd>
 </dl>

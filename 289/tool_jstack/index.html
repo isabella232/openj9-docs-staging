@@ -3146,10 +3146,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <h1 id="java-stack-jstack-tool">Java stack (<code>jstack</code>) tool</h1>
 <p>Use the <code>jstack</code> tool to obtain Java stack traces and thread information for processes. The tool is similar to the HotSpot tool of the same name; the OpenJ9 version of <code>jstack</code> is an independent implementation, added for compatibility.</p>
 <p>The command syntax is as follows:</p>
-<div class="codehilite"><pre><span></span>jstack &lt;options&gt;* &lt;pid&gt;*
-</pre></div>
-
-
+<pre><code>jstack &lt;options&gt;* &lt;pid&gt;*
+</code></pre>
 <p>Where <code>&lt;pid&gt;*</code> is a list of process IDs. If none are supplied, the process IDs are read from <code>stdin</code>, which allows a user running a Bourne or equivalent shell to query all processes via <code>jps -q | jstack</code>. IDs of inactive processes are silently ignored. The output contains Java stacks and thread information of the specified processes (equivalent to the information provided in <code>java.lang.management.ThreadInfo</code>).</p>
 <p>The values for <code>&lt;options&gt;*</code> are as follows:</p>
 <ul>

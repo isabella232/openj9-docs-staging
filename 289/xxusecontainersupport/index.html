@@ -3192,10 +3192,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p><strong>(Linux&reg; only)</strong></p>
 <p>If your application is running in a container that imposes a memory limit, the VM allocates a larger fraction of memory to the Java heap. To turn off this behavior, set the <code>-XX:-UseContainerSupport</code> option on the command line.</p>
 <h2 id="syntax">Syntax</h2>
-<div class="codehilite"><pre><span></span>    -XX:[+|-]UseContainerSupport
-</pre></div>
-
-
+<pre><code>    -XX:[+|-]UseContainerSupport
+</code></pre>
 <table>
 <thead>
 <tr>
@@ -3249,10 +3247,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </ol>
 <p>To prevent the VM adjusting the maximum heap size when running in a container, set <code>-XX:-UseContainerSupport</code>.</p>
 <p>When <a href="../xxinitialrampercentage/"><code>-XX:MaxRAMPercentage</code> / <code>-XX:InitialRAMPercentage</code></a> are used with <code>-XX:+UseContainerSupport</code>, the corresponding heap setting is determined based on the memory limit of the container. For example, to set the maximum heap size to 80% of the container memory, specify the following options:</p>
-<div class="codehilite"><pre><span></span>-XX:+UseContainerSupport -XX:MaxRAMPercentage=80
-</pre></div>
-
-
+<pre><code>-XX:+UseContainerSupport -XX:MaxRAMPercentage=80
+</code></pre>
 <!-- ==== END OF TOPIC ==== xxusecontainersupport.md ==== -->
                 
                   

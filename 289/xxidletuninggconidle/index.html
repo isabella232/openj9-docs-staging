@@ -3207,10 +3207,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>This option controls whether a garbage collection cycle takes place when the state of the OpenJ9 VM is set to idle.</p>
 <p><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> <strong>Restrictions:</strong> This option applies only to Linux&reg; architectures when the Generational Concurrent (<code>gencon</code>) garbage collection policy is in use. This option is not effective if the object heap is configured to use large pages.</p>
 <h2 id="syntax">Syntax</h2>
-<div class="codehilite"><pre><span></span>    -XX:[+|-]IdleTuningGcOnIdle
-</pre></div>
-
-
+<pre><code>    -XX:[+|-]IdleTuningGcOnIdle
+</code></pre>
 <table>
 <thead>
 <tr>

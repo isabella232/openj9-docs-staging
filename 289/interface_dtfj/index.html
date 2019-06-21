@@ -3281,120 +3281,118 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>The following example shows how to work with a system dump. In this example, the only section of code that ties the dump to a particular implementation of DTFJ is the generation of the factory class. Change the factory if you want to use a different implementation.</p>
 <p><details>
   <summary>Example of working with a system dump</summary></p>
-<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">java.io.File</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">java.util.Iterator</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="p">;</span>
+<pre><code>import java.io.File;
+import java.util.Iterator;
+import java.io.IOException;
 
-<span class="kn">import</span> <span class="nn">com.ibm.dtfj.image.CorruptData</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.ibm.dtfj.image.Image</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.ibm.dtfj.image.ImageFactory</span><span class="p">;</span>
+import com.ibm.dtfj.image.CorruptData;
+import com.ibm.dtfj.image.Image;
+import com.ibm.dtfj.image.ImageFactory;
 
-<span class="n">public</span> <span class="k">class</span> <span class="nc">DTFJEX1</span> <span class="p">{</span>
-    <span class="n">public</span> <span class="n">static</span> <span class="n">void</span> <span class="n">main</span><span class="p">(</span><span class="n">String</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">Image</span> <span class="n">image</span> <span class="o">=</span> <span class="n">null</span><span class="p">;</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">File</span> <span class="n">f</span> <span class="o">=</span> <span class="n">new</span> <span class="n">File</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
-            <span class="k">try</span> <span class="p">{</span>
-                <span class="n">Class</span> <span class="n">factoryClass</span> <span class="o">=</span> <span class="n">Class</span><span class="o">.</span><span class="n">forName</span><span class="p">(</span><span class="s2">&quot;com.ibm.dtfj.image.j9.ImageFactory&quot;</span><span class="p">);</span>
-                <span class="n">ImageFactory</span> <span class="n">factory</span> <span class="o">=</span> <span class="p">(</span><span class="n">ImageFactory</span><span class="p">)</span> <span class="n">factoryClass</span><span class="o">.</span><span class="n">newInstance</span><span class="p">();</span>
-                <span class="n">image</span> <span class="o">=</span> <span class="n">factory</span><span class="o">.</span><span class="n">getImage</span><span class="p">(</span><span class="n">f</span><span class="p">);</span>
-            <span class="p">}</span> <span class="n">catch</span> <span class="p">(</span><span class="n">ClassNotFoundException</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
-                <span class="n">System</span><span class="o">.</span><span class="n">err</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="s2">&quot;Could not find DTFJ factory class&quot;</span><span class="p">);</span>
-                <span class="n">e</span><span class="o">.</span><span class="n">printStackTrace</span><span class="p">(</span><span class="n">System</span><span class="o">.</span><span class="n">err</span><span class="p">);</span>
-            <span class="p">}</span> <span class="n">catch</span> <span class="p">(</span><span class="n">IllegalAccessException</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
-                <span class="n">System</span><span class="o">.</span><span class="n">err</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="s2">&quot;IllegalAccessException for DTFJ factory class&quot;</span><span class="p">);</span>
-                <span class="n">e</span><span class="o">.</span><span class="n">printStackTrace</span><span class="p">(</span><span class="n">System</span><span class="o">.</span><span class="n">err</span><span class="p">);</span>
-            <span class="p">}</span> <span class="n">catch</span> <span class="p">(</span><span class="n">InstantiationException</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
-                <span class="n">System</span><span class="o">.</span><span class="n">err</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="s2">&quot;Could not instantiate DTFJ factory class&quot;</span><span class="p">);</span>
-                <span class="n">e</span><span class="o">.</span><span class="n">printStackTrace</span><span class="p">(</span><span class="n">System</span><span class="o">.</span><span class="n">err</span><span class="p">);</span>
-            <span class="p">}</span> <span class="n">catch</span> <span class="p">(</span><span class="n">IOException</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
-                <span class="n">System</span><span class="o">.</span><span class="n">err</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="s2">&quot;Could not find/use required file(s)&quot;</span><span class="p">);</span>
-                <span class="n">e</span><span class="o">.</span><span class="n">printStackTrace</span><span class="p">(</span><span class="n">System</span><span class="o">.</span><span class="n">err</span><span class="p">);</span>
-            <span class="p">}</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-            <span class="n">System</span><span class="o">.</span><span class="n">err</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="s2">&quot;No filename specified&quot;</span><span class="p">);</span>
-        <span class="p">}</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">image</span> <span class="o">==</span> <span class="n">null</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">return</span><span class="p">;</span>
-        <span class="p">}</span>
+public class DTFJEX1 {
+    public static void main(String[] args) {
+        Image image = null;
+        if (args.length &gt; 0) {
+            File f = new File(args[0]);
+            try {
+                Class factoryClass = Class.forName(&quot;com.ibm.dtfj.image.j9.ImageFactory&quot;);
+                ImageFactory factory = (ImageFactory) factoryClass.newInstance();
+                image = factory.getImage(f);
+            } catch (ClassNotFoundException e) {
+                System.err.println(&quot;Could not find DTFJ factory class&quot;);
+                e.printStackTrace(System.err);
+            } catch (IllegalAccessException e) {
+                System.err.println(&quot;IllegalAccessException for DTFJ factory class&quot;);
+                e.printStackTrace(System.err);
+            } catch (InstantiationException e) {
+                System.err.println(&quot;Could not instantiate DTFJ factory class&quot;);
+                e.printStackTrace(System.err);
+            } catch (IOException e) {
+                System.err.println(&quot;Could not find/use required file(s)&quot;);
+                e.printStackTrace(System.err);
+            }
+        } else {
+            System.err.println(&quot;No filename specified&quot;);
+        }
+        if (image == null) {
+            return;
+        }
 
-        <span class="n">Iterator</span> <span class="n">asIt</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">getAddressSpaces</span><span class="p">();</span>
-        <span class="nb">int</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-        <span class="k">while</span> <span class="p">(</span><span class="n">asIt</span><span class="o">.</span><span class="n">hasNext</span><span class="p">())</span> <span class="p">{</span>
-            <span class="n">Object</span> <span class="n">tempObj</span> <span class="o">=</span> <span class="n">asIt</span><span class="o">.</span><span class="n">next</span><span class="p">();</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">tempObj</span> <span class="n">instanceof</span> <span class="n">CorruptData</span><span class="p">)</span> <span class="p">{</span>
-                <span class="n">System</span><span class="o">.</span><span class="n">err</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="s2">&quot;Address Space object is corrupt: &quot;</span>
-                        <span class="o">+</span> <span class="p">(</span><span class="n">CorruptData</span><span class="p">)</span> <span class="n">tempObj</span><span class="p">);</span>
-            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-                <span class="n">count</span><span class="o">++</span><span class="p">;</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-        <span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="s2">&quot;The number of address spaces is: &quot;</span> <span class="o">+</span> <span class="n">count</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-
+        Iterator asIt = image.getAddressSpaces();
+        int count = 0;
+        while (asIt.hasNext()) {
+            Object tempObj = asIt.next();
+            if (tempObj instanceof CorruptData) {
+                System.err.println(&quot;Address Space object is corrupt: &quot;
+                        + (CorruptData) tempObj);
+            } else {
+                count++;
+            }
+        }
+        System.out.println(&quot;The number of address spaces is: &quot; + count);
+    }
+}
+</code></pre>
 
 <p></details></p>
 <h3 id="working-with-a-java-dump">Working with a Java dump</h3>
 <p>To work with a Java dump, change the factory class to <code>com.ibm.dtfj.image.javacore.JCImageFactory</code> and pass the Java dump file to the <code>getImage()</code> method.</p>
 <p><details>
   <summary>Example of working with a Java dump</summary></p>
-<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">java.io.File</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">java.util.Iterator</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="p">;</span>
+<pre><code>import java.io.File;
+import java.util.Iterator;
+import java.io.IOException;
 
-<span class="kn">import</span> <span class="nn">com.ibm.dtfj.image.CorruptData</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.ibm.dtfj.image.Image</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.ibm.dtfj.image.ImageFactory</span><span class="p">;</span>
+import com.ibm.dtfj.image.CorruptData;
+import com.ibm.dtfj.image.Image;
+import com.ibm.dtfj.image.ImageFactory;
 
-<span class="n">public</span> <span class="k">class</span> <span class="nc">DTFJEX2</span> <span class="p">{</span>
-    <span class="n">public</span> <span class="n">static</span> <span class="n">void</span> <span class="n">main</span><span class="p">(</span><span class="n">String</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">Image</span> <span class="n">image</span><span class="o">=</span><span class="n">null</span><span class="p">;</span>
+public class DTFJEX2 {
+    public static void main(String[] args) {
+        Image image=null;
 
-        <span class="k">if</span> <span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">File</span> <span class="n">javacoreFile</span> <span class="o">=</span> <span class="n">new</span> <span class="n">File</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+        if (args.length &gt; 0) {
+            File javacoreFile = new File(args[0]);
 
-            <span class="k">try</span> <span class="p">{</span>
-                <span class="n">Class</span> <span class="n">factoryClass</span> <span class="o">=</span> <span class="n">Class</span><span class="o">.</span><span class="n">forName</span><span class="p">(</span><span class="s2">&quot;com.ibm.dtfj.image.javacore.JCImageFactory&quot;</span><span class="p">);</span>
-                <span class="n">ImageFactory</span> <span class="n">factory</span> <span class="o">=</span> <span class="p">(</span><span class="n">ImageFactory</span><span class="p">)</span> <span class="n">factoryClass</span><span class="o">.</span><span class="n">newInstance</span><span class="p">();</span>
-                <span class="n">image</span> <span class="o">=</span> <span class="n">factory</span><span class="o">.</span><span class="n">getImage</span><span class="p">(</span><span class="n">javacoreFile</span><span class="p">);</span>
-            <span class="p">}</span> <span class="n">catch</span> <span class="p">(</span><span class="n">ClassNotFoundException</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
-                <span class="n">System</span><span class="o">.</span><span class="n">err</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="s2">&quot;Could not find DTFJ factory class&quot;</span><span class="p">);</span>
-                <span class="n">e</span><span class="o">.</span><span class="n">printStackTrace</span><span class="p">(</span><span class="n">System</span><span class="o">.</span><span class="n">err</span><span class="p">);</span>
-            <span class="p">}</span> <span class="n">catch</span> <span class="p">(</span><span class="n">IllegalAccessException</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
-                <span class="n">System</span><span class="o">.</span><span class="n">err</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="s2">&quot;IllegalAccessException for DTFJ factory class&quot;</span><span class="p">);</span>
-                <span class="n">e</span><span class="o">.</span><span class="n">printStackTrace</span><span class="p">(</span><span class="n">System</span><span class="o">.</span><span class="n">err</span><span class="p">);</span>
-            <span class="p">}</span> <span class="n">catch</span> <span class="p">(</span><span class="n">InstantiationException</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
-                <span class="n">System</span><span class="o">.</span><span class="n">err</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="s2">&quot;Could not instantiate DTFJ factory class&quot;</span><span class="p">);</span>
-                <span class="n">e</span><span class="o">.</span><span class="n">printStackTrace</span><span class="p">(</span><span class="n">System</span><span class="o">.</span><span class="n">err</span><span class="p">);</span>
-            <span class="p">}</span> <span class="n">catch</span> <span class="p">(</span><span class="n">IOException</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span>
-                <span class="n">System</span><span class="o">.</span><span class="n">err</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="s2">&quot;Could not find/use required file(s)&quot;</span><span class="p">);</span>
-                <span class="n">e</span><span class="o">.</span><span class="n">printStackTrace</span><span class="p">(</span><span class="n">System</span><span class="o">.</span><span class="n">err</span><span class="p">);</span>
-            <span class="p">}</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-            <span class="n">System</span><span class="o">.</span><span class="n">err</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="s2">&quot;No filename specified&quot;</span><span class="p">);</span>
-        <span class="p">}</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">image</span> <span class="o">==</span> <span class="n">null</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">return</span><span class="p">;</span>
-        <span class="p">}</span>
+            try {
+                Class factoryClass = Class.forName(&quot;com.ibm.dtfj.image.javacore.JCImageFactory&quot;);
+                ImageFactory factory = (ImageFactory) factoryClass.newInstance();
+                image = factory.getImage(javacoreFile);
+            } catch (ClassNotFoundException e) {
+                System.err.println(&quot;Could not find DTFJ factory class&quot;);
+                e.printStackTrace(System.err);
+            } catch (IllegalAccessException e) {
+                System.err.println(&quot;IllegalAccessException for DTFJ factory class&quot;);
+                e.printStackTrace(System.err);
+            } catch (InstantiationException e) {
+                System.err.println(&quot;Could not instantiate DTFJ factory class&quot;);
+                e.printStackTrace(System.err);
+            } catch (IOException e) {
+                System.err.println(&quot;Could not find/use required file(s)&quot;);
+                e.printStackTrace(System.err);
+            }
+        } else {
+            System.err.println(&quot;No filename specified&quot;);
+        }
+        if (image == null) {
+            return;
+        }
 
-        <span class="n">Iterator</span> <span class="n">asIt</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">getAddressSpaces</span><span class="p">();</span>
-        <span class="nb">int</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-        <span class="k">while</span> <span class="p">(</span><span class="n">asIt</span><span class="o">.</span><span class="n">hasNext</span><span class="p">())</span> <span class="p">{</span>
-            <span class="n">Object</span> <span class="n">tempObj</span> <span class="o">=</span> <span class="n">asIt</span><span class="o">.</span><span class="n">next</span><span class="p">();</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">tempObj</span> <span class="n">instanceof</span> <span class="n">CorruptData</span><span class="p">)</span> <span class="p">{</span>
-                <span class="n">System</span><span class="o">.</span><span class="n">err</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="s2">&quot;Address Space object is corrupt: &quot;</span>
-                        <span class="o">+</span> <span class="p">(</span><span class="n">CorruptData</span><span class="p">)</span> <span class="n">tempObj</span><span class="p">);</span>
-            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-                <span class="n">count</span><span class="o">++</span><span class="p">;</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-        <span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span><span class="s2">&quot;The number of address spaces is: &quot;</span> <span class="o">+</span> <span class="n">count</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-
+        Iterator asIt = image.getAddressSpaces();
+        int count = 0;
+        while (asIt.hasNext()) {
+            Object tempObj = asIt.next();
+            if (tempObj instanceof CorruptData) {
+                System.err.println(&quot;Address Space object is corrupt: &quot;
+                        + (CorruptData) tempObj);
+            } else {
+                count++;
+            }
+        }
+        System.out.println(&quot;The number of address spaces is: &quot; + count);
+    }
+}
+</code></pre>
 
 <p></details></p>
 <h2 id="analyze-the-dump">Analyze the dump</h2>
@@ -3415,136 +3413,135 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>This example is a fully working DTFJ application. Many DTFJ applications will follow a similar model.</p>
 <p><details>
   <summary>Sample DTFJ application</summary></p>
-<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">java.io.File</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">java.util.Iterator</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.ibm.dtfj.image.CorruptData</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.ibm.dtfj.image.CorruptDataException</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.ibm.dtfj.image.DataUnavailable</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.ibm.dtfj.image.Image</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.ibm.dtfj.image.ImageAddressSpace</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.ibm.dtfj.image.ImageFactory</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.ibm.dtfj.image.ImageProcess</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.ibm.dtfj.java.JavaRuntime</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.ibm.dtfj.java.JavaThread</span><span class="p">;</span>
-<span class="kn">import</span> <span class="nn">com.ibm.dtfj.image.ImageThread</span><span class="p">;</span>
+<pre><code>import java.io.File;
+import java.util.Iterator;
+import com.ibm.dtfj.image.CorruptData;
+import com.ibm.dtfj.image.CorruptDataException;
+import com.ibm.dtfj.image.DataUnavailable;
+import com.ibm.dtfj.image.Image;
+import com.ibm.dtfj.image.ImageAddressSpace;
+import com.ibm.dtfj.image.ImageFactory;
+import com.ibm.dtfj.image.ImageProcess;
+import com.ibm.dtfj.java.JavaRuntime;
+import com.ibm.dtfj.java.JavaThread;
+import com.ibm.dtfj.image.ImageThread;
 
-<span class="n">public</span> <span class="k">class</span> <span class="nc">DTFJEX2</span>
-<span class="p">{</span>
-   <span class="n">public</span> <span class="n">static</span> <span class="n">void</span> <span class="n">main</span><span class="p">(</span> <span class="n">String</span><span class="p">[]</span> <span class="n">args</span> <span class="p">)</span>
-   <span class="p">{</span>
-      <span class="n">Image</span> <span class="n">image</span> <span class="o">=</span> <span class="n">null</span><span class="p">;</span>
-      <span class="k">if</span> <span class="p">(</span> <span class="n">args</span><span class="o">.</span><span class="n">length</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="p">)</span>
-      <span class="p">{</span>
-         <span class="n">File</span> <span class="n">f</span> <span class="o">=</span> <span class="n">new</span> <span class="n">File</span><span class="p">(</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">);</span>
-         <span class="k">try</span>
-         <span class="p">{</span>
-            <span class="n">Class</span> <span class="n">factoryClass</span> <span class="o">=</span> <span class="n">Class</span>
-                  <span class="o">.</span><span class="n">forName</span><span class="p">(</span> <span class="s2">&quot;com.ibm.dtfj.image.j9.ImageFactory&quot;</span> <span class="p">);</span>
-            <span class="n">ImageFactory</span> <span class="n">factory</span> <span class="o">=</span> <span class="p">(</span><span class="n">ImageFactory</span><span class="p">)</span> <span class="n">factoryClass</span><span class="o">.</span><span class="n">newInstance</span><span class="p">(</span> <span class="p">);</span>
-            <span class="n">image</span> <span class="o">=</span> <span class="n">factory</span><span class="o">.</span><span class="n">getImage</span><span class="p">(</span> <span class="n">f</span> <span class="p">);</span>
-         <span class="p">}</span>
-         <span class="n">catch</span> <span class="p">(</span> <span class="ne">Exception</span> <span class="n">ex</span> <span class="p">)</span>
-         <span class="p">{</span> <span class="o">/*</span>
-             <span class="o">*</span> <span class="n">Should</span> <span class="n">use</span> <span class="n">the</span> <span class="n">error</span> <span class="n">handling</span> <span class="k">as</span> <span class="n">shown</span> <span class="ow">in</span> <span class="n">DTFJEX1</span><span class="o">.</span>
-             <span class="o">*/</span>
-            <span class="n">System</span><span class="o">.</span><span class="n">err</span><span class="o">.</span><span class="n">println</span><span class="p">(</span> <span class="s2">&quot;Error in DTFJEX2&quot;</span> <span class="p">);</span>
-            <span class="n">ex</span><span class="o">.</span><span class="n">printStackTrace</span><span class="p">(</span> <span class="n">System</span><span class="o">.</span><span class="n">err</span> <span class="p">);</span>
-         <span class="p">}</span>
-      <span class="p">}</span>
-      <span class="k">else</span>
-      <span class="p">{</span>
-         <span class="n">System</span><span class="o">.</span><span class="n">err</span><span class="o">.</span><span class="n">println</span><span class="p">(</span> <span class="s2">&quot;No filename specified&quot;</span> <span class="p">);</span>
-      <span class="p">}</span>
+public class DTFJEX2
+{
+   public static void main( String[] args )
+   {
+      Image image = null;
+      if ( args.length &gt; 0 )
+      {
+         File f = new File( args[0] );
+         try
+         {
+            Class factoryClass = Class
+                  .forName( &quot;com.ibm.dtfj.image.j9.ImageFactory&quot; );
+            ImageFactory factory = (ImageFactory) factoryClass.newInstance( );
+            image = factory.getImage( f );
+         }
+         catch ( Exception ex )
+         { /*
+             * Should use the error handling as shown in DTFJEX1.
+             */
+            System.err.println( &quot;Error in DTFJEX2&quot; );
+            ex.printStackTrace( System.err );
+         }
+      }
+      else
+      {
+         System.err.println( &quot;No filename specified&quot; );
+      }
 
-      <span class="k">if</span> <span class="p">(</span> <span class="n">null</span> <span class="o">==</span> <span class="n">image</span> <span class="p">)</span>
-      <span class="p">{</span>
-         <span class="k">return</span><span class="p">;</span>
-      <span class="p">}</span>
+      if ( null == image )
+      {
+         return;
+      }
 
-      <span class="n">MatchingThreads</span><span class="p">(</span> <span class="n">image</span> <span class="p">);</span>
-   <span class="p">}</span>
+      MatchingThreads( image );
+   }
 
-   <span class="n">public</span> <span class="n">static</span> <span class="n">void</span> <span class="n">MatchingThreads</span><span class="p">(</span> <span class="n">Image</span> <span class="n">image</span> <span class="p">)</span>
-   <span class="p">{</span>
-      <span class="n">ImageThread</span> <span class="n">imgThread</span> <span class="o">=</span> <span class="n">null</span><span class="p">;</span>
+   public static void MatchingThreads( Image image )
+   {
+      ImageThread imgThread = null;
 
-      <span class="n">Iterator</span> <span class="n">asIt</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">getAddressSpaces</span><span class="p">(</span> <span class="p">);</span>
-      <span class="k">while</span> <span class="p">(</span> <span class="n">asIt</span><span class="o">.</span><span class="n">hasNext</span><span class="p">(</span> <span class="p">)</span> <span class="p">)</span>
-      <span class="p">{</span>
-         <span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span> <span class="s2">&quot;Found ImageAddressSpace...&quot;</span> <span class="p">);</span>
+      Iterator asIt = image.getAddressSpaces( );
+      while ( asIt.hasNext( ) )
+      {
+         System.out.println( &quot;Found ImageAddressSpace...&quot; );
 
-         <span class="n">ImageAddressSpace</span> <span class="k">as</span> <span class="o">=</span> <span class="p">(</span><span class="n">ImageAddressSpace</span><span class="p">)</span> <span class="n">asIt</span><span class="o">.</span><span class="n">next</span><span class="p">(</span> <span class="p">);</span>
+         ImageAddressSpace as = (ImageAddressSpace) asIt.next( );
 
-         <span class="n">Iterator</span> <span class="n">prIt</span> <span class="o">=</span> <span class="k">as</span><span class="o">.</span><span class="n">getProcesses</span><span class="p">(</span> <span class="p">);</span>
+         Iterator prIt = as.getProcesses( );
 
-         <span class="k">while</span> <span class="p">(</span> <span class="n">prIt</span><span class="o">.</span><span class="n">hasNext</span><span class="p">(</span> <span class="p">)</span> <span class="p">)</span>
-         <span class="p">{</span>
-            <span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span> <span class="s2">&quot;Found ImageProcess...&quot;</span> <span class="p">);</span>
+         while ( prIt.hasNext( ) )
+         {
+            System.out.println( &quot;Found ImageProcess...&quot; );
 
-            <span class="n">ImageProcess</span> <span class="n">process</span> <span class="o">=</span> <span class="p">(</span><span class="n">ImageProcess</span><span class="p">)</span> <span class="n">prIt</span><span class="o">.</span><span class="n">next</span><span class="p">(</span> <span class="p">);</span>
+            ImageProcess process = (ImageProcess) prIt.next( );
 
-            <span class="n">Iterator</span> <span class="n">runTimesIt</span> <span class="o">=</span> <span class="n">process</span><span class="o">.</span><span class="n">getRuntimes</span><span class="p">(</span> <span class="p">);</span>
-            <span class="k">while</span> <span class="p">(</span> <span class="n">runTimesIt</span><span class="o">.</span><span class="n">hasNext</span><span class="p">(</span> <span class="p">)</span> <span class="p">)</span>
-            <span class="p">{</span>
-               <span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span> <span class="s2">&quot;Found Runtime...&quot;</span> <span class="p">);</span>
-               <span class="n">JavaRuntime</span> <span class="n">javaRT</span> <span class="o">=</span> <span class="p">(</span><span class="n">JavaRuntime</span><span class="p">)</span> <span class="n">runTimesIt</span><span class="o">.</span><span class="n">next</span><span class="p">(</span> <span class="p">);</span>
+            Iterator runTimesIt = process.getRuntimes( );
+            while ( runTimesIt.hasNext( ) )
+            {
+               System.out.println( &quot;Found Runtime...&quot; );
+               JavaRuntime javaRT = (JavaRuntime) runTimesIt.next( );
 
-               <span class="n">Iterator</span> <span class="n">javaThreadIt</span> <span class="o">=</span> <span class="n">javaRT</span><span class="o">.</span><span class="n">getThreads</span><span class="p">(</span> <span class="p">);</span>
+               Iterator javaThreadIt = javaRT.getThreads( );
 
-               <span class="k">while</span> <span class="p">(</span> <span class="n">javaThreadIt</span><span class="o">.</span><span class="n">hasNext</span><span class="p">(</span> <span class="p">)</span> <span class="p">)</span>
-               <span class="p">{</span>
-                  <span class="n">Object</span> <span class="n">tempObj</span> <span class="o">=</span> <span class="n">javaThreadIt</span><span class="o">.</span><span class="n">next</span><span class="p">(</span> <span class="p">);</span>
-                  <span class="o">/*</span>
-                   <span class="o">*</span> <span class="n">Should</span> <span class="n">use</span> <span class="n">CorruptData</span> <span class="n">handling</span> <span class="k">for</span> <span class="nb">all</span> <span class="n">iterators</span>
-                   <span class="o">*/</span>
-                  <span class="k">if</span> <span class="p">(</span> <span class="n">tempObj</span> <span class="n">instanceof</span> <span class="n">CorruptData</span> <span class="p">)</span>
-                  <span class="p">{</span>
-                     <span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span> <span class="s2">&quot;We have some corrupt data&quot;</span> <span class="p">);</span>
-                  <span class="p">}</span>
-                  <span class="k">else</span>
-                  <span class="p">{</span>
-                     <span class="n">JavaThread</span> <span class="n">javaThread</span> <span class="o">=</span> <span class="p">(</span><span class="n">JavaThread</span><span class="p">)</span> <span class="n">tempObj</span><span class="p">;</span>
-                     <span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span> <span class="s2">&quot;Found JavaThread...&quot;</span> <span class="p">);</span>
-                     <span class="k">try</span>
-                     <span class="p">{</span>
-                        <span class="n">imgThread</span> <span class="o">=</span> <span class="p">(</span><span class="n">ImageThread</span><span class="p">)</span> <span class="n">javaThread</span><span class="o">.</span><span class="n">getImageThread</span><span class="p">(</span> <span class="p">);</span>
+               while ( javaThreadIt.hasNext( ) )
+               {
+                  Object tempObj = javaThreadIt.next( );
+                  /*
+                   * Should use CorruptData handling for all iterators
+                   */
+                  if ( tempObj instanceof CorruptData )
+                  {
+                     System.out.println( &quot;We have some corrupt data&quot; );
+                  }
+                  else
+                  {
+                     JavaThread javaThread = (JavaThread) tempObj;
+                     System.out.println( &quot;Found JavaThread...&quot; );
+                     try
+                     {
+                        imgThread = (ImageThread) javaThread.getImageThread( );
 
-                        <span class="o">//</span> <span class="n">Now</span> <span class="n">we</span> <span class="n">have</span> <span class="n">a</span> <span class="n">Java</span> <span class="n">thread</span> <span class="n">we</span> <span class="n">can</span> <span class="n">iterator</span>
-                        <span class="o">//</span> <span class="n">through</span> <span class="n">the</span> <span class="n">image</span> <span class="n">threads</span>
-                        <span class="n">Iterator</span> <span class="n">imgThreadIt</span> <span class="o">=</span> <span class="n">process</span><span class="o">.</span><span class="n">getThreads</span><span class="p">(</span> <span class="p">);</span>
+                        // Now we have a Java thread we can iterator
+                        // through the image threads
+                        Iterator imgThreadIt = process.getThreads( );
 
-                        <span class="k">while</span> <span class="p">(</span> <span class="n">imgThreadIt</span><span class="o">.</span><span class="n">hasNext</span><span class="p">(</span> <span class="p">)</span> <span class="p">)</span>
-                        <span class="p">{</span>
-                           <span class="n">ImageThread</span> <span class="n">imgThread2</span> <span class="o">=</span> <span class="p">(</span><span class="n">ImageThread</span><span class="p">)</span> <span class="n">imgThreadIt</span>
-                                 <span class="o">.</span><span class="n">next</span><span class="p">(</span> <span class="p">);</span>
-                           <span class="k">if</span> <span class="p">(</span> <span class="n">imgThread</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span> <span class="n">imgThread2</span> <span class="p">)</span> <span class="p">)</span>
-                           <span class="p">{</span>
-                              <span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span> <span class="s2">&quot;Found a match:&quot;</span> <span class="p">);</span>
-                              <span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span> <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">javaThread &quot;</span>
-                                    <span class="o">+</span> <span class="n">javaThread</span><span class="o">.</span><span class="n">getName</span><span class="p">(</span> <span class="p">)</span>
-                                    <span class="o">+</span> <span class="s2">&quot; is the same as &quot;</span> <span class="o">+</span> <span class="n">imgThread2</span><span class="o">.</span><span class="n">getID</span><span class="p">(</span> <span class="p">)</span> <span class="p">);</span>
-                           <span class="p">}</span>
-                        <span class="p">}</span>
-                     <span class="p">}</span>
-                     <span class="n">catch</span> <span class="p">(</span> <span class="n">CorruptDataException</span> <span class="n">e</span> <span class="p">)</span>
-                     <span class="p">{</span>
-                        <span class="n">System</span><span class="o">.</span><span class="n">err</span><span class="o">.</span><span class="n">println</span><span class="p">(</span> <span class="s2">&quot;ImageThread was corrupt: &quot;</span>
-                              <span class="o">+</span> <span class="n">e</span><span class="o">.</span><span class="n">getMessage</span><span class="p">(</span> <span class="p">)</span> <span class="p">);</span>
-                     <span class="p">}</span>
-                     <span class="n">catch</span> <span class="p">(</span> <span class="n">DataUnavailable</span> <span class="n">e</span> <span class="p">)</span>
-                     <span class="p">{</span>
-                        <span class="n">System</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">println</span><span class="p">(</span> <span class="s2">&quot;DataUnavailable: &quot;</span>
-                              <span class="o">+</span> <span class="n">e</span><span class="o">.</span><span class="n">getMessage</span><span class="p">(</span> <span class="p">)</span> <span class="p">);</span>
-                     <span class="p">}</span>
-                  <span class="p">}</span>
-               <span class="p">}</span>
-            <span class="p">}</span>
-         <span class="p">}</span>
-      <span class="p">}</span>
-   <span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-
+                        while ( imgThreadIt.hasNext( ) )
+                        {
+                           ImageThread imgThread2 = (ImageThread) imgThreadIt
+                                 .next( );
+                           if ( imgThread.equals( imgThread2 ) )
+                           {
+                              System.out.println( &quot;Found a match:&quot; );
+                              System.out.println( &quot;\tjavaThread &quot;
+                                    + javaThread.getName( )
+                                    + &quot; is the same as &quot; + imgThread2.getID( ) );
+                           }
+                        }
+                     }
+                     catch ( CorruptDataException e )
+                     {
+                        System.err.println( &quot;ImageThread was corrupt: &quot;
+                              + e.getMessage( ) );
+                     }
+                     catch ( DataUnavailable e )
+                     {
+                        System.out.println( &quot;DataUnavailable: &quot;
+                              + e.getMessage( ) );
+                     }
+                  }
+               }
+            }
+         }
+      }
+   }
+}
+</code></pre>
 
 <p></details></p>
 <p>For clarity, the example does not perform full error checking when constructing the main Image object and does not perform <code>CorruptData</code> handling in all of the iterators. In a production environment, you use the techniques illustrated in the previous examples under <a href="#working-with-a-system-dump">Working with a system dump</a> and <a href="#working-with-a-java-dump">Working with a Java dump</a>.</p>

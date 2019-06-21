@@ -3301,10 +3301,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <h1 id="-xcheck">-Xcheck</h1>
 <p>You can use the <code>-Xcheck</code> option to run checks during OpenJ9 virtual machine (VM) startup, such as memory checks or checks on JNI functions.</p>
 <h2 id="syntax">Syntax</h2>
-<div class="codehilite"><pre><span></span>    -Xcheck:&lt;parameter&gt;
-</pre></div>
-
-
+<pre><code>    -Xcheck:&lt;parameter&gt;
+</code></pre>
 <h2 id="parameters">Parameters</h2>
 <table>
 <thead>
@@ -3341,19 +3339,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </tbody>
 </table>
 <h3 id="classpath"><code>classpath</code></h3>
-<div class="codehilite"><pre><span></span>    -Xcheck:classpath
-</pre></div>
-
-
+<pre><code>    -Xcheck:classpath
+</code></pre>
 <dl>
 <dd>Checks the classpath and reports errors such as a missing directory or JAR file.</dd>
 </dl>
 <h3 id="dump"><code>dump</code></h3>
 <p><strong>AIX and Linux only</strong></p>
-<div class="codehilite"><pre><span></span>    -Xcheck:dump
-</pre></div>
-
-
+<pre><code>    -Xcheck:dump
+</code></pre>
 <dl>
 <dd>
 <p>Checks operating system settings during VM startup. Messages are issued if the operating system has settings that might truncate system dumps.</p>
@@ -3399,26 +3393,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </dd>
 </dl>
 <h3 id="gc"><code>gc</code></h3>
-<div class="codehilite"><pre><span></span>    -Xcheck:gc[:help][:&lt;scan options&gt;][:&lt;verify options&gt;][:&lt;misc options&gt;]
-</pre></div>
-
-
+<pre><code>    -Xcheck:gc[:help][:&lt;scan options&gt;][:&lt;verify options&gt;][:&lt;misc options&gt;]
+</code></pre>
 <dl>
 <dd>Runs additional checks on garbage collection. By default, no checks are made. There are many scan, verify, and miscellaneous suboptions available. If you do not specify any, all possible scan and verify suboptions are run, plus the miscellaneous verbose and check suboptions. For more information, see the output of <code>-Xcheck:gc:help</code>.</dd>
 </dl>
 <h3 id="jni"><code>jni</code></h3>
-<div class="codehilite"><pre><span></span>    -Xcheck:jni[:help][:&lt;option&gt;]
-</pre></div>
-
-
+<pre><code>    -Xcheck:jni[:help][:&lt;option&gt;]
+</code></pre>
 <dl>
 <dd>Runs additional checks for JNI functions. By default, no checks are made. For more information, see the output of <code>-Xcheck:jni:help</code>.</dd>
 </dl>
 <h3 id="memory"><code>memory</code></h3>
-<div class="codehilite"><pre><span></span>    -Xcheck:memory[:&lt;option&gt;]
-</pre></div>
-
-
+<pre><code>    -Xcheck:memory[:&lt;option&gt;]
+</code></pre>
 <dl>
 <dd>Identifies memory leaks inside the VM by using strict checks that cause the VM to exit on failure.</dd>
 <dd><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> <strong>Restriction:</strong> You cannot include <code>-Xcheck:memory</code> in the options file (see <a href="../xoptionsfile/"><code>-Xoptionsfile</code></a>).</dd>
@@ -3463,10 +3451,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </dd>
 </dl>
 <h3 id="vm"><code>vm</code></h3>
-<div class="codehilite"><pre><span></span>    -Xcheck:vm[:&lt;option&gt;]
-</pre></div>
-
-
+<pre><code>    -Xcheck:vm[:&lt;option&gt;]
+</code></pre>
 <dl>
 <dd>Performs additional checks on the VM. By default, no checking is performed. For more information, run <code>-Xcheck:vm``:help</code>.</dd>
 </dl>

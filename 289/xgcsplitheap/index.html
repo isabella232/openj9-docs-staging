@@ -3211,10 +3211,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li><img alt="Start of content that applies only to Java 8 (LTS)" src="../cr/java8.png" /> This option can be used only with Java SE version 8 runtime environments. <img alt="End of content that applies only to Java 8 (LTS)" src="../cr/java_close_lts.png" /> This option is deprecated in Version 8 and will be removed from future versions.</li>
 </ul>
 <h2 id="syntax">Syntax</h2>
-<div class="codehilite"><pre><span></span>    -Xgc:splitheap
-</pre></div>
-
-
+<pre><code>    -Xgc:splitheap
+</code></pre>
 <h2 id="explanation">Explanation</h2>
 <p>Use <code>-Xgc:splitheap</code> for applications that must run on the 32-bit VM because of 32-bit JNI libraries, a 32-bit operating system, or 32-bit hardware, but need large Java heaps. By using a larger heap, you can allocate more objects before incurring a garbage collection and you can increase the number of live objects that you can use before an <code>OutOfMemoryError</code> exception occurs.</p>
 <p>With a split heap, the old area is committed to its maximum size (set with <code>-Xmox</code>) in a lower region of memory and the new area is committed to its maximum size (set with <code>-Xmnx</code>) in a higher region of memory.</p>

@@ -36,7 +36,7 @@
         <meta name="description" content="Eclipse OpenJ9 documentation">
       
       
-        <link rel="canonical" href="https://www.eclipse.org/openj9/docs/interface_mxbeans/">
+        <link rel="canonical" href="https://www.eclipse.org/openj9/docs/tool_jextract/">
       
       
       
@@ -63,7 +63,7 @@
     
     
       
-        <title>Interface mxbeans -  </title>
+        <title>Tool jextract -  </title>
       
     
     
@@ -134,7 +134,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="../#mbeans-and-mxbeans" tabindex="1" class="md-skip">
+      <a href="../#dump-extractor-jextract" tabindex="1" class="md-skip">
         
       </a>
     
@@ -3095,99 +3095,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#openj9-mxbeans" title="OpenJ9 MXBeans" class="md-nav__link">
-    OpenJ9 MXBeans
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#garbagecollectormxbean" title="GarbageCollectorMXBean" class="md-nav__link">
-    GarbageCollectorMXBean
+  <a href="#syntax" title="Syntax" class="md-nav__link">
+    Syntax
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#guestosmxbean" title="GuestOSMXBean" class="md-nav__link">
-    GuestOSMXBean
+      
+        <li class="md-nav__item">
+  <a href="#see-also" title="See also" class="md-nav__link">
+    See also
   </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#hypervisormxbean" title="HypervisorMXBean" class="md-nav__link">
-    HypervisorMXBean
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#jvmcpumonitormxbean" title="JVMCpuMonitorMXBean" class="md-nav__link">
-    JVMCpuMonitorMXBean
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#memorymxbean" title="MemoryMXBean" class="md-nav__link">
-    MemoryMXBean
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#memorypoolmxbean" title="MemoryPoolMXBean" class="md-nav__link">
-    MemoryPoolMXBean
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#openj9diagnosticsmxbean" title="OpenJ9DiagnosticsMXBean" class="md-nav__link">
-    OpenJ9DiagnosticsMXBean
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#operatingsystemmxbean" title="OperatingSystemMXBean" class="md-nav__link">
-    OperatingSystemMXBean
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#processormxbean" title="ProcessorMXBean" class="md-nav__link">
-    ProcessorMXBean
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#runtimemxbean" title="RuntimeMXBean" class="md-nav__link">
-    RuntimeMXBean
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#threadmxbean" title="ThreadMXBean" class="md-nav__link">
-    ThreadMXBean
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#unixoperatingsystemmxbean" title="UnixOperatingSystemMXBean" class="md-nav__link">
-    UnixOperatingSystemMXBean
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -3208,12 +3125,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               
 <!-- this adds 'pencil' icon to H1 so that you can edit the page directly in GitHub
                 
-                  <a href="https://github.com/eclipse/openj9-docs/edit/master/docs/interface_mxbeans.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/eclipse/openj9-docs/edit/master/docs/tool_jextract.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
 -->
                 
                 <!--
-* Copyright (c) 2017, 2019 IBM Corp. and others
+* Copyright (c) 2017, 2018 IBM Corp. and others
 *
 * This program and the accompanying materials are made
 * available under the terms of the Eclipse Public License 2.0
@@ -3236,61 +3153,32 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 * Classpath-exception-2.0 OR LicenseRef-GPL-2.0 WITH Assembly-exception
 -->
 
-<h1 id="mbeans-and-mxbeans">MBeans and MXBeans</h1>
-<p>MBeans and MXBeans can be used to provide information about the state of a Java&trade; virtual machine (JVM). Additional MXBeans are provided with OpenJ9 that extend the monitoring and management capabilities.</p>
-<p>MXBeans are a generalized variant of MBeans. Because MXBeans are constructed by using only a pre-defined set of data types, MXBeans can be referenced and used more easily by applications such as JConsole.</p>
-<p>For information about using JConsole, see <a href="https://docs.oracle.com/javase/7/docs/technotes/guides/management/jconsole.html">https://docs.oracle.com/javase/7/docs/technotes/guides/management/jconsole.html</a>, particularly the section <a href="https://docs.oracle.com/javase/7/docs/technotes/guides/management/jconsole.html#gdeap">Monitoring and Managing MBeans</a>.</p>
-<p>See also the reference information at <a href="https://docs.oracle.com/javase/6/docs/technotes/tools/share/jconsole.html">https://docs.oracle.com/javase/6/docs/technotes/tools/share/jconsole.html</a>.</p>
-<p>For more information about the standard platform MBeans and MXBeans, see the Oracle API documentation for the <code>java.lang.management package</code> at <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/management/package-summary.html">https://docs.oracle.com/javase/8/docs/api/java/lang/management/package-summary.html</a>.</p>
-<h2 id="openj9-mxbeans">OpenJ9 MXBeans</h2>
-<p>OpenJ9 provides further MXBeans to extend the monitoring and management capabilities. These are summarized in the following sections. For API information about these MXBeans, see the <a href="https://www.ibm.com/support/knowledgecenter/SSYKE2_8.0.0/com.ibm.java.api.80.doc/com.ibm.lang.management/index.html?view=kc">Application programming reference</a>.</p>
-<h4 id="garbagecollectormxbean"><code>GarbageCollectorMXBean</code></h4>
-<p>For monitoring garbage collection operations. You can obtain data about GC collection times, heap memory usage, number of compactions, and the amount of total freed memory.</p>
-<h4 id="guestosmxbean"><code>GuestOSMXBean</code></h4>
+<h1 id="dump-extractor-jextract">Dump extractor (<code>jextract</code>)</h1>
+<p><strong>(AIX&reg;, Linux&trade;, <img alt="Start of content that applies only to Java 11 (LTS) and later" src="../cr/java11plus.png" /> macOS&reg;<img alt="End of content that applies only to Java 10 and later" src="../cr/java_close_lts.png" />)</strong></p>
+<p>On some operating systems, copies of executable files and libraries are required for a full analysis of a core dump (you can get some information from the dump without these files, but not as much). Run the <code>jextract</code> utility to collect these extra files and package them into an archive file along with the core dump. To analyze the output, use the <a href="../tool_jdmpview/">dump viewer (<code>jdmpview</code>)</a>.</p>
+<h2 id="syntax">Syntax</h2>
+<pre><code>    jextract &lt;core file name&gt; [&lt;zip_file&gt;]
+</code></pre>
+<p>where:</p>
+<ul>
+<li><code>&lt;core file name&gt;</code> is the name of the system dump.</li>
+<li><code>&lt;zip_file&gt;</code> is the name you want to give to the processed file. If you do not specify a name, output is written to <code>&lt;core file name&gt;.zip</code> by default. The output is written to the same directory as the core file.</li>
+</ul>
 <dl>
-<dd>For monitoring guest operating system statistics, as seen by the host hypervisor. This data includes memory and processor usage.</dd>
+<dt>If you are analyzing a dump from a VM that used <a href="../xcompressedrefs/"><code>-Xcompressedrefs</code></a>, include the <code>-J-Xcompressedrefs</code> parameter to run <code>jextract</code> using compressed references.</dt>
+<dd>
+<p><i class="fa fa-exclamation-triangle"></i> <strong>Restriction: </strong> You must run <code>jextract</code> using the same VM level, on the same system that produced the system dump. If you run <code>jextract</code> on a VM level that is different from the one on which the dump was produced you see the following messages:</p>
+<pre><code>J9RAS.buildID is incorrect (found e8801ed67d21c6be, expecting eb4173107d21c673).
+This version of jextract is incompatible with this dump.
+Failure detected during jextract, see previous message(s).
+</code></pre>
+</dd>
 </dl>
-<h4 id="hypervisormxbean"><code>HypervisorMXBean</code></h4>
-<dl>
-<dd>This MXBean provides information to determine whether the operating system is running in a virtualized environment, such as a virtual machine or LPAR. A method is also provided to determine the vendor of the hypervisor, if the operating system is running in a virtualized environment.</dd>
-</dl>
-<h4 id="jvmcpumonitormxbean"><code>JVMCpuMonitorMXBean</code></h4>
-<dl>
-<dd>For monitoring CPU consumption, including CPU time that is used by system and application threads, with a further breakdown to show time that is spent on garbage collection and JIT compilation processes.</dd>
-</dl>
-<h4 id="memorymxbean"><code>MemoryMXBean</code></h4>
-<dl>
-<dd>For monitoring memory usage, including data about maximum and minimum heap sizes, and shared class caches sizes.</dd>
-</dl>
-<h4 id="memorypoolmxbean"><code>MemoryPoolMXBean</code></h4>
-<dl>
-<dd>For monitoring the usage of the memory pool, where supported.</dd>
-</dl>
-<h4 id="openj9diagnosticsmxbean"><code>OpenJ9DiagnosticsMXBean</code></h4>
-<dl>
-<dd>For configuring dump options and dynamically triggering dump agents.</dd>
-</dl>
-<h4 id="operatingsystemmxbean"><code>OperatingSystemMXBean</code></h4>
-<dl>
-<dd>For monitoring operating system settings such as physical and virtual memory size, processor capacity, and processor utilization.</dd>
-</dl>
-<h4 id="processormxbean"><code>ProcessorMXBean</code></h4>
-<dl>
-<dd>For monitoring processor resources. You can get the number of CPUs (for example, physical, online, or bound CPUs) and set the number of CPUs that the process should be restricted to.</dd>
-</dl>
-<h4 id="runtimemxbean"><code>RuntimeMXBean</code></h4>
-<dl>
-<dd>For monitoring the runtime environment, including data about the average CPU load, the Java process ID, and whether the VM is idle.</dd>
-</dl>
-<h4 id="threadmxbean"><code>ThreadMXBean</code></h4>
-<dl>
-<dd>For obtaining native thread IDs.</dd>
-</dl>
-<h4 id="unixoperatingsystemmxbean"><code>UnixOperatingSystemMXBean</code></h4>
-<dl>
-<dd>For monitoring statistics on operating systems such as AIX or Linux. You can obtain data about memory (physical and virtual), file descriptors, processors, processor usage, and hardware (model and emulation).</dd>
-</dl>
-<!-- ==== END OF TOPIC ==== interface_mxbeans.md ==== -->
+<h2 id="see-also">See also</h2>
+<ul>
+<li><a href="../tool_jdmpview/">Dump viewer (<code>jdmpview</code>)</a></li>
+</ul>
+<!-- ==== END OF TOPIC ==== tool_jextract.md ==== -->
                 
                   
                 

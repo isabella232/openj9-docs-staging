@@ -3205,10 +3205,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <h1 id="-xgcthreads">-Xgcthreads</h1>
 <p>Sets the number of threads that the Garbage Collector uses for parallel operations.</p>
 <h2 id="syntax">Syntax</h2>
-<div class="codehilite"><pre><span></span>    -Xgcthreads&lt;number&gt;
-</pre></div>
-
-
+<pre><code>    -Xgcthreads&lt;number&gt;
+</code></pre>
 <h2 id="explanation">Explanation</h2>
 <p>The total number of GC threads is composed of one application thread with the remainder being dedicated GC threads. By default, the number is set to <code>n-1</code>, where <code>n</code> is the number of reported CPUs, up to a maximum of 64. Where SMT or hyperthreading is in place, the number of reported CPUs is larger than the number of physical CPUs. Likewise, where virtualization is in place, the number of reported CPUs is the number of virtual CPUs assigned to the operating system. To set it to a different number, for example 4, use <code>-Xgcthreads4</code>. The minimum valid value is 1, which disables parallel operations, at the cost of performance. No advantage is gained if you increase the number of threads to more than the default setting.</p>
 <p>On systems running multiple VMs or in LPAR environments where multiple VMs can share the same physical CPUs, you might want to restrict the number of GC threads used by each VM. The restriction helps prevent the total number of parallel operation GC threads for all VMs exceeding the number of physical CPUs present, when multiple VMs perform garbage collection at the same time.</p>

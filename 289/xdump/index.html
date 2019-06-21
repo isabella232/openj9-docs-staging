@@ -3742,10 +3742,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <h2 id="xdump-option-builder">Xdump Option Builder</h2>
 <p>Use the <a href="https://www.eclipse.org/openj9/tools/xdump_option_builder.html" target="_blank">Xdump Option Builder tool</a> to help you specify the correct options and avoid incompatibilities.</p>
 <h2 id="syntax">Syntax</h2>
-<div class="codehilite"><pre><span></span>    -Xdump:&lt;parameter&gt;
-</pre></div>
-
-
+<pre><code>    -Xdump:&lt;parameter&gt;
+</code></pre>
 <p>The following table lists the help options for <code>-Xdump</code>, which provide usage and configuration information:</p>
 <table>
 <thead>
@@ -3872,14 +3870,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </tbody>
 </table>
 <p>You can have multiple <code>-Xdump</code> options on the command line. You can also have multiple dump types triggered by multiple events. For example, the following command turns off the creation of heap dump files, and creates a dump agent that produces a heap dump file and a Java&trade; dump file when either a <strong>vmstart</strong> or <strong>vmstop</strong> event occurs:</p>
-<div class="codehilite"><pre><span></span>java -Xdump:heap:none -Xdump:heap+java:events=vmstart+vmstop -mp . -m &lt;class&gt; [args...]
-</pre></div>
-
+<pre><code>java -Xdump:heap:none -Xdump:heap+java:events=vmstart+vmstop -mp . -m &lt;class&gt; [args...]
+</code></pre>
 
 <p><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Note:</strong> Multiple suboptions that follow an <code>Xdump</code> suboption must be split with a comma (,), for example:</p>
-<div class="codehilite"><pre><span></span>java -Xdump:java:events=vmstart,file=/STDERR/ -version
-</pre></div>
-
+<pre><code>java -Xdump:java:events=vmstart,file=/STDERR/ -version
+</code></pre>
 
 <p>For more detailed information on the these parameters and suboptions, including examples, see <a href="#parameters">Parameters</a>.</p>
 <h2 id="dump-agents">Dump agents</h2>
@@ -3933,7 +3929,7 @@ An exception is the "tool" agent, which can be used to trigger external processe
 </table>
 <h3 id="default-dump-agents">Default dump agents</h3>
 <p>During VM initialization a set of dump agents are added by default. You can override this set of dump agents using <code>-Xdump</code> on the command line. To show the registered dump agents, user the <code>Xdump:what</code> option on the command line. The following sample output shows the default dump agents that are in place on a Linux system:</p>
-<div class="codehilite"><pre><span></span>java -Xdump:what
+<pre><code>java -Xdump:what
 
 Registered dump agents
 ----------------------
@@ -3998,8 +3994,7 @@ Registered dump agents
     priority=200,
     request=serial
 ----------------------
-</pre></div>
-
+</code></pre>
 
 <h3 id="dump-agent-tokens">Dump agent tokens</h3>
 <p>You can use tokens to add context to dump file names and directories, and to pass command-line arguments to the tool agent. The tokens available are listed in the following table:</p>
@@ -4076,12 +4071,11 @@ Registered dump agents
 <h3 id="merging-xdump-agents">Merging -Xdump agents</h3>
 <p>If you configure more than one dump agent, each responds to events according to its configuration. However, the internal structures representing the dump agent configuration might not match the command line, because dump agents are merged for efficiency. Two sets of options can be merged as long as none of the agent settings conflict. This means that the list of installed dump agents and their parameters produced by <code>-Xdump:what</code> might not be grouped in the same way as the original <code>-Xdump</code> options that configured them.</p>
 <p>For example, you can use the following command to specify that a dump agent creates a Java dump file on class unload:</p>
-<div class="codehilite"><pre><span></span>java -Xdump:java:events=unload -Xdump:what
-</pre></div>
-
+<pre><code>java -Xdump:java:events=unload -Xdump:what
+</code></pre>
 
 <p>This command does not create a new agent, as can be seen in the results from the <code>-Xdump:what</code> option.</p>
-<div class="codehilite"><pre><span></span>...
+<pre><code>...
 ----------------------
 -Xdump:java:
     events=gpf+user+abort+unload+traceassert+corruptcache,
@@ -4090,17 +4084,15 @@ Registered dump agents
     priority=400,
     request=exclusive+preempt
 ----------------------
-</pre></div>
-
+</code></pre>
 
 <p>The configuration is merged with the existing Java dump agent for events <strong>gpf</strong>, <strong>user</strong>, <strong>abort</strong>, <strong>traceassert</strong>, and <strong>corruptcache</strong>, because none of the specified options for the new unload agent conflict with those for the existing agent.</p>
 <p>In the previous example, if one of the parameters for the unload agent is changed so that it conflicts with the existing agent, then it cannot be merged. For example, the following command specifies a different priority, forcing a separate agent to be created:</p>
-<div class="codehilite"><pre><span></span>java -Xdump:java:events=unload,priority=100 -Xdump:what
-</pre></div>
-
+<pre><code>java -Xdump:java:events=unload,priority=100 -Xdump:what
+</code></pre>
 
 <p>The results of the <code>-Xdump:what</code> option in the command are as follows.</p>
-<div class="codehilite"><pre><span></span>...
+<pre><code>...
 ----------------------
 -Xdump:java:
     events=unload,
@@ -4116,17 +4108,15 @@ Registered dump agents
     priority=400,
     request=exclusive+preempt
 ----------------------
-</pre></div>
-
+</code></pre>
 
 <p>To merge dump agents, the <em>request</em>, <em>filter</em>, <em>opts</em>, <em>label</em>, and <em>range</em> parameters must match exactly. If you specify multiple agents that filter on the same string, but keep all other parameters the same, the agents are merged. For example:</p>
-<div class="codehilite"><pre><span></span>java -Xdump:none -Xdump:java:events=uncaught,filter=java/lang/NullPointerException -Xdump:java:events=unload,filter=java/lang/NullPointerException -Xdump:what
-</pre></div>
-
+<pre><code>java -Xdump:none -Xdump:java:events=uncaught,filter=java/lang/NullPointerException -Xdump:java:events=unload,filter=java/lang/NullPointerException -Xdump:what
+</code></pre>
 
 <p>The results of this command are as follows:</p>
-<div class="codehilite"><pre><span></span><span class="gh">Registered dump agents</span>
-<span class="gh">----------------------</span>
+<pre><code>Registered dump agents
+----------------------
 -Xdump:java:
     events=unload+uncaught,
     filter=java/lang/NullPointerException,
@@ -4135,8 +4125,7 @@ Registered dump agents
     priority=400,
     request=exclusive+preempt
 ----------------------
-</pre></div>
-
+</code></pre>
 
 <h2 id="dump-events">Dump events</h2>
 <p>Dump agents are triggered by events occurring during operation of the OpenJ9 VM. Some events can be filtered to improve the relevance of the output.</p>
@@ -4275,29 +4264,24 @@ Registered dump agents
 <p>To remove all default dump agents and any preceding dump options, use <code>-Xdump:none</code>. Use this option so that you can subsequently specify a completely new dump configuration.</p>
 <p>You can also remove dump agents of a particular type. Here are some examples:</p>
 <p>To turn off all heap dumps (including default agents) but leave Java dumps enabled, use the following option:</p>
-<div class="codehilite"><pre><span></span>-Xdump:java+heap:events=vmstop -Xdump:heap:none
-</pre></div>
-
+<pre><code>-Xdump:java+heap:events=vmstop -Xdump:heap:none
+</code></pre>
 
 <p>To turn off all dump agents for corruptcache events:</p>
-<div class="codehilite"><pre><span></span>-Xdump:none:events=corruptcache
-</pre></div>
-
+<pre><code>-Xdump:none:events=corruptcache
+</code></pre>
 
 <p>To turn off just system dumps for corruptcache events:</p>
-<div class="codehilite"><pre><span></span>-Xdump:system:none:events=corruptcache
-</pre></div>
-
+<pre><code>-Xdump:system:none:events=corruptcache
+</code></pre>
 
 <p>To turn off all dumps when a <code>java/lang/OutOfMemory</code> error is thrown:</p>
-<div class="codehilite"><pre><span></span>-Xdump:none:events=systhrow,filter=java/lang/OutOfMemoryError
-</pre></div>
-
+<pre><code>-Xdump:none:events=systhrow,filter=java/lang/OutOfMemoryError
+</code></pre>
 
 <p>To turn off just system dumps when a <code>java/lang/OutOfMemory</code> error is thrown:</p>
-<div class="codehilite"><pre><span></span>-Xdump:system:none:events=systhrow,filter=java/lang/OutOfMemoryError
-</pre></div>
-
+<pre><code>-Xdump:system:none:events=systhrow,filter=java/lang/OutOfMemoryError
+</code></pre>
 
 <p>If you remove all dump agents by using <code>-Xdump:none</code> with no further <code>-Xdump</code> options, the VM still provides these basic diagnostic outputs:</p>
 <ul>
@@ -4308,55 +4292,46 @@ Registered dump agents
 <h3 id="defaults"><code>defaults</code></h3>
 <p>Each dump type has default options. To view the default options for a particular dump type, use <code>-Xdump:&lt;agent&gt;:defaults</code>.</p>
 <p>You can change the default options at run time. For example, you can direct Java dump files into a separate directory for each process, and guarantee unique files by adding a sequence number to the file name using:</p>
-<div class="codehilite"><pre><span></span>-Xdump:java:defaults:file=dumps/%pid/javacore-%seq.txt`
-</pre></div>
-
+<pre><code>-Xdump:java:defaults:file=dumps/%pid/javacore-%seq.txt`
+</code></pre>
 
 <p>Or, for example, on z/OS, you can add the jobname to the Java dump file name using:</p>
-<div class="codehilite"><pre><span></span>-Xdump:java:defaults:file=javacore.%job.%H%M%S.txt
-</pre></div>
-
+<pre><code>-Xdump:java:defaults:file=javacore.%job.%H%M%S.txt
+</code></pre>
 
 <p>This option does not add a Java dump agent; it updates the default settings for Java dump agents. Further Java dump agents will then create dump files using this specification for filenames, unless overridden.</p>
 <p><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Note:</strong> Changing the defaults for a dump type will also affect the default agents for that dump type added by the VM during initialization. For example if you change the default file name for Java dump files, that will change the file name used by the default Java dump agents. However, changing the default range option will not change the range used by the default Java dump agents, because those agents override the range option with specific values.</p>
 <h3 id="eventsevent"><code>events=&lt;event&gt;</code></h3>
 <p>To trigger a dump as a result of an event, use the <code>-Xdump:&lt;agent&gt;:events=&lt;event&gt;</code> suboption. For a list of possible events, see <a href="#dump-events">Dump events</a>.</p>
 <p>For example, the following command instructs the VM to create a dump agent at startup that produces a Heap dump whenever the <em>vmstop</em> event happens:</p>
-<div class="codehilite"><pre><span></span>-Xdump:heap:events=vmstop
-</pre></div>
-
+<pre><code>-Xdump:heap:events=vmstop
+</code></pre>
 
 <h3 id="execcommand"><code>exec=&lt;command&gt;</code></h3>
 <p>The exec suboption is used by the tool dump agent to specify an external application to start. You can set a specific command to run for a particular dump agent with the following command:</p>
-<div class="codehilite"><pre><span></span>-Xdump:&lt;agent&gt;:exec=&lt;command&gt;
-</pre></div>
-
+<pre><code>-Xdump:&lt;agent&gt;:exec=&lt;command&gt;
+</code></pre>
 
 <h3 id="filefilename"><code>file=&lt;filename&gt;</code></h3>
 <p>The file suboption specifies where the diagnostics information is written for the specified dump type. The syntax is <code>-Xdump:&lt;agent&gt;:file=&lt;filename&gt;</code>.</p>
 <p>For example, to create a Heap dump called <code>my.dmp</code> when a <strong>vmstop</strong> event is received, use:</p>
-<div class="codehilite"><pre><span></span>java -Xdump:heap:events=vmstop,file=my.dmp
-</pre></div>
-
+<pre><code>java -Xdump:heap:events=vmstop,file=my.dmp
+</code></pre>
 
 <p>When producing system dump files or CEEDUMPs on z/OS platforms, use the <code>dsn</code> option instead of the <code>file</code> option. For example:</p>
-<div class="codehilite"><pre><span></span>java -Xdump:system:events=vmstop,dsn=%uid.MYDUMP
-</pre></div>
-
+<pre><code>java -Xdump:system:events=vmstop,dsn=%uid.MYDUMP
+</code></pre>
 
 <h4 id="writing-to-stdoutstderr">Writing to <code>STDOUT</code>/<code>STDERR</code></h4>
 <p>Add one of the following options to write a Java dump file to STDOUT or STDERR respectively:</p>
-<div class="codehilite"><pre><span></span>-Xdump:java:file=/STDOUT/
+<pre><code>-Xdump:java:file=/STDOUT/
 -Xdump:java:file=/STDERR/
-</pre></div>
-
+</code></pre>
 
 <ul>
 <li>The keywords <code>/STDOUT/</code> and <code>/STDERR/</code> are <em>not</em> case sensitive; <code>/stdout/</code> and <code>/stderr/</code> are equivalent.</li>
-<li>By common convention, you can use a dash (<code>-</code>) to refer to STDOUT:<div class="codehilite"><pre><span></span>-Xdump:java:file=-
-</pre></div>
-
-
+<li>By common convention, you can use a dash (<code>-</code>) to refer to STDOUT:<pre><code>-Xdump:java:file=-
+</code></pre>
 </li>
 </ul>
 <h4 id="tokens">Tokens</h4>
@@ -4420,177 +4395,150 @@ Registered dump agents
 You can prevent the VM reverting to different dump locations by using the <code>-Xdump:nofailover</code> option.</p>
 <h3 id="filterfilter"><code>filter=&lt;filter&gt;</code></h3>
 <p>Some VM events occur thousands of times during the lifetime of an application. Dump agents can use filters and ranges to avoid producing an excessive number of dump files. The following syntax must be used:</p>
-<div class="codehilite"><pre><span></span>-Xdump:&lt;agent&gt;:filter=&lt;filter&gt;
-</pre></div>
-
+<pre><code>-Xdump:&lt;agent&gt;:filter=&lt;filter&gt;
+</code></pre>
 
 <h4 id="wildcards">Wildcards</h4>
 <p>You can use a wildcard in your exception event filter by placing an asterisk only at the beginning or end of the filter. The following command does not work because the second asterisk is not at the end:</p>
-<div class="codehilite"><pre><span></span>-Xdump:java:events=throw,filter=*InvalidArgumentException#*.myVirtualMethod
-</pre></div>
-
+<pre><code>-Xdump:java:events=throw,filter=*InvalidArgumentException#*.myVirtualMethod
+</code></pre>
 
 <p>To fix the problem, change this filter to the following string:</p>
-<div class="codehilite"><pre><span></span>-Xdump:java:events=throw,filter=*InvalidArgumentException#MyApplication.*
-</pre></div>
-
+<pre><code>-Xdump:java:events=throw,filter=*InvalidArgumentException#MyApplication.*
+</code></pre>
 
 <h4 id="class-loading-and-exception-events">Class loading and exception events</h4>
 <p>You can filter class loading (<strong>load</strong>) and exception (<strong>throw</strong>, <strong>catch</strong>, <strong>uncaught</strong>, <strong>systhrow</strong>) events by the name of the class that is being loaded, thrown or caught. For example:</p>
-<div class="codehilite"><pre><span></span>-Xdump:java:events=load,filter=java/lang/String
+<pre><code>-Xdump:java:events=load,filter=java/lang/String
 -Xdump:java:events=throw,filter=java/lang/ArrayStoreException
 -Xdump:java:events=catch,filter=java/lang/NullPointerException
-</pre></div>
-
+</code></pre>
 
 <p>In addition, you can filter <strong>throw</strong>, <strong>uncaught</strong>, and <strong>systhrow</strong> exception events by the name of the method that throws the exception. The name of the parent class must include the full package name, using the forward slash (/) as a separator. Use a dot (.) to separate the method name from the class name. You can use an asterisk (*) as a wildcard character, to include all methods (optional portions are shown in brackets). For example:</p>
-<div class="codehilite"><pre><span></span>-Xdump:java:events=throw,filter=ExceptionClassName[#com/ibm/ThrowingClassName.throwingMethodName[#stackFrameOffset]]
-</pre></div>
-
+<pre><code>-Xdump:java:events=throw,filter=ExceptionClassName[#com/ibm/ThrowingClassName.throwingMethodName[#stackFrameOffset]]
+</code></pre>
 
 <p>For example, to trigger a Java dump when method <code>MyApplication.myMethod()</code> throws a <code>NullPointerException</code> exception, use the following syntax:</p>
-<div class="codehilite"><pre><span></span>-Xdump:java:events=throw,filter=java/lang/NullPointerException#com/ibm/MyApplication.myMethod
-</pre></div>
-
+<pre><code>-Xdump:java:events=throw,filter=java/lang/NullPointerException#com/ibm/MyApplication.myMethod
+</code></pre>
 
 <p>The stack frame offset allows you to filter on the name of a method that calls the throwing method. This option is useful if the exception is being thrown from a general purpose or utility class. For example, to trigger a Java dump when a method called by <code>MyApplication.main()</code> throws a <code>NullPointerException</code>, use the following syntax:</p>
-<div class="codehilite"><pre><span></span>-Xdump:java:events=throw,filter=java/lang/NullPointerException#com/ibm/MyApplication.main#1
-</pre></div>
-
+<pre><code>-Xdump:java:events=throw,filter=java/lang/NullPointerException#com/ibm/MyApplication.main#1
+</code></pre>
 
 <p>The default value of the stack frame offset is zero.</p>
 <p>You can filter the <strong>catch</strong> exception events by Java method name (optional portions are shown in brackets). For example:</p>
-<div class="codehilite"><pre><span></span>-Xdump:java:events=catch,filter=ExceptionClassName[#com/ibm/CatchingClassName.catchingMethodName]
-</pre></div>
-
+<pre><code>-Xdump:java:events=catch,filter=ExceptionClassName[#com/ibm/CatchingClassName.catchingMethodName]
+</code></pre>
 
 <p>You can filter <strong>throw</strong>, <strong>uncaught</strong>, and <strong>systhrowexception</strong> events by Java method name (optional portions are shown in brackets):</p>
-<div class="codehilite"><pre><span></span>-Xdump:java:events=throw,filter=ExceptionClassName[#com/ibm/ThrowingClassName.throwingMethodName[#stackFrameOffset]]
-</pre></div>
-
+<pre><code>-Xdump:java:events=throw,filter=ExceptionClassName[#com/ibm/ThrowingClassName.throwingMethodName[#stackFrameOffset]]
+</code></pre>
 
 <p>You can filter the <strong>catch</strong> exception events by Java method name (optional portions are shown in brackets):</p>
-<div class="codehilite"><pre><span></span>-Xdump:java:events=catch,filter=ExceptionClassName[#com/ibm/CatchingClassName.catchingMethodName]
-</pre></div>
-
+<pre><code>-Xdump:java:events=catch,filter=ExceptionClassName[#com/ibm/CatchingClassName.catchingMethodName]
+</code></pre>
 
 <p><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Note:</strong> The filters apply to the stacktrace and fire every time the same exception is rethrown, which might result in multiple Java core files.</p>
 <h4 id="vmstop-event">vmstop event</h4>
 <p>You can filter the VM shut down event (<strong>vmstop</strong>) by using one or more exit codes:</p>
-<div class="codehilite"><pre><span></span>-Xdump:java:events=vmstop,filter=#129..192#-42#255
-</pre></div>
-
+<pre><code>-Xdump:java:events=vmstop,filter=#129..192#-42#255
+</code></pre>
 
 <h4 id="slow-event">slow event</h4>
 <p>You can filter the <strong>slow</strong> event to change the time threshold from the default of 50 ms:</p>
-<div class="codehilite"><pre><span></span>-Xdump:java:events=slow,filter=#300ms
-</pre></div>
-
+<pre><code>-Xdump:java:events=slow,filter=#300ms
+</code></pre>
 
 <h4 id="allocation-event">allocation event</h4>
 <p><strong>(Linux, macOS, and Windows only)</strong></p>
 <p>You must filter the <strong>allocation</strong> event to specify the size of objects that cause a trigger. You can set the filter size from zero up to the maximum value of a 32-bit pointer on 32-bit platforms, or the maximum value of a 64-bit pointer on 64-bit platforms. Setting the lower filter value to zero triggers a dump on all allocations.</p>
 <p>For example, to trigger dumps on allocations greater than 5 Mb in size, use:</p>
-<div class="codehilite"><pre><span></span>-Xdump:stack:events=allocation,filter=#5m
-</pre></div>
-
+<pre><code>-Xdump:stack:events=allocation,filter=#5m
+</code></pre>
 
 <p>To trigger dumps on allocations between 256Kb and 512Kb in size, use:</p>
-<div class="codehilite"><pre><span></span>-Xdump:stack:events=allocation,filter=#256k..512k
-</pre></div>
-
+<pre><code>-Xdump:stack:events=allocation,filter=#256k..512k
+</code></pre>
 
 <h4 id="other-events">Other events</h4>
 <p>If you apply a filter to an event that does not support filtering, the filter is ignored.</p>
 <h3 id="msg_filterfilter"><code>msg_filter=&lt;filter&gt;</code></h3>
 <p>You can use the msg_filter suboption to filter on text strings within an exception message, allowing you to reduce the number of dump files produced. This option is supported only for the following events: <strong>throw</strong>, <strong>catch</strong>, <strong>systhrow</strong>, and <strong>uncaught</strong>.</p>
 <p>Use the following syntax to include message filtering in your dump output:</p>
-<div class="codehilite"><pre><span></span>-Xdump:&lt;agent&gt;:events=&lt;event&gt;,msg_filter=&lt;filter&gt;`
-</pre></div>
-
+<pre><code>-Xdump:&lt;agent&gt;:events=&lt;event&gt;,msg_filter=&lt;filter&gt;`
+</code></pre>
 
 <p>where <code>&lt;filter&gt;</code> is a text string from the exceptions that you want to include in the dump file. This suboption supports asterisks as wild cards.</p>
 <p>The following example filters <code>java/lang/VerifyError</code> exceptions that contains the text string <em>class format</em>:</p>
-<div class="codehilite"><pre><span></span>-Xdump:java:events=throw,filter=java/lang/VerifyError,msg_filter=*class format*
-</pre></div>
-
+<pre><code>-Xdump:java:events=throw,filter=java/lang/VerifyError,msg_filter=*class format*
+</code></pre>
 
 <h3 id="optsoptions"><code>opts=&lt;options&gt;</code></h3>
 <p>The full syntax is <code>-Xdump:&lt;agent&gt;:opts=&lt;options&gt;</code>.</p>
 <p>The heap dump agent uses this suboption to specify the type of file to produce. On z/OS, the system dump agent uses this suboption to specify the type of dump to produce.</p>
 <h4 id="heap-dumps">Heap dumps</h4>
 <p>You can specify a PHD heap dump file (PHD), a classic text heap dump file (CLASSIC), or both. The default is a PHD file. For example:</p>
-<div class="codehilite"><pre><span></span>-Xdump:heap:opts=PHD  
+<pre><code>-Xdump:heap:opts=PHD  
 -Xdump:heap:opts=CLASSIC
 -Xdump:heap:opts=PHD+CLASSIC
-</pre></div>
-
+</code></pre>
 
 <h4 id="zos-system-dumps">z/OS system dumps</h4>
 <p>You can specify a system transaction dump (IEATDUMP), an LE dump (CEEDUMP), or both. The default is an IEADUMP file. For example:</p>
-<div class="codehilite"><pre><span></span>-Xdump:system:opts=IEATDUMP
+<pre><code>-Xdump:system:opts=IEATDUMP
 -Xdump:system:opts=CEEDUMP
 -Xdump:system:opts=IEATDUMP+CEEDUMP
-</pre></div>
-
+</code></pre>
 
 <p>The ceedump agent is the preferred way to specify LE dumps, for example:</p>
-<div class="codehilite"><pre><span></span>-Xdump:ceedump:events=gpf
-</pre></div>
-
+<pre><code>-Xdump:ceedump:events=gpf
+</code></pre>
 
 <h4 id="tool-dumps">Tool dumps</h4>
 <p>The tool dump agent supports two suboptions that can be specified using the <code>opts</code> subption. You can run the external process asynchronously with opts=ASYNC. You can also specify a delay in milliseconds that produces a pause after starting the command. These two options can be used independently or together. The following examples show different options for starting a new process that runs <code>myProgram</code>:</p>
-<div class="codehilite"><pre><span></span>-Xdump:tool:events=vmstop,exec=myProgram
-</pre></div>
-
+<pre><code>-Xdump:tool:events=vmstop,exec=myProgram
+</code></pre>
 
 <p>Without the <code>opts</code> suboption, the tool dump agent starts the process, and waits for the process to end before continuing.</p>
-<div class="codehilite"><pre><span></span>-Xdump:tool:events=vmstop,exec=myProgram,opts=ASYNC
-</pre></div>
-
+<pre><code>-Xdump:tool:events=vmstop,exec=myProgram,opts=ASYNC
+</code></pre>
 
 <p>When <code>opts=ASYNC</code> is specified, the tool dump agent starts the process, and continues without waiting for the new process to end.</p>
-<div class="codehilite"><pre><span></span>-Xdump:tool:events=vmstop,exec=myProgram,opts=WAIT1000
-</pre></div>
-
+<pre><code>-Xdump:tool:events=vmstop,exec=myProgram,opts=WAIT1000
+</code></pre>
 
 <p>This option starts the process, waits for the process to end, and then waits a further 1 second (1000 milliseconds) before continuing.</p>
-<div class="codehilite"><pre><span></span>-Xdump:tool:events=vmstop,exec=myProgram,opts=ASYNC+WAIT10000
-</pre></div>
-
+<pre><code>-Xdump:tool:events=vmstop,exec=myProgram,opts=ASYNC+WAIT10000
+</code></pre>
 
 <p>Finally the last example starts the process and waits for 10 seconds before continuing, whether the process is still running or not. This last form is useful if you are starting a process that does not end, but requires time to initialize properly.</p>
 <h3 id="priority0-999"><code>priority=&lt;0-999&gt;</code></h3>
 <p>One event can generate multiple dump files. The agents that produce each dump file run sequentially and their order is determined by the priority keyword set for each agent. The full syntax for this command is <code>-Xdump:&lt;agent&gt;:priority=&lt;0-999&gt;</code>.</p>
 <p>Examination of the output from <code>-Xdump:what</code> shows that a <strong>gpf</strong> event produces a snap trace, a Java dump file, and a system dump file. In this example, the system dump runs first, with priority 999. The snap dump runs second, with priority 500. The Java dump runs last, with priority 10:</p>
-<div class="codehilite"><pre><span></span>-Xdump:heap:events=vmstop,priority=123
-</pre></div>
-
+<pre><code>-Xdump:heap:events=vmstop,priority=123
+</code></pre>
 
 <p>The maximum value allowed for priority is 999. Higher priority dump agents are started first.</p>
 <p>If you do not specifically set a priority, default values are taken based on the dump type. The default priority and the other default values for a particular type of dump, can be displayed by using <code>-Xdump:&lt;type&gt;:defaults</code>. For example:</p>
-<div class="codehilite"><pre><span></span>java -Xdump:heap:defaults -version
-</pre></div>
-
+<pre><code>java -Xdump:heap:defaults -version
+</code></pre>
 
 <p>Default <code>-Xdump:heap</code> settings:</p>
-<div class="codehilite"><pre><span></span>  events=gpf+user
+<pre><code>  events=gpf+user
   filter=
   file=/home/user/heapdump.%Y%m%d.%H%M%S.%pid.phd
   range=1..0
   priority=500
   request=exclusive+compact+prepwalk
   opts=PHD
-</pre></div>
-
+</code></pre>
 
 <h3 id="rangeranges"><code>range=&lt;ranges&gt;</code></h3>
 <p>You can start and stop dump agents on a particular occurrence of a VM event by using the <code>range</code> suboption: <code>-Xdump:&lt;agent&gt;:range=&lt;ranges&gt;</code></p>
 <p>For example:</p>
-<div class="codehilite"><pre><span></span>-Xdump:java:events=fullgc,range=100..200
-</pre></div>
-
+<pre><code>-Xdump:java:events=fullgc,range=100..200
+</code></pre>
 
 <p><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Note:</strong> range=1..0 against an event means "on every occurrence".</p>
 <p>The VM default dump agents have the range suboption set to 1..0 for all events except systhrow. Most systhrow events with <code>filter=java/lang/OutOfMemoryError</code> have the range suboption set to 1..4, which limits the number of dump files produced on <code>OutOfMemory</code> conditions to a maximum of 4. For more information, see <a href="#default-dump-agents">Default dump agents</a>.</p>
@@ -4629,24 +4577,21 @@ You can prevent the VM reverting to different dump locations by using the <code>
 </tbody>
 </table>
 <p>You can specify more than one request option by using <strong>+</strong>. For example:</p>
-<div class="codehilite"><pre><span></span>-Xdump:heap:request=exclusive+compact+prepwalk
-</pre></div>
-
+<pre><code>-Xdump:heap:request=exclusive+compact+prepwalk
+</code></pre>
 
 <p>The VM exclusive access mechanism allows a VM thread to halt the activity of other VM threads in a controlled way by using internal VM locks. When the <code>request=exclusive</code> option is specified for a dump agent, the VM thread that is producing the dump waits for threads that are running Java code to halt, and for garbage collection operations to complete, before the dump file is written. This process helps ensure that the dump has consistent data. When the dump is complete, the mechanism allows the other threads to resume.</p>
 <p>By default, only system dumps for <code>OutOfMemoryError</code> exceptions request exclusive access. Other system dump events typically result from a crash. In these cases, exclusive access is not requested because acquiring locks during a crash can be problematic.</p>
 <p>If system dumps are requested by using the <code>com.ibm.jvm.Dump.SystemDump()</code> API, the default system dump agent settings are used, and exclusive access is not requested. However, if you intend to use the system dump file for Java heap memory analysis, use the following option to request exclusive access when the dump is taken:</p>
-<div class="codehilite"><pre><span></span>-Xdump:system:defaults:request=exclusive+compact+prepwalk
-</pre></div>
-
+<pre><code>-Xdump:system:defaults:request=exclusive+compact+prepwalk
+</code></pre>
 
 <p>These settings avoid capturing a dump file with in-flight data during garbage collection.
 As an alternative, you can use the <code>com.ibm.jvm.Dump.triggerDump()</code> API and specify <code>request=exclusive+compact+prepwalk</code> on the API call.</p>
 <p>For more information about the <code>com.ibm.jvm.Dump API</code>, see the API reference information.</p>
 <p>The default setting of the <code>request</code> suboption for Java dump files is <code>request=exclusive+preempt</code>. To change the settings so that Java dump files are produced without pre-empting threads to collect native stack traces, use the following option:</p>
-<div class="codehilite"><pre><span></span>-Xdump:java:request=exclusive
-</pre></div>
-
+<pre><code>-Xdump:java:request=exclusive
+</code></pre>
 
 <p>In general, the default request options are sufficient.</p>
 <h2 id="dump-output">Dump output</h2>

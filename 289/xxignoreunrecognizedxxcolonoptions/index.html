@@ -3192,10 +3192,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>By default, any <code>-XX:</code> options that you specify on the command line are ignored if they are not recognized, which prevents an application failing to start. However, if you want to determine whether any of your <code>-XX:</code> options are unrecognized, you can turn off the behavior with this option. You might want to do this, for example, if you are switching to OpenJ9 from an alternative VM implementation where you are using <code>-XX:</code> options to tune the
 runtime environment.</p>
 <h2 id="syntax">Syntax</h2>
-<div class="codehilite"><pre><span></span>    -XX:[+|-]IgnoreUnrecognizedXXColonOptions
-</pre></div>
-
-
+<pre><code>    -XX:[+|-]IgnoreUnrecognizedXXColonOptions
+</code></pre>
 <table>
 <thead>
 <tr>
@@ -3218,11 +3216,10 @@ runtime environment.</p>
 </tbody>
 </table>
 <p>When you specify <code>-XX:-IgnoreUnrecognizedXXColonOptions</code>, if you also specify a <code>-XX:</code> option that is not recognized, that option is reported and the VM does not start. For example:</p>
-<div class="codehilite"><pre><span></span>JVMJ9VM007E Command-line option unrecognised: -XX:InvalidOption
+<pre><code>JVMJ9VM007E Command-line option unrecognised: -XX:InvalidOption
 Error: Could not create the Java Virtual Machine.
 Error: A fatal exception has occurred. Program will exit.
-</pre></div>
-
+</code></pre>
 
 <!-- ==== END OF TOPIC ==== xxignoreunrecognizedxxcolonoptions.md ==== -->
                 
