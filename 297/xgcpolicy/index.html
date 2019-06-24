@@ -3510,7 +3510,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </ul>
 <p>Running applications with minimal or no GC requrements</p>
 <ul>
-<li>You might use <code>nogc</code> when an application is so short lived that allocated memory is never exhausted and running a full GC cycle is therfore a waste of resources. Similarly, when memory applocation is well understood or where there is rarely memory to be reclaimed, you might prefer to avoid unnecessary GC cycles and rely on a failover mechanism to occasionally restart the VM as necessary.</li>
+<li>
+<p>You might use <code>nogc</code> when an application is so short lived that allocated memory is never exhausted and running a full GC cycle is therfore a waste of resources.</p>
+</li>
+<li>
+<p>Similarly, when memory application is well understood or where there is rarely memory to be reclaimed, you might prefer to avoid unnecessary GC cycles and rely on a failover mechanism to occasionally restart the VM as necessary.</p>
+</li>
 </ul>
 </dd>
 </dl>
