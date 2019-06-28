@@ -3232,6 +3232,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>Sets the native stack size for operating system threads.</p>
 <p>You can use the <code>-verbose:sizes</code> option to find out the values that the VM is currently using.</p>
 <p>When your application makes a JNI call, the VM calculates whether the memory required for the call will exceed the <code>-Xmso</code> value. If so, a <code>java/lang/StackOverflowError</code> error is thrown.</p>
+<p><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Note:</strong> This option relates to the native stack only. There is a separate, Java&trade; stack for operating system threads, for which you use different options (see the link in the <a href="#see-also">See also</a> section).</p>
 <h2 id="syntax">Syntax</h2>
 <pre><code>    -Xmso&lt;size&gt;
 </code></pre>
