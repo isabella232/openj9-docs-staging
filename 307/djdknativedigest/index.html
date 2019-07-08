@@ -375,18 +375,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
   <li class="md-nav__item">
-    <a href="../version0.14.2/" title="Version 0.14.2" class="md-nav__link">
-      Version 0.14.2
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
     <a href="../version0.14/" title="Version 0.14.0" class="md-nav__link">
       Version 0.14.0
     </a>
@@ -410,12 +398,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           
 
 
-  <li class="md-nav__item">
-    <a href="../version0.12.1/" title="Version 0.12.1" class="md-nav__link">
-      Version 0.12.1
-    </a>
-  </li>
-
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-4" type="checkbox" id="nav-5-4">
+    
+    <label class="md-nav__link" for="nav-5-4">
+      Earlier releases
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-4">
+        Earlier releases
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
         
           
           
@@ -474,6 +469,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <a href="../version0.8/" title="Version 0.8.0" class="md-nav__link">
       Version 0.8.0
     </a>
+  </li>
+
+        
+      </ul>
+    </nav>
   </li>
 
         
@@ -684,6 +684,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <li class="md-nav__item">
     <a href="../tool_builder/" title="Option builder" class="md-nav__link">
       Option builder
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../tool_jmap/" title="Java memory map (jmap) tool" class="md-nav__link">
+      Java memory map (jmap) tool
     </a>
   </li>
 
@@ -3216,7 +3228,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <h1 id="-djdknativedigest">-Djdk.nativeDigest</h1>
 <p>This option enables or disables OpenSSL native cryptographic support for the Digest algorithm.</p>
-<p><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> <strong>Restriction:</strong> <img alt="Start of content that applies to Java 8 (LTS)" src="../cr/java8.png" /> <img alt="Start of content that applies to Java 11 (LTS)" src="../cr/java11.png" /> Due to issue <a href="https://github.com/eclipse/openj9/issues/5611">#5611</a>, the Digest algorithm is currently disabled. <img alt="End of content that applies only to Java 8 and 11 (LTS)" src="../cr/java_close_lts.png" /></p>
+<p><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> <strong>Restriction:</strong> <img alt="Start of content that applies to Java 8 (LTS) and later" src="../cr/java8plus.png" /> Due to issue <a href="https://github.com/eclipse/openj9/issues/5611">#5611</a>, the Digest algorithm is currently disabled.
+This option cannot be used to turn on Digest support. <img alt="End of content that applies to Java 8 and later" src="../cr/java_close_lts.png" /></p>
 <h2 id="syntax">Syntax</h2>
 <pre><code>    -Djdk.nativeDigest=[true|false]
 </code></pre>
@@ -3232,17 +3245,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <tr>
 <td><code>-Djdk.nativeDigest</code></td>
 <td>true</td>
-<td align="center"><img alt="Start of content that applies to Java 12 (LTS)" src="../cr/java12.png" /><i class="fa fa-check" aria-hidden="true"></i><span class="sr-only">yes</span></td>
+<td align="center"></td>
 </tr>
 <tr>
 <td><code>-Djdk.nativeDigest</code></td>
 <td>false</td>
-<td align="center"></td>
+<td align="center"><i class="fa fa-check" aria-hidden="true"></i><span class="sr-only">yes</span></td>
 </tr>
 </tbody>
 </table>
 <h2 id="explanation">Explanation</h2>
-<p>OpenSSL support is enabled by default for the Digest algorithm. If you want to turn off this algorithm only, set this option to <code>false</code>. To turn off all the algorithms, see the <a href="../djdknativecrypto/">-Djdk.nativeCrypto</a> system property command line option.</p>
+<!--OpenSSL support is enabled by default for the Digest algorithm. If you want to turn off this algorithm only, set this option to `false`.-->
+
+<p>To turn off all the algorithms, see the <a href="../djdknativecrypto/">-Djdk.nativeCrypto</a> system property command line option.</p>
 <!-- ==== END OF TOPIC ==== djdknativedigest.md ==== -->
                 
                   

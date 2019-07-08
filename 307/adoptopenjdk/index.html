@@ -420,18 +420,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
   <li class="md-nav__item">
-    <a href="../version0.14.2/" title="Version 0.14.2" class="md-nav__link">
-      Version 0.14.2
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
     <a href="../version0.14/" title="Version 0.14.0" class="md-nav__link">
       Version 0.14.0
     </a>
@@ -455,12 +443,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           
 
 
-  <li class="md-nav__item">
-    <a href="../version0.12.1/" title="Version 0.12.1" class="md-nav__link">
-      Version 0.12.1
-    </a>
-  </li>
-
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-4" type="checkbox" id="nav-5-4">
+    
+    <label class="md-nav__link" for="nav-5-4">
+      Earlier releases
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-4">
+        Earlier releases
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
         
           
           
@@ -519,6 +514,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <a href="../version0.8/" title="Version 0.8.0" class="md-nav__link">
       Version 0.8.0
     </a>
+  </li>
+
+        
+      </ul>
+    </nav>
   </li>
 
         
@@ -729,6 +729,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <li class="md-nav__item">
     <a href="../tool_builder/" title="Option builder" class="md-nav__link">
       Option builder
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../tool_jmap/" title="Java memory map (jmap) tool" class="md-nav__link">
+      Java memory map (jmap) tool
     </a>
   </li>
 
@@ -3202,7 +3214,7 @@ range of platforms. For information about the platforms and minimum operating sy
 <h2 id="installation-pre-requisites">Installation pre-requisites</h2>
 <p>If you obtain binaries from the AdoptOpenJDK community, the following pre-requisites are required:</p>
 <ul>
-<li><img alt="Start of content that applies only to Java 12" src="../cr/java12.png" /> OpenJDK binaries for Linux and AIX platforms from the AdoptOpenJDK community no longer bundle the OpenSSL cryptographic library. The library is expected to be found on the system path. If you want to use OpenSSL cryptographic acceleration, you must install OpenSSL 1.0.2 or 1.1.X on your system. If the library is not found on the system path, the in-built Java crytographic implementation is used instead, which performs less well.  </li>
+<li>OpenJDK binaries for Linux and AIX platforms from the AdoptOpenJDK community no longer bundle the OpenSSL cryptographic library. The library is expected to be found on the system path. If you want to use OpenSSL cryptographic acceleration, you must install OpenSSL 1.0.2 or 1.1.X on your system. If the library is not found on the system path, the in-built Java crytographic implementation is used instead, which performs less well.  </li>
 <li><img alt="Start of content that applies only to Java 8" src="../cr/java8.png" /> On Linux systems, the <code>fontconfig.x86_64</code> package should be installed to avoid a <code>NullPointerException</code> error when the AWT font subsystem is initialized. Work is ongoing at the AdoptOpenJDK project to fix this issue for their OpenJDK binaries.</li>
 </ul>
 <!-- ==== END OF TOPIC ==== adoptopenjdk.md ==== -->
