@@ -2515,8 +2515,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </li>
         
           <li class="md-nav__item">
-  <a href="#nocheckurltimestamps" title="noCheckURLTimestamps" class="md-nav__link">
-    noCheckURLTimestamps
+  <a href="#nocheckurltimestamps" title="nocheckURLTimestamps" class="md-nav__link">
+    nocheckURLTimestamps
   </a>
   
 </li>
@@ -3749,8 +3749,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </li>
         
           <li class="md-nav__item">
-  <a href="#nocheckurltimestamps" title="noCheckURLTimestamps" class="md-nav__link">
-    noCheckURLTimestamps
+  <a href="#nocheckurltimestamps" title="nocheckURLTimestamps" class="md-nav__link">
+    nocheckURLTimestamps
   </a>
   
 </li>
@@ -4107,7 +4107,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <pre><code>    -Xshareclasses:checkURLTimestamps
 </code></pre>
 <dl>
-<dd>Causes timestamps of <code>jar</code> or <code>zip</code> files to be checked every time a class is loaded. If a timestamp has changed, the class is loaded from the <code>jar</code> or <code>zip</code> file and not from the shared cache. This sub-option is not enabled by default and reflects the legacy behavior of the shared classes cache. This sub-option does not affect the behavior of bootstrap <code>jar</code> or <code>zip</code> files, which check timestamps only when <code>jar</code> or <code>zip</code> files are added to a class loader and are used for the first time to look for a class (same behavior as <a href="./#nocheckurltimestamps"><code>noCheckURLTimestamps</code></a>).</dd>
+<dd>Causes timestamps of <code>jar</code> or <code>zip</code> files to be checked every time a class is loaded. If a timestamp has changed, the class is loaded from the <code>jar</code> or <code>zip</code> file and not from the shared cache. This sub-option is not enabled by default and reflects the legacy behavior of the shared classes cache.</dd>
+<dd><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Note:</strong> The timestamp of a bootstrap <code>jar</code> or <code>zip</code> file is checked once when it is used for the first time to load a class.</dd>
 </dl>
 <h3 id="destroy-cache-utility"><code>destroy</code> (Cache utility)</h3>
 <pre><code>    -Xshareclasses:destroy
@@ -4312,13 +4313,13 @@ with shared class cache.
 <dl>
 <dd>Disables the storage of classes that are loaded by the bootstrap class loader in the shared classes cache. Often used with the <code>SharedClassURLFilter</code> API to control exactly which classes are cached. For more information about shared class filtering, see <a href="https://www.ibm.com/support/knowledgecenter/SSYKE2_8.0.0/com.ibm.java.vm.80.doc/docs/shrc_pd_helper_class.html">Using the SharedClassHelper API</a>.</dd>
 </dl>
-<h3 id="nocheckurltimestamps"><code>noCheckURLTimestamps</code></h3>
-<pre><code>    -Xshareclasses:noCheckURLTimestamps
+<h3 id="nocheckurltimestamps"><code>nocheckURLTimestamps</code></h3>
+<pre><code>    -Xshareclasses:nocheckURLTimestamps
 </code></pre>
 <dl>
 <dd>Timestamps of <code>jar</code> or <code>zip</code> files are checked only when they are added to a class loader and used for the first time to look up a class. This is the default
 behavior, which can improve the performance of class loading from the shared classes cache, especially on Windows systems. To revert to the behavior of the shared classes cache in earlier releases, use the <a href="./#checkurltimestamps"><code>CheckURLTimeStamps</code></a> sub-option.</dd>
-<dd><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> <strong>Restriction:</strong> When the <code>noCheckURLTimestamps</code> sub-option is used (default), if <code>jar</code> or <code>zip</code> files are updated after a class loader starts loading classes from them, an older version of the class might be loaded from the shared classes cache. If this scenario occurs, use the <code>checkURLTimestamps</code> option.</dd>
+<dd><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> <strong>Restriction:</strong> When the <code>nocheckURLTimestamps</code> sub-option is used (default), if <code>jar</code> or <code>zip</code> files are updated after a class loader starts loading classes from them, an older version of the class might be loaded from the shared classes cache. If this scenario occurs, use the <code>checkURLTimestamps</code> option.</dd>
 </dl>
 <h3 id="nojitdata"><code>nojitdata</code></h3>
 <pre><code>    -Xshareclasses:nojitdata
