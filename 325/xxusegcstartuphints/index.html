@@ -3225,7 +3225,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 -->
 
 <h1 id="-xx91-93usegcstartuphints">-XX:[+|-]UseGCStartupHints</h1>
-<p>When this option is enabled, the VM calculates, over several application restarts, an appropriate startup heap size for your application. You can therefore use this option instead of calculating and setting an <code>-Xms</code> value yourself. Setting an initial size for the heap helps to avoid frequent garbage collections during the startup phase of an application.</p>
+<p>When this option is enabled, the VM calculates, over several application restarts, an appropriate startup heap size for your application. You can therefore use this option instead of calculating and setting an <code>-Xms</code> value yourself. Setting an initial size for the heap that is larger than the default helps to avoid frequent garbage collections during the startup phase of an application.</p>
 <h2 id="syntax">Syntax</h2>
 <pre><code>    -XX:[+|-]UseGCStartupHints
 </code></pre>
@@ -3252,7 +3252,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </table>
 <p>When enabled, the VM records the heap size when a <em>startup complete</em> event occurs, storing the value into the shared classes cache.
 On subsequent restarts, the garbage collector (GC) reads this value early in startup processing and expands the heap to an appropriate
-value. For accuracy, averages are taken over ~5 restarts to stabilize the value used.</p>
+value. For accuracy and stability, averages are taken over a few restarts to stabilize the value used. The heap size recorded is specific to the application command line,
+therefore a different hint is stored for every unique command line.</p>
 <p>You can check the value used by the garbage collector for heap expansion by inspecting verbose GC output. The following example shows heap expansion based on hints from the previous run when using the <code>gencon</code> policy:</p>
 <pre><code>&lt;heap-resize id=&quot;2&quot; type=&quot;expand&quot; space=&quot;nursery&quot; amount=&quot;205258752&quot; count=&quot;1&quot; timems=&quot;0.328&quot; reason=&quot;hint from previous runs&quot; timestamp=&quot;2019-06-05T13:26:32.021&quot; /&gt;
 &lt;heap-resize id=&quot;3&quot; type=&quot;expand&quot; space=&quot;tenure&quot; amount=&quot;692649984&quot; count=&quot;1&quot; timems=&quot;0.326&quot; reason=&quot;hint from previous runs&quot; timestamp=&quot;2019-06-05T13:26:32.022&quot; /&gt;
