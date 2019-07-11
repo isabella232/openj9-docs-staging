@@ -3225,7 +3225,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 -->
 
 <h1 id="-xx91-93usegcstartuphints">-XX:[+|-]UseGCStartupHints</h1>
-<p>When this option is enabled, the VM attempts to learn an appropriate startup heap size for your application, as an alternative to you sizing and setting an <code>-Xms</code> value. Setting an initial size for the heap helps to avoid frequent garbage collections during the startup phase of an application.</p>
+<p>When this option is enabled, the VM calculates, over several application restarts, an appropriate startup heap size for your application. You can therefore use this option instead of calculating and setting an <code>-Xms</code> value yourself. Setting an initial size for the heap helps to avoid frequent garbage collections during the startup phase of an application.</p>
 <h2 id="syntax">Syntax</h2>
 <pre><code>    -XX:[+|-]UseGCStartupHints
 </code></pre>
