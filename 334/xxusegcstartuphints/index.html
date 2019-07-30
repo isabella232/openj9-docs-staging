@@ -3272,9 +3272,11 @@ therefore a different hint is stored for every unique command line.</p>
 </code></pre>
 
 <p>The final value stored to the shared cache is not recorded in the verbose GC output.</p>
-<p><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Notes:</strong>
-- When enabled, this option overrides any initial heap size that is specified on the command line, for example by using the <a href="../xms/"><code>-Xms</code></a> option.
-- Because the shared classes cache is used to store heap size information, this option does not work if <a href="../shrc/">shared classes</a> are disabled.</p>
+<p><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Notes:</strong></p>
+<ul>
+<li>When enabled, this option overrides any initial heap size that is specified on the command line, for example by using the <a href="../xms/"><code>-Xms</code></a> option.</li>
+<li>Because the shared classes cache is used to store heap size information, this option does not work if <a href="../shrc/">shared classes</a> are disabled.</li>
+</ul>
 <p><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> <strong>Restriction:</strong> This feature is not currently available with the Balanced GC policy.</p>
 <!-- ==== END OF TOPIC ==== xxusegcstartuphints.md ==== -->
                 
