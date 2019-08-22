@@ -3204,22 +3204,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 -->
 
 <h1 id="java-command-jcmd-tool">Java command (<code>jcmd</code>) tool</h1>
-<p>Use the <code>jcmd</code> tool to run diagnostic commands on a specified VM or VMs.</p>
+<p>Use the <code>jcmd</code> tool to run diagnostic commands on a specified VM.</p>
 <p><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Note:</strong> Running diagnostic commands can significantly affect the performance of the target VM.</p>
 <p>The command syntax is as follows:</p>
-<pre><code>jcmd [&lt;options] [&lt;vmid&gt; &lt;arguments&gt;]
+<pre><code>jcmd [&lt;options&gt;] [&lt;vmid&gt; &lt;arguments&gt;]
 </code></pre>
 <p>Where:</p>
 <ul>
 <li>
 <p>The available <code>&lt;options&gt;</code> are:    </p>
 <ul>
-<li><code>-J</code>: supplies arguments to the Java VM that is running the <code>jps</code> command. You can use multiple <code>-J</code> options, for example: <code>jps -J-Xmx10m -J-Dcom.ibm.tools.attach.enable=yes</code></li>
+<li><code>-J</code>: supplies arguments to the Java VM that is running the <code>jcmd</code> command. You can use multiple <code>-J</code> options, for example: <code>jcmd -J-Xmx10m -J-Dcom.ibm.tools.attach.enable=yes</code></li>
 <li><code>-h</code>: prints the <code>jcmd</code> help</li>
 </ul>
 </li>
 <li>
-<p><code>VMID</code> is the Attach API virtual machine identifier for the Java VM process. This ID is often, but not always, the same as the operating system <em>process ID</em>. One example where the ID might be different is if you specified the system property <code>-Dcom.ibm.tools.attach.id</code> when you started the process. You can use the <a href="../tool_jps/"><code>jps</code></a> command to find the VMID. You can specify multiple VMIDs, separated by a space. VMIDs of dead processes are silently ignored.</p>
+<p><code>&lt;vmid&gt;</code> is the Attach API virtual machine identifier for the Java VM process. This ID is often, but not always, the same as the operating system <em>process ID</em>. One example where the ID might be different is if you specified the system property <code>-Dcom.ibm.tools.attach.id</code> when you started the process. You can use the <a href="../tool_jps/"><code>jps</code></a> command to find the VMID.</p>
 </li>
 <li>
 <p>The available <code>arguments</code> are:</p>
@@ -3231,7 +3231,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </li>
 </ul>
 <p>For example:</p>
-<p><code>jcmd 31452 Dump.heap</code></p>
+<pre><code>jcmd 31452 Thread.print
+jcmd 31452 help Dump.heap
+jcmd 31452 Dump.heap myHeapDump
+</code></pre>
+
 <p><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> <strong>Restrictions:</strong> This tool is not supported and is subject to change or removal in future releases. Although similar in usage and output to the HotSpot tool of the same name, this tool is a different implementation that is specific to OpenJ9. For information about the differences between these two implementations, see <a href="../tool_migration/">Switching to OpenJ9</a>.</p>
 <p>The tool uses the Attach API, and has the following limitations:</p>
 <ul>
