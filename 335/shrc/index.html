@@ -3296,9 +3296,11 @@ application runs, it takes much less time to start because the classes are alrea
 <p>The shared classes cache is updated dynamically; When an application loads new classes, the JVM automatically stores them in the cache without any user intervention.</p>
 <p>Memory footprint is reduced by sharing common classes between applications that run in separate Java VMs.</p>
 <h2 id="enabling-class-data-sharing">Enabling class data sharing</h2>
-<p>Class data sharing is enabled by default for bootstrap classes only (the equivalent of specifying <code>-Xshareclasses:bootClassesOnly,nonFatal,silent</code>), unless your application is running in a container. If you want to change the default behaviour, use the <a href="../xshareclasses/"><code>-Xshareclasses</code></a> option on the command line. For example:
-- You can change the name and location of the default shared classes cache.
-- You can enable messages about the default shared classes cache by using the default command line option without the <code>silent</code> suboption: <code>-Xshareclasses:bootClassesOnly,nonFatal</code>.</p>
+<p>Class data sharing is enabled by default for bootstrap classes only (the equivalent of specifying <code>-Xshareclasses:bootClassesOnly,nonFatal,silent</code>), unless your application is running in a container. If you want to change the default behaviour, use the <a href="../xshareclasses/"><code>-Xshareclasses</code></a> option on the command line. For example:</p>
+<ul>
+<li>You can change the name and location of the default shared classes cache.</li>
+<li>You can enable messages about the default shared classes cache by using the default command line option without the <code>silent</code> suboption: <code>-Xshareclasses:bootClassesOnly,nonFatal</code>.</li>
+</ul>
 <p><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Note:</strong> If you have multiple VMs and you do not change the default shared classes behavior, the VMs will share a single default cache, assuming that the VMs are from a single Java installation. If the VMs are from different Java installations, the cache might be deleted and recreated; for more information, see the following section about best practices.</p>
 <p>You can treat the default cache like any other shared classes cache, for example you can print statistics for it, change the soft maximum limit size, or delete it.</p>
 <p>You can enable class data sharing for non-bootstrap classes as well, by using <code>-Xshareclasses</code> without the <code>bootClassesOnly</code> suboption. You can also disable all class data sharing by using the <code>none</code> suboption.</p>
