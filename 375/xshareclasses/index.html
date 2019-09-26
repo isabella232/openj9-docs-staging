@@ -2523,8 +2523,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </li>
         
           <li class="md-nav__item">
-  <a href="#layer-experimental-64-bit-only" title="layer (Experimental, 64-bit only)" class="md-nav__link">
-    layer (Experimental, 64-bit only)
+  <a href="#layer" title="layer" class="md-nav__link">
+    layer
   </a>
   
 </li>
@@ -3833,8 +3833,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </li>
         
           <li class="md-nav__item">
-  <a href="#layer-experimental-64-bit-only" title="layer (Experimental, 64-bit only)" class="md-nav__link">
-    layer (Experimental, 64-bit only)
+  <a href="#layer" title="layer" class="md-nav__link">
+    layer
   </a>
   
 </li>
@@ -4289,7 +4289,8 @@ Cache1                  Java8 64-bit  persistent      cr              2         
 </li>
 </ol>
 <dl>
-<dd>The caches are created in the same directory. When you use the <code>-Xshareclasses:name=Cache1</code> suboption in future Java commands, all the caches are started. Only the cache in the container layer is writable. The caches in the lower layers are read only, because modifying them would invalidate all the caches in the layers above.</dd>
+<dd>The caches are created in the same directory.</dd>
+<dd>When you use the <code>-Xshareclasses:name=Cache1</code> suboption in future Java commands, all the caches are started, however only the cache in the container layer is writable. The caches in the lower layers are read only, because modifying them would invalidate all the caches in the layers above.</dd>
 <dd>If there are multiple VMs in a race condition while creating a layered cache, more than one new layered cache can be created. To avoid this situation, you can instead use the <a href="./#layer"><code>-Xshareclasses:layer=&lt;number&gt;</code></a> suboption to create a new layered cache.</dd>
 </dl>
 <h3 id="destroy-cache-utility"><code>destroy</code> (Cache utility)</h3>
@@ -4437,12 +4438,13 @@ with shared class cache.
 <dd>To identify AOT problems, see <a href="https://www.ibm.com/support/knowledgecenter/SSYKE2_8.0.0/com.ibm.java.vm.80.doc/docs/jit_pd_diagnose.html">Diagnosing a JIT or AOT problem</a>.</dd>
 <dd>To revalidate an AOT method, see the <code>revalidateAotMethods</code> suboption. Use the <code>findAotMethod</code> suboption to determine which AOT methods match the method specifications. To learn more about the syntax to use for <code>&lt;method_specification&gt;</code>, including how to specify more than one method, see <a href="#method-specification-syntax">Method specification syntax</a>.</dd>
 </dl>
-<h3 id="layer-experimental-64-bit-only"><code>layer</code> (Experimental, 64-bit only)</h3>
+<h3 id="layer"><code>layer</code></h3>
+<p>(Experimental, 64-bit only)</p>
 <pre><code>    -Xshareclasses:layer=&lt;number&gt;
 </code></pre>
 <dl>
 <dd>Creates layered caches inside a container. This suboption is experimental; do not use it in production.</dd>
-<dd>This suboption has the same effect as the <code>createLayer</code> suboption, but with the added ability to specify the layer number. For more information, see <a href="./#createLayer"><code>createLayer</code></a>.</dd>
+<dd>This suboption has the same effect as the <code>createLayer</code> suboption, but with the added ability to specify the layer number. For more information, see <a href="./#createlayer"><code>createLayer</code></a>.</dd>
 </dl>
 <h3 id="listallcaches-cache-utility"><code>listAllCaches</code> (Cache utility)</h3>
 <pre><code>    -Xshareclasses:listAllCaches
