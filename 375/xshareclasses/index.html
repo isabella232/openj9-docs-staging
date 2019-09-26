@@ -4256,8 +4256,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </code></pre>
 <dl>
 <dd>Creates layered caches inside a container. This suboption is experimental; do not use it in a production environment.</dd>
-<dd>If you are building a Docker container, you can use this suboption to create caches that build on caches in lower layers inside the container. Because each cache builds on the cache in the layer below, rather than duplicating it, space is saved in the image.</dd>
+<dd>If you are building a Docker container, you can use this suboption to create caches that build on other caches in lower layers inside the container. Because each cache builds on the cache in the layer below, rather than duplicating it, space is saved in the image.</dd>
 <dd>The following example shows a Docker container with four layers:</dd>
+<dd><img alt="This diagram is explained in the surrounding text" src="../cr/shrc_layers.jpg" title="Docker container with layered caches" /></dd>
 </dl>
 <ol>
 <li>The lowest layer is a Ubuntu Docker image.</li>
@@ -4325,8 +4326,8 @@ cannot verify that the shared memory was created by the VM.
 <pre><code>    -Xshareclasses:destroyAllLayers
 </code></pre>
 <dl>
-<dd>Destroys all shared cache layers that are specified by the <code>name</code> suboption. For example, <code>-Xshareclasses:name=Cache1,destroyAllLayers</code> destroys all layers of the cache called <code>Cache1</code>. For more information about layered caches, see the <a href="./#createlayer"><code>createLayer</code></a> suboption.</dd>
-<dd>If you use the <code>destroy</code> suboption on a layered cache, for example <code>-Xshareclasses:name=Cache1,destroy</code>, only the top layer of the cache is destroyed.</dd>
+<dd>Destroys all shared cache layers that are specified by the <code>name</code> suboption. For example, <code>-Xshareclasses:name=Cache1,destroyAllLayers</code> destroys all layers of the cache called <code>Cache1</code>. If you use the <code>destroy</code> suboption on a layered cache, for example <code>-Xshareclasses:name=Cache1,destroy</code>, only the top layer of the cache is destroyed.</dd>
+<dd>For more information about layered caches, see the <a href="./#createlayer"><code>createLayer</code></a> suboption.</dd>
 </dl>
 <h3 id="destroyallsnapshots-cache-utility"><code>destroyAllSnapshots</code> (Cache utility)</h3>
 <dl>
