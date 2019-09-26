@@ -407,8 +407,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </li>
         
           <li class="md-nav__item">
-  <a href="#new-option-to-improve-vm-operations" title="New option to improve VM operations" class="md-nav__link">
-    New option to improve VM operations
+  <a href="#new-shared-classes-cache-suboption" title="New shared classes cache suboption" class="md-nav__link">
+    New shared classes cache suboption
   </a>
   
 </li>
@@ -3280,8 +3280,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </li>
         
           <li class="md-nav__item">
-  <a href="#new-option-to-improve-vm-operations" title="New option to improve VM operations" class="md-nav__link">
-    New option to improve VM operations
+  <a href="#new-shared-classes-cache-suboption" title="New shared classes cache suboption" class="md-nav__link">
+    New shared classes cache suboption
   </a>
   
 </li>
@@ -3354,7 +3354,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>The following new features and notable changes since v.0.16 are included in this release:</p>
 <ul>
 <li><a href="#binaries-and-supported-environments">New binaries and changes to supported environments</a></li>
-<li><a href="#new-option-to-improve-vm-operations">New option to improve VM operations</a></li>
+<li><a href="#new-shared-classes-cache-suboption">New shared classes cache suboption</a></li>
 <li><a href="#digest-algorithm-is-re-enabled">Digest algorithm is re-enabled</a></li>
 </ul>
 <h2 id="features-and-changes">Features and changes</h2>
@@ -3366,7 +3366,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li><a href="https://adoptopenjdk.net/archive.html?variant=openjdk13&amp;jvmVariant=openj9">OpenJDK version 13</a></li>
 </ul>
 <p>To learn more about support for OpenJ9 releases, including OpenJDK levels and platform support, see <a href="../openj9_support/">Supported environments</a>.</p>
-<h3 id="new-option-to-improve-vm-operations">New option to improve VM operations</h3>
+<h3 id="new-shared-classes-cache-suboption">New shared classes cache suboption</h3>
 <p>When creating a persistent shared classes cache, the OpenJ9 VM checks that there is sufficient disk space available on the file
 system. For file systems that do not support the checking of free space, you can set the <code>-Xshareclasses:noPersistentDiskSpaceCheck</code> option, which causes the VM to skip the space checking operation. If there isn't enough disk space available when the cache is written, a <strong>SIGBUG</strong> or <strong>SIGSEGV</strong> signal occurs and the VM ends. For more information, see the <a href="../xshareclasses/#nopersistentdiskspacecheck">-Xshareclasses:noPersistentDiskSpaceCheck</a> option.</p>
 <h3 id="digest-algorithm-is-re-enabled">Digest algorithm is re-enabled</h3>
