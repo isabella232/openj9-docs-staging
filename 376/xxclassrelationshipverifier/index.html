@@ -2585,15 +2585,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#explanation" title="Explanation" class="md-nav__link">
-    Explanation
+  <a href="#syntax" title="Syntax" class="md-nav__link">
+    Syntax
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#syntax" title="Syntax" class="md-nav__link">
-    Syntax
+  <a href="#explanation" title="Explanation" class="md-nav__link">
+    Explanation
   </a>
   
 </li>
@@ -3264,15 +3264,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#explanation" title="Explanation" class="md-nav__link">
-    Explanation
+  <a href="#syntax" title="Syntax" class="md-nav__link">
+    Syntax
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#syntax" title="Syntax" class="md-nav__link">
-    Syntax
+  <a href="#explanation" title="Explanation" class="md-nav__link">
+    Explanation
   </a>
   
 </li>
@@ -3324,10 +3324,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <h1 id="-xx-classrelationshipverifier">-XX:[+|-]ClassRelationshipVerifier</h1>
 <p>This option enables and disables the recording of class relationships in the verifier to delay validation until triggered by class loading.</p>
-<h2 id="explanation">Explanation</h2>
-<p>When enabled, this option delays validating the relationships between classes until the classes are required to be loaded during program execution. In this way, classes that are not required, are never loaded thus reducing VM startup time. </p>
-<p>A verify error is thrown if validation fails.</p>
-<p><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Note:</strong> You cannot use this setting in conjunction with <a href="../xfuture/"><code>-Xfuture</code></a> or <a href="../xverify/"><code>-Xverify:all</code></a>, which itself enables <code>-Xfuture</code>.</p>
 <h2 id="syntax">Syntax</h2>
 <pre><code>    -XX:[+|-]ClassRelationshipVerifier
 </code></pre>
@@ -3352,6 +3348,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </tr>
 </tbody>
 </table>
+<h2 id="explanation">Explanation</h2>
+<p>When enabled, this option delays validating the relationships between classes until the classes are required to be loaded during program execution. In this way, classes that are not required, are never loaded thus reducing VM startup time. </p>
+<p>A verify error is thrown if validation fails.</p>
+<p><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Note:</strong> You cannot use this setting in conjunction with <a href="../xfuture/"><code>-Xfuture</code></a> or <a href="../xverify/"><code>-Xverify:all</code></a>, which itself enables <code>-Xfuture</code>.</p>
 <!-- ==== END OF TOPIC ==== xxclassrelationshipverifier.md ==== -->
                 
                   
