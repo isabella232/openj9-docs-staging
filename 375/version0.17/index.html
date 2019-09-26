@@ -3394,7 +3394,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>The following new features and notable changes since v.0.16 are included in this release:</p>
 <ul>
 <li><a href="#binaries-and-supported-environments">New binaries and changes to supported environments</a></li>
-<li><a href="#new-shared-classes-cache-suboptions-for-creating-layered-caches">New shared classes cache suboptions for layered caches</a></li>
+<li><a href="#new-shared-classes-cache-suboptions-for-layered-caches">New shared classes cache suboptions for layered caches</a></li>
 <li><a href="#new-shared-classes-cache-suboption-to-skip-disk-space-check">New shared classes cache suboption to skip disk space check</a></li>
 <li><a href="#option-to-share-unsafe-classes">Option to share 'Unsafe' classes</a></li>
 <li><a href="#digest-algorithm-is-re-enabled">Digest algorithm is re-enabled</a></li>
@@ -3411,7 +3411,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>To learn more about support for OpenJ9 releases, including OpenJDK levels and platform support, see <a href="../openj9_support/">Supported environments</a>.</p>
 <h3 id="new-shared-classes-cache-suboptions-for-layered-caches">New shared classes cache suboptions for layered caches</h3>
 <p><strong>(Experimental, 64-bit only)</strong></p>
-<p>Two suboptions, <code>createLayer</code> and <code>layer=&lt;number&gt;</code>, are available for creating layered caches in a container. You can use these suboptions to save space when building a Docker container, for example. Instead of a cache being duplicated into higher layers of the container, the cache is layered such that each container layer contains a cache that builds on the cache in the layer below. For more information, see <a href="../xshareclasses/#createlayer"><code>-Xshareclasses:createLayer</code></a>.</p>
+<p>Two new suboptions, <code>createLayer</code> and <code>layer=&lt;number&gt;</code>, are available for creating layered caches in a container. You can use these suboptions to save space when building a Docker container, for example. Instead of a cache being duplicated into higher layers of the container, the cache is layered such that each container layer contains a cache that builds on the cache in the layer below. For more information, see <a href="../xshareclasses/#createlayer"><code>-Xshareclasses:createLayer</code></a>.</p>
 <p>A new suboption, <a href="../xshareclasses/#destroyAllLayers"><code>destroyAllLayers</code></a>, is available for destroying all the layers of a layered cache.</p>
 <p><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Note:</strong> Because these suboptions are experimental, do not use them in a production environment.</p>
 <h3 id="new-shared-classes-cache-suboption-to-skip-disk-space-check">New shared classes cache suboption to skip disk space check</h3>

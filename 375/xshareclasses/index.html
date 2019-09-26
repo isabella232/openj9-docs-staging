@@ -2425,8 +2425,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </li>
         
           <li class="md-nav__item">
-  <a href="#createlayer-experimental-64-bit-only" title="createLayer (Experimental, 64-bit only)" class="md-nav__link">
-    createLayer (Experimental, 64-bit only)
+  <a href="#createlayer" title="createLayer" class="md-nav__link">
+    createLayer
   </a>
   
 </li>
@@ -2446,8 +2446,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </li>
         
           <li class="md-nav__item">
-  <a href="#destroyalllayers-experimental-64-bit-only" title="destroyAllLayers (Experimental, 64-bit only)" class="md-nav__link">
-    destroyAllLayers (Experimental, 64-bit only)
+  <a href="#destroyalllayers" title="destroyAllLayers" class="md-nav__link">
+    destroyAllLayers
   </a>
   
 </li>
@@ -3735,8 +3735,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </li>
         
           <li class="md-nav__item">
-  <a href="#createlayer-experimental-64-bit-only" title="createLayer (Experimental, 64-bit only)" class="md-nav__link">
-    createLayer (Experimental, 64-bit only)
+  <a href="#createlayer" title="createLayer" class="md-nav__link">
+    createLayer
   </a>
   
 </li>
@@ -3756,8 +3756,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </li>
         
           <li class="md-nav__item">
-  <a href="#destroyalllayers-experimental-64-bit-only" title="destroyAllLayers (Experimental, 64-bit only)" class="md-nav__link">
-    destroyAllLayers (Experimental, 64-bit only)
+  <a href="#destroyalllayers" title="destroyAllLayers" class="md-nav__link">
+    destroyAllLayers
   </a>
   
 </li>
@@ -4250,46 +4250,47 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <dd>Causes timestamps of <code>jar</code> or <code>zip</code> files to be checked every time a class is loaded. If a timestamp has changed, the class is loaded from the <code>jar</code> or <code>zip</code> file and not from the shared cache. This suboption is not enabled by default and reflects the legacy behavior of the shared classes cache.</dd>
 <dd><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Note:</strong> The timestamp of a bootstrap <code>jar</code> or <code>zip</code> file is checked once when it is used for the first time to load a class.</dd>
 </dl>
-<h3 id="createlayer-experimental-64-bit-only"><code>createLayer</code> (Experimental, 64-bit only)</h3>
+<h3 id="createlayer"><code>createLayer</code></h3>
+<p><strong>(Experimental, 64-bit only)</strong></p>
 <pre><code>    -Xshareclasses:createLayer
 </code></pre>
 <dl>
 <dd>Creates layered caches inside a container. This suboption is experimental; do not use it in a production environment.</dd>
 <dd>If you are building a Docker container, you can use this suboption to create caches that build on caches in lower layers inside the container. Because each cache builds on the cache in the layer below, rather than duplicating it, space is saved in the image.</dd>
-<dd>The following example shows a Docker container with four layers:
-1. The lowest layer is a Ubuntu Docker image.
-2. The next layer is an OpenJ9 Docker image that is built on the Ubuntu image. As part of this image, the <code>-Xshareclasses:name=Cache1</code> suboption is used to create a cache called Cache1. The layer number assigned to this cache is 0. The <code>listAllCaches</code> suboption shows the cache and the layer number:</dd>
+<dd>The following example shows a Docker container with four layers:</dd>
 </dl>
-<p>```
-  java -Xshareclasses:listAllCaches
-  ...
-  Cache name              level         cache-type      feature         layer       OS shmid       OS semid       last detach time</p>
-<p>Compatible shared caches
-  Cache1                  Java8 64-bit  persistent      cr              0                                         Mon Sep 23 11:41:04 2019                     <br />
-  ```</p>
 <ol>
+<li>The lowest layer is a Ubuntu Docker image.</li>
+<li>
+<p>The next layer is an OpenJ9 Docker image that is built on the Ubuntu image. As part of this image, the <code>-Xshareclasses:name=Cache1</code> suboption is used to create a cache called Cache1. The layer number assigned to this cache is 0. The <code>listAllCaches</code> suboption shows the cache and the layer number:</p>
+<pre><code>java -Xshareclasses:listAllCaches
+...
+Cache name              level         cache-type      feature         layer       OS shmid       OS semid       last detach time
+
+Compatible shared caches
+Cache1                  Java8 64-bit  persistent      cr              0                                         Mon Sep 23 11:41:04 2019
+</code></pre>
+</li>
 <li>
 <p>The next layer up is an Open Liberty Docker image that is built on the OpenJ9 image. As part of this image, the <code>-Xhsareclasses:name=Cache1,createLayer</code> suboption is used to create another cache called Cache1. Because the <code>createLayer</code> suboption is specified, this new cache is a layered cache, which builds on Cache1 in the previous container layer. The layer number assigned to the new cache is 1. Note that this number relates to the cache layers not the container layers.</p>
 </li>
 <li>
 <p>In the same way, another layer is added for an Open Liberty Java application, and another layered cache is created to add to Cache1. The <code>listAllCaches</code> suboption now shows all the caches and their layers:</p>
+<pre><code>java -Xshareclasses:listAllCaches
+...
+Cache name              level         cache-type      feature         layer       OS shmid       OS semid       last detach time
+
+Compatible shared caches
+Cache1                  Java8 64-bit  persistent      cr              0                                         Mon Sep 23 11:41:04 2019   
+Cache1                  Java8 64-bit  persistent      cr              1                                         Mon Sep 23 11:46:25 2019
+Cache1                  Java8 64-bit  persistent      cr              2                                         In use
+</code></pre>
 </li>
 </ol>
-<p>```
-  java -Xshareclasses:listAllCaches
-  ...
-  Cache name              level         cache-type      feature         layer       OS shmid       OS semid       last detach time</p>
 <dl>
-<dt>Compatible shared caches</dt>
-<dt>  Cache1                  Java8 64-bit  persistent      cr              0                                         Mon Sep 23 11:41:04 2019   </dt>
-<dt>  Cache1                  Java8 64-bit  persistent      cr              1                                         Mon Sep 23 11:46:25 2019</dt>
-<dt>  Cache1                  Java8 64-bit  persistent      cr              2                                         In use                     </dt>
-<dt>  ```</dt>
-<dd>
-<p>The caches are created in the same directory. When you use the <code>-Xshareclasses:name=Cache1</code> suboption in future Java commands, all the caches are started. Only the cache in the container layer is writable. The caches in the lower layers are read only, because modifying them would invalidate all the caches in the layers above.</p>
-</dd>
+<dd>The caches are created in the same directory. When you use the <code>-Xshareclasses:name=Cache1</code> suboption in future Java commands, all the caches are started. Only the cache in the container layer is writable. The caches in the lower layers are read only, because modifying them would invalidate all the caches in the layers above.</dd>
+<dd>If there are multiple VMs in a race condition while creating a layered cache, more than one new layered cache can be created. To avoid this situation, you can instead use the <a href="./#layer"><code>-Xshareclasses:layer=&lt;number&gt;</code></a> suboption to create a new layered cache.</dd>
 </dl>
-<p>If there are multiple VMs in a race condition while creating a layered cache, more than one new layered cache could be created. To avoid this situation, you can instead use the <code>-Xshareclasses:layer=&lt;number&gt;</code> suboption to create a new layered cache.</p>
 <h3 id="destroy-cache-utility"><code>destroy</code> (Cache utility)</h3>
 <pre><code>    -Xshareclasses:destroy
 </code></pre>
@@ -4319,7 +4320,8 @@ cannot verify that the shared memory was created by the VM.
 <p>Persistent caches that are still in use continue to exist even when you use this option, but they are unlinked from the file system so they are not visible to new VM invocations. If you update the VM then restart an application for which a persistent shared cache already exists, the VM unlinks the existing cache and creates a new cache. Because the unlinked caches are not visible to new VMs, you cannot find them by using the <code>-Xshareclasses:listAllCaches</code> option, and you cannot use the <code>-Xshareclasses:printStats</code> option on them. You can therefore have multiple unlinked caches that consume file system space until they are no longer in use.</p>
 </li>
 </ul>
-<h3 id="destroyalllayers-experimental-64-bit-only"><code>destroyAllLayers</code> (Experimental, 64-bit only)</h3>
+<h3 id="destroyalllayers"><code>destroyAllLayers</code></h3>
+<p><strong>(Experimental, 64-bit only)</strong></p>
 <pre><code>    -Xshareclasses:destroyAllLayers
 </code></pre>
 <dl>
