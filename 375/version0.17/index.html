@@ -428,6 +428,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </li>
         
           <li class="md-nav__item">
+  <a href="#option-to-record-class-relationships-in-the-verifier" title="Option to record class relationships in the verifier" class="md-nav__link">
+    Option to record class relationships in the verifier
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#digest-algorithm-is-re-enabled" title="Digest algorithm is re-enabled" class="md-nav__link">
     Digest algorithm is re-enabled
   </a>
@@ -2642,6 +2649,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
   <li class="md-nav__item">
+    <a href="../xxclassrelationshipverifier/" title="-XX:[+|-]ClassRelationshipVerifier" class="md-nav__link">
+      -XX:[+|-]ClassRelationshipVerifier
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../xxcodecachetotal/" title="-XX:codecachetotal" class="md-nav__link">
       -XX:codecachetotal
     </a>
@@ -3327,6 +3346,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </li>
         
           <li class="md-nav__item">
+  <a href="#option-to-record-class-relationships-in-the-verifier" title="Option to record class relationships in the verifier" class="md-nav__link">
+    Option to record class relationships in the verifier
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#digest-algorithm-is-re-enabled" title="Digest algorithm is re-enabled" class="md-nav__link">
     Digest algorithm is re-enabled
   </a>
@@ -3397,6 +3423,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li><a href="#new-shared-classes-cache-suboptions-for-layered-caches">New shared classes cache suboptions for layered caches</a></li>
 <li><a href="#new-shared-classes-cache-suboption-to-skip-disk-space-check">New shared classes cache suboption to skip disk space check</a></li>
 <li><a href="#option-to-share-unsafe-classes">Option to share 'Unsafe' classes</a></li>
+<li><a href="#option-to-record-class-relationships-in-the-verifier">Option to record class relationships in the verifier</a></li>
 <li><a href="#digest-algorithm-is-re-enabled">Digest algorithm is re-enabled</a></li>
 </ul>
 <h2 id="features-and-changes">Features and changes</h2>
@@ -3411,7 +3438,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>To learn more about support for OpenJ9 releases, including OpenJDK levels and platform support, see <a href="../openj9_support/">Supported environments</a>.</p>
 <h3 id="new-shared-classes-cache-suboptions-for-layered-caches">New shared classes cache suboptions for layered caches</h3>
 <p><strong>(Experimental, 64-bit only)</strong></p>
-<p>Two new suboptions, <code>createLayer</code> and <code>layer=&lt;number&gt;</code>, are available for creating layered caches in a container. You can use these suboptions to save space when building a Docker container, for example. Instead of a cache being duplicated into higher layers of the container, the cache is layered such that each container layer contains a cache that builds on the cache in the layer below. For more information, see <a href="../xshareclasses/#createlayer"><code>-Xshareclasses:createLayer</code></a>.</p>
+<p>Two new suboptions, <code>createLayer</code> and <code>layer=&lt;number&gt;</code>, are available for creating layered caches, where a cache builds on another cache with the same name. You can use these suboptions to save space when building a Docker container, for example. For more information, see <a href="../xshareclasses/#createlayer"><code>-Xshareclasses:createLayer</code></a>.</p>
 <p>A new suboption, <a href="../xshareclasses/#destroyalllayers"><code>destroyAllLayers</code></a>, is available for destroying all the layers of a layered cache.</p>
 <p><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Note:</strong> Because these suboptions are experimental, do not use them in a production environment.</p>
 <h3 id="new-shared-classes-cache-suboption-to-skip-disk-space-check">New shared classes cache suboption to skip disk space check</h3>
@@ -3419,6 +3446,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 system. For file systems that do not support the checking of free space, you can set the <code>-Xshareclasses:noPersistentDiskSpaceCheck</code> option, which causes the VM to skip the space checking operation. If there isn't enough disk space available when the cache is written, a <strong>SIGBUG</strong> or <strong>SIGSEGV</strong> signal occurs and the VM ends. For more information, see the <a href="../xshareclasses/#nopersistentdiskspacecheck">-Xshareclasses:noPersistentDiskSpaceCheck</a> option.</p>
 <h3 id="option-to-share-unsafe-classes">Option to share 'Unsafe' classes</h3>
 <p>Classes created through <code>Unsafe.defineClass</code> are now stored by default in the shared classes cache. You can use the <code>-XX:-ShareUnsafeClasses</code> option to change the default behavior. For more information, see <a href="../xxshareunsafeclasses/">-XX:[+|-]ShareUnsafeClasses</a>.</p>
+<h3 id="option-to-record-class-relationships-in-the-verifier">Option to record class relationships in the verifier</h3>
+<p>A new command line option <code>-XX:+ClassRelationshipVerifier</code> allows you to record class relationships in the verifier, which avoids unnecessary class loading and reduces VM startup time. This is a new approach to bytecode verification that delays validating the relationships between classes until the classes are required to be loaded for a program's execution thus loading only those classes that are needed. For more information, see <a href="../xxclassrelationshipverifier/">-XX:[+|-]ClassRelationshipVerifier</a>.</p>
 <h3 id="digest-algorithm-is-re-enabled">Digest algorithm is re-enabled</h3>
 <p>Issue <a href="https://github.com/eclipse/openj9/issues/5611">#5611</a> is fixed, so support for the Digest algorithm is re-enabled. For more information about this support, see <a href="../introduction/#cryptographic-operations">Cryptographic operations</a>.</p>
 <h2 id="full-release-information">Full release information</h2>

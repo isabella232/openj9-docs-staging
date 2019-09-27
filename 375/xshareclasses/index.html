@@ -2994,6 +2994,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
   <li class="md-nav__item">
+    <a href="../xxclassrelationshipverifier/" title="-XX:[+|-]ClassRelationshipVerifier" class="md-nav__link">
+      -XX:[+|-]ClassRelationshipVerifier
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../xxcodecachetotal/" title="-XX:codecachetotal" class="md-nav__link">
       -XX:codecachetotal
     </a>
@@ -4255,43 +4267,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <pre><code>    -Xshareclasses:createLayer
 </code></pre>
 <dl>
-<dd>Creates layered caches inside a container. This suboption is experimental; do not use it in a production environment.</dd>
-<dd>If you are building a Docker container, you can use this suboption to create caches that build on other caches in lower layers inside the container. Because each cache builds on the cache in the layer below, rather than duplicating it, space is saved in the image.</dd>
-<dd>The following example shows a Docker container with four layers:</dd>
-<dd><img alt="This diagram is explained in the surrounding text" src="../cr/shrc_layers.jpg" title="Docker container with layered caches" /></dd>
-</dl>
-<ol>
-<li>The lowest layer is a Ubuntu Docker image.</li>
-<li>
-<p>The next layer is an OpenJ9 Docker image that is built on the Ubuntu image. As part of this image, the <code>-Xshareclasses:name=Cache1</code> suboption is used to create a cache called Cache1. The layer number assigned to this cache is 0. The <code>listAllCaches</code> suboption shows the cache and the layer number:</p>
-<pre><code>java -Xshareclasses:listAllCaches
-...
-Cache name              level         cache-type      feature         layer       OS shmid       OS semid       last detach time
-
-Compatible shared caches
-Cache1                  Java8 64-bit  persistent      cr              0                                         Mon Sep 23 11:41:04 2019
-</code></pre>
-</li>
-<li>
-<p>The next layer up is an Open Liberty Docker image that is built on the OpenJ9 image. As part of this image, the <code>-Xhsareclasses:name=Cache1,createLayer</code> suboption is used to create another cache called Cache1. Because the <code>createLayer</code> suboption is specified, this new cache is a layered cache, which builds on Cache1 in the previous container layer. The layer number assigned to the new cache is 1. Note that this number relates to the cache layers not the container layers.</p>
-</li>
-<li>
-<p>In the same way, another layer is added for an Open Liberty Java application, and another layered cache is created to add to Cache1. The <code>listAllCaches</code> suboption now shows all the caches and their layers:</p>
-<pre><code>java -Xshareclasses:listAllCaches
-...
-Cache name              level         cache-type      feature         layer       OS shmid       OS semid       last detach time
-
-Compatible shared caches
-Cache1                  Java8 64-bit  persistent      cr              0                                         Mon Sep 23 11:41:04 2019   
-Cache1                  Java8 64-bit  persistent      cr              1                                         Mon Sep 23 11:46:25 2019
-Cache1                  Java8 64-bit  persistent      cr              2                                         In use
-</code></pre>
-</li>
-</ol>
-<dl>
-<dd>The caches are created in the same directory.</dd>
-<dd>When you use the <code>-Xshareclasses:name=Cache1</code> suboption in future Java commands, all the caches are started, however only the cache in the container layer is writable. The caches in the lower layers are read only, because modifying them would invalidate all the caches in the layers above.</dd>
-<dd>If there are multiple VMs in a race condition while creating a layered cache, more than one new layered cache can be created. To avoid this situation, you can instead use the <a href="./#layer"><code>-Xshareclasses:layer=&lt;number&gt;</code></a> suboption to create a new layered cache.</dd>
+<dd>Creates layered caches. This suboption is experimental; do not use it in a production environment.</dd>
+<dd>If there are multiple VMs in a race condition while creating a layered cache, more than one new layered cache can be created. To avoid this situation, use the <code>-Xshareclasses:layer=&lt;number&gt;</code> suboption to create a new layered cache with a specific layer number. See <a href="./#layer"><code>layer</code></a> for more information about layered caches.</dd>
 </dl>
 <h3 id="destroy-cache-utility"><code>destroy</code> (Cache utility)</h3>
 <pre><code>    -Xshareclasses:destroy
@@ -4443,8 +4420,43 @@ with shared class cache.
 <pre><code>    -Xshareclasses:layer=&lt;number&gt;
 </code></pre>
 <dl>
-<dd>Creates layered caches inside a container. This suboption is experimental; do not use it in production.</dd>
-<dd>This suboption has the same effect as the <code>createLayer</code> suboption, but with the added ability to specify the layer number. For more information, see <a href="./#createlayer"><code>createLayer</code></a>.</dd>
+<dd>Creates layered caches. This suboption is experimental; do not use it in production.</dd>
+<dd>This suboption has the same effect as the <a href="./#createlayer"><code>createLayer</code></a> suboption, but with the added ability to specify the layer number.</dd>
+<dd>One scenario where you might want to use a layered cache is if you are building a Docker image. Normally, writing to an existing shared cache in a lower image layer results in Docker duplicating the shared cache to the top layer (following the Docker <a href="https://docs.docker.com/storage/storagedriver/#the-copy-on-write-cow-strategy">copy-on-write strategy</a>). With a layered cache, you can instead write into a new cache in the top layer. The new cache builds on the existing cache, so space is saved in the image.</dd>
+<dd>The following example shows a Docker container with four layers:</dd>
+<dd><img alt="This diagram is explained in the surrounding text" src="../cr/shrc_layers.jpg" title="Docker container with layered caches" /></dd>
+</dl>
+<ol>
+<li>The lowest layer is a Ubuntu Docker image.</li>
+<li>
+<p>The next layer is an OpenJ9 Docker image that is built on the Ubuntu image. As part of this image, the <code>-Xshareclasses:name=Cache1</code> suboption is used to create a cache called <code>Cache1</code>. The layer number assigned to this cache is 0. The <code>listAllCaches</code> suboption shows the cache and the layer number:</p>
+<pre><code>java -Xshareclasses:listAllCaches
+...
+Cache name              level         cache-type      feature         layer       OS shmid       OS semid       last detach time
+
+Compatible shared caches
+Cache1                  Java8 64-bit  persistent      cr              0                                         Mon Sep 23 11:41:04 2019
+</code></pre>
+</li>
+<li>
+<p>The next Docker layer up is an Open Liberty image that is built on the OpenJ9 image. As part of this image, the <code>-Xshareclasses:name=Cache1,layer=1</code> suboption is used to create another cache called Cache1. Because the <code>layer=1</code> suboption is specified, this new cache is a layered cache, which builds on <code>Cache1</code> in the previous container layer. (Open Liberty starts two VMs, so if you instead use the <code>createLayer</code> suboption here, two layered caches are created, with layer numbers of 1 and 2.) Note that cache layers are different from, and independent of, container layers.  </p>
+</li>
+<li>
+<p>In the same way, another layer is added for an Open Liberty Java application, and another layered cache is created to add to <code>Cache1</code>. The <code>listAllCaches</code> suboption now shows all the caches and their layers:</p>
+<pre><code>java -Xshareclasses:listAllCaches
+...
+Cache name              level         cache-type      feature         layer       OS shmid       OS semid       last detach time
+
+Compatible shared caches
+Cache1                  Java8 64-bit  persistent      cr              0                                         Mon Sep 23 11:41:04 2019   
+Cache1                  Java8 64-bit  persistent      cr              1                                         Mon Sep 23 11:46:25 2019
+Cache1                  Java8 64-bit  persistent      cr              2                                         In use
+</code></pre>
+</li>
+</ol>
+<dl>
+<dd>The caches are created in the same directory.</dd>
+<dd>When you use the <code>-Xshareclasses:name=Cache1</code> suboption in future Java commands, all the caches are started. The top-layer cache is started in read/write mode, and lower-layer caches are started in read-only mode. Modifying a lower-layer cache would invalidate all the caches in the layers above.</dd>
 </dl>
 <h3 id="listallcaches-cache-utility"><code>listAllCaches</code> (Cache utility)</h3>
 <pre><code>    -Xshareclasses:listAllCaches
@@ -4547,7 +4559,7 @@ behavior, which can improve the performance of class loading from the shared cla
 <pre><code>    -Xshareclasses:noPersistentDiskSpaceCheck
 </code></pre>
 <dl>
-<dd>Instructs the VM not to check for available storage on the file system before creating a persistent shared classes cache. This option prevents an error on file systems that do not support the checking of free space, where a value of 0 is returned and a shared cache cannot be created. Regardless of whether you choose to set this option, if there isn't enough disk space available when the VM writes to the shared cache memory, a <strong>SIGBUG</strong> or <strong>SIGSEGV</strong> signal occurs and the VM ends.</dd>
+<dd>Instructs the VM not to check for available storage on the file system before creating a persistent shared classes cache. This option prevents an error on file systems that do not support the checking of free space, where a value of 0 is returned and a shared cache cannot be created. Regardless of whether you choose to set this option, if there isn't enough disk space available when the VM writes to the shared cache memory, a <strong>SIGBUS</strong> or <strong>SIGSEGV</strong> signal occurs and the VM ends.</dd>
 <dd>If you are using the <a href="#readonly"><code>readonly</code></a> suboption, the VM does not check the available disk space, so you do not need to set the <code>noPersistentDiskSpaceCheck</code> suboption.</dd>
 </dl>
 <h3 id="persistent"><code>persistent</code></h3>
