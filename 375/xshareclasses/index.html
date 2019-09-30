@@ -4305,7 +4305,7 @@ cannot verify that the shared memory was created by the VM.
 </code></pre>
 <dl>
 <dd>Destroys all shared cache layers that are specified by the <code>name</code> suboption. For example, <code>-Xshareclasses:name=Cache1,destroyAllLayers</code> destroys all layers of the cache called <code>Cache1</code>. If you use the <code>destroy</code> suboption on a layered cache, for example <code>-Xshareclasses:name=Cache1,destroy</code>, only the top layer of the cache is destroyed.</dd>
-<dd>For more information about layered caches, see the <a href="./#createlayer"><code>createLayer</code></a> suboption.</dd>
+<dd>For more information about layered caches, see the <a href="./#layer"><code>layer</code></a> suboption.</dd>
 </dl>
 <h3 id="destroyallsnapshots-cache-utility"><code>destroyAllSnapshots</code> (Cache utility)</h3>
 <dl>
@@ -4442,7 +4442,7 @@ Cache1                  Java8 64-bit  persistent      cr              0         
 <p>The next Docker layer up is an Open Liberty image that is built on the OpenJ9 image. As part of this image, the <code>-Xshareclasses:name=Cache1,layer=1</code> suboption is used to create another cache called Cache1. Because the <code>layer=1</code> suboption is specified, this new cache is a layered cache, which builds on <code>Cache1</code> in the previous container layer. (Open Liberty starts two VMs, so if you instead use the <code>createLayer</code> suboption here, two layered caches are created, with layer numbers of 1 and 2.) Note that cache layers are different from, and independent of, container layers.  </p>
 </li>
 <li>
-<p>In the same way, another layer is added for an Open Liberty Java application, and another layered cache is created to add to <code>Cache1</code>. The <code>listAllCaches</code> suboption now shows all the caches and their layers:</p>
+<p>In the same way, another Docker layer is added for an Open Liberty Java application, and another layered cache is created to add to <code>Cache1</code>. The <code>listAllCaches</code> suboption now shows all the caches and their layers:</p>
 <pre><code>java -Xshareclasses:listAllCaches
 ...
 Cache name              level         cache-type      feature         layer       OS shmid       OS semid       last detach time
