@@ -972,8 +972,32 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
   <li class="md-nav__item">
-    <a href="../dcomibmlangmanagementosmxbeaniscputime100ns/" title="-Dcom.ibm.lang.management.OperatingSystemMXBean.isCpuTime100ns" class="md-nav__link">
-      -Dcom.ibm.lang.management.OperatingSystemMXBean.isCpuTime100ns
+    <a href="../dcomibmgpudisable/" title="-Dcom.ibm.gpu.disable" class="md-nav__link">
+      -Dcom.ibm.gpu.disable
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../dcomibmgpuenable/" title="-Dcom.ibm.gpu.enable" class="md-nav__link">
+      -Dcom.ibm.gpu.enable
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../dcomibmgpuverbose/" title="-Dcom.ibm.gpu.verbose" class="md-nav__link">
+      -Dcom.ibm.gpu.verbose
     </a>
   </li>
 
@@ -2706,6 +2730,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
   <li class="md-nav__item">
+    <a href="../xxclassrelationshipverifier/" title="-XX:[+|-]ClassRelationshipVerifier" class="md-nav__link">
+      -XX:[+|-]ClassRelationshipVerifier
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../xxcodecachetotal/" title="-XX:codecachetotal" class="md-nav__link">
       -XX:codecachetotal
     </a>
@@ -3609,8 +3645,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <pre><code>    -Xjit:enableGPU
 </code></pre>
 <dl>
-<dd>Enables the JIT compiler to offload certain processing tasks to a graphics processing unit (GPU). The JIT determines which functions to offload based on performance heuristics. Systems must support NVIDIA Compute Unified Device Architecture (CUDA).  GPU adapters require the CUDA Toolkit 7.5 and must have a minimum compute capability of 3.0.</dd>
-<dd>To troubleshoot operations between the JIT compiler and the GPU, use <code>-Xjit:enableGPU={verbose}</code>, which provides output showing the processing tasks that are offloaded and their status. To send this output to a file (<code>output.txt</code>), run <code>-Xjit:enableGPU={verbose},vlog=output.txt</code> when you start your application. </dd>
+<dd>Enables the JIT compiler to offload certain processing tasks to a graphics processing unit (GPU). The JIT determines which functions to offload based on performance heuristics. Systems must support NVIDIA Compute Unified Device Architecture (CUDA).  The JIT requires the CUDA Toolkit 7.5 and your GPU device must have a minimum compute capability of 3.0</dd>
+<dd>To troubleshoot operations between the JIT compiler and the GPU, use <code>-Xjit:enableGPU={verbose}</code>, which provides output showing the processing tasks that are offloaded and their status. To send this output to a file (<code>output.txt</code>), run <code>-Xjit:enableGPU={verbose},vlog=output.txt</code> when you start your application.</dd>
 </dl>
 <h3 id="exclude"><code>exclude</code></h3>
 <pre><code>    -Xjit:exclude=&lt;method&gt;
