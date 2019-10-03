@@ -818,15 +818,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </li>
         
           <li class="md-nav__item">
-  <a href="#zip-caches" title="# Zip caches" class="md-nav__link">
-    # Zip caches
+  <a href="#zip-caches" title="Zip caches" class="md-nav__link">
+    Zip caches
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#stale-classes" title="# Stale classes" class="md-nav__link">
-    # Stale classes
+  <a href="#stale-classes" title="Stale classes" class="md-nav__link">
+    Stale classes
   </a>
   
 </li>
@@ -3758,15 +3758,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </li>
         
           <li class="md-nav__item">
-  <a href="#zip-caches" title="# Zip caches" class="md-nav__link">
-    # Zip caches
+  <a href="#zip-caches" title="Zip caches" class="md-nav__link">
+    Zip caches
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#stale-classes" title="# Stale classes" class="md-nav__link">
-    # Stale classes
+  <a href="#stale-classes" title="Stale classes" class="md-nav__link">
+    Stale classes
   </a>
   
 </li>
@@ -3857,7 +3857,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 -->
 
 <h1 id="shared-classes-cache-diagnostic-utilities">Shared classes cache diagnostic utilities</h1>
-<p>These utilities display information about the contents of a shared classes cache. Run the utilities by specifying them as suboptions of <code>-Xshareclasses</code>. The utilities run on the default cache unless you specify a cache by adding the <code>name=&lt;cache_name&gt;</code> suboption.</p>
+<p>These utilities display information about the contents of a shared classes cache. Run the utilities by specifying them as suboptions of <code>-Xshareclasses</code>. The utilities run on the default cache unless you specify a cache by adding the <code>name=&lt;cache_name&gt;</code> suboption. For layered caches, some information is shown for the top layer cache only, and some is shown for all layers combined. To see information for the top layer cache only, use <a href="#printtoplayerstats"><code>printTopLayerStats=all</code></a>.</p>
 <h2 id="printallstats"><code>printAllStats</code></h2>
 <pre><code>-Xshareclasses:printAllStats
 -Xshareclasses:printAllStats,name=&lt;cache_name&gt;
@@ -4122,11 +4122,11 @@ Startup hint bytes                   = 0
 <dd>The number of class paths, URLs, and tokens in the cache. Classes stored from a <code>SharedClassURLClasspathHelper</code> are stored with a Classpath. Classes stored using a <code>SharedClassURLHelper</code> are stored with a URL. Classes stored using a <code>SharedClassTokenHelper</code> are stored with a Token. Most class loaders, including the bootstrap and application class loaders, use a <code>SharedClassURLClasspathHelper</code>. The result is that it is most common to see class paths in the cache.</dd>
 <dd>The number of Classpaths, URLs, and Tokens stored is determined by a number of factors. For example, every time an element of a Classpath is updated, such as when a <code>.jar</code> file is rebuilt, a new Classpath is added to the cache. Additionally, if partitions or modification contexts are used, they are associated with the Classpath, URL, or Token. A Classpath, URL, or Token is stored for each unique combination of partition and modification context. For more information, see <a href="https://www.ibm.com/support/knowledgecenter/SSYKE2_8.0.0/com.ibm.java.vm.80.doc/docs/shrc_pd_rbm_partitions.html">SharedClassHelper partitions</a> and <a href="https://www.ibm.com/support/knowledgecenter/SSYKE2_8.0.0/com.ibm.java.vm.80.doc/docs/shrc_pd_rbm_contexts.html">Modification contexts</a>.</dd>
 </dl>
-<h4 id="zip-caches"><code># Zip caches</code></h4>
+<h4 id="zip-caches"><code>Zip caches</code></h4>
 <dl>
 <dd>The number of .zip files that have entry caches stored in the shared cache.</dd>
 </dl>
-<h4 id="stale-classes"><code># Stale classes</code></h4>
+<h4 id="stale-classes"><code>Stale classes</code></h4>
 <dl>
 <dd>The number of classes that have been marked as "potentially stale" by the cache code, because of an operating system update. See <a href="https://www.ibm.com/support/knowledgecenter/SSYKE2_8.0.0/com.ibm.java.vm.80.doc/docs/shrc_pd_dynamic.html">Understanding dynamic updates</a>.</dd>
 </dl>
