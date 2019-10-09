@@ -547,10 +547,46 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       
 
 
-  <li class="md-nav__item">
-    <a href="../shrc/" title="Class data sharing" class="md-nav__link">
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9">
+    
+    <label class="md-nav__link" for="nav-9">
       Class data sharing
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-9">
+        Class data sharing
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../shrc/" title="Overview" class="md-nav__link">
+      Overview
     </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../shrc_diag_util/" title="Diagnostic cache utilities" class="md-nav__link">
+      Diagnostic cache utilities
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
   </li>
 
     
@@ -3361,7 +3397,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 -->
 
 <h1 id="-dcomibmgpuverbose">-Dcom.ibm.gpu.verbose</h1>
-<p><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> <strong>Restriction:</strong> This system property is supported only on Java 11 and later</p>
+<p><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> <strong>Restriction:</strong> This system property is supported only on Java&trade; 11 and later</p>
 <p>This system property can be used to help identify problems with graphics processing unit (GPU) processing.</p>
 <h2 id="syntax">Syntax</h2>
 <pre><code>    -Dcom.ibm.gpu.verbose
@@ -3371,6 +3407,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>When specified, this option generates verbose output to STDOUT, which can be piped to a file.</p>
 <h2 id="see-also">See also</h2>
 <ul>
+<li><a href="../introduction/#exploiting-gpus">Exploiting GPUs</a></li>
 <li><a href="../dcomibmgpudisable/">-Dcom.ibm.gpu.disable</a></li>
 <li><a href="../dcomibmgpuenable/">-Dcom.ibm.gpu.enable</a></li>
 </ul>

@@ -547,10 +547,46 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       
 
 
-  <li class="md-nav__item">
-    <a href="../shrc/" title="Class data sharing" class="md-nav__link">
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9">
+    
+    <label class="md-nav__link" for="nav-9">
       Class data sharing
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-9">
+        Class data sharing
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../shrc/" title="Overview" class="md-nav__link">
+      Overview
     </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../shrc_diag_util/" title="Diagnostic cache utilities" class="md-nav__link">
+      Diagnostic cache utilities
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
   </li>
 
     
@@ -3347,7 +3383,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 -->
 
 <h1 id="-xminf-xmaxf"><code>-Xminf</code> / <code>-Xmaxf</code></h1>
-<p>Specifies the minimum and maximum proportion of the heap that must remain free after a global garbage collection cycle.</p>
+<p>Specifies the minimum and maximum proportion of the heap that must remain free after a global garbage collection (GC) cycle.</p>
 <p>If the free space is above or below these limits, the OpenJ9 VM attempts to adjust the heap size so that: <code>-Xminf</code> &le; free space &le; <code>-Xmaxf</code>.</p>
 <h2 id="syntax">Syntax</h2>
 <table>
@@ -3362,15 +3398,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <tr>
 <td><code>-Xminf&lt;value&gt;</code></td>
 <td>Set minimum free space</td>
-<td>30</td>
+<td>0.3</td>
 </tr>
 <tr>
 <td><code>-Xmaxf&lt;value&gt;</code></td>
 <td>Set maximum free space</td>
-<td>60</td>
+<td>0.6</td>
 </tr>
 </tbody>
 </table>
+<p>The value range is 0.0 - 1.0.</p>
+<ul>
+<li>For the <code>gencon</code> GC policy, the values apply only to the Tenure part of the heap and only at global GC points.</li>
+<li>For the <code>optthruput</code> and <code>optavgpause</code> GC policies, these values apply to the whole heap at every GC point.</li>
+</ul>
 <h2 id="see-also">See also</h2>
 <ul>
 <li><a href="https://www.ibm.com/support/knowledgecenter/SSYKE2_8.0.0/com.ibm.java.vm.80.doc/docs/mm_gc_heapshrinkage.html">Heap shrinkage</a></li>

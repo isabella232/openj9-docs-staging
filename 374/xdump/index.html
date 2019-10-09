@@ -547,10 +547,46 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       
 
 
-  <li class="md-nav__item">
-    <a href="../shrc/" title="Class data sharing" class="md-nav__link">
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9">
+    
+    <label class="md-nav__link" for="nav-9">
       Class data sharing
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-9">
+        Class data sharing
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../shrc/" title="Overview" class="md-nav__link">
+      Overview
     </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../shrc_diag_util/" title="Diagnostic cache utilities" class="md-nav__link">
+      Diagnostic cache utilities
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
   </li>
 
     
@@ -4470,7 +4506,7 @@ Registered dump agents
 <pre><code>java -Xdump:heap:events=vmstop,file=my.dmp
 </code></pre>
 
-<p>When producing system dump files or CEEDUMPs on z/OS platforms, use the <code>dsn</code> option instead of the <code>file</code> option. For example:</p>
+<p>When producing system dump files on z/OS platforms, use the <code>dsn</code> option instead of the <code>file</code> option. For example:</p>
 <pre><code>java -Xdump:system:events=vmstop,dsn=%uid.MYDUMP
 </code></pre>
 
@@ -4543,7 +4579,7 @@ Registered dump agents
 <li>The location specified by the <code>TMPDIR</code> environment variable.</li>
 <li>The <code>C:\Temp</code> on Windows operating systems, or the <code>/tmp</code> directory on other operating systems.</li>
 </ol>
-<p>This VM action does not apply to CEEDUMPs on z/OS operating systems that use the <code>dsn</code> option.
+<p>This VM action does not apply to system dumps on z/OS operating systems that use the <code>dsn</code> option.
 You can prevent the VM reverting to different dump locations by using the <code>-Xdump:nofailover</code> option.</p>
 <h3 id="filterfilter"><code>filter=&lt;filter&gt;</code></h3>
 <p>Some VM events occur thousands of times during the lifetime of an application. Dump agents can use filters and ranges to avoid producing an excessive number of dump files. The following syntax must be used:</p>
@@ -4603,7 +4639,6 @@ You can prevent the VM reverting to different dump locations by using the <code>
 </code></pre>
 
 <h4 id="allocation-event">allocation event</h4>
-<p><strong>(Linux, macOS, and Windows only)</strong></p>
 <p>You must filter the <strong>allocation</strong> event to specify the size of objects that cause a trigger. You can set the filter size from zero up to the maximum value of a 32-bit pointer on 32-bit platforms, or the maximum value of a 64-bit pointer on 64-bit platforms. Setting the lower filter value to zero triggers a dump on all allocations.</p>
 <p>For example, to trigger dumps on allocations greater than 5 Mb in size, use:</p>
 <pre><code>-Xdump:stack:events=allocation,filter=#5m
