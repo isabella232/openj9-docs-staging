@@ -3364,10 +3364,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>The command syntax is as follows:</p>
 <pre><code>jstat [&lt;option&gt;] [&lt;vmid&gt;]
 </code></pre>
-<p>Where <code>vmid</code> is the Attach API virtual machine identifier for the Java process. This ID is typically the same as
-the operating system <em>process ID</em>, unless you specified the <code>-Dcom.ibm.tools.attach.id</code> system property when you started the process.</p>
-<p>VMID is shown in <code>jps</code> or other Attach API-based tools.</p>
-<p>On its own, <code>jstat</code> prints help information. The values for <code>&lt;options&gt;</code> are as follows:</p>
+<p>where <code>vmid</code> is the Attach API virtual machine identifier for the Java process. This ID is typically the same as
+the operating system <em>process ID</em>, unless you specified the <a href="../dcomibmtoolsattachid/">-Dcom.ibm.tools.attach.id</a> system property when you started the process.</p>
+<p>VMID is shown in <a href="../tool_jps/">Java process status (jps) tool</a> or other Attach API-based tools.</p>
+<p>On its own, <code>jstat</code> prints help information. The values for <code>&lt;option&gt;</code> are as follows:</p>
 <ul>
 <li><code>-J</code>: supplies arguments to the JVM that is running the <code>jstat</code> command. You can use multiple <code>-J</code> options, for example: <code>jstat -J-Xmx10m -J-Dcom.ibm.tools.attach.enable=yes</code></li>
 <li><code>-h</code>: prints help information</li>
