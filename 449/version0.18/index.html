@@ -380,6 +380,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#binaries-and-supported-environments" class="md-nav__link">
+    Binaries and supported environments
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#jextract-now-available-on-macos-for-openjdk-version-8" class="md-nav__link">
     jextract now available on macOS for OpenJDK version 8
   </a>
@@ -415,8 +422,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </li>
         
           <li class="md-nav__item">
-  <a href="#new-xdump-exit-agent-and-exitonoutofmemoryerror-option" class="md-nav__link">
-    New Xdump "exit" agent and ExitOnOutOfMemoryError option
+  <a href="#new-dump-exit-agent-and-exitonoutofmemoryerror-option" class="md-nav__link">
+    New dump "exit" agent and ExitOnOutOfMemoryError option
   </a>
   
 </li>
@@ -3434,6 +3441,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#binaries-and-supported-environments" class="md-nav__link">
+    Binaries and supported environments
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#jextract-now-available-on-macos-for-openjdk-version-8" class="md-nav__link">
     jextract now available on macOS for OpenJDK version 8
   </a>
@@ -3469,8 +3483,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </li>
         
           <li class="md-nav__item">
-  <a href="#new-xdump-exit-agent-and-exitonoutofmemoryerror-option" class="md-nav__link">
-    New Xdump "exit" agent and ExitOnOutOfMemoryError option
+  <a href="#new-dump-exit-agent-and-exitonoutofmemoryerror-option" class="md-nav__link">
+    New dump "exit" agent and ExitOnOutOfMemoryError option
   </a>
   
 </li>
@@ -3563,18 +3577,27 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <h1 id="whats-new-in-version-0180">What's new in version 0.18.0</h1>
 <p>The following new features and notable changes since v 0.17.0 are included in this release:</p>
 <ul>
+<li>Binaries and supported environments](#binaries-and-supported-environments)</li>
 <li><a href="#jextract-now-available-on-macos-for-openjdk-version-8"><code>jextract</code> now available on macOS&reg; for OpenJDK version 8</a></li>
 <li><a href="#new-shared-classes-cache-suboption-to-turn-off-timestamp-checking">New shared-classes cache suboption to turn off timestamp checking</a></li>
 <li><a href="#-xmso-1-mb-minimum-value-on-zos-64-bit"><code>-Xmso</code> 1 MB minimum value on z/OS&reg; 64-bit</a></li>
 <li><a href="#jstat-new-java-statistics-monitoring-tool"><code>jstat</code>: new Java&trade; statistics monitoring tool</a></li>
 <li><a href="#-xxtransparenthugepage-is-enabled-by-default-on-more-linux-systems"><code>-XX:+TransparentHugePage</code> is enabled by default on more Linux&reg; systems</a></li>
-<li><a href="#new-xdump-exit-agent-and-exitonoutofmemoryerror-option">New Xdump "exit" agent and <code>ExitOnOutOfMemoryError</code> option</a></li>
+<li><a href="#new-dump-exit-agent-and-exitonoutofmemoryerror-option">New dump "exit" agent and <code>ExitOnOutOfMemoryError</code> option</a></li>
 <li><a href="#ludcl-caching-enabled-by-default">LUDCL caching enabled by default</a></li>
 <li><a href="#terabytes-suffix-support-for-x-and-xx-options-that-take-a-size">Terabytes suffix support for <code>-X</code> and <code>-XX</code> options that take a size</a></li>
 <li><a href="#improved-support-for-pause-less-garbage-collection">Improved support for pause-less garbage collection</a></li>
 <li><a href="#-xgcnoconcurrentscavenge-option"><code>-Xgc:noConcurrentScavenge</code> option</a></li>
 </ul>
 <h2 id="features-and-changes">Features and changes</h2>
+<h3 id="binaries-and-supported-environments">Binaries and supported environments</h3>
+<p>OpenJ9 release 0.18.0 supports OpenJDK 8, 11, and 13. Binaries are available from the AdoptOpenJDK community at the following links:</p>
+<ul>
+<li><a href="https://adoptopenjdk.net/archive.html?variant=openjdk8&amp;jvmVariant=openj9">OpenJDK version 8</a></li>
+<li><a href="https://adoptopenjdk.net/archive.html?variant=openjdk11&amp;jvmVariant=openj9">OpenJDK version 11</a></li>
+<li><a href="https://adoptopenjdk.net/archive.html?variant=openjdk13&amp;jvmVariant=openj9">OpenJDK version 13</a></li>
+</ul>
+<p>To learn more about support for OpenJ9 releases, including OpenJDK levels and platform support, see <a href="../openj9_support/">Supported environments</a>.</p>
 <h3 id="jextract-now-available-on-macos-for-openjdk-version-8"><code>jextract</code> now available on macOS for OpenJDK version 8</h3>
 <p>The <a href="../tool_jextract/"><code>jextract</code> tool</a> is now available on macOS platforms (as well as AIX&reg; and Linux) for <em>all</em> current versions of OpenJDK: 8, 11, and 13.</p>
 <h3 id="new-shared-classes-cache-suboption-to-turn-off-timestamp-checking">New shared-classes cache suboption to turn off timestamp checking</h3>
@@ -3585,10 +3608,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>For compatibility with the HotSpot implementation, OpenJ9 now includes an independent implementation of the <code>jstat</code> tool for retrieving statistics on a VM. For more information, see <a href="../tool_jstat/">Java statistics monitoring tool</a>.</p>
 <h3 id="-xxtransparenthugepage-is-enabled-by-default-on-more-linux-systems"><code>-XX:+TransparentHugePage</code> is enabled by default on more Linux systems</h3>
 <p><a href="../xxtransparenthugepage/">-XX:+TransparentHugePage</a> is enabled by default on Linux systems for POWER&reg; and IBM Z&reg; as well as x86 systems. This option takes affect only when Transparent Huge Pages (THP) is set to <code>madvise</code> on your system. When Transparent Huge Pages are used, your application footprint might increase.</p>
-<h3 id="new-xdump-exit-agent-and-exitonoutofmemoryerror-option">New Xdump "exit" agent and <code>ExitOnOutOfMemoryError</code> option</h3>
-<p>The new Xdump agent "exit" shuts down the VM when the specified event occurs. The "exit" agent is at priority level 0 and "tool" agent has been moved to priority level 1 to aid in mimicking the behavior of HotSpot options. See <a href="../xdump/#dump-agents">Xdump dump agents</a> for more about agents.</p>
-<p>OpenJ9 now supports the HotSpot option <code>-XX:[+-]ExitOnOutOfMemoryError</code>. You can set this option to have the VM shut down when a java.lang.OutOfMemory error is thrown by the VM or in Java code. See the <a href="../xxexitonoutofmemory/">-XX:[+-]ExitOnOutOfMemoryError</a> option.</p>
-<p>The Xdump "exit" agent is used in the implementation of <code>-XX:[+-]ExitOnOutOfMemoryError</code>.</p>
+<h3 id="new-dump-exit-agent-and-exitonoutofmemoryerror-option">New dump "exit" agent and <code>ExitOnOutOfMemoryError</code> option</h3>
+<p>The new dump agent "exit" shuts down the VM when the specified event occurs. The "exit" agent is at priority level 0 and "tool" agent has been moved to priority level 1 to aid in mimicking the behavior of HotSpot options. See <a href="../xdump/#dump-agents"><code>-Xdump</code> dump agents</a> for more about agents.</p>
+<p>OpenJ9 now supports the HotSpot option <a href="../xxexitonoutofmemory/"><code>-XX:[+|-]ExitOnOutOfMemoryError</code></a>. You can set this option to have the VM shut down when a java.lang.OutOfMemory error is thrown by the VM or in Java code. The dump "exit" agent is used in the implementation of <code>-XX:[+|-]ExitOnOutOfMemoryError</code>.</p>
 <h3 id="ludcl-caching-enabled-by-default">LUDCL caching enabled by default</h3>
 <p>By caching the Latest User Defined Class Loader (LUDCL), Java applications that use deserialization extensively can see a performance improvement. This capability is controlled by the <a href="../dcomibmenableclasscaching/"><code>-Dcom.ibm.enableClassCaching</code></a> system property and is now enabled by default. This feature was disabled for the 0.17.0 release due to <a href="https://github.com/eclipse/openj9/issues/7332">issue #7332</a> which has now been resolved.</p>
 <h3 id="terabytes-suffix-support-for-x-and-xx-options-that-take-a-size">Terabytes suffix support for <code>-X</code> and <code>-XX</code> options that take a size</h3>
