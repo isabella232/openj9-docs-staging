@@ -3364,13 +3364,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 -->
 
 <h1 id="language-management-interface">Language management interface</h1>
-<p>Eclipse OpenJ9 provides MXBean extensions to the standard <code>java.lang.management</code> API, which can be used to monitor and manage the Java@reg; virtual machine.
+<p>Eclipse OpenJ9 provides MXBean extensions to the standard <code>java.lang.management</code> API, which can be used to monitor and manage the Java@trade; virtual machine.
 These extensions provide access to information about the state of the OpenJ9 VM and the environment in which it is running. The following
-table lists the MXBeans and describes the monitoring or management capability:</p>
+tables list the MXBeans by package and describe the monitoring or management capability:</p>
 <table>
 <thead>
 <tr>
-<th>MXBean</th>
+<th><code>com.ibm.lang.management</code> MXBean</th>
 <th>Description</th>
 </tr>
 </thead>
@@ -3378,6 +3378,10 @@ table lists the MXBeans and describes the monitoring or management capability:</
 <tr>
 <td><code>GarbageCollectorMXBean</code></td>
 <td>Discovers Garbage Collection (GC) operations (collection times, compactions, heap memory usage, and freed memory).</td>
+</tr>
+<tr>
+<td><code>JvmCpuMonitorMXBean</code></td>
+<td>Discovers CPU consumption by category (GC, JIT, or other threads).</td>
 </tr>
 <tr>
 <td><code>MemoryMXBean</code></td>
@@ -3388,29 +3392,31 @@ table lists the MXBeans and describes the monitoring or management capability:</
 <td>Discovers memory pool usage for specific GC policies.</td>
 </tr>
 <tr>
-<td><code>ThreadMXBean</code></td>
-<td>Discovers information about native thread IDs.</td>
-</tr>
-<tr>
-<td><code>JvmCpuMonitorMXBean</code></td>
-<td>Discovers CPU consumption by category (GC, JIT or Other threads).</td>
-</tr>
-<tr>
-<td><code>ProcessorMXBean</code></td>
-<td>Discovers and limits the CPUs that a process has access to.</td>
-</tr>
-<tr>
 <td><code>OperatingSystemMXBean</code></td>
 <td>Discovers information about the operating system (memory, CPU capacity/utilization).</td>
-</tr>
-<tr>
-<td><code>UnixOperatingSystemMXBean</code></td>
-<td>Discovers information for Unix operating systems (memory, file descriptors, processors, processor usage, and hardware)</td>
 </tr>
 <tr>
 <td><code>RuntimeMXBean</code></td>
 <td>Discovers information about the runtime environment (CPU load, Java process ID, and VM state)</td>
 </tr>
+<tr>
+<td><code>ThreadMXBean</code></td>
+<td>Discovers information about native thread IDs.</td>
+</tr>
+<tr>
+<td><code>UnixOperatingSystemMXBean</code></td>
+<td>Discovers information for Unix operating systems (memory, file descriptors, processors, processor usage, and hardware)</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th><code>com.ibm.virtualization.management</code> MXBean</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
 <tr>
 <td><code>GuestOSMXBean</code></td>
 <td>Discovers CPU and memory statistics of a virtual machine or logical partition as seen by the Hypervisor.</td>
@@ -3419,6 +3425,16 @@ table lists the MXBeans and describes the monitoring or management capability:</
 <td><code>HypervisorMXBean</code></td>
 <td>Discovers whether the operating system is running on a hypervisor and provides information about the hypervisor.</td>
 </tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th><code>openj9.lang.management</code> MXBean</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
 <tr>
 <td><code>OpenJ9DiagnosticsMXBean</code></td>
 <td>Configures and dynamically triggers dump agents.</td>
