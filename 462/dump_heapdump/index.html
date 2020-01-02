@@ -3641,7 +3641,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 -->
 
 <h1 id="heap-dump">Heap dump</h1>
-<p>Heap dumps contain a snapshot of all the live objects that are being used by a running Java application on the Java heap.
+<p>Heap dumps contain a snapshot of all the live objects that are being used by a running Java&trade; application on the Java heap.
 You can obtain detailed information for each object instance, such as the address, type, class name, or size, and whether the instance has references to other objects.</p>
 <p>There are two formats for heap dumps; the classic format and the Portable Heap Dump (PHD) format, which is the default.
 Whilst the classic format is generated in ascii text and can be read, the PHD format is binary and and must be processed
@@ -3659,7 +3659,7 @@ for analysis.</p>
 
 <p>The following sections contain detailed information about the content of each type of heap dump file.</p>
 <h3 id="portable-heap-dump-phd-format">Portable Heap Dump (PHD) format</h3>
-<p>A PHD head dump file contains a header section and a body section. The body section can contain information about object, array, or class records.
+<p>A PHD format dump file contains a header section and a body section. The body section can contain information about object, array, or class records.
 Primitive numbers are used to describe the file format, as detailed in the following table:</p>
 <table>
 <thead>
@@ -3687,7 +3687,7 @@ Primitive numbers are used to describe the file format, as detailed in the follo
 </tr>
 <tr>
 <td><code>word</code></td>
-<td>4 (32-bit platforms) 8 (64-bit platforms)</td>
+<td>4 (32-bit platforms) or 8 (64-bit platforms)</td>
 </tr>
 </tbody>
 </table>
@@ -3696,18 +3696,22 @@ Primitive numbers are used to describe the file format, as detailed in the follo
 <ul>
 <li>A UTF string indicating that the file is a <code>portable heap dump</code></li>
 <li>An <code>int</code> containing the PHD version number</li>
-<li>An <code>int</code> containing flags:</li>
+<li>An <code>int</code> containing flags:<ul>
 <li><code>1</code> indicates that the <code>word</code> length is 64-bit.</li>
 <li><code>2</code> indicates that all the objects in the dump are hashed. This flag is set for heap dumps that use 16-bit hash codes. These heap dumps use 32-bit hash codes that are only created when used. For example, these hash codes are created when the APIs <code>Object.hashCode()</code> or <code>Object.toString()</code> are called in a Java application. If this flag is not set, the presence of a hash code is indicated by the hash code flag on the individual PHD records.</li>
 <li><code>4</code> indicates that the dump is from an OpenJ9 VM.</li>
-<li>A <code>byte</code> containing a tag with a value of <code>1</code> that indicates the start of the header.</li>
-<li>A number of header records, each preceded by a one-byte header tag. Header record tags have a different range of values from the body, or object record tags. The end of the header is indicated by the end of header tag. Header records are optional.</li>
-<li><code>header tag 1</code> - not used.</li>
-<li><code>header tag 2</code> - indicates the end of the header.</li>
-<li><code>header tag 3</code> - not used.</li>
-<li><code>header tag 4</code> - indicates the VM version. This UTF string has a variable length.</li>
 </ul>
-<p>The body of the PHD file is indicated by a <code>byte</code> that contains a tag with a value of 2, after which there are a number of dump records. Dump records are preceded by a 1 byte tag with the following record types:</p>
+</li>
+<li>A <code>byte</code> containing a tag with a value of <code>1</code> that indicates the start of the header.</li>
+<li>A number of optional header records, each preceded by a one-byte header tag. Header record tags have a different range of values from the body, or object record tags. The end of the header is indicated by the end of header tag. The following tags are included:<ul>
+<li><code>header tag 1</code> - not used</li>
+<li><code>header tag 2</code> - indicates the end of the header</li>
+<li><code>header tag 3</code> - not used</li>
+<li><code>header tag 4</code> - indicates the VM version (Variable length UTF string)</li>
+</ul>
+</li>
+</ul>
+<p>The body of a PHD file is indicated by a <code>byte</code> that contains a tag with a value of 2, after which there are a number of dump records. Dump records are preceded by a 1 byte tag with the following record types:</p>
 <ul>
 <li>Short object: <code>0x80</code> bit of the tag is set</li>
 <li>Medium object: <code>0x40</code> bit of the tag is set (top bit value is 0)</li>
@@ -3721,11 +3725,11 @@ Primitive numbers are used to describe the file format, as detailed in the follo
 <p>The end of the PHD body is indicated by a <code>byte</code> that contains a tag with a value of 3.</p>
 <h4 id="object-records">Object records</h4>
 <p>Object records can be short, medium, or long, depending on the number of object references in the heap dump.</p>
-<p><strong>Short object record</strong></p>
+<p><strong>1. Short object record</strong></p>
 <p>The following information is contained within the tag byte:</p>
 <ul>
-<li>The 1 byte tag, which consists of the following bits:</li>
-</ul>
+<li>
+<p>The 1 byte tag, which consists of the following bits:</p>
 <table>
 <thead>
 <tr>
@@ -3756,16 +3760,18 @@ Primitive numbers are used to describe the file format, as detailed in the follo
 </tr>
 </tbody>
 </table>
-<ul>
-<li>A <code>byte</code> or a <code>short</code> containing the gap between the address of this object and the address of the preceding object. The value is signed and represents the number of 32-bit words between the two addresses. Most gaps fit into 1 byte.</li>
+</li>
+<li>
+<p>A <code>byte</code> or a <code>short</code> containing the gap between the address of this object and the address of the preceding object. The value is signed and represents the number of 32-bit words between the two addresses. Most gaps fit into 1 byte.</p>
+</li>
 <li>If all objects are hashed, a <code>short</code> containing the hash code.</li>
 <li>The array of references, if references exist. The tag shows the number of elements, and the size of each element. The value in each element is the gap between the address of the references and the address of the current object. The value is a signed number of 32-bit words. Null references are not included.</li>
 </ul>
-<p><strong>Medium object record</strong></p>
+<p><strong>2. Medium object record</strong></p>
 <p>These records provide the actual address of the class rather than a cache index. The following format is used:</p>
 <ul>
-<li>The 1 byte tag, consisting of the following bits:</li>
-</ul>
+<li>
+<p>The 1 byte tag, consisting of the following bits:</p>
 <table>
 <thead>
 <tr>
@@ -3783,7 +3789,7 @@ Primitive numbers are used to describe the file format, as detailed in the follo
 <td>Set (0x40)</td>
 </tr>
 <tr>
-<td>3, 4 and 5</td>
+<td>3, 4, and 5</td>
 <td>Contain the number of references</td>
 </tr>
 <tr>
@@ -3796,22 +3802,22 @@ Primitive numbers are used to describe the file format, as detailed in the follo
 </tr>
 </tbody>
 </table>
-<ul>
-<li>A <code>byte</code> or a <code>short</code> containing the gap between the address of this object and the address of the preceding object (See the <strong>Short object record</strong> description)</li>
+</li>
+<li>
+<p>A <code>byte</code> or a <code>short</code> containing the gap between the address of this object and the address of the preceding object (See the <strong>Short object record</strong> description)</p>
+</li>
 <li>A <code>word</code> containing the address of the class of this object.</li>
 <li>If all objects are hashed, a <code>short</code> containing the hash code.</li>
-<li>The array of references (See the <strong>Short object record</strong> description)</li>
+<li>The array of references (See the <strong>Short object record</strong> description).</li>
 </ul>
-<p><strong>Long object record</strong></p>
-<p>This record format is used when there are more than seven references, or if there are extra flags or a hash code. The following format is used:</p>
+<p><strong>3. Long object record</strong></p>
+<p>This record format is used when there are more than 7 references, or if there are extra flags or a hash code. The following format is used:</p>
 <ul>
 <li>
 <p>The 1 byte tag, containing the value 4.</p>
 </li>
 <li>
 <p>A <code>byte</code> containing flags, consisting of the following bits:</p>
-</li>
-</ul>
 <table>
 <thead>
 <tr>
@@ -3825,11 +3831,11 @@ Primitive numbers are used to describe the file format, as detailed in the follo
 <td>Indicates whether the gap is a <code>byte</code>, <code>short</code>, <code>int</code> or <code>long</code> format</td>
 </tr>
 <tr>
-<td>2 and 3</td>
+<td>3 and 4</td>
 <td>Indicates the size of each reference  (0=<code>byte</code>, 1=<code>short</code>, 2=<code>int</code>, 3=<code>long</code>)</td>
 </tr>
 <tr>
-<td>4 and 5</td>
+<td>5 and 6</td>
 <td>Unused</td>
 </tr>
 <tr>
@@ -3842,20 +3848,22 @@ Primitive numbers are used to describe the file format, as detailed in the follo
 </tr>
 </tbody>
 </table>
-<ul>
-<li>A <code>byte</code>, <code>short</code>, <code>int</code>, or <code>long</code> containing the gap between the address of this object and the address of the preceding object (See the <strong>Short object record</strong> description)</li>
+</li>
+<li>
+<p>A <code>byte</code>, <code>short</code>, <code>int</code>, or <code>long</code> containing the gap between the address of this object and the address of the preceding object (See the <strong>Short object record</strong> description).</p>
+</li>
 <li>A <code>word</code> containing the address of the class of this object.</li>
 <li>If all objects are hashed, a <code>short</code> containing the hash code. Otherwise, an optional <code>int</code> containing the hash code if the hashed and moved bit is set in the record flag byte.</li>
 <li>An <code>int</code> containing the length of the array of references.</li>
-<li>The array of references (See the <strong>Short object record</strong> description)</li>
+<li>The array of references (See the <strong>Short object record</strong> description).</li>
 </ul>
 <h4 id="array-records">Array records</h4>
 <p>PHD arrays can be primitive arrays or object arrays, as described in the sections that follow.</p>
-<p><strong>Primitive array record</strong></p>
+<p><strong>1. Primitive array record</strong></p>
 <p>The following information is contained in an array record:</p>
 <ul>
-<li>The 1 byte tag, consisting of the following bits:</li>
-</ul>
+<li>
+<p>The 1 byte tag, consisting of the following bits:</p>
 <table>
 <thead>
 <tr>
@@ -3882,13 +3890,15 @@ Primitive numbers are used to describe the file format, as detailed in the follo
 </tr>
 </tbody>
 </table>
-<ul>
-<li><code>byte</code>, <code>short</code>, <code>int</code> or <code>long</code> containing the gap between the address of this object and the address of the preceding object (See the <strong>Short object record</strong> description)</li>
+</li>
+<li>
+<p><code>byte</code>, <code>short</code>, <code>int</code> or <code>long</code> containing the gap between the address of this object and the address of the preceding object (See the <strong>Short object record</strong> description).</p>
+</li>
 <li><code>byte</code>, <code>short</code>, <code>int</code> or <code>long</code> containing the array length.</li>
 <li>If all objects are hashed, a <code>short</code> containing the hash code.</li>
 <li>An unsigned <code>int</code> containing the size of the instance of the array on the heap, including header and padding. The size is measured in 32-bit words, which you can multiply by four to obtain the size in bytes. This format allows encoding of lengths up to 16GB in an unsigned <code>int</code>.</li>
 </ul>
-<p><strong>Long primitive array record</strong></p>
+<p><strong>2. Long primitive array record</strong></p>
 <p>This type of record is used when a primitive array has been hashed.</p>
 <ul>
 <li>
@@ -3896,8 +3906,6 @@ Primitive numbers are used to describe the file format, as detailed in the follo
 </li>
 <li>
 <p>A byte containing the following flags:</p>
-</li>
-</ul>
 <table>
 <thead>
 <tr>
@@ -3907,12 +3915,12 @@ Primitive numbers are used to describe the file format, as detailed in the follo
 </thead>
 <tbody>
 <tr>
-<td>1 ,2, 3</td>
+<td>1, 2, and 3</td>
 <td>Contains the array type ( 0=bool, 1=char, 2=float, 3=double, 4=<code>byte</code>, 5=<code>short</code>, 6=<code>int</code>, and 7=<code>long</code>)</td>
 </tr>
 <tr>
 <td>4</td>
-<td>indicating the length of the array size and the length of the gap (0=<code>byte</code>, 1=<code>word</code>).</td>
+<td>Indicates the length of the array size and the length of the gap (0=<code>byte</code>, 1=<code>word</code>).</td>
 </tr>
 <tr>
 <td>5 and 6</td>
@@ -3928,13 +3936,15 @@ Primitive numbers are used to describe the file format, as detailed in the follo
 </tr>
 </tbody>
 </table>
-<ul>
-<li>a <code>byte</code> or <code>word</code> containing the gap between the address of this object and the address of the preceding object (See the <strong>Short object record</strong>  description)</li>
+</li>
+<li>
+<p>a <code>byte</code> or <code>word</code> containing the gap between the address of this object and the address of the preceding object (See the <strong>Short object record</strong>  description).</p>
+</li>
 <li>a <code>byte</code> or <code>word</code> containing the array length.</li>
 <li>If all objects are hashed, a <code>short</code> containing the hash code. Otherwise, an optional <code>int</code> containing the hash code if the hashed and moved bit is set in the record flag byte.</li>
 <li>An unsigned <code>int</code> containing the size of the instance of the array on the heap, including header and padding. The size is measured in 32-bit words, which you can multiply by four to obtain the size in bytes. This format allows encoding of lengths up to 16GB in an unsigned <code>int</code>.</li>
 </ul>
-<p><strong>Object array record</strong></p>
+<p><strong>3. Object array record</strong></p>
 <p>The following format applies:</p>
 <ul>
 <li>
@@ -3942,8 +3952,6 @@ Primitive numbers are used to describe the file format, as detailed in the follo
 </li>
 <li>
 <p>A byte containing the following flags:</p>
-</li>
-</ul>
 <table>
 <thead>
 <tr>
@@ -3974,12 +3982,14 @@ Primitive numbers are used to describe the file format, as detailed in the follo
 </tr>
 </tbody>
 </table>
-<ul>
-<li>A <code>byte</code>, <code>short</code>, <code>int</code> or <code>long</code> containing the gap between the address of this object and the address of the preceding object(See the <strong>Short object record</strong> format description)</li>
+</li>
+<li>
+<p>A <code>byte</code>, <code>short</code>, <code>int</code> or <code>long</code> containing the gap between the address of this object and the address of the preceding object (See the <strong>Short object record</strong> format description).</p>
+</li>
 <li>A <code>word</code> containing the address of the class of the objects in the array. Object array records do not update the class cache.</li>
 <li>If all objects are hashed, a <code>short</code> containing the hash code. If the hashed and moved bit is set in the records flag, this field contains an <code>int</code>.</li>
 <li>An <code>int</code> containing the length of the array of references.</li>
-<li>The array of references (See the <strong>Short object record</strong> description)</li>
+<li>The array of references (See the <strong>Short object record</strong> description).</li>
 <li>An unsigned <code>int</code> containing the size of the instance of the array on the heap, including header and padding. The size is measured in 32-bit words, which you can multiply by four to obtain the size in bytes. This format allows encoding of lengths up to 16GB in an unsigned <code>int</code>.</li>
 <li>An final <code>int</code> value is shown at the end. This <code>int</code> contains the true array length, shown as a number of array elements. The true array length might differ from the length of the array of references because null references are excluded.</li>
 </ul>
@@ -3991,8 +4001,6 @@ Primitive numbers are used to describe the file format, as detailed in the follo
 </li>
 <li>
 <p>A byte containing the following flags:</p>
-</li>
-</ul>
 <table>
 <thead>
 <tr>
@@ -4003,7 +4011,7 @@ Primitive numbers are used to describe the file format, as detailed in the follo
 <tbody>
 <tr>
 <td>1 and 2</td>
-<td>Indicates whether the gap is byte, <code>short</code>, <code>int</code> or <code>long</code>.</td>
+<td>Indicates whether the gap is byte, <code>short</code>, <code>int</code> or <code>long</code></td>
 </tr>
 <tr>
 <td>3 and 4</td>
@@ -4015,14 +4023,16 @@ Primitive numbers are used to describe the file format, as detailed in the follo
 </tr>
 </tbody>
 </table>
-<ul>
-<li>A byte, <code>short</code>, <code>int</code> or <code>long</code> containing the gap between the address of this class and the address of the preceding object (See the <strong>Short object record</strong> description)</li>
+</li>
+<li>
+<p>A byte, <code>short</code>, <code>int</code> or <code>long</code> containing the gap between the address of this class and the address of the preceding object (See the <strong>Short object record</strong> description).</p>
+</li>
 <li>An <code>int</code> containing the instance size.</li>
 <li>If all objects are hashed, a <code>short</code> containing the hash code. Otherwise, an optional <code>int</code> containing the hash code if the hashed and moved bit is set in the record flag byte.</li>
 <li>A <code>word</code> containing the address of the superclass.</li>
 <li>A UTF string containing the name of this class.</li>
 <li>An <code>int</code> containing the number of static references.</li>
-<li>The array of static references (See the <strong>Short object record</strong> description)</li>
+<li>The array of static references (See the <strong>Short object record</strong> description).</li>
 </ul>
 <h3 id="classic-heap-dump-format">Classic Heap Dump format</h3>
 <p>Classic heap dumps are produced in ascii text on all platforms except z/OS, which are encoded in EBCDIC. The dump is divided into the following sections:</p>
