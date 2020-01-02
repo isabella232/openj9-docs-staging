@@ -4058,21 +4058,17 @@ Primitive numbers are used to describe the file format, as detailed in the follo
 <p>The following example shows an object instance (16 bytes in length) of type <code>java/lang/String</code>, with a reference to a char array:</p>
 <pre><code>0x00000000E0000AF0 [16] OBJ java/lang/String
     0x00000000E0000B00
-  ```
-
-The object instance (length 32 bytes) of type char array, as referenced from the `java/lang/String`, is shown in the following example:
-
 </code></pre>
 
-<p>0x00000000E0000B00 [32] OBJ [C</p>
-<pre><code>
-The following example shows an object instance (24 bytes in length) of type array of `java/lang/String`:
-
+<p>The object instance (length 32 bytes) of type char array, as referenced from the <code>java/lang/String</code>, is shown in the following example:</p>
+<pre><code>0x00000000E0000B00 [32] OBJ [C
 </code></pre>
 
-<p>0x00000000FFF07498 [24] OBJ [Ljava/lang/String;
+<p>The following example shows an object instance (24 bytes in length) of type array of <code>java/lang/String</code>:</p>
+<pre><code>0x00000000FFF07498 [24] OBJ [Ljava/lang/String;
     0x00000000E0005D78 0x00000000E0005D50 0x00000000E0005D28 0x00000000E0005D00
-  ```</p>
+</code></pre>
+
 <h4 id="class-records_1">Class records</h4>
 <p>A record of each class in the following format:</p>
 <pre><code>&lt;class object address, in hexadecimal&gt; [&lt;length in bytes of class object, in decimal&gt;] CLS &lt;class type&gt;
@@ -4104,11 +4100,11 @@ The following example shows an object instance (24 bytes in length) of type arra
 <pre><code>// EOF:  Total 'Objects',Refs(null) : 7147,22040(12379)
 </code></pre>
 
-<p>Where the values reflect the following counts:</p>
+<p>The values in the example reflect the following counts:</p>
 <ul>
 <li><code>7147</code> total objects</li>
 <li><code>22040</code> total references</li>
-<li><code>(12379)</code> total NULL references as part of the total references count</li>
+<li><code>(12379)</code> total NULL references as a proportion of the total references count</li>
 </ul>
 <h4 id="java-vm-type-signatures">Java VM Type Signatures</h4>
 <p>The following table shows the abbreviations used for different Java types in the heap dump records:</p>
@@ -4122,7 +4118,7 @@ The following example shows an object instance (24 bytes in length) of type arra
 <tbody>
 <tr>
 <td><code>Z</code></td>
-<td>boolean</td>
+<td><code>boolean</code></td>
 </tr>
 <tr>
 <td><code>B</code></td>
@@ -4146,11 +4142,11 @@ The following example shows an object instance (24 bytes in length) of type arra
 </tr>
 <tr>
 <td><code>F</code></td>
-<td>float</td>
+<td><code>float</code></td>
 </tr>
 <tr>
 <td><code>D</code></td>
-<td>double</td>
+<td><code>double</code></td>
 </tr>
 <tr>
 <td><code>L&lt;fully-qualified class&gt;;</code></td>
@@ -4162,7 +4158,7 @@ The following example shows an object instance (24 bytes in length) of type arra
 </tr>
 <tr>
 <td><code>(&lt;arg-types&gt;)&lt;ret-type&gt;</code></td>
-<td>method</td>
+<td><code>method</code></td>
 </tr>
 </tbody>
 </table>
