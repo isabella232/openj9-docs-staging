@@ -2658,6 +2658,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
   <li class="md-nav__item">
+    <a href="../xxconcgcthreads/" title="-XX:ConcGCThreads" class="md-nav__link">
+      -XX:ConcGCThreads
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../xxcodecachetotal/" title="-XX:codecachetotal" class="md-nav__link">
       -XX:codecachetotal
     </a>
@@ -2982,6 +2994,68 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
   <li class="md-nav__item">
+    <a href="../xxparallelcmsthreads/" title="-XX:ParallelCMSThreads" class="md-nav__link">
+      -XX:ParallelCMSThreads
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        -XX:ParallelGCThreads
+      </label>
+    
+    <a href="./" title="-XX:ParallelGCThreads" class="md-nav__link md-nav__link--active">
+      -XX:ParallelGCThreads
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">On this page ...</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#syntax" class="md-nav__link">
+    Syntax
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../xxpositiveidentityhash/" title="-XX:[+|-]PositiveIdentityHash" class="md-nav__link">
       -XX:[+|-]PositiveIdentityHash
     </a>
@@ -3192,80 +3266,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   </li>
 
         
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../xxparallelcmsthreads/" title="-XX:ParallelCMSThreads" class="md-nav__link">
-      -XX:ParallelCMSThreads
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../xxconcgcthreads/" title="-XX:ConcGCThreads" class="md-nav__link">
-      -XX:ConcGCThreads
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-  
-
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        -XX:ParallelGCThreads
-      </label>
-    
-    <a href="./" title="-XX:ParallelGCThreads" class="md-nav__link md-nav__link--active">
-      -XX:ParallelGCThreads
-    </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">On this page ...</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#syntax" class="md-nav__link">
-    Syntax
-  </a>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
-  </li>
-
-        
       </ul>
     </nav>
   </li>
@@ -3444,10 +3444,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 * Classpath-exception-2.0 OR LicenseRef-GPL-2.0 WITH Assembly-exception
 -->
 
-<h1 id="-xxparallelgcthread">-XX:ParallelGcThread</h1>
+<h1 id="-xxparallelgcthread">-XX:ParallelGCThread</h1>
 <p>This Oracle Hotspot option specifies the number of threads used during parallel operations of the default garbage collector. This option is recognized by OpenJ9 and provided for compatibility.</p>
 <h2 id="syntax">Syntax</h2>
-<pre><code>    -XX:ParallelGcThreads=&lt;number&gt;
+<pre><code>    -XX:ParallelGCThreads=&lt;number&gt;
 </code></pre>
 <p>Where <code>&lt;number&gt;</code> is the number of threads to be used for parallel operations. </p>
 <p>Within OpenJ9 this option is directly mapped to <a href="../xgcthreads/"><code>-Xgcthreads</code></a>.</p>
@@ -3494,7 +3494,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- Ignore all this to remove previous/next links in footer, but leave nav block else lose highlighting in LH navigation
                     <img alt="" src="../cr/rule.png"> [!-- Separator --]
                     
-                      <a href="xxconcgcthreads/" title="-XX:ConcGCThreads" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+                      <a href="xxparallelcmsthreads/" title="-XX:ParallelCMSThreads" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
                         <div class="md-flex__cell md-flex__cell--shrink">
                           <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
                         </div>
@@ -3503,19 +3503,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                             <span class="md-footer-nav__direction">
                               Previous
                             </span>
-                            -XX:ConcGCThreads
+                            -XX:ParallelCMSThreads
                           </span>
                         </div>
                       </a>
                     
                     
-                      <a href="openj9_support/" title="Supported environments" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+                      <a href="xxpositiveidentityhash/" title="-XX:[+|-]PositiveIdentityHash" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
                         <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
                           <span class="md-flex__ellipsis">
                             <span class="md-footer-nav__direction">
                               Next
                             </span>
-                            Supported environments
+                            -XX:[+|-]PositiveIdentityHash
                           </span>
                         </div>
                         <div class="md-flex__cell md-flex__cell--shrink">
