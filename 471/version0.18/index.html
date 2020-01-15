@@ -477,6 +477,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#shared-classes-cache-suboptions-for-layered-caches-no-longer-experimental" class="md-nav__link">
+    Shared classes cache suboptions for layered caches no longer experimental
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -667,8 +674,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
   <li class="md-nav__item">
-    <a href="../jitserver/" title="JITServer (tech. preview)" class="md-nav__link">
-      JITServer (tech. preview)
+    <a href="../jit/" title="JIT Compiler" class="md-nav__link">
+      JIT Compiler
     </a>
   </li>
 
@@ -679,8 +686,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
   <li class="md-nav__item">
-    <a href="../jit/" title="JIT Compiler" class="md-nav__link">
-      JIT Compiler
+    <a href="../jitserver/" title="JITServer (tech. preview)" class="md-nav__link">
+      JITServer (tech. preview)
     </a>
   </li>
 
@@ -3619,6 +3626,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#shared-classes-cache-suboptions-for-layered-caches-no-longer-experimental" class="md-nav__link">
+    Shared classes cache suboptions for layered caches no longer experimental
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -3693,6 +3707,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li><a href="#improved-support-for-pause-less-garbage-collection">Improved support for pause-less garbage collection</a></li>
 <li><a href="#-xgcnoconcurrentscavenge-option"><code>-Xgc:noConcurrentScavenge</code> option</a></li>
 <li><a href="#support-for-openjdk-hotspot-options">Support for OpenJDK HotSpot options</a></li>
+<li><a href="#shared-classes-cache-suboptions-for-layered-caches-no-longer-experimental">Shared classes cache suboptions for layered caches no longer experimental</a></li>
 </ul>
 <h2 id="features-and-changes">Features and changes</h2>
 <h3 id="binaries-and-supported-environments">Binaries and supported environments</h3>
@@ -3705,7 +3720,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>To learn more about support for OpenJ9 releases, including OpenJDK levels and platform support, see <a href="../openj9_support/">Supported environments</a>.</p>
 <h3 id="technical-preview-of-jitserver-technology">Technical preview of JITServer technology</h3>
 <p>A technical preview of JITServer technology is included in this release. It's currently available for OpenJDK 8 and OpenJDK 11 running on Linux on x86-64.</p>
-<p>JITServer technology decouples the JIT compiler from the VM and lets the JIT compiler run remotely in its own process. This prevents your Java application suffering possible negative effects due to CPU and memory consumption caused by JIT compilation. The technology can potentially improve quality of service, robustness, and even performance of Java applications. For more information, see <a href="../jitserver/">JITServer technology</a>.</p>
+<p>JITServer technology decouples the JIT compiler from the VM and lets the JIT compiler run remotely in its own process. This mechanism prevents your Java application suffering possible negative effects due to CPU and memory consumption caused by JIT compilation. The technology can potentially improve quality of service, robustness, and even performance of Java applications. For more information, see <a href="../jitserver/">JITServer technology</a>.</p>
 <h3 id="jextract-now-available-on-macos-for-openjdk-version-8"><code>jextract</code> now available on macOS for OpenJDK version 8</h3>
 <p>The <a href="../tool_jextract/"><code>jextract</code> tool</a> is now available on macOS platforms (as well as AIX&reg; and Linux) for <em>all</em> current versions of OpenJDK: 8, 11, and 13.</p>
 <h3 id="new-shared-classes-cache-suboption-to-turn-off-timestamp-checking">New shared-classes cache suboption to turn off timestamp checking</h3>
@@ -3735,6 +3750,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li><a href="../xxparallelgcthreads/">-XX:ParallelGCThreads</a></li>
 <li><a href="../xxconcgcthreads/">-XX:ConcGCThreads</a></li>
 <li><a href="../xxparallelcmsthreads/">-XX:ParallelCMSThreads</a></li>
+</ul>
+<h3 id="shared-classes-cache-suboptions-for-layered-caches-no-longer-experimental">Shared classes cache suboptions for layered caches no longer experimental</h3>
+<p>The suboptions for creating layered caches are no longer marked experimental.</p>
+<p>The new options are:</p>
+<ul>
+<li><a href="../xshareclasses/#createlayer"><code>createLayer</code></a></li>
+<li><a href="../xshareclasses/#layer"><code>layer=&lt;number&gt;</code></a> (see this section for more information about layered caches)</li>
+<li><a href="../xshareclasses/#printtoplayerstats-cache-utility"><code>printTopLayerStats</code></a></li>
+<li><a href="../xshareclasses/#destroyalllayers"><code>destroyAllLayers</code></a></li>
 </ul>
 <h2 id="full-release-information">Full release information</h2>
 <p>To see a complete list of changes between Eclipse OpenJ9 v 0.17.0 and v 0.18.0 releases, see the <a href="https://github.com/eclipse/openj9/blob/master/doc/release-notes/0.18/0.18.md">Release notes</a>.</p>

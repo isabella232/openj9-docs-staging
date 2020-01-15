@@ -514,6 +514,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       
       
 
+
+  <li class="md-nav__item">
+    <a href="../jit/" title="JIT Compiler" class="md-nav__link">
+      JIT Compiler
+    </a>
+  </li>
+
+    
+      
+      
+      
+
   
 
 
@@ -547,6 +559,33 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     Using JITServer technology
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#launch-openj9-in-client-mode" class="md-nav__link">
+    Launch OpenJ9 in client mode
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#launch-openj9-in-server-mode" class="md-nav__link">
+    Launch OpenJ9 in server mode
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuring-jitserver-technology" class="md-nav__link">
+    Configuring JITServer technology
+  </a>
+  
 </li>
       
         <li class="md-nav__item">
@@ -578,18 +617,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   
 </nav>
     
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../jit/" title="JIT Compiler" class="md-nav__link">
-      JIT Compiler
-    </a>
   </li>
 
     
@@ -3426,6 +3453,33 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     Using JITServer technology
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#launch-openj9-in-client-mode" class="md-nav__link">
+    Launch OpenJ9 in client mode
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#launch-openj9-in-server-mode" class="md-nav__link">
+    Launch OpenJ9 in server mode
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuring-jitserver-technology" class="md-nav__link">
+    Configuring JITServer technology
+  </a>
+  
 </li>
       
         <li class="md-nav__item">
@@ -3498,7 +3552,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p><img alt="Start of content that applies to Java 8 and later" src="../cr/java8.png" />
 <img alt="Start of content that applies to Java 11 and later" src="../cr/java11.png" /><br />
 <strong>Linux&reg; on x86-64 only</strong></p>
-<p>JITServer technology decouples the JIT compiler from the VM and lets the JIT compiler run remotely in its own process. This prevents your Java&trade; application suffering possible negative effects due to CPU and memory consumption caused by JIT compilation.</p>
+<p>JITServer technology decouples the JIT compiler from the VM and lets the JIT compiler run remotely in its own process. This mechanism prevents your Java&trade; application suffering possible negative effects due to CPU and memory consumption caused by JIT compilation.</p>
 <p>This technology can potentially improve quality of service, robustness, and even performance of Java applications. We recommend trying this technology if the following criteria are met:</p>
 <ul>
 <li>Your Java application is required to compile many methods using JIT in a relatively short time.</li>
@@ -3507,32 +3561,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </ul>
 <p>For more details about JITServer technology, its pros and cons, and when best to use it, see the blog <a href="https://blog.openj9.org/2020/01/09/free-your-jvm-from-the-jit-with-jitserver-technology/">Free your JVM from the JIT with JITServer Technology</a>.</p>
 <h2 id="using-jitserver-technology">Using JITServer technology</h2>
-<p>OpenJ9 builds available from <a href="https://adoptopenjdk.net/archive.html?variant=openjdk11&amp;jvmVariant=openj9">AdoptOpenJDK</a> have JITServer technology included, though you must explicitly invoke it.</p>
-<p>To use JITServer technology, use one of the following options:</p>
-<table>
-<thead>
-<tr>
-<th>Setting</th>
-<th>Effect</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>none</td>
-<td>Launches OpenJ9 as a regular VM with embedded JIT compilation</td>
-</tr>
-<tr>
-<td><code>-XX:+UseJITServer</code></td>
-<td>Launches OpenJ9 in client mode (<strong>Note 1</strong>)</td>
-</tr>
-<tr>
-<td><code>jitserver</code></td>
-<td>Launches OpenJ9 in JITServer mode (<strong>Note 2</strong>)</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Note 1:</strong> With this command-line option, the VM sends compilation requests to an available JITServer. The client operates as a regular VM if a server is not available.<br />
-<strong>Note 2:</strong> Use the <code>jitserver</code> command to start a VM that listens for incoming compilation requests.</p>
+<p>JITServer technology is not enabled by default: you must explicitly invoke it. Running OpenJ9 without either of the following options launches it as a regular VM with embedded JIT compilation.</p>
+<h3 id="launch-openj9-in-client-mode">Launch OpenJ9 in client mode</h3>
+<p>Use the following command-line option to launch OpenJ9 in client mode. In this mode, the VM sends compilation requests to an available JITServer. The client operates as a regular VM if a server is not available.</p>
+<pre><code> -XX:+UseJITServer
+</code></pre>
+<h3 id="launch-openj9-in-server-mode">Launch OpenJ9 in server mode</h3>
+<p>Use the following command to start a JITServer process that listens for incoming compilation requests:</p>
+<pre><code>jitserver
+</code></pre>
+<h2 id="configuring-jitserver-technology">Configuring JITServer technology</h2>
 <p>You can use the following command line options to further configure the JITServer and the client VM processes:</p>
 <table>
 <thead>
@@ -3556,11 +3594,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <tr>
 <td><code>-XX:JITServerTimeout=&lt;timeout&gt;</code></td>
 <td>Specifies a timeout value in milliseconds for socket operations</td>
-<td>(<strong>Note 3</strong>)</td>
+<td>(<strong>Note 1</strong>)</td>
 </tr>
 </tbody>
 </table>
-<p><strong>Note 3:</strong> The timeout default is 30000 ms for JITServer and 2000 ms when launched as a client VM. You might need to increase the latter value if network latency is large.</p>
+<p><strong>Note 1:</strong> The timeout default is 30000 ms for JITServer and 2000 ms when launched as a client VM. You might need to increase the latter value if network latency is large.</p>
 <h2 id="security-issues">Security issues</h2>
 <p>You can encrypt network communication between the client VM and JITServer by using OpenSSL 1.0.x or 1.1.x. To enable encryption, specify the private key (<code>&lt;key&gt;.pem</code>) and the certificate (<code>&lt;cert&gt;.pem</code>) at the server:</p>
 <pre><code>-XX:JITServerSSLKey=&lt;key&gt;.pem -XX:JITServerSSLCert=&lt;cert&gt;.pem
@@ -3618,7 +3656,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- Ignore all this to remove previous/next links in footer, but leave nav block else lose highlighting in LH navigation
                     <img alt="" src="../cr/rule.png"> [!-- Separator --]
                     
-                      <a href="gc/" title="Garbage Collection" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+                      <a href="jit/" title="JIT Compiler" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
                         <div class="md-flex__cell md-flex__cell--shrink">
                           <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
                         </div>
@@ -3627,19 +3665,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                             <span class="md-footer-nav__direction">
                               Previous
                             </span>
-                            Garbage Collection
+                            JIT Compiler
                           </span>
                         </div>
                       </a>
                     
                     
-                      <a href="jit/" title="JIT Compiler" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+                      <a href="aot/" title="AOT Compiler" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
                         <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
                           <span class="md-flex__ellipsis">
                             <span class="md-footer-nav__direction">
                               Next
                             </span>
-                            JIT Compiler
+                            AOT Compiler
                           </span>
                         </div>
                         <div class="md-flex__cell md-flex__cell--shrink">
