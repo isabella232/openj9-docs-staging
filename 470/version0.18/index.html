@@ -471,6 +471,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </li>
         
           <li class="md-nav__item">
+  <a href="#shared-classes-cache-suboptions-for-layered-caches-no-longer-experimental" class="md-nav__link">
+    Shared classes cache suboptions for layered caches no longer experimental
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#-djavalangstringsubstringnocopy-option" class="md-nav__link">
     -Djava.lang.string.substring.nocopy option
   </a>
@@ -1307,6 +1314,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <li class="md-nav__item">
     <a href="../djavacompiler/" title="-Djava.compiler" class="md-nav__link">
       -Djava.compiler
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../djavalangstringsubstringnocopy/" title="-Djava.lang.string.substring.nocopy" class="md-nav__link">
+      -Djava.lang.string.substring.nocopy
     </a>
   </li>
 
@@ -3601,6 +3620,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </li>
         
           <li class="md-nav__item">
+  <a href="#shared-classes-cache-suboptions-for-layered-caches-no-longer-experimental" class="md-nav__link">
+    Shared classes cache suboptions for layered caches no longer experimental
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#-djavalangstringsubstringnocopy-option" class="md-nav__link">
     -Djava.lang.string.substring.nocopy option
   </a>
@@ -3680,7 +3706,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li><a href="#improved-support-for-pause-less-garbage-collection">Improved support for pause-less garbage collection</a></li>
 <li><a href="#-xgcnoconcurrentscavenge-option"><code>-Xgc:noConcurrentScavenge</code> option</a></li>
 <li><a href="#support-for-openjdk-hotspot-options">Support for OpenJDK HotSpot options</a></li>
-<li><a href="#-djavalangstringsubstringnocopy"><code>-Djava.lang.string.substring.nocopy</code> option</a></li>
+<li><a href="#shared-classes-cache-suboptions-for-layered-caches-no-longer-experimental">Shared classes cache suboptions for layered caches no longer experimental</a></li>
+<li><a href="#-djavalangstringsubstringnocopy-option"><code>-Djava.lang.string.substring.nocopy</code> option</a></li>
 </ul>
 <h2 id="features-and-changes">Features and changes</h2>
 <h3 id="binaries-and-supported-environments">Binaries and supported environments</h3>
@@ -3720,6 +3747,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li><a href="../xxparallelgcthreads/">-XX:ParallelGCThreads</a></li>
 <li><a href="../xxconcgcthreads/">-XX:ConcGCThreads</a></li>
 <li><a href="../xxparallelcmsthreads/">-XX:ParallelCMSThreads</a></li>
+</ul>
+<h3 id="shared-classes-cache-suboptions-for-layered-caches-no-longer-experimental">Shared classes cache suboptions for layered caches no longer experimental</h3>
+<p>The suboptions for creating layered caches are no longer marked experimental.</p>
+<p>The new options are:</p>
+<ul>
+<li><a href="../xshareclasses/#createlayer"><code>createLayer</code></a></li>
+<li><a href="../xshareclasses/#layer"><code>layer=&lt;number&gt;</code></a> (see this section for more information about layered caches)</li>
+<li><a href="../xshareclasses/#printtoplayerstats-cache-utility"><code>printTopLayerStats</code></a></li>
+<li><a href="../xshareclasses/#destroyalllayers"><code>destroyAllLayers</code></a></li>
 </ul>
 <h3 id="-djavalangstringsubstringnocopy-option"><code>-Djava.lang.string.substring.nocopy</code> option</h3>
 <p>The previously undocumented Java 8 option <a href="../djavalangstringsubstringnocopy/"><code>-Djava.lang.string.substring.nocopy=true</code></a> avoids String sharing by String.substring(), which is the same behavior as the Oracle Hotspot VM.</p>
