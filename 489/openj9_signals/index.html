@@ -3370,6 +3370,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#signal-chaining" class="md-nav__link">
+    Signal chaining
+  </a>
+  
+</li>
+      
       
       
       
@@ -3489,6 +3496,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#signal-chaining" class="md-nav__link">
+    Signal chaining
+  </a>
+  
+</li>
+      
       
       
       
@@ -3542,6 +3556,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li>Interrupts (Int): Raised asynchronously from outside a VM process to request a VM exit.</li>
 <li>Controls (Con): Other signals that are used by the VM for control purposes.</li>
 </ul>
+<p>For exceptions and errors, if the VM cannot handle the condition and recover, dumps are produced and a controlled shut down sequence takes place. Interrupts also cause the VM to enter a controlled shut down sequence, but without generating dumps. The shutdown sequence is equivalent to calling <code>System.exit()</code>, which results in the following steps:</p>
+<ol>
+<li>The VM calls the equivalent application signal handler</li>
+<li>The VM calls any hooks installed by the application (unexpected shutdown hooks for exceptions or errors, shutdown or exit hooks for interrupts)</li>
+<li>The VM does any final clean up</li>
+</ol>
+<p>Control signals are used for internal control purposes and do not cause the VM to end.</p>
+<p>The VM takes control of any signals for Java threads. For non-Java threads, the VM passes control to an application handler, if one is installed. If the application does not install a signal handler, or signal chaining is turned off, the signal is either ignored or the default action is taken. Signal chaining is controlled by the <a href="../xsigchain/">-Xsigchain / -Xnosigchain</a> command-line option.</p>
 <p>The signals relevant to each platform are detailed in the sections that follow.</p>
 <p>When reading each table, a number supplied after the signal name is the standard numerical value for that signal.</p>
 <p>Note that certain signals on VM threads cause OpenJ9 to shutdown. An application signal handler should not attempt to recover from these signals unless it no longer requires the VM.</p>
@@ -3571,7 +3593,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <tr>
 <td><code>SIGILL (4)</code></td>
 <td>Exc</td>
-<td>Illegal instruction (attempt to call unknown machine instruction))</td>
+<td>Illegal instruction (attempt to call unknown machine instruction)</td>
 <td><code>-Xrs</code> or <code>-Xrs:sync</code></td>
 </tr>
 <tr>
@@ -3629,7 +3651,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <td>-</td>
 </tr>
 <tr>
-<td><code>SIGRTMAX (2)</code></td>
+<td><code>SIGRTMAX -2 (62)</code></td>
 <td>Con</td>
 <td>Used by the <code>java.net</code> class library code</td>
 <td>-</td>
@@ -3730,7 +3752,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <td>-</td>
 </tr>
 <tr>
-<td><code>SIGIO</code></td>
+<td><code>SIGIO (23)</code></td>
 <td>Con</td>
 <td>Used by the <code>java.net</code> class library code</td>
 <td>-</td>
@@ -3951,7 +3973,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <td>-</td>
 </tr>
 <tr>
-<td><code>SIGRTMAX (1)</code></td>
+<td><code>SIGRTMAX -1 (56)</code></td>
 <td>Con</td>
 <td>Used by the <code>java.net</code> class library code</td>
 <td>-</td>
@@ -3968,6 +3990,45 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <ul>
 <li>VM performance is affected if you install a signal handler for SIGTRAP (5) or SIGRECONFIG (58) because these signals are used for internal control purposes.</li>
 <li>If you want to generate floating point exceptions, use the following call in your code to generate a <code>SIGFPE</code> signal: <code>fp_trap( P_TRAP_SYNC)</code>. Although you can use the C compiler <code>-qflttrap</code> setting to generate <code>SIGTRAP</code> signals to trap floating point exceptions, this mechanism can affect the JIT compiler.</li>
+</ul>
+<h2 id="signal-chaining">Signal chaining</h2>
+<p>Signal chaining allows application code to interoperate with VM signal handling. By linking and loading a shared library, certain
+calls can be intercepted so that the application handlers do not replace the VM signal handlers. Instead, the application handlers
+are chained behind the VM handlers. If signals that are raised do not target the VM, the application handlers take over. Signals that
+can be chained include <code>signal()</code>, <code>sigset()</code>, and <code>sigaction()</code>.</p>
+<p>The following table shows the shared library that must be linked with the application that creates or embeds a VM, and the
+command line syntax to use with the compiler, where available:</p>
+<table>
+<thead>
+<tr>
+<th>Operating system</th>
+<th>Shared library</th>
+<th>Method for linking</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Linux, macOS, and z/OS</td>
+<td><code>libjsig.so</code></td>
+<td><code>gcc -L$JAVA_HOME/bin -ljsig -L$JAVA_HOME/lib/j9vm -ljvm &lt;java_application&gt;.c</code></td>
+</tr>
+<tr>
+<td>Windows</td>
+<td><code>jsig.dll</code></td>
+<td>Link the DLL with the application that creates or embeds a VM</td>
+</tr>
+<tr>
+<td>AIX</td>
+<td><code>libjsig.so</code></td>
+<td><code>cc_r [-q64] &lt;other_compile/link_parameter&gt; -L&lt;java_install_dir&gt; -ljsig -L&lt;java_install_dir&gt;/lib/j9vm -ljvm &lt;java_application&gt;.c</code></td>
+</tr>
+</tbody>
+</table>
+<p><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Note:</strong> On Linux, macOS, and z/OS systems, you can use the <code>LD_PRELOAD</code>
+environment variable as an alternative method to the command line for linking the shared library as shown in the following list:</p>
+<ul>
+<li>bash and ksh shells: <code>export LD_PRELOAD=$JAVA_HOME/lib/libjsig.so; &lt;java_application&gt;</code></li>
+<li>csh shell: <code>setenv LD_PRELOAD=$JAVA_HOME/lib/libjsig.so; &lt;java_application&gt;</code></li>
 </ul>
 <!-- ==== END OF TOPIC ==== openj9_signals.md ==== -->
                 
