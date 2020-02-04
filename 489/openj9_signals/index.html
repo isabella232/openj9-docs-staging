@@ -343,6 +343,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
   <li class="md-nav__item">
+    <a href="../version0.19/" title="Version 0.19.0" class="md-nav__link">
+      Version 0.19.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../version0.18/" title="Version 0.18.1" class="md-nav__link">
       Version 0.18.1
     </a>
@@ -360,6 +372,25 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </a>
   </li>
 
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-4" type="checkbox" id="nav-5-4">
+    
+    <label class="md-nav__link" for="nav-5-4">
+      Earlier releases
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-4">
+        Earlier releases
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
         
           
           
@@ -384,25 +415,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </a>
   </li>
 
-        
-          
-          
-          
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-5" type="checkbox" id="nav-5-5">
-    
-    <label class="md-nav__link" for="nav-5-5">
-      Earlier releases
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-5-5">
-        Earlier releases
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
         
           
           
@@ -3551,16 +3563,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <h1 id="signal-handling">Signal handling</h1>
 <p>Signals used by the OpenJ9 VM include the following types:</p>
 <ul>
-<li>Exceptions (Exc): Raised synchronously by the operating system whenever an unrecoverable condition occurs (not applicable on Windows systems)</li>
+<li>Exceptions (Exc): Raised synchronously by the operating system whenever an unrecoverable condition occurs (not applicable on Windows systems).</li>
 <li>Errors (Err): Raised by the OpenJ9 VM when an unrecoverable condition occurs.</li>
 <li>Interrupts (Int): Raised asynchronously from outside a VM process to request a VM exit.</li>
 <li>Controls (Con): Other signals that are used by the VM for control purposes.</li>
 </ul>
 <p>For exceptions and errors, if the VM cannot handle the condition and recover, dumps are produced and a controlled shut down sequence takes place. Interrupts also cause the VM to enter a controlled shut down sequence, but without generating dumps. The shutdown sequence is equivalent to calling <code>System.exit()</code>, which results in the following steps:</p>
 <ol>
-<li>The VM calls the equivalent application signal handler</li>
-<li>The VM calls any hooks installed by the application (unexpected shutdown hooks for exceptions or errors, shutdown or exit hooks for interrupts)</li>
-<li>The VM does any final clean up</li>
+<li>The VM calls the equivalent application signal handler.</li>
+<li>The VM calls any hooks installed by the application (unexpected shutdown hooks for exceptions or errors, shutdown or exit hooks for interrupts).</li>
+<li>The VM does any final clean up.</li>
 </ol>
 <p>Control signals are used for internal control purposes and do not cause the VM to end.</p>
 <p>The VM takes control of any signals for Java threads. For non-Java threads, the VM passes control to an application handler, if one is installed. If the application does not install a signal handler, or signal chaining is turned off, the signal is either ignored or the default action is taken. Signal chaining is controlled by the <a href="../xsigchain/">-Xsigchain / -Xnosigchain</a> command-line option.</p>
@@ -3666,7 +3678,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </table>
 <p><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Notes:</strong></p>
 <ul>
-<li>use of <code>SIGRTMIN</code> is configurable with the <code>-Xdump:suspendwith=&lt;num&gt;</code> option</li>
+<li>The use of <code>SIGRTMIN</code> is configurable with the <code>-Xdump:suspendwith=&lt;num&gt;</code> option.</li>
 </ul>
 <h2 id="signals-on-macos">Signals on macOS</h2>
 <table>
