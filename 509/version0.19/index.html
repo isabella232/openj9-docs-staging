@@ -343,6 +343,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           
           
 
+
+  <li class="md-nav__item">
+    <a href="../openj9_releases/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
   
 
 
@@ -401,8 +413,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </li>
         
           <li class="md-nav__item">
-  <a href="#the-default-value-of-xmx-has-been-changed-in-java-8" class="md-nav__link">
-    The default value of -Xmx has been changed in Java 8
+  <a href="#the-default-value-of-xmx-is-changed" class="md-nav__link">
+    The default value of -Xmx is changed
   </a>
   
 </li>
@@ -468,13 +480,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-4" type="checkbox" id="nav-5-4">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-5" type="checkbox" id="nav-5-5">
     
-    <label class="md-nav__link" for="nav-5-4">
+    <label class="md-nav__link" for="nav-5-5">
       Earlier releases
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-5-4">
+      <label class="md-nav__title" for="nav-5-5">
         Earlier releases
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -3540,8 +3552,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </li>
         
           <li class="md-nav__item">
-  <a href="#the-default-value-of-xmx-has-been-changed-in-java-8" class="md-nav__link">
-    The default value of -Xmx has been changed in Java 8
+  <a href="#the-default-value-of-xmx-is-changed" class="md-nav__link">
+    The default value of -Xmx is changed
   </a>
   
 </li>
@@ -3616,7 +3628,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li><a href="#binaries-and-supported-environments">New binaries and changes to supported environments</a></li>
 <li><a href="#option-to-print-code-cache-usage-on-stderr-at-JVM-shutdown">Option to print code cache usage on stderr at JVM shutdown</a></li>
 <li><a href="stringbuffer-and-stringbuilder-above-1-g-grow-to-the-maximum-size"><img alt="Start of content that applies to Java 8" src="../cr/java8.png" /> <code>StringBuffer</code> and <code>StringBuilder</code> above 1 G grow to the maximum size</a></li>
-<li><a href="#the-default-value-of-max-heapsize-has-been-changed-in-java8">The default value of <code>-Xmx</code> has been changed in Java 8</a></li>
+<li><a href="#the-default-value-of--xmx-is-changed"><img alt="Start of content that applies to Java 8" src="../cr/java8.png" /> The default value of <code>-Xmx</code> is changed</a></li>
 <li><a href="#xxxx">xxxx</a></li>
 </ul>
 <h2 id="features-and-changes">Features and changes</h2>
@@ -3632,8 +3644,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>A new command line option <a href="../xxprintcodecache/">-XX:+PrintCodeCache</a> allows you to print the code cache memory usage on stderr at JVM shutdown.</p>
 <h3 id="stringbuffer-and-stringbuilder-above-1-g-grow-to-the-maximum-size"><img alt="Start of content that applies to Java 8" src="../cr/java8.png" /> <code>StringBuffer</code> and <code>StringBuilder</code> above 1 G grow to the maximum size</h3>
 <p>For Java 8 only, <code>StringBuffer</code> and <code>StringBuilder</code> grow differently when sized at 1 G <code>char[]</code> or larger. They immediately grow to the maximum possible size, similarly to Java 11 and later. Revert to the behavior of growing only as much as necessary to accommodate the <code>String</code> being added via the <a href="../djavalangstringbuffergrowaggressively/"><code>-Djava.lang.stringBuffer.growAggressively=false</code></a> option.</p>
-<h3 id="the-default-value-of-xmx-has-been-changed-in-java-8">The default value of <code>-Xmx</code> has been changed in Java 8</h3>
-<p>The default value of maximum heap size for Java 8 has been changed to match the behavior (25% of available memory with a maximum of 25 GB) on Java 11 or above. Revert to the old behavior (half the available memory with a minimum of 16MB and a maximum of 512 MB) in Java 8 via the <a href="../xxoriginaljadk8heapsizecompatibilitymode/">-XX:+OriginalJDK8HeapSizeCompatibilityMode</a> option.</p>
+<h3 id="the-default-value-of-xmx-is-changed"><img alt="Start of content that applies to Java 8" src="../cr/java8.png" /> The default value of <code>-Xmx</code> is changed</h3>
+<p>The default value of maximum heap size for Java 8 has been changed to match the behavior (25% of available memory with a maximum of 25 GB) on Java 11 or above. Revert to the old behavior (half the available memory with a minimum of 16MB and a maximum of 512 MB) in Java 8 via the <a href="../xxoriginaljdk8heapsizecompatibilitymode/">-XX:+OriginalJDK8HeapSizeCompatibilityMode</a> option.</p>
 <h3 id="xxxx">xxxx</h3>
 <h2 id="full-release-information">Full release information</h2>
 <p>To see a complete list of changes between Eclipse OpenJ9 v 0.18.0 and v 0.19.0 releases, see the <a href="https://github.com/eclipse/openj9/blob/master/doc/release-notes/0.19/0.19.md">Release notes</a>.</p>
@@ -3680,7 +3692,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- Ignore all this to remove previous/next links in footer, but leave nav block else lose highlighting in LH navigation
                     <img alt="" src="../cr/rule.png"> [!-- Separator --]
                     
-                      <a href="openj9_newuser/" title="New to OpenJ9?" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+                      <a href="openj9_releases/" title="Overview" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
                         <div class="md-flex__cell md-flex__cell--shrink">
                           <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
                         </div>
@@ -3689,7 +3701,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                             <span class="md-footer-nav__direction">
                               Previous
                             </span>
-                            New to OpenJ9?
+                            Overview
                           </span>
                         </div>
                       </a>
