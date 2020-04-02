@@ -3511,33 +3511,35 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>Use the <code>jcmd</code> tool to run diagnostic commands on a specified VM.</p>
 <p><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Note:</strong> Running diagnostic commands can significantly affect the performance of the target VM.</p>
 <p>The command syntax is as follows:</p>
-<pre><code>jcmd &lt;vmid&gt; -J[&lt;argument&gt;] [-J[&lt;argument&gt;]]
+<pre><code>jcmd [&lt;options&gt;] [&lt;vmid&gt; &lt;arguments&gt;]
 </code></pre>
 <p>Where:</p>
 <ul>
 <li>
-<p><code>&lt;vmid&gt;</code> is the Attach API virtual machine identifier (VMID) for the Java&trade; VM process. This ID is often, but not always, the same as the operating system <em>process ID</em>. One example where the ID might be different is if you specified the system property <code>-Dcom.ibm.tools.attach.id</code> when you started the process. You can use the <a href="../tool_jps/"><code>jps</code></a> command to find the VMID.</p>
+<p>The available <code>&lt;options&gt;</code> are:    </p>
+<ul>
+<li><code>-J</code>: supplies arguments to the Java VM that is running the <code>jcmd</code> command. You can use multiple <code>-J</code> options, for example: <code>jcmd -J-Xmx10m -J-Dcom.ibm.tools.attach.enable=yes</code></li>
+<li><code>-h</code>: prints the <code>jcmd</code> help</li>
+</ul>
 </li>
 <li>
-<p><code>-J</code>: supplies arguments to the Java VM that is running the <code>jcmd</code> command. <code>&lt;argument&gt;</code> can be one of:</p>
+<p><code>&lt;vmid&gt;</code> is the Attach API virtual machine identifier for the Java&trade; VM process. This ID is often, but not always, the same as the operating system <em>process ID</em>. One example where the ID might be different is if you specified the system property <code>-Dcom.ibm.tools.attach.id</code> when you started the process. You can use the <a href="../tool_jps/"><code>jps</code></a> command to find the VMID.</p>
+</li>
+<li>
+<p>The available <code>arguments</code> are:</p>
 <ul>
 <li><code>help</code>: shows the diagnostic commands that are available for this VM. This list of commands can vary between VMs.</li>
 <li><code>help &lt;command&gt;</code>: shows help information for the specified diagnostic command</li>
 <li><code>&lt;command&gt; [&lt;command_arguments&gt;]</code>: runs the specified diagnostic command, with optional command arguments</li>
+</ul>
+</li>
 </ul>
 <p>Examples:</p>
 <pre><code>jcmd 31452 Thread.print
 jcmd 31452 help Dump.heap
 jcmd 31452 Dump.heap myHeapDump
 </code></pre>
-<p>You can use multiple <code>-J</code> options, for example:</p>
-<pre><code>jcmd 31452 -J-Xmx10m -J-Dcom.ibm.tools.attach.enable=yes
-</code></pre>
-</li>
-</ul>
-<p>Run the following command to print the <code>jcmd</code> help:</p>
-<pre><code>jcmd -h
-</code></pre>
+
 <p><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> <strong>Restrictions:</strong> This tool is not supported and is subject to change or removal in future releases. Although similar in usage and output to the HotSpot tool of the same name, this tool is a different implementation that is specific to OpenJ9. For information about the differences between these two implementations, see <a href="../tool_migration/">Switching to OpenJ9</a>.</p>
 <p>The tool uses the Attach API, and has the following limitations:</p>
 <ul>
