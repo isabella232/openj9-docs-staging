@@ -977,6 +977,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </li>
         
           <li class="md-nav__item">
+  <a href="#info-mod" class="md-nav__link">
+    info mod
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#info-heap" class="md-nav__link">
     info heap
   </a>
@@ -3404,6 +3411,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
   <li class="md-nav__item">
+    <a href="../xxoriginaljdk8heapsizecompatibilitymode/" title="-XX:[+|-]OriginalJDK8HeapSizeCompatibilityMode" class="md-nav__link">
+      -XX:[+|-]OriginalJDK8HeapSizeCompatibilityMode
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../xxnosuballoc32bitmem/" title="-XXnosuballoc32bitmem" class="md-nav__link">
       -XXnosuballoc32bitmem
     </a>
@@ -4001,6 +4020,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </li>
         
           <li class="md-nav__item">
+  <a href="#info-mod" class="md-nav__link">
+    info mod
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#info-heap" class="md-nav__link">
     info heap
   </a>
@@ -4205,16 +4231,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </tr>
 <tr>
 <td><code>-J-Dcom.ibm.j9ddr.path.mapping=&lt;mappings&gt;</code></td>
-<td><code>&lt;mappings&gt;</code> is a <code>:</code> separated list of native library mappings, each of the form <code>old-path=new-path</code>.</td>
+<td>The variable <code>&lt;mappings&gt;</code> is a list of native library mappings of the form <code>old-path=new-path</code>, separated by a colon (':').</td>
 </tr>
 <tr>
 <td><code>-J-Dcom.ibm.j9ddr.library.path=&lt;path&gt;</code></td>
-<td><code>&lt;path&gt;</code> is a <code>:</code> separated list of paths to search for native libraries.</td>
+<td>The variable <code>&lt;path&gt;</code> is a list of paths to search for native libraries, separated by a colon (':').</td>
 </tr>
 </tbody>
 </table>
 <p><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Note:</strong> The <code>-core</code> option can be used with the <code>-zip</code> option to specify the core file in the compressed file. Without these options, <code>jdmpview</code> shows multiple contexts, one for each source file that it identified in the compressed file.</p>
-<p><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Note:</strong> On AIX, Linux some <code>jdmpview</code> commands, such as those related to callsites, require locating the native libraries referenced by the core. See the list of native libraries via the <code>info mod</code> command when running <code>jdmpview</code> on a core. If the libraries are not in the original locations, <code>jdmpview</code> can locate them using the path mapping and library path options specified on the <code>jdmpview</code> command line.  </p>
+<p><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Note:</strong> On AIX and Linux, some <code>jdmpview</code> commands need to locate the native libraries that are referenced by the core. For example, commands that relate to callsites. First, check the list of native libraries by running <code>jdmpview</code> on a core with the <code>info mod</code> parameter. If the libraries are not in the original locations, ensure that <code>jdmpview</code> can locate them by specifying the path mapping (<code>-J-Dcom.ibm.j9ddr.path.mapping=&lt;mappings&gt;</code>) and library path (<code>-J-Dcom.ibm.j9ddr.library.path=&lt;path&gt;</code>) options specified on the <code>jdmpview</code> command line.  </p>
 <p>On z/OS&reg;, you can copy the dump to an HFS file and supply that as input to <code>jdmpview</code>, or you can supply a fully qualified MVS&trade; data set name. For example:</p>
 <pre><code>&gt; jdmpview -core USER1.JVM.TDUMP.SSHD6.D070430.T092211
 DTFJView version 4.28.3, using DTFJ version 1.11.28004
@@ -4592,6 +4618,10 @@ The `sort` option allows the list of classes to be sorted by name (default), by 
 </code></pre>
 <dl>
 <dd>Displays a summary list of memory sections in the process address space, with start and end address, size, and properties. If an address parameter is specified, the results show details of only the memory section containing the address. If <code>-verbose</code> is specified, full details of the properties of each memory section are displayed. The <code>-sort</code> option allows the list of memory sections to be sorted by size or by start address (default).</dd>
+</dl>
+<h3 id="info-mod">info mod</h3>
+<dl>
+<dd>Displays a list of native library modules in the process address space, which includes file paths and other information about each module.</dd>
 </dl>
 <h3 id="info-heap">info heap</h3>
 <pre><code>    info heap [*|&lt;heap_name&gt;*]
