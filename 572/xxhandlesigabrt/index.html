@@ -36,7 +36,7 @@
         <meta name="description" content="Eclipse OpenJ9 documentation">
       
       
-        <link rel="canonical" href="https://www.eclipse.org/openj9/docs/xscmx/">
+        <link rel="canonical" href="https://www.eclipse.org/openj9/docs/xxhandlesigabrt/">
       
       
       
@@ -63,7 +63,7 @@
     
     
       
-        <title>-Xscmx -  </title>
+        <title>-XX:[+|-]handleSIGABRT -  </title>
       
     
     
@@ -117,7 +117,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="../#-xscmx" tabindex="1" class="md-skip">
+      <a href="../#-xx91-93handlesigabrt" tabindex="1" class="md-skip">
         
       </a>
     
@@ -1327,12 +1327,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-12-5" type="checkbox" id="nav-12-5" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-12-5" type="checkbox" id="nav-12-5">
     
     <label class="md-nav__link" for="nav-12-5">
       JVM -X options
@@ -2464,76 +2462,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        -Xscmx
-      </label>
-    
-    <a href="./" title="-Xscmx" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../xscmx/" title="-Xscmx" class="md-nav__link">
       -Xscmx
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">On this page ...</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#syntax" class="md-nav__link">
-    Syntax
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#explanation" class="md-nav__link">
-    Explanation
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#setting-a-soft-maximum-size" class="md-nav__link">
-    Setting a soft maximum size
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#see-also" class="md-nav__link">
-    See also
-  </a>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -2738,10 +2671,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           
           
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-12-6" type="checkbox" id="nav-12-6">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-12-6" type="checkbox" id="nav-12-6" checked>
     
     <label class="md-nav__link" for="nav-12-6">
       JVM -XX options
@@ -2913,11 +2848,56 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../xxhandlesigabrt/" title="-XX:[+|-]handleSIGABRT" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        -XX:[+|-]handleSIGABRT
+      </label>
+    
+    <a href="./" title="-XX:[+|-]handleSIGABRT" class="md-nav__link md-nav__link--active">
       -XX:[+|-]handleSIGABRT
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">On this page ...</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#syntax" class="md-nav__link">
+    Syntax
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#explanation" class="md-nav__link">
+    Explanation
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -3575,26 +3555,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     Explanation
   </a>
   
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#setting-a-soft-maximum-size" class="md-nav__link">
-    Setting a soft maximum size
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#see-also" class="md-nav__link">
-    See also
-  </a>
-  
 </li>
       
       
@@ -3614,12 +3574,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               
 <!-- this adds 'pencil' icon to H1 so that you can edit the page directly in GitHub
                 
-                  <a href="https://github.com/eclipse/openj9-docs/edit/master/docs/xscmx.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/eclipse/openj9-docs/edit/master/docs/xxhandlesigabrt.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
 -->
                 
                 <!--
-* Copyright (c) 2017, 2020 IBM Corp. and others
+* Copyright (c) 2020, 2020 IBM Corp. and others
 *
 * This program and the accompanying materials are made
 * available under the terms of the Eclipse Public License 2.0
@@ -3642,36 +3602,37 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 * Classpath-exception-2.0 OR LicenseRef-GPL-2.0 WITH Assembly-exception
 -->
 
-<h1 id="-xscmx">-Xscmx</h1>
-<p>For a new shared class cache, specifies either:</p>
-<ul>
-<li>the actual size of the cache, if the <code>-XX:SharedCacheHardLimit</code> option is not present</li>
-<li>the soft maximum size of the cache, if used with the <code>-XX:SharedCacheHardLimit</code> option
-(See <a href="../xxsharedcachehardlimit/"><code>-XX:SharedCacheHardLimit</code></a>)</li>
-</ul>
-<p>This option applies only if a cache is being created and no cache of the same name exists.</p>
-<p>When you run an application with the <a href="../xshareclasses/#verbose"><code>-Xshareclasses:verbose</code></a> option, the VM writes to the console the number of bytes that are not stored due to the current setting of the soft maximum size. You can also get this information by using the <code>MemoryMXBean.getSharedClassCacheSoftmxUnstoredBytes()</code> method in the <code>com.ibm.lang.management</code> API.</p>
-<p>You can increase the soft maximum size accordingly if you want to add the unstored data to the shared cache. However, the VM that provided the information no longer has the opportunity to store that data. Therefore, increasing the soft maximum size does not necessarily cause any more data to be stored in the shared cache by the current VM, but subsequent VMs can add data to the shared cache.</p>
+<h1 id="-xx91-93handlesigabrt">-XX:[+|-]HandleSIGABRT</h1>
+<p>This option affects the handling of the operating system signal <code>SIGABRT</code>. This signal represents abnormal termination, and it can either be generated by the <code>abort</code> function or the <code>kill</code> command.</p>
 <h2 id="syntax">Syntax</h2>
-<pre><code>    -Xscmx&lt;size&gt;
+<pre><code>    -XX:[+|-]HandleSIGABRT
 </code></pre>
-<p>See <a href="../x_jvm_commands/">Using -X command-line options</a> for more information about the <code>&lt;size&gt;</code> parameter.</p>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Effect</th>
+<th align="center">Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-XX:+HandleSIGABRT</code></td>
+<td>Enable</td>
+<td align="center"><i class="fa fa-check" aria-hidden="true"></i><span class="sr-only">yes</span></td>
+</tr>
+<tr>
+<td><code>-XX:-HandleSIGABRT</code></td>
+<td>Disable</td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
 <h2 id="explanation">Explanation</h2>
-<h3 id="setting-a-soft-maximum-size">Setting a soft maximum size</h3>
-<p>If you specify the <code>-Xscmx</code> option with the <a href="../xxsharedcachehardlimit/">-XX:SharedCacheHardLimit</a> option, the <code>-Xscmx</code> option sets the <em>soft maximum size</em> of a new shared class cache, and the <code>-XX:SharedCacheHardLimit</code> option sets the actual maximum size. The value of the <code>-Xscmx</code> option must therefore not exceed the value of <code>-XX:SharedCacheHardLimit</code>.</p>
-<p>When the soft maximum limit is reached, no more data can be added into the shared cache, unless there is reserved AOT or JIT data space. If such reserved space exists, AOT or JIT data can still be added into the reserved space. The reserved AOT and JIT data spaces are counted as used space within the soft maximum size, so the soft maximum size should not be less than the minimum reserved space for AOT and JIT data if you specify the <a href="../xscminaot/">-Xscminaot</a> or <a href="../xscminjitdata/">-Xscminjitdata</a> options.</p>
-<p>You can change the soft maximum size by using the <code>-Xshareclasses:adjustsoftmx=&lt;size&gt;</code> option or the <code>MemoryMXBean.setSharedClassCacheSoftmxBytes()</code> method in the <code>com.ibm.lang.management</code> API. By using this API, Java&trade; applications can dynamically monitor and adjust the cache soft maximum size as required. This function can be useful in virtualized or cloud environments, for example, where the shared cache size might change dynamically to meet business needs.</p>
-<p>For example, you might create a 64 MB shared cache and set a smaller value, such as 16 MB, for the <code>-Xscmx</code> option, to limit the data stored in the cache:</p>
-<pre><code>-XX:SharedCacheHardLimit=64m -Xscmx16m
-</code></pre>
-<p>You can then use the <code>com.ibm.lang.management</code> API from within a Java application to increase the soft maximum value during run time, as load increases. This change allows the application to use more shared cache space than you specified initially.</p>
-<p>You can increase the soft maximum size if it is currently less than the actual cache size. If you attempt to reduce the soft maximum size to a value that is less than the number of bytes already used in the cache, the number of used bytes is set as the new soft maximum size.</p>
-<p>For more information about cache sizes, see <a href="https://www.ibm.com/support/knowledgecenter/SSYKE2_8.0.0/com.ibm.java.vm.80.doc/docs/shrc_cache_size.html">Cache size limits</a>.</p>
-<h2 id="see-also">See also</h2>
-<ul>
-<li><a href="../xscdmx/"><code>-Xscdmx</code></a> (control the size of the class debug area)</li>
-</ul>
-<!-- ==== END OF TOPIC ==== xscmx.md ==== -->
+<p>When enabled, the VM handles the signal <code>SIGABRT</code> and generates the various dump files. </p>
+<p>When the option is disabled, the VM does not handle the signal <code>SIGABRT</code>. Generally, this signal is handled by the default operating system handler.</p>
+<p><code>-XX:+HandleSIGABRT</code> is not supported with <a href="../xrs/"><code>-Xrs</code></a>. An error is thrown if both options are enabled together. To resolve this error, one of the options should be disabled.</p>
+<!-- ==== END OF TOPIC ==== xxhandlesigxfsz.md ==== -->
                 
                   
                 
@@ -3714,7 +3675,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- Ignore all this to remove previous/next links in footer, but leave nav block else lose highlighting in LH navigation
                     <img alt="" src="../cr/rule.png"> [!-- Separator --]
                     
-                      <a href="xscminjitdata/" title="-Xscminjitdata" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+                      <a href="xxhandlesigxfsz/" title="-XX:[+|-]handleSIGXFSZ" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
                         <div class="md-flex__cell md-flex__cell--shrink">
                           <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
                         </div>
@@ -3723,19 +3684,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                             <span class="md-footer-nav__direction">
                               Previous
                             </span>
-                            -Xscminjitdata
+                            -XX:[+|-]handleSIGXFSZ
                           </span>
                         </div>
                       </a>
                     
                     
-                      <a href="xshareclasses/" title="-Xshareclasses" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+                      <a href="xxheapdumponoutofmemory/" title="-XX:[+|-]HeapDumpOnOutOfMemory" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
                         <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
                           <span class="md-flex__ellipsis">
                             <span class="md-footer-nav__direction">
                               Next
                             </span>
-                            -Xshareclasses
+                            -XX:[+|-]HeapDumpOnOutOfMemory
                           </span>
                         </div>
                         <div class="md-flex__cell md-flex__cell--shrink">

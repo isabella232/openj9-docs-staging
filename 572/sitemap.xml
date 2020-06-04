@@ -966,6 +966,11 @@
      <changefreq>daily</changefreq>
     </url>
     <url>
+     <loc>https://www.eclipse.org/openj9/docs/xxhandlesigabrt/</loc>
+     <lastmod>2020-06-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
      <loc>https://www.eclipse.org/openj9/docs/xxheapdumponoutofmemory/</loc>
      <lastmod>2020-06-04</lastmod>
      <changefreq>daily</changefreq>
