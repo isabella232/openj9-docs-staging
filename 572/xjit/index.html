@@ -1782,18 +1782,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
   <li class="md-nav__item">
-    <a href="../xifa/" title="-Xifa" class="md-nav__link">
-      -Xifa
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
     <a href="../xint/" title="-Xint" class="md-nav__link">
       -Xint
     </a>
@@ -3934,7 +3922,7 @@ However, <code>-Xjit:exclude={test/sample/MyClass.testMethod()*}</code> excludes
 Similarly, <code>-Xjit:exclude={*}</code> excludes <em>all</em> methods.</p>
 </dd>
 <dd>
-<p><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Note:</strong> <code>exclude</code> has the same effect regardless of whether it is specified on <a href="../xaot/"><code>-Xaot</code></a> or <code>-Xjit</code>.</p>
+<p><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Note:</strong> <code>exclude</code> has the same effect regardless of whether it is specified on <a href="../xaot/"><code>-Xaot</code></a> or <code>-Xjit</code>. In consequence, if you specify <code>-Xjit:exclude</code>, AOT compilation is also prevented and the methods specified are always interpreted.</p>
 </dd>
 </dl>
 <h3 id="limit"><code>limit</code></h3>
@@ -3942,14 +3930,14 @@ Similarly, <code>-Xjit:exclude={*}</code> excludes <em>all</em> methods.</p>
 </code></pre>
 <dl>
 <dd>Only the Java methods specified are included when code is compiled or loaded from the shared classes cache. <code>&lt;method_name&gt;</code> is a regular expression that determines the method or methods that are to be included (see <a href="#exclude"><code>-Xjit:exclude</code></a> for details).</dd>
-<dd><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Note:</strong> <code>limit</code> has the same effect regardless of whether it is specified on <a href="../xaot/"><code>-Xaot</code></a> or <code>-Xjit</code>.</dd>
+<dd><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Note:</strong> <code>limit</code> has the same effect regardless of whether it is specified on <a href="../xaot/"><code>-Xaot</code></a> or <code>-Xjit</code>. In consequence, if you specify <code>-Xjit:limit</code>, AOT compilation is also restricted to those methods specified; other methods are always interpreted.</dd>
 </dl>
 <h3 id="limitfile"><code>limitFile</code></h3>
 <pre><code>    -Xjit:limitFile=(&lt;vlog_filename&gt;, &lt;m&gt;, &lt;n&gt;)
 </code></pre>
 <dl>
 <dd>Compile only the methods that are listed on lines <code>&lt;m&gt;</code> to <code>&lt;n&gt;</code> in the specified limit file, where the limit file is a verbose log that you generated with the <code>-Xjit:verbose,vlog=&lt;vlog_filename&gt;</code> option. Methods that are not listed in the limit file and methods that are listed on lines outside the range are not compiled.</dd>
-<dd><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Note:</strong> <code>limitFile</code> has the same effect regardless of whether it is specified on <a href="../xaot/"><code>-Xaot</code></a> or <code>-Xjit</code>.</dd>
+<dd><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Note:</strong> <code>limitFile</code> has the same effect regardless of whether it is specified on <a href="../xaot/"><code>-Xaot</code></a> or <code>-Xjit</code>. In consequence, if you specify <code>-Xjit:limitFile</code>, AOT compilation is also restricted to those methods specified; other methods are always interpreted.</dd>
 </dl>
 <h3 id="optlevel"><code>optlevel</code></h3>
 <pre><code>    -Xjit:optlevel=[noOpt|cold|warm|hot|veryHot|scorching]
