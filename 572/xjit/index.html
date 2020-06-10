@@ -3893,7 +3893,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <pre><code>    -Xjit:count=&lt;n&gt;
 </code></pre>
 <dl>
-<dd>: Specifies the number of times, <code>&lt;n&gt;</code>, a method is called before it is compiled. For example, setting <code>count=0</code> forces the JIT compiler to compile everything on first execution, which is useful for problem determination.</dd>
+<dd>Specifies the number of times, <code>&lt;n&gt;</code>, a method is called before it is compiled. For example, setting <code>count=0</code> forces the JIT compiler to compile everything on first execution, which is useful for problem determination.</dd>
 </dl>
 <h3 id="disablermode64"><code>disableRMODE64</code></h3>
 <p><strong>(z/OS&reg; only)</strong></p>
@@ -3975,8 +3975,10 @@ Similarly, <code>-Xjit:exclude={*}</code> excludes <em>all</em> methods.</p>
 <dd>
 <p>Shows the methods that are inlined.</p>
 </dd>
-</dl>
+<dd>
 <p><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Note:</strong> Suboptions can be chained together by using a  <code>|</code> character. When used, you must enclose the full option name in single quotes (') to avoid the shell misinterpreting these characters as pipe commands. For example:</p>
+</dd>
+</dl>
 <pre><code>java '-Xjit:verbose={compileStart|compileEnd|inlining}' -version
 </code></pre>
 
