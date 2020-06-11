@@ -3765,7 +3765,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>In a VM without an AOT compiler or with the AOT compiler disabled, the JIT compiler selectively compiles frequently used methods into optimized native code. There is a time cost associated with compiling methods because the JIT compiler operates while the application is running. Because methods begin by being interpreted and most JIT compilations occur during startup, startup times can be increased.</p>
 <p>Startup performance can be improved by using the shared AOT code to provide native code without compiling. There is a small time cost to load the AOT code for a method from the shared data cache and bind it into a running program. The time cost is low compared to the time it takes the JIT compiler to compile that method.</p>
 <h2 id="default-behavior">Default behavior</h2>
-<p>The AOT compiler is enabled by default, but is not active unless <a href="../xshareclasses/">shared classes</a> are enabled. Using <code>-Xaot</code> on its own therefore has no effect. Use the <a href="../xshareclasses/">-Xshareclasses</a> option to enable shared classes.</p>
+<p>The AOT compiler is enabled by default, but is only active for classes found in the shared classes cache (see <a href="../shrc/">Class data sharing</a>). Class data sharing is enabled by default for bootstrap classes, but you can use the <a href="../xshareclasses/"><code>-Xshareclasses</code></a> option to modify the behavior of the shared classes cache.</p>
 <h2 id="syntax">Syntax</h2>
 <table>
 <thead>
@@ -3821,7 +3821,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </tr>
 <tr>
 <td><a href="#limitfile"><code>limitFile</code>    </a></td>
-<td>Compilesonly the methods listed in the specified limit file.</td>
+<td>Compiles only the methods listed in the specified limit file.</td>
 </tr>
 <tr>
 <td><a href="#loadexclude"><code>loadExclude</code>  </a></td>
@@ -3847,60 +3847,74 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <pre><code>    -Xaot:count=&lt;n&gt;
 </code></pre>
 <dl>
-<dd>Specifies the number of times, <code>&lt;n&gt;</code>, a method is called before it is compiled or loaded from an existing shared class cache. Setting <code>-Xaot:count=0</code> forces the AOT compiler to compile everything on first execution, which is useful for problem determination.</dd>
+<dd>Specifies the number of times, <code>&lt;n&gt;</code>, a method is called before it is compiled or loaded from an existing shared classes cache. Setting <code>-Xaot:count=0</code> forces the AOT compiler to compile everything on first execution, which is useful for problem determination.</dd>
 </dl>
 <h3 id="exclude"><code>exclude</code></h3>
 <pre><code>    -Xaot:exclude={&lt;method_name&gt;}
 </code></pre>
 <dl>
-<dd>Excludes a Java method when AOT code is compiled or loaded from the shared classes cache. Use this option if the method causes the program to fail.</dd>
-<dd><code>&lt;method_name&gt;</code> is a regular expression that determines the method or methods that are to be excluded. Specify as much of the full package, class and method as necessary. </dd>
-<dd>For example, <code>-Xaot:exclude={test/sample/MyClass.testMethod()V}</code> excludes the single method specified.  </dd>
-<dd>However, <code>-Xaot:exclude={test/sample/MyClass.testMethod()*}</code> excludes the method regardless of return type.  </dd>
-<dd>Similarly, <code>-Xaot:exclude={*}</code> excludes <em>all</em> methods.</dd>
-<dd><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Note:</strong> <code>exclude</code> has the same effect regardless of whether it's specified on <a href="../xjit/"><code>-Xjit</code></a> or <code>-Xaot</code>. In consequence, if you specify <code>-Xaot:exclude</code>, JIT compilation is also prevented and the methods specified are always interpreted.</dd>
+<dd>
+<p>Excludes a Java method when AOT code is compiled from the shared classes cache. Use this option if the method causes the program to fail.</p>
+<p><code>&lt;method_name&gt;</code> is a regular expression that determines the method or methods that are to be excluded. Specify as much of the full package, class and method as necessary. </p>
+<p>For example, <code>-Xaot:exclude={test/sample/MyClass.testMethod()V}</code> excludes the single method specified.<br />
+However, <code>-Xaot:exclude={test/sample/MyClass.testMethod()*}</code> excludes the method regardless of return type.<br />
+Similarly, <code>-Xaot:exclude={*}</code> excludes <em>all</em> methods.</p>
+<p><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Note:</strong> <code>exclude</code> has the same effect regardless of whether it's specified on <a href="../xjit/"><code>-Xjit</code></a> or <code>-Xaot</code>. In consequence, if you specify <code>-Xaot:exclude</code>, JIT compilation is also prevented and the methods specified are always interpreted.</p>
+</dd>
 </dl>
 <h3 id="limit"><code>limit</code></h3>
 <pre><code>    -Xaot:limit={&lt;method_name&gt;}
 </code></pre>
 <dl>
-<dd>Only the Java methods specified are included when AOT code is compiled from the shared classes cache. <code>&lt;method_name&gt;</code> is a regular expression that determines the method or methods that are to be included (see <a href="#exclude"><code>-Xaot:exclude</code></a> for details).</dd>
-<dd><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Note:</strong> <code>limit</code> has the same effect regardless of whether it's specified on <a href="../xjit/"><code>-Xjit</code></a> or <code>-Xaot</code>. In consequence, if you specify <code>-Xaot:limit</code>, JIT compilation is also restricted to those methods specified; other methods are always interpreted.</dd>
+<dd>
+<p>Only the Java methods specified are included when AOT code is compiled from the shared classes cache. <code>&lt;method_name&gt;</code> is a regular expression that determines the method or methods that are to be included (see <a href="#exclude"><code>-Xaot:exclude</code></a> for details).</p>
+<p><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Note:</strong> <code>limit</code> has the same effect regardless of whether it's specified on <a href="../xjit/"><code>-Xjit</code></a> or <code>-Xaot</code>. In consequence, if you specify <code>-Xaot:limit</code>, JIT compilation is also restricted to those methods specified; other methods are always interpreted.</p>
+</dd>
 </dl>
 <h3 id="limitfile"><code>limitFile</code></h3>
 <pre><code>    -Xaot:limitFile=(&lt;filename&gt;,&lt;m&gt;,&lt;n&gt;)
 </code></pre>
 <dl>
-<dd>Compiles or loads only the methods listed on lines <code>&lt;m&gt;</code> to, and including, <code>&lt;n&gt;</code> in the specified limit file, <code>&lt;filename&gt;</code>. Methods not listed in the limit file and methods listed on lines outside the range are not compiled or loaded.</dd>
-<dd><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Note:</strong> <code>limitFile</code> has the same effect regardless of whether it's specified on <a href="../xjit/"><code>-Xjit</code></a> or <code>-Xaot</code>. In consequence, if you specify <code>-Xaot:limitFile</code>, JIT compilation is also restricted to those methods specified; other methods are always interpreted.</dd>
+<dd>
+<p>Compiles or loads only the methods listed on lines <code>&lt;m&gt;</code> to, and including, <code>&lt;n&gt;</code> in the specified limit file, <code>&lt;filename&gt;</code>. Methods not listed in the limit file and methods listed on lines outside the range are not compiled or loaded.</p>
+<p><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Note:</strong> <code>limitFile</code> has the same effect regardless of whether it's specified on <a href="../xjit/"><code>-Xjit</code></a> or <code>-Xaot</code>. In consequence, if you specify <code>-Xaot:limitFile</code>, JIT compilation is also restricted to those methods specified; other methods are always interpreted.</p>
+</dd>
 </dl>
 <h3 id="loadexclude"><code>loadExclude</code></h3>
 <pre><code>    -Xaot:loadExclude={&lt;method_name&gt;}
 </code></pre>
 <dl>
-<dd>Excludes the specified Java methods when AOT code is loaded from the shared classes cache. In consequence, the compiler does a JIT compilation on those methods instead.</dd>
-<dd><code>&lt;method_name&gt;</code> is a regular expression that determines the method or methods that are to be excluded (see <a href="#exclude"><code>-Xaot:exclude</code></a> for details). This option does <em>not</em> prevent the method from being compiled.</dd>
-<dd><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Note:</strong> <code>loadExclude</code> can only be specified on <code>-Xaot</code>; it does not have an equivalent on <a href="../xjit/"><code>-Xjit</code></a>.</dd>
+<dd>
+<p>Excludes the specified Java methods when AOT code is loaded from the shared classes cache. In consequence, the compiler does a JIT compilation on those methods instead.</p>
+<p><code>&lt;method_name&gt;</code> is a regular expression that determines the method or methods that are to be excluded (see <a href="#exclude"><code>-Xaot:exclude</code></a> for details). This option does <em>not</em> prevent the method from being compiled.</p>
+<p><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Note:</strong> <code>loadExclude</code> can only be specified on <code>-Xaot</code>; it does not have an equivalent on <a href="../xjit/"><code>-Xjit</code></a>.</p>
+</dd>
 </dl>
 <h3 id="loadlimit"><code>loadLimit</code></h3>
 <pre><code>    -Xaot:loadLimit={&lt;method_name&gt;}
 </code></pre>
 <dl>
-<dd>Only the Java methods specified are included when AOT code is loaded from the shared classes cache. In consequence, the compiler does a JIT compilation on other methods instead.</dd>
-<dd><code>&lt;method_name&gt;</code> is a regular expression that determines the method or methods that are to be included (see <a href="#exclude"><code>-Xaot:exclude</code></a> for details).</dd>
-<dd><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Note:</strong> <code>loadLimit</code> can only be specified on <code>-Xaot</code>; it does not have an equivalent on <a href="../xjit/"><code>-Xjit</code></a>. This option filters what AOT code the compiler is allowed to load from the shared classes cache. </dd>
+<dd>
+<p>Only the Java methods specified are included when AOT code is loaded from the shared classes cache. In consequence, the compiler does a JIT compilation on other methods instead.</p>
+<p><code>&lt;method_name&gt;</code> is a regular expression that determines the method or methods that are to be included (see <a href="#exclude"><code>-Xaot:exclude</code></a> for details).</p>
+<p><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Note:</strong> <code>loadLimit</code> can only be specified on <code>-Xaot</code>; it does not have an equivalent on <a href="../xjit/"><code>-Xjit</code></a>. This option filters what AOT code the compiler is allowed to load from the shared classes cache. </p>
+</dd>
 </dl>
 <h3 id="loadlimitfile"><code>loadLimitFile</code></h3>
 <pre><code>    -Xaot:loadLimitFile=(&lt;filename&gt;,&lt;m&gt;,&lt;n&gt;)
 </code></pre>
 <dl>
-<dd>Loads only the methods listed on lines <code>&lt;m&gt;</code> to, and including, <code>&lt;n&gt;</code> in the specified limit file. In consequence, the compiler does a JIT compilation on other methods instead.</dd>
-<dd><code>&lt;filename&gt;</code>. Methods not listed in the limit file and methods listed on lines outside the range are not loaded.</dd>
-<dd><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Note:</strong> <code>loadLimitFile</code> can only be specified on <code>-Xaot</code>; it does not have an equivalent on <a href="../xjit/"><code>-Xjit</code></a>.</dd>
+<dd>
+<p>Loads only the methods listed on lines <code>&lt;m&gt;</code> to, and including, <code>&lt;n&gt;</code> in the specified limit file. In consequence, the compiler does a JIT compilation on other methods instead.</p>
+<p><code>&lt;filename&gt;</code>. Methods not listed in the limit file and methods listed on lines outside the range are not loaded.</p>
+<p><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Note:</strong> <code>loadLimitFile</code> can only be specified on <code>-Xaot</code>; it does not have an equivalent on <a href="../xjit/"><code>-Xjit</code></a>.</p>
+</dd>
 </dl>
 <h2 id="see-also">See also</h2>
 <ul>
-<li><a href="../xquickstart/">-Xquickstart</a></li>
+<li><a href="../shrc/">Class data sharing</a></li>
+<li><a href="../xquickstart/"><code>-Xquickstart</code></a></li>
+<li><a href="../xshareclasses/"><code>-Xshareclasses</code></a></li>
 <li><a href="../xjit/"><code>-Xjit</code></a></li>
 </ul>
 <!-- ==== END OF TOPIC ==== xaot.md ==== -->

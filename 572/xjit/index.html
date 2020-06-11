@@ -3976,12 +3976,11 @@ Similarly, <code>-Xjit:exclude={*}</code> excludes <em>all</em> methods.</p>
 <p>Shows the methods that are inlined.</p>
 </dd>
 <dd>
-<p><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Note:</strong> Suboptions can be chained together by using a  <code>|</code> character. When used, you must enclose the full option name in single quotes (') to avoid the shell misinterpreting these characters as pipe commands. For example:</p>
-</dd>
-</dl>
+<p><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Note:</strong> Suboptions can be chained together by using a pipe (<code>|</code>) symbol. When used, you must enclose the full option name in single quotation marks (<code>'</code>) to avoid the shell misinterpreting these characters as pipe commands. For example:</p>
 <pre><code>java '-Xjit:verbose={compileStart|compileEnd|inlining}' -version
 </code></pre>
-
+</dd>
+</dl>
 <h3 id="vlog"><code>vlog</code></h3>
 <pre><code>    -Xjit:vlog=&lt;vlog_filename&gt;
 </code></pre>
