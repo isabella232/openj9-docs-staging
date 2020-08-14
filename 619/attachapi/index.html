@@ -1256,6 +1256,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
   <li class="md-nav__item">
+    <a href="../dcomibmtoolsattachcommand_timeout/" title="-Dcom.ibm.tools.attach.command_timeout" class="md-nav__link">
+      -Dcom.ibm.tools.attach.command_timeout
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../dcomibmtoolsattachdirectory/" title="-Dcom.ibm.tools.attach.directory" class="md-nav__link">
       -Dcom.ibm.tools.attach.directory
     </a>
@@ -1294,6 +1306,42 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <li class="md-nav__item">
     <a href="../dcomibmtoolsattachid/" title="-Dcom.ibm.tools.attach.id" class="md-nav__link">
       -Dcom.ibm.tools.attach.id
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../dcomibmtoolsattachlogging/" title="-Dcom.ibm.tools.attach.logging" class="md-nav__link">
+      -Dcom.ibm.tools.attach.logging
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../dcomibmtoolsattachlogname/" title="-Dcom.ibm.tools.attach.log.name" class="md-nav__link">
+      -Dcom.ibm.tools.attach.log.name
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../dcomibmtoolsattachshutdown_timeout/" title="-Dcom.ibm.tools.attach.shutdown_timeout" class="md-nav__link">
+      -Dcom.ibm.tools.attach.shutdown_timeout
     </a>
   </li>
 
@@ -3838,14 +3886,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 -->
                 
                 <h1 id="java-attach-api">Java Attach API</h1>
-<p>By using the Attach API library, your application can connect to a running VM and load an agent into that VM to run tasks. The typical use case for this feature is to load an agent that can be used to monitor the application that's running in the target VM.</p>
-<p>For example, if you want to monitor a target application with the IBM Health Center tool, start the<br />
-target application with the Attach API enabled. The Health Center agent can then attach to the VM running the target application and start monitoring.</p>
+<p>With the Attach API, your application can connect to a running VM and load an agent into that VM to run tasks. The typical use case for this feature is to load an agent that can be used to monitor the application that's running in the target VM.</p>
+<p>For example, if you wanted to start monitoring an application that is already running with the Attach API enabled, you could use a tool such as the <a href="https://www.ibm.com/support/knowledgecenter/en/SS3KLZ/com.ibm.java.diagnostics.healthcenter.doc/topics/introduction.html">IBM Health Center</a>. In this case, a Health Center agent can start in its own VM and attach to the target VM where the application  is running to start recording and sending data to the Health Center client.</p>
 <p>The OpenJ9 implementation of the Attach API is equivalent to the reference implementation. However, you can only use the Attach API to connect to another OpenJ9 VM.</p>
 <h2 id="enabling-the-attach-api">Enabling the Attach API</h2>
 <p>When you run a Java application, VM support for the Attach API is enabled by default on all platforms except z/OS&reg;. For security reasons on  z/OS,
 processes that use the default z/OS OMVS segment cannot enable the Attach API.</p>
-<p>To enable or disable the feature, set the <code>-Dcom.ibm.tools.attach.enable=[yes|no]</code> system property on the command line.</p>
+<p>To enable or disable the feature, set the <code>-Dcom.ibm.tools.attach.enable=[yes|no]</code> system property command line option.</p>
 <h2 id="securing-the-attach-api">Securing the Attach API</h2>
 <p>Because the Attach API can be used to connect to a running application, you must control access to it to ensure that only
 authorized users or processes can use it.</p>
@@ -3900,7 +3947,7 @@ total 4
 <tbody>
 <tr>
 <td><a href="comibmtoolsattachdirectory.md"><code>-Dcom.ibm.tools.attach.directory=&lt;directory_name&gt;</code></a></td>
-<td>Specify a different directory in which to create <code>.com_ibm_tools_attach</code></td>
+<td>Specify a different common directory for Attach API working files.</td>
 </tr>
 <tr>
 <td><a href="../dcomibmtoolsattachdisplayname/"><code>-Dcom.ibm.tools.attach.displayName=&lt;my_display_name&gt;</code></a></td>
@@ -3913,6 +3960,22 @@ total 4
 <tr>
 <td><a href="../dcomibmtoolsattachtimeout/"><code>-Dcom.ibm.tools.attach.timeout=&lt;value_in_milliseconds&gt;</code></a></td>
 <td>Change the connection timeout</td>
+</tr>
+<tr>
+<td><a href="../dcomibmtoolsattachlogging/"><code>-Dcom.ibm.tools.attach.logging=&lt;yes|no&gt;</code></a></td>
+<td>Turn on tracing of attach API events</td>
+</tr>
+<tr>
+<td><a href="../dcomibmtoolsattachlogname/"><code>-Dcom.ibm.tools.attach.log.name=&lt;my_log_name&gt;</code></a></td>
+<td>Specify the path and prefix for the log files</td>
+</tr>
+<tr>
+<td><a href="../dcomibmtoolsattachshutdown_timeout/"><code>-Dcom.ibm.tools.attach.shutdown_timeout=&lt;value_in_milliseconds&gt;</code></a></td>
+<td>Specify the time before abandoning the attempt to end the wait loop</td>
+</tr>
+<tr>
+<td><a href="../dcomibmtoolsattachcommand_timeout/"><code>-Dcom.ibm.tools.attach.command_timeout=&lt;value_in_milliseconds&gt;</code></a></td>
+<td>Specify the socket timeout when attempting to connect to the target VM</td>
 </tr>
 </tbody>
 </table>
