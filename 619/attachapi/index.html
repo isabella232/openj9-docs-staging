@@ -3877,7 +3877,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>The OpenJ9 implementation of the Attach API is equivalent to the reference implementation. However, you can only use the Attach API to connect to another OpenJ9 VM.</p>
 <p>When you run a Java application, VM support for the Attach API is enabled by default on all platforms except z/OS&reg;. For security reasons on  z/OS,
 processes that use the default z/OS OMVS segment cannot enable the Attach API.</p>
-<p>To enable or disable the feature, set the <a href="comibmtoolsattachenable.md"><code>-Dcom.ibm.tools.attach.enable=[yes|no]</code></a> system property command line option.</p>
+<p>Use the <a href="comibmtoolsattachenable.md"><code>-Dcom.ibm.tools.attach.enable=[yes|no]</code></a> command line option to set the system property.</p>
 <h2 id="security">Security</h2>
 <p>Because the Attach API can be used to connect to a running application, you must control access to it to ensure that only
 authorized users or processes can use it.</p>
@@ -3946,6 +3946,14 @@ total 4
 <td><a href="../dcomibmtoolsattachtimeout/"><code>-Dcom.ibm.tools.attach.timeout=&lt;value_in_milliseconds&gt;</code></a></td>
 <td>Change the connection timeout</td>
 </tr>
+<tr>
+<td><a href="../dcomibmtoolsattachshutdown_timeout/"><code>-Dcom.ibm.tools.attach.shutdown_timeout=&lt;value_in_milliseconds&gt;</code></a></td>
+<td>Specify the timeout for ending the Attach API wait loop thread</td>
+</tr>
+<tr>
+<td><a href="../dcomibmtoolsattachcommand_timeout/"><code>-Dcom.ibm.tools.attach.command_timeout=&lt;value_in_milliseconds&gt;</code></a></td>
+<td>Specify the timeout for sending a command to the target VM after initial attachment</td>
+</tr>
 </tbody>
 </table>
 <p>To learn more about each property, click the link in the table.</p>
@@ -3981,14 +3989,6 @@ total 4
 <tr>
 <td><a href="../dcomibmtoolsattachlogname/"><code>-Dcom.ibm.tools.attach.log.name=&lt;my_log_name&gt;</code></a></td>
 <td>Specify the path and prefix for the log files</td>
-</tr>
-<tr>
-<td><a href="../dcomibmtoolsattachshutdown_timeout/"><code>-Dcom.ibm.tools.attach.shutdown_timeout=&lt;value_in_milliseconds&gt;</code></a></td>
-<td>Specify the time before abandoning the attempt to end the wait loop</td>
-</tr>
-<tr>
-<td><a href="../dcomibmtoolsattachcommand_timeout/"><code>-Dcom.ibm.tools.attach.command_timeout=&lt;value_in_milliseconds&gt;</code></a></td>
-<td>Specify the socket timeout when attempting to connect to the target VM</td>
 </tr>
 </tbody>
 </table>

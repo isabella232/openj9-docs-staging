@@ -3886,7 +3886,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 -->
 
 <h1 id="-dcomibmtoolsattachcommand_timeout">-Dcom.ibm.tools.attach.command_timeout</h1>
-<p>Specify a time that a process should wait for a socket when attempting to connect to a target virtual machine (VM) before ending.</p>
+<p>Specify the timeout for sending a command to the target VM after the initial attachment.</p>
 <h2 id="syntax">Syntax</h2>
 <pre><code>    -Dcom.ibm.tools.attach.command_timeout=&lt;ms&gt;
 </code></pre>
@@ -3902,11 +3902,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <tr>
 <td><code>&lt;ms&gt;</code></td>
 <td>[1 millisecond or greater]</td>
-<td>120000 milliseconds (120 seconds)</td>
+<td>0 milliseconds (no timeout)</td>
 </tr>
 </tbody>
 </table>
-<p>This command is useful when debugging Attach API problems.</p>
 <h2 id="see-also">See also</h2>
 <ul>
 <li><a href="../attachapi/">Java&trade; Attach API</a></li>

@@ -3886,9 +3886,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 -->
 
 <h1 id="-dcomibmtoolsattachshutdown_timeout">-Dcom.ibm.tools.attach.shutdown_timeout</h1>
-<p>Specify a time before abandoning the attempt to end the wait loop set by <code>-Dcom.ibm.tools.attach.timeout</code>.</p>
+<p>Specify a timeout before ending the Attach API wait loop thread.</p>
 <h2 id="syntax">Syntax</h2>
-<pre><code>    -Dcom.ibm.tools.attach.timeout=&lt;ms&gt;
+<pre><code>    -Dcom.ibm.tools.attach.shutdown_timeout=&lt;ms&gt;
 </code></pre>
 <table>
 <thead>
@@ -3902,11 +3902,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <tr>
 <td><code>&lt;ms&gt;</code></td>
 <td>[1 millisecond or greater]</td>
-<td>120000 milliseconds (120 seconds)</td>
+<td>10000 milliseconds (10 seconds)</td>
 </tr>
 </tbody>
 </table>
-<p>This command is useful when debugging Attach API problems.</p>
 <h2 id="see-also">See also</h2>
 <ul>
 <li><a href="../attachapi/">Java&trade; Attach API</a></li>
