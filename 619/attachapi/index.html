@@ -718,29 +718,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#enabling-the-attach-api" class="md-nav__link">
-    Enabling the Attach API
+  <a href="#security" class="md-nav__link">
+    Security
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#securing-the-attach-api" class="md-nav__link">
-    Securing the Attach API
+  <a href="#configuring" class="md-nav__link">
+    Configuring
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#configuring-the-attach-api" class="md-nav__link">
-    Configuring the Attach API
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#troubleshooting-the-attach-api" class="md-nav__link">
-    Troubleshooting the Attach API
+  <a href="#troubleshooting" class="md-nav__link">
+    Troubleshooting
   </a>
   
 </li>
@@ -3837,29 +3830,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#enabling-the-attach-api" class="md-nav__link">
-    Enabling the Attach API
+  <a href="#security" class="md-nav__link">
+    Security
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#securing-the-attach-api" class="md-nav__link">
-    Securing the Attach API
+  <a href="#configuring" class="md-nav__link">
+    Configuring
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#configuring-the-attach-api" class="md-nav__link">
-    Configuring the Attach API
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#troubleshooting-the-attach-api" class="md-nav__link">
-    Troubleshooting the Attach API
+  <a href="#troubleshooting" class="md-nav__link">
+    Troubleshooting
   </a>
   
 </li>
@@ -3889,19 +3875,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>With the Attach API, your application can connect to a running VM and load an agent into that VM to run tasks. The typical use case for this feature is to load an agent that can be used to monitor the application that's running in the target VM.</p>
 <p>For example, if you wanted to start monitoring an application that is already running with the Attach API enabled, you could use a tool such as the <a href="https://www.ibm.com/support/knowledgecenter/en/SS3KLZ/com.ibm.java.diagnostics.healthcenter.doc/topics/introduction.html">IBM Health Center</a>. In this case, a Health Center agent can start in its own VM and attach to the target VM where the application  is running to start recording and sending data to the Health Center client.</p>
 <p>The OpenJ9 implementation of the Attach API is equivalent to the reference implementation. However, you can only use the Attach API to connect to another OpenJ9 VM.</p>
-<h2 id="enabling-the-attach-api">Enabling the Attach API</h2>
 <p>When you run a Java application, VM support for the Attach API is enabled by default on all platforms except z/OS&reg;. For security reasons on  z/OS,
 processes that use the default z/OS OMVS segment cannot enable the Attach API.</p>
-<p>To enable or disable the feature, set the <code>-Dcom.ibm.tools.attach.enable=[yes|no]</code> system property command line option.</p>
-<h2 id="securing-the-attach-api">Securing the Attach API</h2>
+<p>To enable or disable the feature, set the <a href="comibmtoolsattachenable.md"><code>-Dcom.ibm.tools.attach.enable=[yes|no]</code></a> system property command line option.</p>
+<h2 id="security">Security</h2>
 <p>Because the Attach API can be used to connect to a running application, you must control access to it to ensure that only
 authorized users or processes can use it.</p>
 <p>On Windows systems, the Attach API uses the system temporary directory, which is typically <code>C:\Documents and Settings\&lt;userid&gt;\Local Settings\Temp</code>.
 The Attach API creates a common subdirectory, which is <code>.com_ibm_tools_attach</code> by default. Because files and directories in the system temporary directory are handled by Windows
 security, only the process owner can connect to their processes.</p>
 <p>On UNIX systems, the Attach API uses <code>/tmp</code> and creates a common subdirectory, which is <code>.com_ibm_tools_attach</code> by default.
-Security is handled by POSIX file permissions. The Attach API directory must be owned by <code>root</code> user and must have read, write, and execute file permissioms for
-<code>user</code>, <code>group</code>, and <code>other</code> (drwxrwxrwx). The sticky bit must be set so that only the owner and <code>root</code> can delete or rename files or directories within it.</p>
+Security is handled by POSIX file permissions. The Attach API directory must be owned by <code>root</code> user and must have read, write, and execute file permissions for
+<code>user</code>, <code>group</code>, and <code>other</code> (<code>drwxrwxrwx</code>). The sticky bit must be set so that only the owner and <code>root</code> can delete or rename files or directories within it.</p>
 <pre><code>~/tmp $ ls -al
 total 0
 drwxr-xr-x   3 user_a staff    96  6 Aug 17:11 .
@@ -3930,12 +3915,12 @@ total 4
 -rwxr-xr-x  1 user_b  staff  0  6 Aug 17:21 file_c
 </code></pre>
 
-<p><strong>Notes on z/OS:</strong></p>
+<p><strong>Notes for z/OS:</strong></p>
 <ul>
 <li>z/OS systems must also set POSIX permissions on files and cannot rely on RACF&reg; or system level security to protect applications.</li>
 <li>To avoid z/OS console messages reporting security violations in <code>/tmp</code>, add a security exception or specify a different common subdirectory by setting the <code>com.ibm.tools.attach.directory</code> system property.</li>
 </ul>
-<h2 id="configuring-the-attach-api">Configuring the Attach API</h2>
+<h2 id="configuring">Configuring</h2>
 <p>A number of system properties are available to configure the Attach API when you start a Java application, as shown in the following table:</p>
 <table>
 <thead>
@@ -3961,6 +3946,34 @@ total 4
 <td><a href="../dcomibmtoolsattachtimeout/"><code>-Dcom.ibm.tools.attach.timeout=&lt;value_in_milliseconds&gt;</code></a></td>
 <td>Change the connection timeout</td>
 </tr>
+</tbody>
+</table>
+<p>To learn more about each property, click the link in the table.</p>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<p>Problems with the Attach API generate one of the following exceptions:</p>
+<ul>
+<li><code>com.sun.tools.attach.AgentLoadException</code></li>
+<li><code>com.sun.tools.attach.AgentInitializationException</code></li>
+<li><code>com.sun.tools.attach.AgentNotSupportedException</code></li>
+<li><code>com.sun.tools.attach.AttachOperationFailedException</code></li>
+<li><code>java.io.IOException</code></li>
+</ul>
+<p>Exceptions from agents on the target VM go to <code>stderr</code> or <code>stdout</code> for the target VM. These exceptions are not reported in the output of the attaching VM.</p>
+<p>The following problems are common:</p>
+<ul>
+<li>On Unix systems, the file permissions are incorrectly set. Resolve these issues by reading and complying with <a href="#securing-the-attach-api">Securing the Attach API</a>.</li>
+<li>The common directory is deleted, the contents of the common directory are deleted, or permissions of the common directory or subdirectories are changed.</li>
+<li>The system temporary directory is full or inaccessible and the Attach API cannot initialize. Try specifying a different directory in which to create the common subdirectory by using the <code>-Dcom.ibm.tools.attach.directory</code> system property.</li>
+</ul>
+<p>If you have checked for these potential issues but you are still experiencing problems, a number of command line system properties are available to help narrow down the cause. These options are shown in the following table:</p>
+<table>
+<thead>
+<tr>
+<th>System property</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
 <tr>
 <td><a href="../dcomibmtoolsattachlogging/"><code>-Dcom.ibm.tools.attach.logging=&lt;yes|no&gt;</code></a></td>
 <td>Turn on tracing of attach API events</td>
@@ -3980,22 +3993,6 @@ total 4
 </tbody>
 </table>
 <p>To learn more about each property, click the link in the table.</p>
-<h2 id="troubleshooting-the-attach-api">Troubleshooting the Attach API</h2>
-<p>Problems with the Attach API generate one of the following exceptions:</p>
-<ul>
-<li><code>com.sun.tools.attach.AgentLoadException</code></li>
-<li><code>com.sun.tools.attach.AgentInitializationException</code></li>
-<li><code>com.sun.tools.attach.AgentNotSupportedException</code></li>
-<li><code>com.sun.tools.attach.AttachOperationFailedException</code></li>
-<li><code>java.io.IOException</code></li>
-</ul>
-<p>Exceptions from agents on the target VM go to <code>stderr</code> or <code>stdout</code> for the target VM. These exceptions are not reported in the output of the attaching VM.</p>
-<p>The following problems are common:</p>
-<ul>
-<li>On Unix systems, the file permissions are incorrectly set. Resolve these issues by reading and complying with <a href="#securing-the-attach-api">Securing the Attach API</a>.</li>
-<li>The common directory is deleted, the contents of the common directory are deleted, or permissions of the common directory or subdirectories are changed.</li>
-<li>The system temporary directory is full or inaccessible and the Attach API cannot initialize. Try specifying a different directory in which to create the common subdirectory by using the <code>-Dcom.ibm.tools.attach.directory</code> system property.</li>
-</ul>
                 
                   
                 
