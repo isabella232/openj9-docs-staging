@@ -4270,21 +4270,25 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <ul>
 <li>
 <p>Testing during development</p>
-</li>
+<ul>
 <li>
 <p>GC performance: Use <code>nogc</code> as a baseline when testing the performance of other GC policies, including the provision of a low-latency baseline.</p>
 </li>
 <li>
 <p>Application memory: Use <code>nogc</code> to test your settings for allocated memory. If you use <code>-Xmx</code> to set the heap size that should not be exceeded, your application will crash with a heap dump if it tries to exceed your memory limit.</p>
 </li>
+</ul>
+</li>
 <li>
 <p>Running applications with minimal or no GC requirements</p>
-</li>
+<ul>
 <li>
 <p>You might use <code>nogc</code> when an application is so short-lived that allocated memory is never exhausted and running a full GC cycle is therefore a waste of resources.</p>
 </li>
 <li>
 <p>Similarly, when memory application is well understood or where there is rarely memory to be reclaimed, you might prefer to avoid unnecessary GC cycles and rely on a failover mechanism to occasionally restart the VM.</p>
+</li>
+</ul>
 </li>
 </ul>
 <h2 id="troubleshooting">Troubleshooting</h2>
