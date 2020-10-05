@@ -3924,9 +3924,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <dl>
 <dd><i class="fa fa-exclamation-triangle"></i> <strong>Restriction:</strong> You should run <code>jextract</code> on the same system that produced the system dump in order to collect the correct executables and libraries referenced in the system dump. You should also run <code>jextract</code> using the same VM level, to avoid any problems. From Eclipse OpenJ9 V0.23.0, the utility checks that the build ID of the SDK that created the dump file matches the <code>jextract</code> build ID. Where these IDs do not match, the following exception is thrown:</dd>
 </dl>
-<pre><code>J9RAS.buildID is incorrect (found XXX, expecting YYY). This version of jextract is incompatible with this dump.
-</code></pre>
-
+<p><code>J9RAS.buildID is incorrect (found XXX, expecting YYY). This version of jextract is incompatible with this dump.</code></p>
 <p>To continue, despite the mismatch, use the <code>-r</code> option.</p>
 <h2 id="see-also">See also</h2>
 <ul>
