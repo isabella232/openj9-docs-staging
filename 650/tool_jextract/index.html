@@ -3934,12 +3934,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li><code>&lt;zip_file&gt;</code> is the name you want to give to the processed file. If you do not specify a name, output is written to <code>&lt;core file name&gt;.zip</code> by default. The output is written to the same directory as the core file.</li>
 </ul>
 <dl>
-<dd>
-<p><i class="fa fa-exclamation-triangle"></i> <strong>Restriction:</strong> You should run <code>jextract</code> on the same system that produced the system dump in order to collect the correct executables and libraries referenced in the system dump. You should also run <code>jextract</code> using the same VM level, to avoid any problems. From Eclipse OpenJ9 V0.24.0, the utility always checks that the build ID of the SDK that created the dump file matches the <code>jextract</code> build ID. Where these IDs do not match, the following exception is thrown:</p>
+<dd><i class="fa fa-exclamation-triangle"></i> <strong>Restriction:</strong> You should run <code>jextract</code> on the same system that produced the system dump in order to collect the correct executables and libraries referenced in the system dump. You should also run <code>jextract</code> using the same VM level, to avoid any problems. From Eclipse OpenJ9 V0.24.0, the utility always checks that the build ID of the SDK that created the dump file matches the <code>jextract</code> build ID. Where these IDs do not match, the following exception is thrown:</dd>
+</dl>
 <p><code>J9RAS.buildID is incorrect (found XXX, expecting YYY). This version of jextract is incompatible with this dump (use '-r' option to relax this check).</code></p>
 <p>To continue, despite the mismatch, use the <code>-r</code> option.</p>
-</dd>
-</dl>
 <h2 id="see-also">See also</h2>
 <ul>
 <li><a href="../tool_jdmpview/">Dump viewer (<code>jdmpview</code>)</a></li>
