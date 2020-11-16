@@ -36,7 +36,7 @@
         <meta name="description" content="Eclipse OpenJ9 documentation">
       
       
-        <link rel="canonical" href="https://www.eclipse.org/openj9/docs/gc_vgclog_intro/">
+        <link rel="canonical" href="https://www.eclipse.org/openj9/docs/vgclog/">
       
       
       
@@ -63,7 +63,7 @@
     
     
       
-        <title>Gc vgclog intro -  </title>
+        <title>Verbose garbage collection logs -  </title>
       
     
     
@@ -583,10 +583,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6" checked>
     
     <label class="md-nav__link" for="nav-6">
       Memory management
@@ -619,6 +621,76 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <a href="../gc/" title="Garbage collection" class="md-nav__link">
       Garbage collection
     </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Verbose garbage collection logs
+      </label>
+    
+    <a href="./" title="Verbose garbage collection logs" class="md-nav__link md-nav__link--active">
+      Verbose garbage collection logs
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">On this page ...</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-generate-a-verbose-garbage-collection-log" class="md-nav__link">
+    How to generate a verbose garbage collection log
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vgc-log-contents" class="md-nav__link">
+    Vgc log contents
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#an-example-of-an-stw-cycle" class="md-nav__link">
+    An example of an STW cycle
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -3859,7 +3931,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               
 <!-- this adds 'pencil' icon to H1 so that you can edit the page directly in GitHub
                 
-                  <a href="https://github.com/eclipse/openj9/edit/master/docs/gc_vgclog_intro.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/eclipse/openj9/edit/master/docs/vgclog.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
 -->
                 
@@ -3933,7 +4005,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </ul>
 <p>The vgc logs are event-based, recording each STW event as it happens. Operations that are running concurrently with application threads are not logged. However, concurrent operations run as part of a concurrent cycle, and these concurrent cycles begin and finish with STW events. So you can locate and analyze aspects of the concurrent cycles in the vgc logs that run concurrent events. (For some garbage collectors, the concurrent cycle also includes intermediate STW events).  </p>
 <p>The highest level stanzas in the vgc log represent gc cycles and begin with xml tags that define the kickoff event and reason. Except for some of the more complex gc algorithms (such as the global marking phase gc of the balanced policy), a gc cycle, when complete, generally results in reclaimed memory for reuse. Each cycle consists of 1 or more gc increments and gc operations.  </p>
-<p>Events that make up a garbage collector cycle are listed in the stanza in a linear fashion, but are ‘nested’ by a start and end tag that identify the start and end of an event. Details of the event are recorded in the XML attributes associated with the tag and also within tags that are nested within the gc event's start and end tags.</p>
+<p>Events that make up a garbage collector cycle are listed in the stanza in a linear fashion, but are ‘nested’ by a start and end tag that identify the start rather thanand end of an event. Details of the event are recorded in the XML attributes associated with the tag and also within tags that are nested within the gc event's start and end tags.</p>
 <p>The following table shows the tagging that is used for the nested gc processes: </p>
 <table>
 <thead>
@@ -3961,7 +4033,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </tr>
 </tbody>
 </table>
-<p><strong>Note:</strong> Gc operations are the smallest fragment in a vgc log. All details of a gc operation are logged by using a single tag rather than a start and end tags.  </p>
+<p><strong>Note:</strong> Gc operations are the smallest fragment in a vgc log. All details of a gc operation are logged by using a single tag rather than start and end tags.  </p>
 <h3 id="an-example-of-an-stw-cycle">An example of an STW cycle</h3>
 <p>An example output from the vgc log for a simple STW cycle for gencon is displayed in fig 1. </p>
 <pre><code>&lt;exclusive-start id=&quot;2&quot; timestamp=&quot;2020-10-18T13:27:09.603&quot; intervalms=&quot;1913.853&quot;&gt; 

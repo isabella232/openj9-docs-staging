@@ -121,6 +121,11 @@
      <changefreq>daily</changefreq>
     </url>
     <url>
+     <loc>https://www.eclipse.org/openj9/docs/vgclog/</loc>
+     <lastmod>2020-11-16</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
      <loc>https://www.eclipse.org/openj9/docs/jit/</loc>
      <lastmod>2020-11-16</lastmod>
      <changefreq>daily</changefreq>
