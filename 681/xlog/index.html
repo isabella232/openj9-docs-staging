@@ -2070,15 +2070,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#syntax" class="md-nav__link">
-    Syntax
+  <a href="#compatibility-processing" class="md-nav__link">
+    Compatibility processing
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#explanation" class="md-nav__link">
-    Explanation
+  <a href="#legacy-processing" class="md-nav__link">
+    Legacy processing
   </a>
   
 </li>
@@ -3889,15 +3889,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#syntax" class="md-nav__link">
-    Syntax
+  <a href="#compatibility-processing" class="md-nav__link">
+    Compatibility processing
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#explanation" class="md-nav__link">
-    Explanation
+  <a href="#legacy-processing" class="md-nav__link">
+    Legacy processing
   </a>
   
 </li>
@@ -3948,16 +3948,28 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 -->
 
 <h1 id="-xlog">-Xlog</h1>
-<p>To control logging to the operating system message log, use <a href="../xsyslog/"><code>-Xsyslog</code></a>.
-- When <a href="../xxlegacyxlogoption/"><code>-XX:-LegacyXlogOption</code></a> is set, which is the default, the <code>-Xlog</code> option is processed for compatibility as described in the explanation.
-- When <code>-XX:+LegacyXlogOption</code> is set, <code>-Xlog</code> is equivalent to <code>-Xsyslog</code>.</p>
-<h2 id="syntax">Syntax</h2>
-<pre><code>    -Xlog:gc[:stderr|:file=&lt;filename&gt;]
-</code></pre>
-<h2 id="explanation">Explanation</h2>
-<p><code>-Xlog:gc</code> or <code>-Xlog:gc:stderr</code> is equivalent to <a href="../xverbosegclog/"><code>-Xverbosegclog</code></a>. <code>-Xlog:gc:file=&lt;filename&gt;</code> is equivalent to <code>-Xverbosegclog:&lt;filename&gt;</code>. The tokens <code>%p</code> and <code>%t</code> are recognized in the <code>&lt;filename&gt;</code> for compatibility. <code>%p</code> is replaced with the process ID and is equivalent to the <a href="../xdump/#dump-agent-tokens">dump agent token <code>%pid</code></a>. <code>%t</code> is replaced with the dump agent tokens <code>%Y-%m-%d_%H-%M-%S</code>.</p>
-<p>Other forms of <code>-Xlog</code> which should enable GC logging are also recognized, such as <code>-Xlog</code> or <code>-Xlog:all</code>, but since these options are intended to enable other forms of logging which are not supported, a warning is output <code>JVMJ9VM007W Command-line option unrecognised: &lt;option&gt;</code> in addition to enabling verbose GC logging . Similarly <code>-Xlog:gc:stdout</code> enables <code>-Xverbosegclog</code> but also outputs the warning. The <code>-Xverbosegclog</code> output goes to <code>stderr</code>, logging to <code>stdout</code> is not supported.</p>
-<!-- ==== END OF TOPIC ==== xsyslog.md ==== -->
+<p>To control logging to the operating system message log, use <a href="../xsyslog/"><code>-Xsyslog</code></a>, which supersedes the legacy <code>-Xlog</code> option.</p>
+<p>To control the behavior of the <code>-Xlog</code> option, use <a href="../xxlegacyxlogoption/"><code>-XX:[+|-]LegacyXlogOption</code></a>.</p>
+<ul>
+<li>When <code>-XX:-LegacyXlogOption</code> is set the <code>-Xlog</code> option is processed for compatibility as described in <a href="#compatibility-processing">Compatibility processing</a>.</li>
+<li>When <code>-XX:+LegacyXlogOption</code> is set, the <code>-Xlog</code> option can be used interchangeably with the <code>-Xsyslog</code> option. See <a href="#legacy-processing">Legacy processing</a>.</li>
+</ul>
+<h2 id="compatibility-processing">Compatibility processing</h2>
+<p>Any garbage collection options passed to the <code>-Xlog</code> option are mapped to the equivalent OpenJ9 verbose GC command line options as described in the following list:</p>
+<ul>
+<li><code>-Xlog:gc</code> or <code>-Xlog:gc:stderr</code> is equivalent to <a href="../xverbosegclog/"><code>-Xverbosegclog</code></a></li>
+<li><code>-Xlog:gc:file=&lt;filename&gt;</code> is equivalent to <code>-Xverbosegclog:&lt;filename&gt;</code>, where <code>&lt;filename&gt;</code> can contain the following tokens:</li>
+<li><code>%p</code> is replaced with the process ID (equivalent to <a href="../xdump/#dump-agent-tokens">dump agent token <code>%pid</code></a>)</li>
+<li><code>%t</code> is replaced with the dump agent tokens <code>%Y-%m-%d_%H-%M-%S</code>.</li>
+</ul>
+<p>Other forms of <code>-Xlog</code> that should enable GC logging are also recognized, such as <code>-Xlog</code> or <code>-Xlog:all</code>. However, because these options are intended to enable other forms of logging that are not supported by the OpenJ9 VM, the following warning is printed in addition to enabling verbose GC logging:</p>
+<p>```
+JVMJ9VM007W Command-line option unrecognised: <option>
+````</p>
+<p>Similarly <code>-Xlog:gc:stdout</code> enables <code>-Xverbosegclog</code> but also outputs this warning message. The <code>-Xverbosegclog</code> output goes to <code>stderr</code> because logging to <code>stdout</code> is not supported.</p>
+<h2 id="legacy-processing">Legacy processing</h2>
+<p>For a description of the options available with the legacy <code>-Xlog</code> option, see the <a href="syslog.md"><code>-Xsyslog</code></a>. If the <a href="../xxlegacyxlogoption/"><code>-XX:+LegacyXlogOption</code></a> is set, you can use the <code>-Xlog</code> option interchangeably with the <code>-Xsyslog</code> option. For example, <code>-Xlog:info</code> turns on logging for all OpenJ9 VM informational messages.</p>
+<!-- ==== END OF TOPIC ==== xlog.md ==== -->
                 
                   
                 
