@@ -4025,7 +4025,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>stanzas that contain information about the different garbage collection cycles run, including the GC increments and GC operations that made up the GC cycle. </p>
 </li>
 </ul>
-<p>The verbose GC logs are event-based, recording each <em>stop-the-world</em> event as it happens. Operations that are running concurrently with application threads are not logged. However, concurrent operations run as part of a concurrent cycle, and these concurrent cycles begin and finish with <em>stop-the-world</em> events. So you can locate and analyze aspects of the concurrent cycles in the verbose GC logs that run concurrent events. (For some garbage collectors, the concurrent cycle also includes intermediate <em>stop-the-world</em> events).  </p>
+<p>The verbose GC logs are event-based, recording each <em>stop-the-world</em> event as it happens. While <em>stop-the-world</em> cycles are fully logged, some aspects of concurrent cycles are also logged, even though operations that are running concurrently with application threads are not logged. Concurrent operations run as part of a concurrent cycle, and these concurrent cycles begin and finish with <em>stop-the-world</em> events - events which are logged. (For some garbage collectors, the concurrent cycle also includes intermediate <em>stop-the-world</em> events). In addition, for some types of concurrent collections, verbose GC logs also include information about when certain targets have been reached. </p>
 <p>The highest level stanzas in the verbose GC log represent GC cycles and begin with xml tags that define the kickoff event and reason. Except for some of the more complex GC algorithms (such as the global marking phase GC of the balanced policy), a GC cycle, when complete, generally results in reclaimed memory for reuse. Each cycle consists of 1 or more GC increments and GC operations.  </p>
 <p>Events that make up a garbage collector cycle are listed in the stanza in a linear fashion, but are ‘nested’ by a start and end tag that identify the start and end of an event. Details of the event are recorded in the XML attributes associated with the tag and also within tags that are nested within the GC event's start and end tags.</p>
 <p>The following table shows the tagging that is used for the nested GC processes: </p>
@@ -4165,7 +4165,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p><strong><code>&lt;exclusive-start&gt;</code></strong> The <em>stop-the-world</em> cycle stanza begins with a triggering event, represented for <em>stop-the-world</em> cycles with a <exclusive-start> tag. The triggering event for the other type of GC cycle, a concurrent cycle, is recorded by the <code>&lt;concurrent-kickoff&gt;</code> tag.</p>
 </li>
 <li>
-<p><strong><code>&lt;af-start&gt;</code></strong> The reason for the triggering of this GC cycle is recorded by the <code>&lt;af-start&gt;</code> tag, indicating an allocation failure.  </p>
+<p><strong><code>&lt;af-start&gt;</code></strong> The reason for the triggering of this GC cycle is recorded by theso you can <code>&lt;af-start&gt;</code> tag, indicating an allocation failure.  </p>
 </li>
 <li>
 <p><strong><code>&lt;cycle-start&gt;</code></strong> The beginning of the GC cycle itself is recorded by the <code>&lt;cycle-start&gt;</code> tag and contains the XML attribute <code>type=scavenge</code> to describe the GC involved in this GC cycle.  </p>
