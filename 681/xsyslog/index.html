@@ -4073,9 +4073,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <h1 id="-xsyslog">-Xsyslog</h1>
 <p>Enables operating system message logging.</p>
-<p><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Notes:</strong>
-- Changes made to message logging using the <code>-Xsyslog</code> option do not affect messages written to the standard error stream (<code>stderr</code>).
-- This option supersedes the OpenJ9 <code>-Xlog</code> option.</p>
+<p><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Notes:</strong></p>
+<ul>
+<li>Changes made to message logging using the <code>-Xsyslog</code> option do not affect messages written to the standard error stream (<code>stderr</code>).</li>
+<li>This option supersedes the OpenJ9 <a href="../xlog/"><code>-Xlog</code></a> option.</li>
+</ul>
 <h2 id="syntax">Syntax</h2>
 <pre><code>    -Xsyslog:&lt;parameter&gt;{,&lt;parameter&gt;}
 </code></pre>
