@@ -4158,7 +4158,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>HotSpot uses <code>-Xgc</code> to both select policies and configure them; OpenJ9 uses <code>-Xgcpolicy</code> to select policies, reserving <code>-Xgc</code> for configuration.</p>
 </li>
 <li>
-<p>To avoid confusion with the HotSpot <code>-Xlog</code> option, the OpenJ9 <code>-Xlog</code> option is superseded by the <a href="../xsyslog/"><code>-Xsyslog</code></a> option.</p>
+<p>Prior to the OpenJ9 0.24.0 release, OpenJ9 message logging was controlled with the <code>-Xlog</code> option. To avoid confusion with the more recent HotSpot <code>-Xlog</code> option, the OpenJ9 <code>-Xlog</code> option is superseded by the <a href="../xsyslog/"><code>-Xsyslog</code></a> option.</p>
 </li>
 <li>
 <p>In HotSpot, NUMA awareness is turned off by default and is turned on by using the <code>-XX:+UseNUMA</code> option. Conversely, the OpenJ9 VM automatically enables NUMA awareness and uses <code>-Xnuma:none</code> to turn it <em>off</em>.</p>

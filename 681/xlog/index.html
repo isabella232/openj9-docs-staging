@@ -3958,7 +3958,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>Any garbage collection (GC) options passed to the <code>-Xlog</code> option are mapped to the equivalent OpenJ9 verbose GC command line options as described in the following list:</p>
 <ul>
 <li><code>-Xlog:gc</code> or <code>-Xlog:gc:stderr</code> is equivalent to <a href="../xverbosegclog/"><code>-Xverbosegclog</code></a></li>
-<li><code>-Xlog:gc:file=&lt;filename&gt;</code> is equivalent to <code>-Xverbosegclog:&lt;filename&gt;</code>, where <code>&lt;filename&gt;</code> can contain the following tokens:<ul>
+<li><code>-Xlog:gc:file=&lt;filename&gt;</code> is equivalent to <code>-Xverbosegclog:&lt;updated_filename&gt;</code>, where <code>&lt;filename&gt;</code> can contain the following tokens:<ul>
 <li><code>%p</code> is replaced with the process ID (equivalent to <a href="../xdump/#dump-agent-tokens">dump agent token <code>%pid</code></a>)</li>
 <li><code>%t</code> is replaced with the dump agent tokens <code>%Y-%m-%d_%H-%M-%S</code>.</li>
 </ul>
