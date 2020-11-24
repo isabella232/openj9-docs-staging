@@ -4091,17 +4091,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>Troubleshooting GC operations and policies. For example, analyzing long pauses, or determining how free memory is divided in the heap before and after a GC cycle. </p>
 </li>
 </ul>
-<p>Verbose GC logs, when enabled, begin capturing information as soon as garbage collection is initialized. By default, the information is printed to STDERR. The information can also be <a href="dump_gcdump.html/#how-to-generate-a-verbonse-garbage-collection-log">printed to a file</a>.</p>
+<p>Verbose GC logs, when enabled, begin capturing information as soon as garbage collection is initialized. By default, the information is printed to STDERR. The information can also be <a href="./#how-to-generate-a-verbonse-garbage-collection-log">printed to a file</a>.</p>
 <p>To help you visualize and analyze the garbage collection, you can feed verbose GC log files into various diagnostic tools and interfaces. Examples include tools such as the <a href="https://marketplace.eclipse.org/content/ibm-monitoring-and-diagnostic-tools-garbage-collection-and-memory-visualizer-gcmv">Garbage Collection and memory visualizer extension for Eclipse</a>, and online services such as <a href="https://gceasy.io">GCEasy</a>. </p>
 <p><strong>Note:</strong> You can run one or more GC traces by using the (<a href="../xtgc/">'-XTgc' option</a>) to get more detailed information to help diagnose GC problems or perform finer tuning.</p>
 <h2 id="how-to-generate-a-verbose-garbage-collection-log">How to generate a verbose garbage collection log</h2>
-<p>You can enable verbose GC logs by specifying the <code>-verbose:gc</code> standard option when you start your application. For more information, see <a href="cmdline_general">standard command-line options</a>.</p>
+<p>You can enable verbose GC logs by specifying the <code>-verbose:gc</code> standard option when you start your application. For more information, see <a href="../cmdline_general/">standard command-line options</a>.</p>
 <p>The output of <code>-verbose:gc</code> is printed to STDERR by default. To print the log output to a file, append the <code>-Xverbosegclog</code> option. You can print the verbose GC log file to a succession of files, where each file logs a specified number of GC cycles, by using additional parameters of <code>-Xverbosegclog</code> option. For more information, see the command-line option <a href="../xverbosegclog/">-Xverbosegclog</a>.</p>
 <h2 id="verbose-gc-log-contents">Verbose GC log contents</h2>
 <p>The Verbose garbage collection logs are printed in XML format and consist of the following sections:  </p>
 <ul>
 <li>
-<p>a summary of your GC configuration, which is captured in the stanza beginning with the <a href="dump_gcdump.html#garbage-collection-configuration"><code>&lt;INITIATIZED&gt;</code> tag</a> </p>
+<p>a summary of your GC configuration, which is captured in the stanza beginning with the <a href="./#xml-tags-an-attributes"><code>&lt;INITIATIZED&gt;</code> tag</a> </p>
 </li>
 <li>
 <p>stanzas that contain information about the different garbage collection cycles run, including the GC increments and GC operations that made up the GC cycle. </p>
@@ -4270,7 +4270,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <h2 id="using-the-verbose-gc-log-to-troubleshoot">Using the verbose GC log to troubleshoot</h2>
 <h3 id="stop-the-world-cycles-and-concurrent-cycles"><em>Stop-the-world</em> cycles and concurrent cycles</h3>
-<p>Garbage collectors can be considered to implement two types of gc cycle - <em>stop-the-world</em> cycles and concurrent cycles. The first step in reading the verbose GC log is to understand how these different types of cycle are recorded. </p>
+<p>Garbage collectors run collections as either a <em>stop-the-world</em> cycle, or as a concurrent cycle. For example, the gencon policy by default consists of the following collectors:</p>
+<ul>
+<li>
+<p>a <a href="../gc/#garbage-collection-policies">scavenger collector</a>, which uses a <em>stop-the-world</em> cycle to collect.</p>
+</li>
+<li>
+<p>a <a href="../gc/#garbage-collection-policies">concurrent global mark and sweep collector</a>, which uses a concurrent cycle to collect.  </p>
+</li>
+</ul>
+<p>The first step in reading the verbose GC log is to understand how these different types of cycle are recorded. </p>
 <p>Verbose GC logs only record <em>stop-the-world</em> events, which are events that involve pauses of the application threads of the VM. <em>Stop-the-world</em> cycles consist solely of <em>stop-the-world</em> events so all events of a <em>stop-the-world</em> cycle are recorded in the verbose GC logs. For concurrent cycles, while some operations of concurrent cycles run at the same time as application threads, others run as <em>stop-the-world</em> events. In particular, concurrent cycles consist of: </p>
 <ul>
 <li>
@@ -4415,7 +4424,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>The concurrent gc cycles that are used by most gc policies in OpenJ9 consist of only two <em>stop-the-world</em> events; a kickoff <em>stop-the-world</em> event and a final collection <em>stop-the-world</em> event. Some policies, such as the balanced policy, also include intermediate <em>stop-the-world</em> events during the cycle. For example, the concurrent global mark cycle of the balanced policy can include intermediate <em>stop-the-world</em> "mark" GC increments.</p>
 <p>See <a href="./#stop-the-world-events-of-the-gencon-policy"><em>stop-the-world</em> events of the Gencon policy gc</a> for details of <em>stop-the-world</em> events and their associated verbose GC log tags. For more information about the verbose GC tags used for other GC gc policies, see <a href="./#xml-tags-and-attributes">Verbose GC log XML tags and attributes</a>. </p>
 <h3 id="stop-the-world-events-of-the-gencon-policy">Stop-the-world events of the Gencon policy</h3>
-<p>The OpenJ9 default policy is the <a href="../gc/">Gencon policy</a> and consists of two types of garbage collection – <em>scavenge</em> and <em>concurrent global mark</em>. You can also enable the non-default gencon <em>concurrent scavenge</em> collector. The concurrent cycle consists of two <em>stop-the-world</em> events - a kickoff event and a final collection event. </p>
+<p>The OpenJ9 default policy is the <a href="../gc/#garbage-collection-policies">Gencon policy</a> and consists of two types of garbage collection – <em>scavenge</em> and <em>concurrent global mark</em>. You can also enable the non-default gencon <em>concurrent scavenge</em> collector. The concurrent cycle consists of two <em>stop-the-world</em> events - a kickoff event and a final collection event. </p>
 <p>The different garbage collections can be located in the logs by searching for the following tags that are associated with <em>stop-the-world</em> events: </p>
 <table>
 <thead>
