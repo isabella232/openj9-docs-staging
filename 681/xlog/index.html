@@ -2077,36 +2077,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </li>
       
         <li class="md-nav__item">
-  <a href="#parameters" class="md-nav__link">
-    Parameters
+  <a href="#explanation" class="md-nav__link">
+    Explanation
   </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#-xlogall" class="md-nav__link">
-    -Xlog:all
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#-xloggcstderr" class="md-nav__link">
-    -Xlog:gc[stderr]
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#-xloggcfileltfilenamegt" class="md-nav__link">
-    -Xlog:gc:file=&lt;filename&gt;
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -3930,36 +3903,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </li>
       
         <li class="md-nav__item">
-  <a href="#parameters" class="md-nav__link">
-    Parameters
+  <a href="#explanation" class="md-nav__link">
+    Explanation
   </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#-xlogall" class="md-nav__link">
-    -Xlog:all
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#-xloggcstderr" class="md-nav__link">
-    -Xlog:gc[stderr]
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#-xloggcfileltfilenamegt" class="md-nav__link">
-    -Xlog:gc:file=&lt;filename&gt;
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -4016,38 +3962,58 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 -->
 
 <h1 id="-xlog">-Xlog</h1>
-<p>This option controls Java&trade; VM logging and is supported for compatibility with the reference implementation. However, only forms of <code>-Xlog</code> that enable garbage collection (GC) logging are recognized.</p>
-<p>From Eclipse OpenJ9 version 0.24.0, the <a href="../xsyslog/"><code>-Xsyslog</code></a> option replaces the existing OpenJ9 <code>-Xlog</code>  option for message logging to avoid conflicts with the reference implementation. For backward compatibility, you can control the behavior of the <code>-Xlog</code> option with the <a href="../xxlegacyxlogoption/"><code>-XX:[+|-]LegacyXlogOption</code></a> option.</p>
+<p>This option is supported for better compatibility with the reference implementation. However, only forms of <code>-Xlog</code> that enable garbage collection (GC) logging are recognized. Note that the behavior of this option changed in Eclipse OpenJ9 0.24.0.</p>
 <h2 id="syntax">Syntax</h2>
-<pre><code>    `-Xlog[:&lt;parameters&gt;]`
+<pre><code>    -Xlog[:&lt;parameters&gt;]
 </code></pre>
-<p>Without any parameters, this command runs the <a href="../xverbosegclog/"><code>-Xverbosegclog</code></a> option. Because the reference implementation of <code>-Xlog</code> is intended to enable other forms of logging that are not supported by the OpenJ9 VM, the following warning is printed in addition to enabling verbose GC logging:</p>
-<pre><code>JVMJ9VM007W Command-line option unrecognised: &lt;option&gt;
+<p>Note: In Eclipse OpenJ9 version 0.24.0, the <a href="../xsyslog/"><code>-Xsyslog</code></a> option replaces the existing OpenJ9 <code>-Xlog</code>  option for message logging to avoid conflicts with the reference implementation. For backward compatibility, you can control the behavior of the <code>-Xlog</code> option with the <a href="../xxlegacyxlogoption/"><code>-XX:[+|-]LegacyXlogOption</code></a> option.</p>
+<h2 id="explanation">Explanation</h2>
+<p>Use of the <code>-Xlog</code> option is supported for GC logging only. The following table describes the behavior of the option depending on what you specify on the command line.</p>
+<table>
+<thead>
+<tr>
+<th><code>-Xlog</code> option type</th>
+<th>Behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>An option that returns GC data. For example <code>-Xlog:gc</code></td>
+<td>An equivalent OpenJ9 GC logging option is enabled. See the next table for more details.</td>
+</tr>
+<tr>
+<td>An option that, in the reference implementation, returns GC data and also other data. For example: <code>-Xlog</code>, <code>-Xlog:all</code>, <code>-Xlog:gc+&lt;other_tag&gt;</code>, or  <code>-Xlog:gc:stdout</code></td>
+<td>An equivalent OpenJ9 GC logging option is enabled as before but because non-GC data is not supported, the following error message is also produced: <br/> <code>JVMJ9VM007W Command-line option unrecognised: &lt;option&gt;</code></td>
+</tr>
+<tr>
+<td>An option that, in the reference implementation, returns only non-GC data</td>
+<td>Non-GC data is not supported, so the following error message is produced: <br/> <code>JVMJ9VM007W Command-line option unrecognised: &lt;option&gt;</code></td>
+</tr>
+</tbody>
+</table>
+<p>The following table shows some examples of the mapping between <code>-Xlog</code> parameters and the equivalent OpenJ9 GC parameters:</p>
+<table>
+<thead>
+<tr>
+<th><code>-Xlog</code> parameter</th>
+<th>OpenJ9 GC equivalent</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-Xlog:gc</code> <br/> <code>-Xlog:gc:stderr</code></td>
+<td><code>-verbose:gc</code></td>
+</tr>
+<tr>
+<td><code>-Xlog:gc:&lt;filename&gt;</code> <br/> <code>-Xlog:gc:file=&lt;filename&gt;</code></td>
+<td><code>-Xverbosegclog:&lt;updated_filename&gt;</code></td>
+</tr>
+</tbody>
+</table>
+<p>The value of <code>&lt;filename&gt;</code> can contain the following tokens, which are processed and passed to the <code>-Xverbosegclog</code> option as <code>&lt;updated_filename&gt;</code>:</p>
+<pre><code>- `%p` is replaced with the process ID (equivalent to [dump agent token `%pid`](xdump.md#dump-agent-tokens))
+- `%t` is replaced with the dump agent tokens `%Y-%m-%d_%H-%M-%S`.
 </code></pre>
-
-<h2 id="parameters">Parameters</h2>
-<p>Supported parameters are listed in the sections that follow.</p>
-<h3 id="-xlogall"><code>-Xlog:all</code></h3>
-<p>Setting <code>-Xlog:all</code> runs the <code>-Xverbosegclog</code> option. Because the reference implementation of <code>-Xlog</code> is intended to enable other forms of logging that are not supported by the OpenJ9 VM, the following warning is printed in addition to enabling verbose GC logging:</p>
-<pre><code>JVMJ9VM007W Command-line option unrecognised: &lt;option&gt;
-</code></pre>
-
-<h3 id="-xloggcstderr"><code>-Xlog:gc[stderr]</code></h3>
-<p>Setting <code>-Xlog:gc</code> on the command line runs the <code>-Xverbosegclog</code> option.</p>
-<p>The following suboption is supported:</p>
-<ul>
-<li><code>-Xlog:gc:stderr</code>: Output from the <code>-Xverbosegclog</code> is printed to <code>stderr</code>.</li>
-</ul>
-<p>If you specify <code>-Xlog:gc:stdout</code>, output is printed to <code>stderr</code> because logging to <code>stdout</code> is not supported by OpenJ9. The following additional message is printed:</p>
-<pre><code>```
-JVMJ9VM007W Command-line option unrecognised: &lt;stdout&gt;
-```
-</code></pre>
-<h3 id="-xloggcfileltfilenamegt"><code>-Xlog:gc:file=&lt;filename&gt;</code></h3>
-<p>Setting <code>-Xlog:gc:file=&lt;filename&gt;</code> on the command line runs the <code>-Xverbosegclog:&lt;updated_filename&gt;</code> option.</p>
-<p>The value of <code>&lt;filename&gt;</code> can contain the following tokens, which are processed and passed to the <code>-Xverbosegclog</code> option as <code>&lt;updated_filename&gt;</code>:
-    - <code>%p</code> is replaced with the process ID (equivalent to <a href="../xdump/#dump-agent-tokens">dump agent token <code>%pid</code></a>)
-    - <code>%t</code> is replaced with the dump agent tokens <code>%Y-%m-%d_%H-%M-%S</code>.</p>
 <h2 id="see-also">See also</h2>
 <ul>
 <li><a href="../xsyslog/"><code>-Xsyslog</code></a></li>
