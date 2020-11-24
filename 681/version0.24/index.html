@@ -4049,7 +4049,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p><a href="https://openjdk.java.net/jeps/158">JEP 158</a> introduces the <code>-Xlog</code> option as a common logging system for all components of a Java virtual machine. To avoid confusion with the reference implementation, the <a href="../xsyslog/"><code>-Xsyslog</code></a> option replaces the existing OpenJ9 <a href="../xlog/"><code>-Xlog</code></a> option for message logging. For compatibility with the reference implementation, a limited set of <code>-Xlog</code> suboptions are supported.</p>
 <p>A new option, <a href="../xxlegacyxlogoption/"><code>-XX:[+|-]LegacyXlogOption</code></a>, controls how <code>-Xlog</code> is processed when set on the command line.</p>
 <ul>
-<li>When <code>-XX:-LegacyXlogOption</code> is set, the <code>-Xlog</code> option is recognized when a form of this option is run that requests garbage collection (GC) logging.<ul>
+<li>When <code>-XX:-LegacyXlogOption</code> is set, the <code>-Xlog</code> option is recognized when a form of this option  runs that requests garbage collection (GC) logging.<ul>
 <li>If any <code>-Xlog</code> GC log requests are set, these options are mapped to the equivalent OpenJ9 verbose GC command line options. For more information, see <a href="../xlog/"><code>-Xlog</code></a>.</li>
 </ul>
 </li>
