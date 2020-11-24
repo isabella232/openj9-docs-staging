@@ -89,6 +89,8 @@
     
     <link rel="stylesheet" href="../assets/fonts/material-icons.css">
     
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
       <link rel="stylesheet" href="../stylesheets/oj9.css">
     
     
@@ -2685,6 +2687,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
   <li class="md-nav__item">
+    <a href="../xsyslog/" title="-Xsyslog" class="md-nav__link">
+      -Xsyslog
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../xtgc/" title="-Xtgc" class="md-nav__link">
       -Xtgc
     </a>
@@ -3143,6 +3157,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <li class="md-nav__item">
     <a href="../xxlazysymbolresolution/" title="-XX:[+|-]LazySymbolResolution" class="md-nav__link">
       -XX:[+|-]LazySymbolResolution
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xxlegacyxlogoption/" title="-XX:[+|-]LegacyXLogOption" class="md-nav__link">
+      -XX:[+|-]LegacyXLogOption
     </a>
   </li>
 
@@ -4063,36 +4089,18 @@ columns will be removed over time.</p>
 <th>Release date</th>
 <th>JDK8 (LTS)</th>
 <th>JDK11 (LTS)</th>
-<th>JDK14</th>
 <th>JDK15</th>
 <th>JDK16</th>
+<th>JDK17 (LTS)</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>v 0.19.0</td>
-<td>March 2020</td>
-<td>No</td>
-<td>No</td>
-<td>Yes (*2)</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>v 0.20.0</td>
-<td>April 2020</td>
-<td>Yes</td>
-<td>Yes</td>
-<td>Yes</td>
-<td></td>
-<td></td>
-</tr>
 <tr>
 <td>v 0.21.0</td>
 <td>July 2020</td>
 <td>Yes</td>
 <td>Yes</td>
-<td>Yes</td>
+<td></td>
 <td></td>
 <td></td>
 </tr>
@@ -4101,8 +4109,8 @@ columns will be removed over time.</p>
 <td>September 2020</td>
 <td>No</td>
 <td>No</td>
-<td>No</td>
 <td>Yes (*2)</td>
+<td></td>
 <td></td>
 </tr>
 <tr>
@@ -4110,8 +4118,8 @@ columns will be removed over time.</p>
 <td>October 2020</td>
 <td>Yes</td>
 <td>Yes</td>
-<td>No</td>
 <td>Yes</td>
+<td></td>
 <td></td>
 </tr>
 <tr>
@@ -4119,8 +4127,8 @@ columns will be removed over time.</p>
 <td>January 2021</td>
 <td>Yes</td>
 <td>Yes</td>
-<td>No</td>
 <td>Yes</td>
+<td></td>
 <td></td>
 </tr>
 <tr>
@@ -4129,8 +4137,8 @@ columns will be removed over time.</p>
 <td>No</td>
 <td>No</td>
 <td>No</td>
-<td>No</td>
 <td>Yes (*2)</td>
+<td></td>
 </tr>
 <tr>
 <td>v 0.26.0</td>
@@ -4138,8 +4146,26 @@ columns will be removed over time.</p>
 <td>Yes</td>
 <td>Yes</td>
 <td>No</td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td>v 0.27.0</td>
+<td>July 2021 (*1)</td>
+<td>Yes</td>
+<td>Yes</td>
 <td>No</td>
 <td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td>v 0.28.0</td>
+<td>September 2021 (*1)</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+<td>Yes (*2)</td>
 </tr>
 </tbody>
 </table>
@@ -4154,9 +4180,9 @@ columns will be removed over time.</p>
 provided that we have community members available to maintain them. For practical
 reasons the Eclipse OpenJ9 JVM does not currently run on every platform.</p>
 <h3 id="openjdk-8">OpenJDK 8</h3>
-<p><i class="fa fa-bell" aria-hidden="true"></i> <strong>Important:</strong> If you obtain pre-built binaries from <a href="https://adoptopenjdk.net/index.html">AdoptOpenJDK.net</a>,
-platform support might vary, depending on their build environment. Check the AdoptOpenJDK <a href="https://adoptopenjdk.net/supported_platforms.html">Platform support matrix</a>.</p>
-<p>OpenJDK 8 binaries are supported on the minimum operating system levels shown in the following tables:</p>
+<p><i class="fa fa-bell" aria-hidden="true"></i> <strong>Important:</strong> If you obtain pre-built binaries from <a href="https://adoptopenjdk.net/index.html">AdoptOpenJDK.net</a> or from other sources,
+platform support might vary, depending on the build environment. For AdoptOpenJDK, see the <a href="https://adoptopenjdk.net/supported_platforms.html">Platform support matrix</a>.</p>
+<p>OpenJDK 8 binaries are expected to function on the minimum operating system levels shown in the following tables:</p>
 <table>
 <thead>
 <tr>
@@ -4202,7 +4228,7 @@ platform support might vary, depending on their build environment. Check the Ado
 <td>Y</td>
 </tr>
 <tr>
-<td>SUSE Linux Enterprise Server (SLES) 12</td>
+<td>SUSE Linux Enterprise Server (SLES) 12 SP5</td>
 <td>Y</td>
 <td>Y</td>
 <td>Y</td>
@@ -4219,6 +4245,14 @@ platform support might vary, depending on their build environment. Check the Ado
 </tr>
 <tr>
 <td>Ubuntu 18.04</td>
+<td>Y</td>
+<td>Y</td>
+<td>Y</td>
+<td>N</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>Ubuntu 20.04</td>
 <td>Y</td>
 <td>Y</td>
 <td>Y</td>
@@ -4284,12 +4318,12 @@ minimum glibc version 2.12 (x) or 2.17 (others) are expected to function without
 </thead>
 <tbody>
 <tr>
-<td>AIX 7.1 TL4</td>
+<td>AIX 7.1 TL5</td>
 <td>Y</td>
 <td>Y</td>
 </tr>
 <tr>
-<td>AIX 7.2</td>
+<td>AIX 7.2 TL3</td>
 <td>Y</td>
 <td>Y</td>
 </tr>
@@ -4297,9 +4331,9 @@ minimum glibc version 2.12 (x) or 2.17 (others) are expected to function without
 </table>
 <p>When public support for an operating system version ends, OpenJ9 can no longer be supported on that level.</p>
 <h3 id="openjdk-11">OpenJDK 11</h3>
-<p><i class="fa fa-bell" aria-hidden="true"></i> <strong>Important:</strong> If you obtain pre-built binaries from <a href="https://adoptopenjdk.net/index.html">AdoptOpenJDK.net</a>,
-platform support might vary, depending on their build environment. Check the AdoptOpenJDK <a href="https://adoptopenjdk.net/supported_platforms.html">Platform support matrix</a>.</p>
-<p>OpenJDK 11 binaries are supported on the minimum operating system levels shown in the following tables:</p>
+<p><i class="fa fa-bell" aria-hidden="true"></i> <strong>Important:</strong> If you obtain pre-built binaries from <a href="https://adoptopenjdk.net/index.html">AdoptOpenJDK.net</a> or from other sources,
+platform support might vary, depending on the build environment. For AdoptOpenJDK, see the <a href="https://adoptopenjdk.net/supported_platforms.html">Platform support matrix</a>.</p>
+<p>OpenJDK 11 binaries are expected to function on the minimum operating system levels shown in the following tables:</p>
 <table>
 <thead>
 <tr>
@@ -4340,7 +4374,7 @@ platform support might vary, depending on their build environment. Check the Ado
 <td>Y</td>
 </tr>
 <tr>
-<td>SUSE Linux Enterprise Server (SLES) 12</td>
+<td>SUSE Linux Enterprise Server (SLES) 12 SP5</td>
 <td>N</td>
 <td>Y</td>
 <td>Y</td>
@@ -4355,6 +4389,13 @@ platform support might vary, depending on their build environment. Check the Ado
 </tr>
 <tr>
 <td>Ubuntu 18.04</td>
+<td>Y</td>
+<td>Y</td>
+<td>Y</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>Ubuntu 20.04</td>
 <td>Y</td>
 <td>Y</td>
 <td>Y</td>
@@ -4416,20 +4457,20 @@ platform support might vary, depending on their build environment. Check the Ado
 </thead>
 <tbody>
 <tr>
-<td>AIX 7.1 TL4</td>
+<td>AIX 7.1 TL5</td>
 <td>Y</td>
 </tr>
 <tr>
-<td>AIX 7.2</td>
+<td>AIX 7.2 TL3</td>
 <td>Y</td>
 </tr>
 </tbody>
 </table>
 <p>When public support for an operating system version ends, OpenJ9 can no longer be supported on that level.</p>
 <h3 id="openjdk-15">OpenJDK 15</h3>
-<p><i class="fa fa-bell" aria-hidden="true"></i> <strong>Important:</strong> If you obtain pre-built binaries from <a href="https://adoptopenjdk.net/index.html">AdoptOpenJDK.net</a>,
-platform support might vary, depending on their build environment. Check the AdoptOpenJDK <a href="https://adoptopenjdk.net/supported_platforms.html">Platform support matrix</a>.</p>
-<p>OpenJDK 15 binaries are supported on the minimum operating system levels shown in the following tables:</p>
+<p><i class="fa fa-bell" aria-hidden="true"></i> <strong>Important:</strong> If you obtain pre-built binaries from <a href="https://adoptopenjdk.net/index.html">AdoptOpenJDK.net</a> or from other sources,
+platform support might vary, depending on the build environment. For AdoptOpenJDK, see the <a href="https://adoptopenjdk.net/supported_platforms.html">Platform support matrix</a>.</p>
+<p>OpenJDK 15 binaries are expected to function on the minimum operating system levels shown in the following tables:</p>
 <table>
 <thead>
 <tr>
@@ -4456,7 +4497,7 @@ platform support might vary, depending on their build environment. Check the Ado
 <td>Y</td>
 </tr>
 <tr>
-<td>SUSE Linux Enterprise Server (SLES) 12</td>
+<td>SUSE Linux Enterprise Server (SLES) 12 SP5</td>
 <td>N</td>
 <td>Y</td>
 <td>Y</td>
@@ -4471,6 +4512,13 @@ platform support might vary, depending on their build environment. Check the Ado
 </tr>
 <tr>
 <td>Ubuntu 18.04</td>
+<td>Y</td>
+<td>Y</td>
+<td>Y</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>Ubuntu 20.04</td>
 <td>Y</td>
 <td>Y</td>
 <td>Y</td>
@@ -4532,11 +4580,11 @@ platform support might vary, depending on their build environment. Check the Ado
 </thead>
 <tbody>
 <tr>
-<td>AIX 7.1 TL4</td>
+<td>AIX 7.1 TL5</td>
 <td>Y</td>
 </tr>
 <tr>
-<td>AIX 7.2</td>
+<td>AIX 7.2 TL3</td>
 <td>Y</td>
 </tr>
 </tbody>

@@ -89,6 +89,8 @@
     
     <link rel="stylesheet" href="../assets/fonts/material-icons.css">
     
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
       <link rel="stylesheet" href="../stylesheets/oj9.css">
     
     
@@ -3001,6 +3003,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
   <li class="md-nav__item">
+    <a href="../xsyslog/" title="-Xsyslog" class="md-nav__link">
+      -Xsyslog
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../xtgc/" title="-Xtgc" class="md-nav__link">
       -Xtgc
     </a>
@@ -3459,6 +3473,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <li class="md-nav__item">
     <a href="../xxlazysymbolresolution/" title="-XX:[+|-]LazySymbolResolution" class="md-nav__link">
       -XX:[+|-]LazySymbolResolution
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xxlegacyxlogoption/" title="-XX:[+|-]LegacyXLogOption" class="md-nav__link">
+      -XX:[+|-]LegacyXLogOption
     </a>
   </li>
 
@@ -5023,7 +5049,7 @@ Registered dump agents
 <h3 id="defaults"><code>defaults</code></h3>
 <p>Each dump type has default options. To view the default options for a particular dump type, use <code>-Xdump:&lt;agent&gt;:defaults</code>.</p>
 <p>You can change the default options at run time. For example, you can direct Java dump files into a separate directory for each process, and guarantee unique files by adding a sequence number to the file name using:</p>
-<pre><code>-Xdump:java:defaults:file=dumps/%pid/javacore-%seq.txt`
+<pre><code>-Xdump:java:defaults:file=dumps/%pid/javacore-%seq.txt
 </code></pre>
 
 <p>Or, for example, on z/OS, you can add the jobname to the Java dump file name using:</p>
