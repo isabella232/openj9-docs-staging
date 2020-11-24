@@ -4138,13 +4138,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <td>Configuring your garbage collection policy.</td>
 </tr>
 <tr>
-<td><code>-Xlog</code></td>
-<td><a href="../xlog/"><code>-Xlog</code></a><strong><sup>3</sup></strong></td>
-<td>Controls operating system message logging</td>
-</tr>
-<tr>
 <td><code>-XX:+UseNUMA</code></td>
-<td><a href="../xnumanone/"><code>-Xnuma:none</code></a><strong><sup>4</sup></strong></td>
+<td><a href="../xnumanone/"><code>-Xnuma:none</code></a><strong><sup>3</sup></strong></td>
 <td>Controls non-uniform memory architecture (NUMA) awareness.</td>
 </tr>
 </tbody>
@@ -4156,9 +4151,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </li>
 <li>
 <p>HotSpot uses <code>-Xgc</code> to both select policies and configure them; OpenJ9 uses <code>-Xgcpolicy</code> to select policies, reserving <code>-Xgc</code> for configuration.</p>
-</li>
-<li>
-<p>Prior to the OpenJ9 0.24.0 release, OpenJ9 message logging was controlled with the <code>-Xlog</code> option. To avoid confusion with the more recent HotSpot <code>-Xlog</code> option, the OpenJ9 <code>-Xlog</code> option is superseded by the <a href="../xsyslog/"><code>-Xsyslog</code></a> option.</p>
 </li>
 <li>
 <p>In HotSpot, NUMA awareness is turned off by default and is turned on by using the <code>-XX:+UseNUMA</code> option. Conversely, the OpenJ9 VM automatically enables NUMA awareness and uses <code>-Xnuma:none</code> to turn it <em>off</em>.</p>

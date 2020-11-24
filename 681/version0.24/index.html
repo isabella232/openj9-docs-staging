@@ -4046,13 +4046,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </ul>
 <p>To learn more about support for OpenJ9 releases, including OpenJDK levels and platform support, see <a href="../openj9_support/">Supported environments</a>.</p>
 <h3 id="changes-to-message-logging">Changes to message logging</h3>
-<p>Following the introduction of <a href="https://openjdk.java.net/jeps/158">JEP 158</a> and to avoid confusion with the reference implementation, the <a href="../xsyslog/"><code>-Xsyslog</code></a> option supersedes the OpenJ9 <a href="../xlog/"><code>-Xlog</code></a> option for message logging. A new option, <a href="../xxlegacyxlogoption/"><code>-XX:[+|-]LegacyXlogOption</code></a> controls how the <code>-Xlog</code> option is processed when set on the command line.</p>
+<p><a href="https://openjdk.java.net/jeps/158">JEP 158</a> introduces the <code>-Xlog</code> option as a common logging system for all components of a Java virtual machine. To avoid confusion with the reference implementation, the <a href="../xsyslog/"><code>-Xsyslog</code></a> option replaces the existing OpenJ9 <a href="../xlog/"><code>-Xlog</code></a> option for message logging. For compatibility with the reference implementation, a limited set of <code>-Xlog</code> suboptions are supported.</p>
+<p>A new option, <a href="../xxlegacyxlogoption/"><code>-XX:[+|-]LegacyXlogOption</code></a>, controls how <code>-Xlog</code> is processed when set on the command line.</p>
 <ul>
-<li>Setting <code>-XX:-LegacyXlogOption</code> (default) causes the VM to process the <code>-Xsyslog</code> option and process the <code>-Xlog</code> option only for garbage collection (GC) log requests (<code>-Xlog:gc[:stderr|:file=&lt;filename&gt;]</code>).<ul>
+<li>When <code>-XX:-LegacyXlogOption</code> is set, the <code>-Xlog</code> option is recognized when a form of this option is run that requests garbage collection (GC) logging.<ul>
 <li>If any <code>-Xlog</code> GC log requests are set, these options are mapped to the equivalent OpenJ9 verbose GC command line options. For more information, see <a href="../xlog/"><code>-Xlog</code></a>.</li>
 </ul>
 </li>
-<li>Setting <code>-XX:+LegacyXLogOption</code>, processes the <code>-Xlog</code> option as an equivalent option to <code>-Xsyslog</code>. That is, these options can be used interchangeably.</li>
+<li>Setting <code>-XX:+LegacyXLogOption</code> provides backward compatibility with the legacy <code>-Xlog</code> option, which can be specified on the command line with the parameters documented for the <code>-Xsyslog</code> option. That is, these options can be used interchangeably. If you rely on the legacy <code>-Xlog</code> option and cannot easily migrate to the <code>-Xsyslog</code> option, you must set this option on the command line.</li>
 </ul>
 <h3 id="support-for-the-java_options-environment-variable">Support for the <code>JAVA_OPTIONS</code> environment variable</h3>
 <p>For compatibility with the reference implementation, OpenJ9 now supports the <code>JAVA_OPTIONS</code> environment variable. This environment variable  can be used to set command line options, as described in <a href="../cmdline_specifying/">OpenJ9 command-line options</a> and <a href="../env_var/">Environment variables</a>. Options specified by <code>JAVA_OPTIONS</code> can be overridden by options specified by <code>OPENJ9_JAVA_OPTIONS</code>.</p>
