@@ -707,13 +707,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </li>
         
           <li class="md-nav__item">
-  <a href="#metronome-policy" class="md-nav__link">
-    metronome policy
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#optavgpause-and-optthruput-policies" class="md-nav__link">
     optavgpause and optthruput policies
   </a>
@@ -737,6 +730,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         
       </ul>
     </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metronome-policy" class="md-nav__link">
+    metronome policy
+  </a>
   
 </li>
         
@@ -4050,13 +4050,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </li>
         
           <li class="md-nav__item">
-  <a href="#metronome-policy" class="md-nav__link">
-    metronome policy
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#optavgpause-and-optthruput-policies" class="md-nav__link">
     optavgpause and optthruput policies
   </a>
@@ -4080,6 +4073,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         
       </ul>
     </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metronome-policy" class="md-nav__link">
+    metronome policy
+  </a>
   
 </li>
         
@@ -4259,15 +4259,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </li>
 </ul>
 <p><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Note:</strong> Despite the general advantage of using arraylets, they can slow down processing when the Java Native Interface (JNI) is being used. The JNI provides flexibility by enabling Java programs to call native code; for example C or C++, and if direct addressability to the inside of an object is needed, a JNI critical section can be used. However, that requires the object to be in a contiguous region of memory, or at least <em>appear</em> to be so. The JNI therefore creates a temporary contiguous array that is the same size as the original array and copies everything, element by element, to the temporary array. After the JNI critical section is finished, everything is copied from the temporary array back to the arraylet, element by element.</p>
-<h3 id="metronome-policy"><code>metronome</code> policy</h3>
-<p><strong>(Linux on x86-64 and AIX platforms only)</strong></p>
-<p><a href="../xgcpolicy/#metronome-aix-linux-x86-only"><code>-Xgcpolicy:metronome</code></a> is designed for applications that require a precise upper bound on collection pause times as well as specified application utilization: the proportion of time that the application is permitted to use, with the remainder being devoted to GC. The realtime GC runs in short interruptible bursts to avoid stop-the-world pauses.</p>
-<p>The realtime heap is allocated as a contiguous range of RAM partitioned into small regions of equal size, usually about 64 KB. There is no dynamic heap resizing when you use the <code>metronome</code> policy. The heap is always fully expanded even if <a href="../xms/"><code>-Xms</code></a> is not set to <a href="../xms/"><code>-Xmx</code></a>.</p>
-<p>As with the <code>balanced</code> GC policy, arrays are represented as arraylets with a spine pointing to a series of regions containing the array elements (see <a href="#arraylets-dealing-with-large-arrays">Arraylets: dealing with large arrays</a> for more information). Note that JNI access to array data might involve reconstituting arraylets as contiguous arrays, which can significantly slow down processing.</p>
-<p>Each region of the heap is either empty, or contains only objects in one of 16 size classes, or an arraylet. This organization reduces heap fragmentation, so that need for heap compaction and defragmentation is minimized, and provides more precise control of the incremental sweep phase.</p>
-<p>Although high application utilization is desirable for optimal throughput, the GC must be able to keep up with the application's memory  allocation rate. </p>
-<p>A higher utilization typically requires a larger heap because the GC isn't allowed to run as much as a lower utilization would permit. The relationship between utilization and heap size is highly application dependent, and striking an appropriate balance requires iterative experimentation with the application and VM parameters. You might need to adjust heap size or pause time or target utilization to achieve an acceptable runtime configuration.</p>
-<p>See <a href="../xgcpolicy/#metronome-aix-linux-x86-only"><code>-Xgcpolicy:metronome</code></a> for details of the configuration parameters you can set.</p>
 <h3 id="optavgpause-and-optthruput-policies"><code>optavgpause</code> and <code>optthruput</code> policies</h3>
 <p>Both of these policies use the global collector to manage a flat heap comprised of a single region. The global collector runs to mark and sweep the heap when the heap is exhausted (<code>optthruput</code>), or is started preemptively so that the cycle finishes before heap is completely exhausted (<code>optavgpause</code>). Additionally, if the heap becomes fragmented, the global collector compacts the heap.</p>
 <p>You are likely to find that in many situations, the default <a href="#gencon-policy-default"><code>gencon</code> policy</a> offers better performance than these two policies.</p>
@@ -4279,6 +4270,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p><a href="../xgcpolicy/#optavgpause"><code>-Xgcpolicy:optavgpause</code></a> uses concurrent marking, as for <code>gencon</code>, to anticipate global collections and initiate some marking before the stop-the-world global collection phase. This reduces the likelihood of long interruptions of service due to GC activity and pause times are reduced when compared to <code>optthruput</code> though at the expense of some performance throughput.</p>
 <h4 id="optthruput-policy"><code>optthruput</code> policy</h4>
 <p><a href="../xgcpolicy/#optthruput"><code>-Xgcpolicy:optthruput</code></a> is optimized for throughput by disabling the concurrent mark phase, which means that applications stop for long pauses while garbage collection takes place. You might consider using this policy when your application can tolerate longer GC pauses to obtain better overall throughput.</p>
+<h3 id="metronome-policy"><code>metronome</code> policy</h3>
+<p><strong>(Linux on x86-64 and AIX platforms only)</strong></p>
+<p><a href="../xgcpolicy/#metronome-aix-linux-x86-only"><code>-Xgcpolicy:metronome</code></a> is designed for applications that require a precise upper bound on collection pause times as well as specified application utilization: the proportion of time that the application is permitted to use, with the remainder being devoted to GC. The realtime GC runs in short interruptible bursts to avoid long stop-the-world pauses.</p>
+<p>The realtime heap is allocated as a contiguous range of RAM partitioned into small regions of equal size, usually about 64 KB. There is no dynamic heap resizing when you use the <code>metronome</code> policy. The heap is always fully expanded even if <a href="../xms/"><code>-Xms</code></a> is not set to <a href="../xms/"><code>-Xmx</code></a>.</p>
+<p>As with the <code>balanced</code> GC policy, arrays are represented as arraylets with a spine pointing to a series of regions containing the array elements (see <a href="#arraylets-dealing-with-large-arrays">Arraylets: dealing with large arrays</a> for more information). Note that JNI access to array data might involve reconstituting arraylets as contiguous arrays, which can significantly slow down processing.</p>
+<p>Each region of the heap is either empty, or contains only objects in one of 16 size classes, or an arraylet. This organization reduces heap fragmentation, so that need for heap compaction and defragmentation is minimized, and provides more precise control of the incremental sweep phase.</p>
+<p>Although high application utilization is desirable for optimal throughput, the GC must be able to keep up with the application's memory  allocation rate. </p>
+<p>A higher utilization typically requires a larger heap because the GC isn't allowed to run as much as a lower utilization would permit. The relationship between utilization and heap size is highly application dependent, and striking an appropriate balance requires iterative experimentation with the application and VM parameters. You might need to adjust heap size or pause time or target utilization to achieve an acceptable runtime configuration.</p>
+<p>See <a href="../xgcpolicy/#metronome-aix-linux-x86-only"><code>-Xgcpolicy:metronome</code></a> for details of the configuration parameters you can set.</p>
 <h3 id="nogc-policy"><code>nogc</code> policy</h3>
 <p><a href="../xgcpolicy/#nogc"><code>-Xgcpolicy:nogc</code></a> handles only memory allocation and heap expansion, but doesn't reclaim any memory. The GC impact on runtime performance is therefore minimized, but if the available Java heap becomes exhausted, an <code>OutOfMemoryError</code> exception is triggered and the VM stops.</p>
 <h2 id="troubleshooting">Troubleshooting</h2>
