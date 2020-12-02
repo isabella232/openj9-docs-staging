@@ -4193,60 +4193,62 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>The process of managing memory in the VM is handled by the Allocator and the Garbage Collector (GC). These components operate on an area of memory that is reserved for VM processing called the Java heap.</p>
 <p>The Allocator assigns areas of the Java heap for Java objects. See <a href="../allocator/">Memory allocation</a> for more information about the Allocator.</p>
 <h2 id="the-garbage-collector">The garbage collector</h2>
-<p>To prevent applications running out of memory, objects in the Java heap that are no longer required must be reclaimed. This process is known as garbage collection. When garbage is collected, the garbage collector must obtain exclusive access to the heap, which causes an application to pause while the clean up is done. This pause is often referred to as a <em>stop-the-world</em> pause because an application must halt until the process completes. In general, the first step in the GC process is to mark the objects that are reachable, which means they are still in use. The next step is to sweep away the unmarked objects to reclaim memory. The last step, which isn't always required unless the heap has become very fragmented, is to compact the heap.</p>
+<p>To prevent applications running out of memory, objects in the Java heap that are no longer required must be reclaimed. This process is known as garbage collection. When garbage is collected, the garbage collector must obtain exclusive access to the heap, which causes an application to pause while the clean up is done. This pause is often referred to as a <em>stop-the-world</em> (STW) pause because an application must halt until the process completes. In general, the first step in the GC process is to mark the objects that are reachable, which means they are still in use. The next step is to sweep away the unmarked objects to reclaim memory. The final step is to compact the heap if the heap is badly fragmented.</p>
 <h2 id="garbage-collection-policies">Garbage collection policies</h2>
 <p>OpenJ9 provides several GC policies that are designed around different application workloads. Each GC policy consists of a set of characteristics and features that aim to optimize one or more performance aspects of a running application. These performance aspects include application throughput, memory footprint, average pause times, worst-case pause times, and startup time.</p>
-<p>Different policies require a Java heap that is configured in different ways in order to achieve different goals. The following layouts exist:</p>
+<p>Different policies require a Java heap that is configured in different ways in order to achieve different goals. The simplest configuration consists of a single area of memory, often referred to as a <em>flat</em> heap. Other configurations divide the heap into different areas or regions, which might contain objects of different ages (<em>generations</em>) or sizes.</p>
+<p>A GC cycle is a repeatable process that involves a set of GC operations. These operations process all or parts of the Java heap to complete a discrete function. For example, a <em>mark</em> operation traces all objects in the heap to determine which ones are reachable. A <em>sweep</em> operation runs to clear away unreachable objects. Together, a <em>mark</em> and <em>sweep</em>  operation are capable of reclaiming used memory as part of a GC cycle.</p>
+<p>A GC operation might complete in one step, or it might involve phases. For example, a <em>mark</em> operation consists of the following 3 phases:</p>
 <ul>
-<li>A <em>flat</em> Java heap consists of one region of memory that contains a single generation of objects. With this type of heap, GC consists of a single global GC cycle that is triggered when the heap is full.</li>
-<li>A <em>generational</em> Java heap is segregated for different generations of objects, consisting of <code>tenure</code> and <code>nursery</code> regions. With this type of heap, objects can be moved between regions, depending on age and liveness. GC operations can then consist of local or partial GC cycles on objects that are no longer in use, thereby attempting to delay or avoid a global GC cycle.</li>
-<li>A <em>multi-generational</em> Java heap consists of multiple regions, typically of a fixed size, that support multiple generations of objects. Again, this type of arrangement can support local or partial GC cycles on objects that are no longer in use, attempting to delay or avoid a global GC cycle.</li>
+<li><em>Initial phase:</em> Identify all the root objects by running a root scan.</li>
+<li><em>Main phase:</em> Trace references from each root object to other objects in the heap. Reachable objects are marked.</li>
+<li><em>Final phase:</em> Run a further root scan to update references, followed by further operations, such as card cleaning.</li>
 </ul>
-<p>Different policies also employ different collection processes, which operate on areas of the heap in different ways. The following distinctions exist:</p>
-<p>Global and local GC cycles can be incremental, where they occur in a series of discrete increments,  or non-incremental, where they occur in a single operation. These cycles can also be concurrent, where the operations take place while applications are still running, or non-concurrent, where the application is stopped (<em>stop-the-world</em> (STW)) while GC operations take place. More advanced characteristics exist for concurrent-style GC policies, including read or write barriers that are raised to allow application processing to continue without a STW collection taking place.</p>
-<p>Each GC policy operates on a specific heap configuration and one or more collectors. These policies are summarized in the following table. Follow the links to read more about individual policies:</p>
+<p>GC policies use different GC cycles to manage different aspects of the heap. For example, the <code>gencon</code> policy runs a partial GC cycle on the <em>nursery</em> area of the heap to complete a <em>scavenge</em> operation. At other times, <code>gencon</code> also runs a global GC on the entire Java heap to complete a <em>mark</em> and <em>sweep</em> (and optionally <em>mark</em> and <em>compact</em>) operation.  </p>
+<p>GC cycles are divided into increments that run over a period of time to reduce maximum pause times. These increments might involve <em>stop-the-world</em> (STW) pauses that must halt application threads to give certain GC operations exclusive access to the Java heap. Alternatively, increments might include GC operations that can run concurrently with application processing.</p>
+<p>The following table shows the heap configuration and the GC cycles and operations used by different policies:</p>
 <table>
 <thead>
 <tr>
-<th>GC policy name (option name)</th>
+<th>Policy</th>
 <th>Heap configuration</th>
-<th>Collectors</th>
+<th>GC cycles / operations</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><a href="#gencon-policy-default">Generational concurrent (<code>gencon</code>)</a> (default)</td>
-<td>Generational (nursery/tenure)</td>
-<td>Scavenger, Concurrent Mark, Global</td>
+<td><code>gencon</code></td>
+<td>Two areas: <em>nursery</em> and <em>tenure</em> <br> Two generations of objects: new/older</td>
+<td>Global GC cycle: concurrent <em>mark-sweep</em> (and optionally <em>mark-compact</em>) operation <br> Partial GC cycle: STW <em>scavenge</em> operation or concurrent <em>scavenge</em> operation (if <code>-Xgc:concurrentScavenge</code> is set)</td>
 </tr>
 <tr>
-<td><a href="#balanced-policy">Balanced (<code>balanced</code>)</a></td>
-<td>Generational (multiple regions)</td>
-<td>Incremental Generational</td>
+<td><code>balanced</code></td>
+<td>Multiple regions of equal size <br> Multiple generations: 24</td>
+<td>Global GC cycle: incremental concurrent <em>mark</em> operation (<em>global mark phase</em>), followed by a global STW <em>sweep</em> operation <br> Partial GC cycle: STW <em>scavenge</em> operation  or STW <em>mark-compact</em> operation</td>
 </tr>
 <tr>
-<td><a href="#metronome-policy">Metronome (<code>metronome</code>)</a></td>
-<td>Segregated</td>
-<td>Realtime</td>
+<td><code>optavgpause</code></td>
+<td>Single area: <em>flat</em></td>
+<td>Global GC cycle: concurrent <em>mark-sweep</em> (and optionally <em>mark-compact</em>) operation</td>
 </tr>
 <tr>
-<td><a href="#optavgpause-policy">Optimize for pause time (<code>optavgpause</code>)</a></td>
-<td>Flat</td>
-<td>Concurrent Mark, Global</td>
+<td><code>optthruput</code></td>
+<td>Single area: <em>flat</em></td>
+<td>Global GC cycle: STW <em>mark-sweep</em> (and optionally <em>compact</em>) operation</td>
 </tr>
 <tr>
-<td><a href="#optthruput-policy">Optimize for throughput (<code>optthruput</code>)</a></td>
-<td>Flat</td>
-<td>Global</td>
+<td><code>metronome</code></td>
+<td>Multiple regions <br> Segregated by class size</td>
+<td>Global GC cycle: incremental STW <em>mark-sweep</em> operation in small interruptible steps</td>
 </tr>
 <tr>
-<td><a href="#nogc-policy">No garbage collection (<code>nogc</code>)</a></td>
-<td>Flat</td>
-<td>--</td>
+<td><code>nogc</code></td>
+<td>Single area: <em>flat</em></td>
+<td>No GC cycles</td>
 </tr>
 </tbody>
 </table>
-<p><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Note:</strong> All OpenJ9 GC policies support compressed references on 64-bit platforms, which compresses heap pointers to 32 bits if the total heap size does not exceed the theoretical upper bound of 64 GB. Applications that require more heap space can forgo compressed pointers and select any heap size within the bounds imposed by the operating system and available system RAM.</p>
+<p><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Note:</strong> All OpenJ9 GC policies support compressed references on 64-bit platforms, which compresses heap pointers to 32 bits if the total heap size does not exceed the theoretical upper bound of 64 GB. Applications that require more heap space can select any heap size within the bounds imposed by the operating system and available system RAM, without using compressed references. For more information, see <a href="allocation.md#compressed-references">compressed references</a>.</p>
 <h3 id="policy-selection-and-tuning">Policy selection and tuning</h3>
 <p>The default GC policy is <code>gencon</code>, which suits a broad spectrum of applications. Choosing a different GC policy should be guided by the application dynamics and an observation of how the application interacts with the heap during startup and at steady state. To help with this analysis, all OpenJ9 GC policies are instrumented to collect a wide range of GC-related metric data for reporting in a GC log file.</p>
 <p>To enable GC logging for the OpenJ9 Java runtime, include the <code>-verbose:gc</code> option on the command line. By default, this option prints output to <code>stderr</code> but you can send the output to a log file by using <a href="xverbsoegclog"><code>-Xverbosegclog</code></a>. You can then visualize the output by loading the GC log into the <a href="https://marketplace.eclipse.org/content/ibm-monitoring-and-diagnostic-tools-garbage-collection-and-memory-visualizer-gcmv">Garbage Collector and Memory Visualizer (GCMV) plugin for Eclipse</a>. OpenJ9 Java GC logs can also be analyzed by some online services, such as <a href="https://gceasy.io/">GCEasy</a>.</p>
@@ -4299,7 +4301,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>Regions impose a maximum object size. Objects are always allocated within the bounds of a single region and are never permitted to span regions. The region size is always a power of two; for example, 512 KB, 1 MB, and so on (where KB is 2<sup>10</sup> bytes and MB is 2<sup>20</sup> bytes). The region size is selected at startup based on the maximum heap size. The collector chooses the smallest power of two which will result in less than 2048 regions, with a minimum region size of 512 KB. Except for small heaps (less than about 512 MB) the VM aims to have between 1024 and 2047 regions.</p>
 <p>Object ages are tracked for each region with a maximum of 24 possible generations. The following diagram illustrates the structure of the object heap:</p>
 <p><img alt="The diagram is explained in the surrounding text" src="../cr/balanced_regions.png" title="Region structure and characteristics found in the object heap" /></p>
-<p>An age 0 region, known as the <em>eden</em> space, contains the newest objects allocated. Regions of intermediate age serve as survivor regions to receive live objects copied forwarded from younger regions. When the eden space is full, a partial garbage collection (PGC) runs to reclaim space, typically by using a <em>copy-forward</em> operation. In specific cases, a <em>mark-compact</em> operation might be used, for example, when there are not enough free survivor regions available. The PGC is a stop-the-world operation, after which new regions are allocated to create a new eden space. A PGC always includes the eden space, but might include older regions. Objects within collectible regions of intermediate age N are evacuated to survivor regions of age N+1. Regions of age 24 are never included in PGC collection sets but might be included for compaction in global GC (GGC) cycles, which mark and sweep the whole heap and compact regions that need defragmentation.</p>
+<p>An age 0 region, known as the <em>eden</em> space, contains the newest objects allocated. Regions of intermediate age serve as survivor regions to receive live objects copied forwarded from younger regions. When the eden space is full, a partial garbage collection (PGC) runs to reclaim space, typically by using a <em>copy forward</em> operation. In specific cases, a <em>mark-compact</em> operation might be used, for example, when there are not enough free survivor regions available. The PGC is a stop-the-world operation, after which new regions are allocated to create a new eden space. A PGC always includes the eden space, but might include older regions. Objects within collectible regions of intermediate age N are evacuated to survivor regions of age N+1. Regions of age 24 are never included in PGC collection sets but might be included for compaction in global GC (GGC) cycles, which mark and sweep the whole heap and compact regions that need defragmentation.</p>
 <p>Over time, transient objects drop out of the live set and viable survivor regions become scarce. This problem is solved by introducing a global mark phase (GMP) to mark and sweep the entire heap. GMP is a hybrid <em>incremental-concurrent</em> GC cycle. Each GMP increment is interleaved with a PGC cycle so that regions that are left sparse after sweeping the heap can be collected, cleared, and recycled during and after the GMP.</p>
 <h4 id="arraylets-dealing-with-large-arrays">Arraylets: dealing with large arrays</h4>
 <p>Most objects are easily contained within the minimum region size of 512 KB. However, some large arrays might require more memory than is available in a single region. To support such arrays, the Balanced GC uses an <strong>arraylet</strong> representation to more effectively store large arrays in the heap. (Arraylets are also used by the Metronome GC; both Balanced and Metronome GC policies are region-based garbage collectors.)</p>
