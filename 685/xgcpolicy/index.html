@@ -4140,17 +4140,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <pre><code>    -Xgcpolicy:gencon
 </code></pre>
 <dl>
-<dd>The generational concurrent policy (default) requires a heap that is divided into two main areas (<em>nursery</em> and <em>tenure</em>) to manage two generation groups (<em>new</em> and <em>older</em>). The policy uses a global GC cycle of concurrent <em>mark-sweep</em> operations, optionally followed by <em>compact</em> operations. The policy also uses a partial GC cycle to run <em>scavenge</em> operations on the <em>nursery</em> area. The partial cycle helps reduce the frequency and duration of the global GC cycle. Note that <em>scavenge</em> is a <em>stop-the-world</em> operation, unless <code>-Xgcpolicy:gencon</code> is specified with the <a href="../xgc/#concurrentscavenge"><code>-Xgc:concurrentScavenge</code></a> option (supported only IBM Z&reg; systems).</dd>
-<dd>To learn more about this policy, when to use it, and how it works, see <a href="../gc/#gencon-policy-default">Garbage collection: 'gencon' policy</a>.</dd>
+<dd>The generational concurrent policy (default) requires a heap that is divided into two main areas (<em>nursery</em> and <em>tenure</em>) to manage two generation groups (<em>new</em> and <em>older</em>). The policy uses a global GC cycle of concurrent <em>mark-sweep</em> operations, optionally followed by <em>compact</em> operations. The policy also uses a partial GC cycle to run <em>scavenge</em> operations on the <em>nursery</em> area. The partial cycle helps reduce the frequency and duration of the global GC cycle. Note that <em>scavenge</em> is a <em>stop-the-world</em> operation, unless <code>-Xgcpolicy:gencon</code> is specified with the <a href="../xgc/#concurrentscavenge"><code>-Xgc:concurrentScavenge</code></a> option (supported only on IBM Z&reg; systems).</dd>
+<dd>To learn more about this policy, when to use it, and how it works, see <a href="../gc/#gencon-policy-default">Garbage collection: <code>gencon</code> policy</a>.</dd>
 </dl>
 <h3 id="balanced"><code>balanced</code></h3>
 <pre><code>    -Xgcpolicy:balanced
 </code></pre>
 <dl>
-<dd>The Balanced policy requires a multi-region heap to manage multiple generations of objects. The policy uses a global GC cycle that involves an incremental concurrent <em>mark</em> operation (global mark phase), followed by STW <em>sweep</em> operation. The policy also uses a partial GC cycle to run <em>copy forward</em> or <em>mark-compact</em> operations. Regions are individually managed to reduce the maximum pause time on large heaps and increase the efficiency of garbage collection. The policy tries to avoid global collections by matching object allocation and survival rates.</dd>
+<dd>The Balanced policy requires a multi-region heap to manage multiple generations of objects. The policy uses a global GC cycle that involves an incremental concurrent <em>mark</em> operation (global mark phase), followed by <em>stop-the-world</em> (STW) <em>sweep</em> operation. The policy also uses a partial GC cycle to run <em>copy forward</em> or <em>mark-compact</em> operations. Regions are individually managed to reduce the maximum pause time on large heaps and increase the efficiency of garbage collection. The policy tries to avoid global collections by matching object allocation and survival rates.</dd>
 <dd>The <code>balanced</code> policy also exploits large systems that have Non-Uniform Memory Architecture (NUMA) characteristics (x86 and POWER&trade; platforms only), which might further improve application throughput.</dd>
 <dd><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Note:</strong> If you are using this GC policy in a Docker container that uses the default <code>seccomp</code> Docker profile, you must start the container with <code>--security-opt seccomp=unconfined</code> to exploit NUMA characteristics. These options are not required if you are running in Kubernetes, because <code>unconfined</code> is set by default (see <a href="https://kubernetes.io/docs/concepts/policy/pod-security-policy/#seccomp">Seccomp</a>).</dd>
-<dd>To learn more about this policy, how it works, and when to use it, see <a href="../gc/#balanced-policy">Garbage collection: 'balanced' policy</a>.</dd>
+<dd>To learn more about this policy, how it works, and when to use it, see <a href="../gc/#balanced-policy">Garbage collection: <code>balanced</code> policy</a>.</dd>
 </dl>
 <h4 id="balanced-defaults-and-options"><code>balanced</code> defaults and options</h4>
 <p>The initial heap size is <em>Xmx/1024</em>, rounded down to the nearest power of 2, where <em>Xmx</em> is the maximum heap size available. You can override this value by specifying the <code>-Xms</code> option on the command line.</p>
@@ -4224,7 +4224,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <dl>
 <dd>
 <p>The <em>optimize for pause time</em> policy requires a <em>flat</em> heap and uses a global GC cycle to run concurrent <em>mark-sweep</em> operations, optionally followed by <em>compact</em> operations. Pause times are shorter than with <code>optthruput</code>, but application throughput is reduced. The impact on throughput occurs because some garbage collection work is taking place in the context of mutator (application) threads, and because GC frequency is increased.</p>
-<p>To learn more about this policy and when to use it, see <a href="../gc/#optavgpause-policy">Garbage collection: 'optavgpause' policy</a>.</p>
+<p>To learn more about this policy and when to use it, see <a href="../gc/#optavgpause-policy">Garbage collection: <code>optavgpause</code> policy</a>.</p>
 </dd>
 </dl>
 <h3 id="optthruput"><code>optthruput</code></h3>
@@ -4233,7 +4233,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <dl>
 <dd>
 <p>The <em>optimize for throughput</em> policy requires a <em>flat</em> heap and uses a global GC cycle to run <em>mark-sweep</em> operations, optionally followed by <em>compact</em> operations. Because the application stops during a global GC cycle, long pauses can occur.</p>
-<p>To learn more about this policy, how it works, and when to use it, see <a href="../gc/#optthruput-policy">Garbage collection: 'optthruput' policy</a>.</p>
+<p>To learn more about this policy, how it works, and when to use it, see <a href="../gc/#optthruput-policy">Garbage collection: <code>optthruput</code> policy</a>.</p>
 </dd>
 </dl>
 <h3 id="metronome-aix-linux-x86-only"><code>metronome</code> (AIX, Linux x86 only)</h3>
@@ -4242,7 +4242,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <dl>
 <dd>
 <p>The metronome policy is an incremental, deterministic garbage collector with short pause times. Applications that are dependent on precise response times can take advantage of this technology by avoiding potentially long delays from GC activity. The <code>metronome</code> policy is supported on specific hardware and operating system configurations.</p>
-<p>To learn more about this policy, how it works, and when to use it, see <a href="../gc/#metronome-policy">Garbage collection: 'metronome' policy</a>.</p>
+<p>To learn more about this policy, how it works, and when to use it, see <a href="../gc/#metronome-policy">Garbage collection: <code>metronome</code> policy</a>.</p>
 </dd>
 </dl>
 <h4 id="metronome-defaults-and-options"><code>metronome</code> defaults and options</h4>
@@ -4290,7 +4290,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 - Weak, soft, and phantom references</p>
 </dd>
 <dd>
-<p>To learn when to use this policy, see <a href="../gc/#nogc-policy">Garbage collection: 'nogc' policy</a>.</p>
+<p>To learn when to use this policy, see <a href="../gc/#nogc-policy">Garbage collection: <code>nogc</code> policy</a>.</p>
 </dd>
 </dl>
 <p>This policy can also be enabled with the <a href="../xxusenogc/"><code>-XX:+UseNoGC</code></a> option.</p>
