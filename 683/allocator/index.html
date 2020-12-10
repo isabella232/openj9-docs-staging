@@ -1,5 +1,5 @@
 <!--
-* Copyright (c) 2017, 2020 IBM Corp. and others
+* Copyright (c) 2017, 2021 IBM Corp. and others
 *
 * This program and the accompanying materials are made
 * available under the terms of the Eclipse Public License 2.0
@@ -125,7 +125,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     
     
       <!--
-* Copyright (c) 2017, 2020 IBM Corp. and others
+* Copyright (c) 2017, 2021 IBM Corp. and others
 *
 * This program and the accompanying materials are made
 * available under the terms of the Eclipse Public License 2.0
@@ -643,6 +643,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <li class="md-nav__item">
   <a href="#allocation-caches" class="md-nav__link">
     Allocation caches
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#soa-and-loa" class="md-nav__link">
+    SOA and lOA
   </a>
   
 </li>
@@ -3915,6 +3922,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </li>
         
           <li class="md-nav__item">
+  <a href="#soa-and-loa" class="md-nav__link">
+    SOA and lOA
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#compressed-references" class="md-nav__link">
     Compressed references
   </a>
@@ -3948,7 +3962,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 -->
                 
                 <!--
-* Copyright (c) 2017, 2020 IBM Corp. and others
+* Copyright (c) 2017, 2021 IBM Corp. and others
 *
 * This program and the accompanying materials are made
 * available under the terms of the Eclipse Public License 2.0
@@ -3997,6 +4011,17 @@ For very active threads, the maximum TLH requested size might be reached before 
 </ul>
 <p>Typically, when the maximum TLH size is increased, you should also increase the increment proportionally, so that active threads can
 reach the maximum requested TLH size more quickly.</p>
+<h3 id="soa-and-loa">SOA and lOA</h3>
+<p>Some GC policies subdivide areas of the heap for object allocation into the Small Object Area (SOA) and the Large Object Area (LOA).</p>
+<p>The allocator initially attempts to allocate objects in the SOA, regardless of size. If the allocation cannot be satisfied the following actions are possible, depending on object size:</p>
+<ul>
+<li>If the object is smaller than 64 KB, an allocation failure occurs, which triggers a GC action.</li>
+<li>If the object is larger than 64 KB, the allocator attempts to allocate the object in the LOA. If the allocation cannot be satisfied, an allocation failure occurs, which triggers a GC action.</li>
+</ul>
+<p>The GC action that is triggered by the allocation failure depends on the GC policy in force.</p>
+<p>The overall size of the LOA is calculated when the heap is initialized, and recalculated at the end of each global GC cycle. The GC can expand or shrink the LOA, depending on usage, to avoid allocation failures.</p>
+<p>You can control the size of the LOA by using the <code>-Xloainitial</code>, <code>-Xloaminimum</code>, and <code>-Xloamaximum</code> command line options. If the LOA is not used, the GC shrinks the LOA after a few cycles, down to the value of <code>-Xloaminimum</code>. You can also specify <code>-Xnoloa</code> to prevent an LOA being created.</p>
+<p>The Balanced and metronome GC policies use a heap configuration that does not include the SOA or LOA.</p>
 <h3 id="compressed-references">Compressed references</h3>
 <p>On 64-bit systems, the VM can use compressed references to decrease the size of Java objects and make better use of the available space in the Java heap. By storing objects in a 32-bit representation, the object size is identical to a 32-bit object, which occupies a smaller memory footprint. These 4 byte (32-bit) compressed references are converted to 64-bit values at runtime with minimal overhead. Smaller objects enable larger heap sizes that result in less frequent garbage collection and improve memory cache utilization. Overall, the performance of 64-bit applications that store compressed rather than uncompressed 64-bit object references is significantly improved.</p>
 <p>Compressed references are used by default when the maximum Java heap size is in the range 0 - 57 GB on AIX&reg;, Linux&reg;, and Windows&reg; systems. The upper limit is also 57 GB on z/OS&reg; systems that have APAR OA49416
@@ -4023,7 +4048,7 @@ installed (25 GB without APAR OA49416). All GC policies observe these limits exc
       </main>
       
         <!--
-* Copyright (c) 2017, 2020 IBM Corp. and others
+* Copyright (c) 2017, 2021 IBM Corp. and others
 *
 * This program and the accompanying materials are made
 * available under the terms of the Eclipse Public License 2.0
