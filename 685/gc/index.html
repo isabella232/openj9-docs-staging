@@ -4339,12 +4339,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <tr>
 <td><code>gencon</code></td>
 <td>Two areas: <em>nursery</em> and <em>tenure</em> <br> Two generation groups: new/older</td>
-<td>Global GC cycle: concurrent <em>mark-sweep</em> operations, optionally followed by a <em>compact</em> operation <br> Partial GC cycle: STW <em>scavenge</em> operation or concurrent <em>scavenge</em> operation (if <code>-Xgc:concurrentScavenge</code> is set)</td>
+<td>Global GC cycle: concurrent <em>mark-sweep</em> operations, optionally followed by a <em>compact</em> operation <br> Partial GC cycle: STW <em>scavenge</em> operation or concurrent <em>scavenge</em> operation (if optionally enabled)</td>
 </tr>
 <tr>
 <td><code>balanced</code></td>
-<td>Multiple regions of equal size <br> Multiple generations: 24</td>
-<td>Global GC cycle: incremental concurrent <em>mark</em> operation (<em>global mark phase</em>), followed by a global STW <em>sweep</em> operation <br> Partial GC cycle: STW <em>copy forward</em> operation  or STW <em>mark-compact</em> operation</td>
+<td>Multiple regions of equal size <br> Multiple generations</td>
+<td>Global <em>mark</em> cycle: incremental concurrent <em>mark</em> operation (<em>global mark phase</em>) <br> Partial GC cycle: STW <em>copy forward</em> operation and occasional STW <em>sweep</em> or <em>mark-compact</em> operation</td>
 </tr>
 <tr>
 <td><code>optavgpause</code></td>
