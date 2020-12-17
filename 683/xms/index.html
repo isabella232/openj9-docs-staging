@@ -2362,19 +2362,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     Syntax
   </a>
   
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#calculating-xmx-for-large-pages" class="md-nav__link">
-    Calculating -Xmx for large pages
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -3913,19 +3900,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     Syntax
   </a>
   
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#calculating-xmx-for-large-pages" class="md-nav__link">
-    Calculating -Xmx for large pages
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -3995,7 +3969,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li>If you exceed the limit set by the <code>-Xmx</code> option, the OpenJ9 VM generates an <code>OutofMemoryError</code>.</li>
 <li>If you set a value for <code>-Xms</code>, the <a href="../xxinitialrampercentage/"><code>-XX:InitialRAMPercentage</code></a> option is ignored.</li>
 <li>If you set a value for <code>-Xmx</code>, the <a href="../xxinitialrampercentage/"><code>-XX:MaxRAMPercentage</code></a> option is ignored.</li>
-<li>If you are allocating the Java heap with large pages, see <a href="../xlp/">-Xlp</a> and <a href="#calculating-xmx-for-large-pages">Calculating <code>-Xmx</code> for large pages</a>.</li>
 </ul>
 <p>You can also use the <a href="../xmo/"><code>-Xmo</code></a> option (not supported by the balanced garbage collection policy):<br />
 If the scavenger is enabled, <code>-Xms</code> &ge; <code>-Xmn</code> + <code>-Xmo</code><br />
@@ -4024,12 +3997,6 @@ If the scavenger is disabled, <code>-Xms</code> &ge; <code>-Xmo</code>  </p>
 </table>
 <p>See <a href="../x_jvm_commands/">Using -X command-line options</a> for more information about the <code>&lt;size&gt;</code> parameter.<br />
 See <a href="../openj9_defaults/">Default settings for the OpenJ9 VM</a> for more about default values.</p>
-<h3 id="calculating-xmx-for-large-pages">Calculating <code>-Xmx</code> for large pages</h3>
-<p>For z/OS&reg; and Linux&reg; on IBM Z&reg;, specifying an object heap size that is a multiple of the page size uses another page of memory. For example, if the page size is 2 GB, setting <code>-Xmx2G</code> actually uses 4 GB of memory. To avoid using more memory, make the heap size a little smaller than an integral number of pages by subtracting at least 16 bytes from the value that you set with the <code>-Xmx</code> option. The following examples are provided:</p>
-<ul>
-<li>For Linux on IBM Z, you might set <code>-Xmx=61203283972</code> for a 57 GB heap (61203283968 bytes minus 16 bytes).</li>
-<li>For z/OS, you might set <code>-Xmx=32212254704</code> for a 30 GB heap (32212254720 bytes minus 16 bytes), or <code>-Xmx=66571993072</code> for a 62 GB heap (66571993088 bytes minus 16 bytes).</li>
-</ul>
 <h2 id="examples">Examples</h2>
 <dl>
 <dt><code>-Xms2m -Xmx64m</code></dt>
