@@ -119,7 +119,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="../#memory-management-overview" tabindex="1" class="md-skip">
+      <a href="../#garbage-collection" tabindex="1" class="md-skip">
         
       </a>
     
@@ -633,48 +633,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#the-allocator" class="md-nav__link">
-    The allocator
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#allocation-caches" class="md-nav__link">
-    Allocation caches
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#soa-and-loa" class="md-nav__link">
-    SOA and LOA
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#compressed-references" class="md-nav__link">
-    Compressed references
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#the-garbage-collector" class="md-nav__link">
-    The garbage collector
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
   <a href="#gc-operations" class="md-nav__link">
     GC operations
   </a>
@@ -687,7 +645,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     GC mark operation
   </a>
   
-</li>
+    <nav class="md-nav">
+      <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#gc-parallel-mark-operation" class="md-nav__link">
@@ -710,12 +669,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   
 </li>
         
+      </ul>
+    </nav>
+  
+</li>
+        
           <li class="md-nav__item">
   <a href="#gc-sweep-operation" class="md-nav__link">
     GC sweep operation
   </a>
   
-</li>
+    <nav class="md-nav">
+      <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#gc-parallel-sweep-operation" class="md-nav__link">
@@ -728,6 +693,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <a href="#gc-concurrent-sweep-operation" class="md-nav__link">
     GC concurrent sweep operation
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -763,11 +733,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <a href="#gc-mark-compact-operation" class="md-nav__link">
     GC mark compact operation
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -4017,48 +3982,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#the-allocator" class="md-nav__link">
-    The allocator
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#allocation-caches" class="md-nav__link">
-    Allocation caches
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#soa-and-loa" class="md-nav__link">
-    SOA and LOA
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#compressed-references" class="md-nav__link">
-    Compressed references
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#the-garbage-collector" class="md-nav__link">
-    The garbage collector
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
   <a href="#gc-operations" class="md-nav__link">
     GC operations
   </a>
@@ -4071,7 +3994,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     GC mark operation
   </a>
   
-</li>
+    <nav class="md-nav">
+      <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#gc-parallel-mark-operation" class="md-nav__link">
@@ -4094,12 +4018,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   
 </li>
         
+      </ul>
+    </nav>
+  
+</li>
+        
           <li class="md-nav__item">
   <a href="#gc-sweep-operation" class="md-nav__link">
     GC sweep operation
   </a>
   
-</li>
+    <nav class="md-nav">
+      <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#gc-parallel-sweep-operation" class="md-nav__link">
@@ -4112,6 +4042,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <a href="#gc-concurrent-sweep-operation" class="md-nav__link">
     GC concurrent sweep operation
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -4147,11 +4082,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <a href="#gc-mark-compact-operation" class="md-nav__link">
     GC mark compact operation
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -4205,49 +4135,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 * Classpath-exception-2.0 OR LicenseRef-GPL-2.0 WITH Assembly-exception
 -->
 
-<h1 id="memory-management-overview">Memory management overview</h1>
-<p>The process of managing memory in the VM is handled by the allocator and the garbage collector. These components operate on an area of memory that is reserved for VM processing called the Java&trade; heap.</p>
-<h2 id="the-allocator">The allocator</h2>
-<p>The allocator assigns areas of the Java heap for Java objects. Objects are considered as <em>live</em> when they have a chain of references to them that start from root references, such as those found in thread stacks. When that reference or pointer no longer exists, the objects are considered as <em>garbage</em>.</p>
-<p>The allocator manages pools of free memory and how the free memory is consumed. It is also responsible for allocating areas of storage in the Java heap for objects at the request of applications, class libraries, or the VM.</p>
-<p>Every allocation requires a <em>heap lock</em> to stop concurrent threads trying to access the same area of memory at the same time. When an object is allocated, the heap lock is released. If there is insufficient space to allocate the object, allocation fails, the heap lock is released, and the GC is called. If the GC manages to recover some space on the heap, the allocator can resume operations. If the GC does not recover enough space, it returns an <code>OutOfMemoryError</code> exception.</p>
-<p>Acquiring a heap lock for every allocation would be an intensive operation with a knock on impact to performance. To get around this problem, small objects are allocated to allocation caches.</p>
-<h3 id="allocation-caches">Allocation caches</h3>
-<p>To improve performance, allocation caches are reserved in the heap for different threads. These allocation caches are known as thread local heaps (TLH) and allow each thread to allocate memory from its cache without acquiring the heap lock. A TLH is typically used for small objects of less than 512 bytes (768 bytes on 64-bit VMs) although larger objects can be allocated from the cache if there is sufficient space.</p>
-<p>If a thread allocates a lot of objects, the allocator gives that thread a larger TLH to reduce contention on the heap lock.</p>
-<p>A TLH is predefined with an initial default size of 2 KB. On every TLH refresh, the requested size for that thread
-is increased by an increment (default 4 KB). The requested size can grow up to a predefined maximum (default 128 KB).</p>
-<p>After every GC cycle, the TLH requested size for each thread is reduced, sometimes by as much as 50%, to take account of threads that
-reduce their allocation rate and no longer need large TLHs.</p>
-<p>For very inactive threads, the requested size can even drop below the initial value, down to the predefined minimum (512/768 bytes).
-For very active threads, the maximum TLH requested size might be reached before the next GC occurs.</p>
-<p>Larger TLHs can help reduce heap lock contention, but might also reduce heap utilisation and increase heap fragmentation.</p>
-<p>The following options control the requested TLH size:</p>
-<ul>
-<li><a href="../xgc/#tlhmaximumsize"><code>-Xgc:tlhMaximumSize=&lt;bytes&gt;</code></a></li>
-<li><a href="../xgc/#tlhinitialsize"><code>-Xgc:tlhInitialSize=&lt;bytes&gt;</code></a></li>
-<li><a href="../xgc/#tlhincrementsize"><code>-Xgc:tlhIncrementSize=&lt;bytes&gt;</code></a></li>
-</ul>
-<p>Typically, when the maximum TLH size is increased, you should also increase the increment proportionally, so that active threads can
-reach the maximum requested TLH size more quickly.</p>
-<h3 id="soa-and-loa">SOA and LOA</h3>
-<p>Some GC policies subdivide areas of the heap for object allocation into the Small Object Area (SOA) and the Large Object Area (LOA).</p>
-<p>The allocator initially attempts to allocate objects in the SOA, regardless of size. If the allocation cannot be satisfied the following actions are possible, depending on object size:</p>
-<ul>
-<li>If the object is smaller than 64 KB, an allocation failure occurs, which triggers a GC action.</li>
-<li>If the object is larger than 64 KB, the allocator attempts to allocate the object in the LOA. If the allocation cannot be satisfied, an allocation failure occurs, which triggers a GC action.</li>
-</ul>
-<p>The GC action that is triggered by the allocation failure depends on the GC policy in force.</p>
-<p>The overall size of the LOA is calculated when the heap is initialized, and recalculated at the end of each global GC cycle. The GC can expand or shrink the LOA, depending on usage, to avoid allocation failures.</p>
-<p>You can control the size of the LOA by using the <code>-Xloainitial</code>, <code>-Xloaminimum</code>, and <code>-Xloamaximum</code> command line options (See <a href="../xloaminimum/">LOA sizing options</a>). If the LOA is not used, the GC shrinks the LOA after a few cycles, down to the value of <code>-Xloaminimum</code>. You can also specify <a href="../xloa/"><code>-Xnoloa</code></a> to prevent an LOA being created.</p>
-<p>An SOA and LOA are used by the OpenJ9 standard GC policies: <code>gencon</code>, <code>optavgpause</code> and <code>optthruput</code>. However, the <code>balanced</code> and <code>metronome</code> GC policies use a heap configuration that does not include the SOA or LOA. For more information about policies, see <a href="../gc/">Garbage collection policies</a>.</p>
-<h3 id="compressed-references">Compressed references</h3>
-<p>On 64-bit systems, the VM can use compressed references to decrease the size of Java objects and make better use of the available space in the Java heap. By storing objects in a 32-bit representation, the object size is identical to a 32-bit object, which occupies a smaller memory footprint. These 4 byte (32-bit) compressed references are converted to 64-bit values at runtime with minimal overhead. Smaller objects enable larger heap sizes that result in less frequent garbage collection and improve memory cache utilization. Overall, the performance of 64-bit applications that store compressed rather than uncompressed 64-bit object references is significantly improved.</p>
-<p>Compressed references are used by default when the maximum Java heap size is in the range 0 - 57 GB on AIX&reg;, Linux&reg;, and Windows&reg; systems. The upper limit is also 57 GB on z/OS&reg; systems that have APAR OA49416
-installed (25 GB without APAR OA49416). All GC policies observe these limits except for the <a href="../gc/#metronome-policy"><code>metronome</code></a> policy, which can only support a heap size of up to 25 GB with compressed references.</p>
-<p>When the VM uses compressed references, classes, threads, and monitors are stored in the lowest 4 GB of address space. However, this area of memory is also used by native libraries, the operating system, and for small Java heaps. If you receive native memory <code>OutOfMemoryError</code> exceptions in the lowest 4 GB when running with compressed references enabled, these errors might result from the lowest 4 GB of address space becoming full. Try specifying a large heap with the <a href="../xms/"><code>-Xmx</code></a> option, which puts the Java heap into a higher area of address space or using the <a href="../xmcrs/"><code>-Xmcrs</code></a> option to reserve space in the lowest 4 GB of address space for compressed references.</p>
-<p>To turn off compressed references, use the <a href="../xcompressedrefs/"><code>-Xnocompressedrefs</code></a> command-line option.</p>
-<h2 id="the-garbage-collector">The garbage collector</h2>
+<h1 id="garbage-collection">Garbage collection</h1>
 <p>To prevent applications running out of memory, objects in the Java heap that are no longer required must be reclaimed. This process is known as <em>garbage collection</em> (GC). When garbage is collected, the garbage collector must obtain exclusive access to the heap, which causes an application to pause while the clean up is done. This pause is often referred to as a <em>stop-the-world</em> (STW) pause because an application must halt until the process completes. In general, the first step in the GC process is to <em>mark</em> the objects that are reachable, which means they are still in use. The next step is to <em>sweep</em> away the unmarked objects to reclaim memory. The final step is to <em>compact</em> the heap if the heap is badly fragmented.</p>
 <p>A GC cycle is a repeatable process that involves a set of GC operations. These operations process all or parts of the Java heap. When operating on the
 whole of the Java heap, the cycle is referred to as a <em>global GC cycle</em>; When operating on part of the heap, the cycle is referred to as a <em>partial GC cycle</em>.</p>
@@ -4257,10 +4145,10 @@ whole of the Java heap, the cycle is referred to as a <em>global GC cycle</em>; 
 <li>A global GC cycle is triggered explicitly if it is started directly by an application calling <code>System.gc()</code> or indirectly, for example when requesting a heap dump.</li>
 </ul>
 <p>Partial GC cycles are triggered only implicitly under the control of a particular GC policy. For more information about the GC policies available with OpenJ9, see <a href="../gc/">Garbage collection policies</a>.</p>
-<h3 id="gc-operations">GC operations</h3>
+<h2 id="gc-operations">GC operations</h2>
 <p>GC operations run discrete functions on the Java heap. For example, a <em>mark</em> operation traces all objects in the heap to determine which ones are reachable. A <em>sweep</em> operation runs to clear away unreachable objects. Together, a <em>mark</em> and <em>sweep</em> operation are capable of reclaiming used memory as part of a GC cycle. Not all GC cycles include operations to reclaim memory. For example, the balanced GC policy involves a global cycle that includes only a <em>mark</em> operation; reclaiming the memory with a <em>sweep</em> operation occurs as part of a separate partial GC cycle.</p>
-<p>A GC operation might complete in one step, or it might involve phases. For example, a mark operation consists of the 3 phases, as described in the following section.</p>
-<h4 id="gc-mark-operation">GC <em>mark</em> operation</h4>
+<p>A GC operation might complete in one step, or it might involve phases. For example, a mark operation consists of three phases, as described in the following section.</p>
+<h3 id="gc-mark-operation">GC <em>mark</em> operation</h3>
 <p>A <em>mark</em> operation identifies which objects on the Java heap are reachable from outside of the heap and which objects are unreachable. Reachable objects are in use and must be retained, whereas unreachable objects are not in use and can be cleared away as <em>garbage</em>.</p>
 <p>The process of marking involves a bit array called a <em>mark map</em> that is allocated by the VM at startup, based on the maximum heap size setting. Each bit in the <em>mark map</em> corresponds to 8 bytes of heap space. When an object is <em>marked</em>, its location in the heap is recorded by setting the appropriate bit in the <em>mark map</em>.</p>
 <p>A <em>mark</em> operation can be broken down into the following phases:</p>
@@ -4295,7 +4183,7 @@ whole of the Java heap, the cycle is referred to as a <em>global GC cycle</em>; 
 <p>Incremental concurrent mark operations are used in the <code>balanced</code> GC policy to even out pause times by avoiding global STW garbage collections. These operations are also known as the <em>global mark phase</em>, whereby <em>mark</em> operations take place incrementally across the entire heap. The global <em>mark</em> operations are interleaved with a partial GC cycle that is responsible for moving objects and clearing unreachable objects in the heap.</p>
 <p>These operations also use <em>cards</em> in a <em>card table</em> to manage updates to objects that occur whilst <em>mark</em> operations are in progress. However, unlike the concurrent <em>mark</em> operations used by other policies, application threads are not involved in tracing objects; only background threads are used to trace objects and update the <em>cards</em>.</p>
 <p>For more information about GC operations for the <code>balanced</code> GC policy, see <a href="../gc/#balanced-policy">Garbage collection policies</a></p>
-<h4 id="gc-sweep-operation">GC <em>sweep</em> operation</h4>
+<h3 id="gc-sweep-operation">GC <em>sweep</em> operation</h3>
 <p>The purpose of a <em>sweep</em> operation is to identify memory that can be reclaimed for object allocation and update a central record, known as the <em>freelist</em>.</p>
 <h4 id="gc-parallel-sweep-operation">GC parallel <em>sweep</em> operation</h4>
 <p>Similar to the parallel <em>mark</em> operation, multiple helper threads can be used to <em>sweep</em> the Java heap to speed up processing times. Because these helper threads are the same ones that are used for parallel <em>mark</em> operations, the number of threads can be controlled by using the <a href="../xgcthreads/">-Xgcthreads</a> option.</p>
@@ -4313,16 +4201,16 @@ whole of the Java heap, the cycle is referred to as a <em>global GC cycle</em>; 
 <p>Based on the analysis, the sections of the heap are connected to the <em>freelist</em>.</p>
 <p>Concurrent <em>sweep</em> operations work in tandem with concurrent <em>mark</em> operations and use the same <em>mark map</em>. Concurrent <em>sweep</em> operations start after a STW collection and complete a section of the heap before concurrent <em>mark</em> operations continue.</p>
 <p>Concurrent <em>sweep</em> is used by the <code>optavgpause</code> GC policy.</p>
-<h4 id="gc-scavenge-operation">GC <em>scavenge</em> operation</h4>
+<h3 id="gc-scavenge-operation">GC <em>scavenge</em> operation</h3>
 <p>A GC <em>scavenge</em> operation is used by the <code>gencon</code> policy to move an object in the heap to create space for new object allocations. The object is copied from the <em>nursery</em> area of the heap to the <em>tenure</em> area, which is reserved for older generations of objects.</p>
-<h4 id="gc-copy-forward-operation">GC <em>copy forward</em> operation</h4>
+<h3 id="gc-copy-forward-operation">GC <em>copy forward</em> operation</h3>
 <p>A GC <em>copy forward</em> operation is similar to a <em>scavenge</em> operation. The <em>copy forward</em> operation is used by the <code>balanced</code> GC Policy to move an object from a younger region to an older region in the heap. The operation aims to empty or <em>evacuate</em> fragmented regions that then become available for new object allocation.</p>
-<h4 id="gc-classunloading-operation">GC <em>classunloading</em> operation</h4>
-<h4 id="gc-compact-operation">GC <em>compact</em> operation</h4>
+<h3 id="gc-classunloading-operation">GC <em>classunloading</em> operation</h3>
+<h3 id="gc-compact-operation">GC <em>compact</em> operation</h3>
 <p>Compaction of the heap is an expensive operation because when objects are moved to defragment the heap, the references to each object change. Therefore, <em>compact</em> operations do not occur by default but only when certain triggers occur.</p>
 <p><strong>Add the triggers:</strong></p>
 <p>Two options are available to control <em>compact</em> operations; <a href="../xcompactgc/"><code>-Xcompactgc</code></a> and <a href="xnocompactgc.md"><code>-Xnocompactgc</code></a>. If <code>-Xnocompactgc</code> is specified, compaction occurs only in rare circumstances.</p>
-<h4 id="gc-mark-compact-operation">GC <em>mark compact</em> operation</h4>
+<h3 id="gc-mark-compact-operation">GC <em>mark compact</em> operation</h3>
 <p>A GC <em>mark compact</em> operation is sometimes used instead of a <em>copy forward</em> operation by the <code>balanced</code> GC policy. Rather than moving or <em>evacuating</em> objects to empty regions, objects within a region are <em>marked</em> and the region <em>compacted</em> to free up contiguous space.</p>
 <!-- ==== END OF TOPIC ==== gc_overview.md ==== -->
                 
