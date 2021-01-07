@@ -4137,18 +4137,34 @@ whole of the Java heap, the cycle is referred to as a <em>global GC cycle</em>; 
 <p>The process of marking involves a bit array called a <em>mark map</em> that is allocated by the VM at startup, based on the maximum heap size setting. Each bit in the <em>mark map</em> corresponds to 8 bytes of heap space. When an object is <em>marked</em>, its location in the heap is recorded by setting the appropriate bit in the <em>mark map</em>.</p>
 <p>A <em>mark</em> operation can be broken down into the following phases:</p>
 <ol>
-<li>Initial phase</li>
-</ol>
+<li>
+<p>Initial phase</p>
 <p>A root object is an object that is accessible from outside of the heap such as a stack, class static field, or JNI reference. For other objects in the heap to be reachable, they must retain a connection from a root object. In the initial phase, tracing identifies all root objects by running a root scan. Root objects are pushed onto a work stack for processing in the next phase.</p>
-<ol start="2">
-<li>Main phase</li>
-</ol>
+</li>
+<li>
+<p>Main phase</p>
 <p>The list of reachable root objects in the work stack is recursively traced for references to other objects in the heap. If new objects are found, they are added to the work stack. If an object is reachable, the appropriate bit is set in the <em>mark map</em>.</p>
-<ol start="3">
-<li>Final phase</li>
-</ol>
+</li>
+<li>
+<p>Final phase</p>
 <p>The final phase processes weakly reachable roots such as finalizable objects, weak references, monitor sets, and string sets. If reachable objects are found, the appropriate bit is set in the <em>mark map</em>. For more information about the processing of <em>soft</em>, <em>weak</em>, and <em>phantom</em> references, see <a href="#weak-reference-processing">Weak reference processing</a>.</p>
+</li>
+</ol>
 <p>In general, helper threads are used in parallel to speed up <em>mark</em> operations on the heap. The helper threads share the work stack with the application thread and are involved in identifying root objects, tracing objects in the heap, and updating the <em>mark map</em>. By default, the number of helper threads is based on the number of CPUs reported by the operating system. You can control the number of helper threads available by specifying the <a href="../xgcthreads/">-Xgcthreads</a> command line option when starting your application.</p>
+<p>In a verbose GC log, this operation is shown by the <code>&lt;gc-op type="mark"&gt;</code> XML element, which is similar to the following example:</p>
+<pre><code>&lt;gc-op id=&quot;19086&quot; type=&quot;mark&quot; timems=&quot;4.619&quot; contextid=&quot;19066&quot; timestamp=&quot;2020-10-18T13:39:28.893&quot;&gt;
+  &lt;trace-info objectcount=&quot;2356&quot; scancount=&quot;2038&quot; scanbytes=&quot;62884&quot; /&gt;
+  &lt;finalization candidates=&quot;392&quot; enqueued=&quot;0&quot; /&gt;
+  &lt;ownableSynchronizers candidates=&quot;5173&quot; cleared=&quot;625&quot; /&gt;
+  &lt;references type=&quot;soft&quot; candidates=&quot;18390&quot; cleared=&quot;0&quot; enqueued=&quot;0&quot; dynamicThreshold=&quot;16&quot; maxThreshold=&quot;32&quot; /&gt;
+  &lt;references type=&quot;weak&quot; candidates=&quot;19808&quot; cleared=&quot;244&quot; enqueued=&quot;244&quot; /&gt;
+  &lt;references type=&quot;phantom&quot; candidates=&quot;643&quot; cleared=&quot;28&quot; enqueued=&quot;28&quot; /&gt;
+  &lt;stringconstants candidates=&quot;40849&quot; cleared=&quot;2&quot;  /&gt;
+  &lt;object-monitors candidates=&quot;163&quot; cleared=&quot;29&quot;  /&gt;
+&lt;/gc-op&gt;
+</code></pre>
+
+<p>For more information about verbose GC logs, see <a href="">Troubleshooting GC</a>.</p>
 <h4 id="concurrent-mark-processing">Concurrent <em>mark</em> processing</h4>
 <p>A <em>mark</em> operation can run with exclusive access to the heap, which requires application threads to pause while processing takes place. Alternatively, it can run concurrently with application threads to avoid pauses in application processing.</p>
 <p>With concurrent <em>mark</em>, the process of root scanning is handed over to application stack threads, which populate the work stack with root objects in their stack. The root objects in the work stack are then traced by a background thread and by each application thread during a heap lock allocation to find reachable objects and update the <em>mark map</em>. Because the <em>mark</em> operation runs concurrently with application threads, any changes to objects that are already traced must be updated. This process works by using a write barrier that can flag the update and trigger a further scan of part of the heap.</p>
@@ -4166,51 +4182,99 @@ whole of the Java heap, the cycle is referred to as a <em>global GC cycle</em>; 
 <p>The purpose of a <em>sweep</em> operation is to identify memory that can be reclaimed for object allocation and update a central record, known as the <em>freelist</em>.</p>
 <p><em>sweep</em> operations occur in 2 phases:</p>
 <ol>
-<li>Initial phase</li>
-</ol>
+<li>
+<p>Initial phase</p>
 <p>This phase analyzes the <em>mark map</em> for free memory.</p>
-<ol start="2">
-<li>Final phase</li>
-</ol>
+</li>
+<li>
+<p>Final phase</p>
 <p>Based on the analysis, the sections of the heap are connected to the <em>freelist</em>.</p>
+</li>
+</ol>
 <p>As with <em>mark</em> operations, multiple helper threads can be used to <em>sweep</em> the Java heap in parallel to speed up processing times. Because these helper threads are the same ones that are used for parallel <em>mark</em> operations, the number of threads can be controlled by using the <a href="../xgcthreads/">-Xgcthreads</a> option.</p>
 <p>Parallel <em>sweep</em> operations run on 256 KB sections of the heap. Each helper thread scans a section at a time. The results are stored and used to generate a <em>freelist</em> of empty regions.</p>
+<p>In a verbose GC log, this operation is shown by the <code>&lt;gc-op type="sweep"&gt;</code> XML element, which is similar to the following example:</p>
+<pre><code>&lt;gc-op id=&quot;12386&quot; type=&quot;sweep&quot; timems=&quot;9.464&quot; contextid=&quot;12364&quot; timestamp=&quot;2020-10-18T13:35:44.618&quot; /&gt;
+</code></pre>
+
+<p>For more information about verbose GC logs, see <a href="">Troubleshooting GC</a>.</p>
 <h4 id="concurrent-sweep-processing">Concurrent <em>sweep</em> processing</h4>
 <p>Concurrent <em>sweep</em> processing works in tandem with concurrent <em>mark</em> processing and uses the same <em>mark map</em>. Concurrent <em>sweep</em> operations start after a STW collection and complete a section of the heap before concurrent <em>mark</em> operations continue.</p>
 <p>Concurrent <em>sweep</em> is used by the <code>optavgpause</code> GC policy.</p>
 <h3 id="gc-scavenge-operation">GC <em>scavenge</em> operation</h3>
-<p>A GC <em>scavenge</em> operation occurs in 2 phases:</p>
+<p>A GC <em>scavenge</em> operation occurs in 3 phases:</p>
 <ol>
-<li>Initial phase</li>
-</ol>
+<li>
+<p>Initial phase</p>
 <p>A root object is an object that is accessible from outside of the heap such as a stack, class static field, or JNI reference. For other objects in the heap to be reachable, they must retain a connection from a root object. In the initial phase, tracing identifies all root objects by running a root scan. Root objects are pushed onto a work stack for processing in the next phase.</p>
-<ol start="2">
-<li>Main phase</li>
-</ol>
+</li>
+<li>
+<p>Main phase</p>
 <p>The list of reachable root objects in the work stack is recursively traced for references to other objects in the heap. If new objects are found, they are added to the work stack. If an object is reachable, it is copied from the <em>allocate</em> space to the <em>survivor</em> space in the <em>nursery</em> area or to the <em>tenure</em> area if the object has reached a particular age.</p>
-<ol start="3">
-<li>Final phase</li>
-</ol>
+</li>
+<li>
+<p>Final phase</p>
 <p>The final phase processes weakly reachable roots such as finalizable objects, weak references, monitor sets, and string sets. If reachable objects are found, the appropriate bit is set in the <em>mark map</em>. For more information about the processing of <em>soft</em>, <em>weak</em>, and <em>phantom</em> references, see <a href="#weak-reference-processing">Weak reference processing</a>.</p>
+</li>
+</ol>
+<p>In a verbose GC log, this operation is shown by the <code>&lt;gc-op type="scavenge"&gt;</code> XML element, which is similar to the following example:</p>
+<pre><code>&lt;gc-op id=&quot;12397&quot; type=&quot;scavenge&quot; timems=&quot;11.649&quot; contextid=&quot;12394&quot; timestamp=&quot;2020-10-18T13:35:45.012&quot;&gt;
+  &lt;scavenger-info tenureage=&quot;7&quot; tenuremask=&quot;4080&quot; tiltratio=&quot;89&quot; /&gt;
+  &lt;memory-copied type=&quot;nursery&quot; objects=&quot;154910&quot; bytes=&quot;6027440&quot; bytesdiscarded=&quot;394832&quot; /&gt;
+  &lt;memory-copied type=&quot;tenure&quot; objects=&quot;16171&quot; bytes=&quot;562848&quot; bytesdiscarded=&quot;3064&quot; /&gt;
+  &lt;ownableSynchronizers candidates=&quot;10838&quot; cleared=&quot;10824&quot; /&gt;
+  &lt;references type=&quot;soft&quot; candidates=&quot;24&quot; cleared=&quot;0&quot; enqueued=&quot;0&quot; dynamicThreshold=&quot;16&quot; maxThreshold=&quot;32&quot; /&gt;
+  &lt;references type=&quot;weak&quot; candidates=&quot;390&quot; cleared=&quot;269&quot; enqueued=&quot;269&quot; /&gt;
+  &lt;references type=&quot;phantom&quot; candidates=&quot;1&quot; cleared=&quot;0&quot; enqueued=&quot;0&quot; /&gt;
+  &lt;object-monitors candidates=&quot;132&quot; cleared=&quot;0&quot;  /&gt;
+&lt;/gc-op&gt;
+</code></pre>
+
+<p>For more information about verbose GC logs, see <a href="">Troubleshooting GC</a>.</p>
 <p>The <em>scavenge</em> operation is used by the <a href="../gc/#gencon-policy-default"><code>gencon</code> GC policy</a>.</p>
 <h3 id="gc-copy-forward-operation">GC <em>copy forward</em> operation</h3>
 <p>A GC <em>copy forward</em> operation is similar to a <em>scavenge</em> operation and also occurs in 3 phases:</p>
 <ol>
-<li>Initial phase</li>
-</ol>
+<li>
+<p>Initial phase</p>
 <p>A root object is an object that is accessible from outside of the heap such as a stack, class static field, or JNI reference. For other objects in the heap to be reachable, they must retain a connection from a root object. In the initial phase, tracing identifies all root objects by running a root scan. Root objects are pushed onto a work stack for processing in the next phase.</p>
-<ol start="2">
-<li>Main phase</li>
-</ol>
+</li>
+<li>
+<p>Main phase</p>
 <p>The list of reachable root objects in the work stack is recursively traced for references to other objects in the heap. If new objects are found, they are added to the work stack. If an object is reachable, it is moved to another region of the same age or to an empty region of the same age in the heap. The age of all regions in the heap is then incremented by 1, except for the oldest region (age 24).</p>
-<ol start="3">
-<li>Final phase</li>
-</ol>
+</li>
+<li>
+<p>Final phase</p>
 <p>The final phase processes weakly reachable roots such as finalizable objects, weak references, monitor sets, and string sets. If reachable objects are found, the appropriate bit is set in the <em>mark map</em>. For more information about the processing of <em>soft</em>, <em>weak</em>, and <em>phantom</em> references, see <a href="#weak-reference-processing">Weak reference processing</a>.</p>
+</li>
+</ol>
 <p>The operation aims to empty or <em>evacuate</em> fragmented regions that can then be reclaimed for new object allocation.</p>
+<p>In a verbose GC log, this operation is shown by the <code>&lt;gc-op type="copy forward"&gt;</code> XML element, which is similar to the following example:</p>
+<pre><code>&lt;gc-op id=&quot;1502&quot; type=&quot;copy forward&quot; timems=&quot;127.110&quot; contextid=&quot;1499&quot; timestamp=&quot;2020-11-13T06:33:41.331&quot;&gt;
+  &lt;memory-copied type=&quot;eden&quot; objects=&quot;1813616&quot; bytes=&quot;48230096&quot; bytesdiscarded=&quot;1049944&quot; /&gt;
+  &lt;memory-copied type=&quot;other&quot; objects=&quot;3156935&quot; bytes=&quot;85461568&quot; bytesdiscarded=&quot;3442800&quot; /&gt;
+  &lt;memory-cardclean objects=&quot;944281&quot; bytes=&quot;34840056&quot; /&gt;
+  &lt;regions eden=&quot;384&quot; other=&quot;68&quot; /&gt;
+  &lt;remembered-set-cleared processed=&quot;3113467&quot; cleared=&quot;352213&quot; durationms=&quot;10.761&quot; /&gt;
+  &lt;ownableSynchronizers candidates=&quot;4772&quot; cleared=&quot;3922&quot; /&gt;
+  &lt;references type=&quot;soft&quot; candidates=&quot;1423&quot; cleared=&quot;0&quot; enqueued=&quot;0&quot; dynamicThreshold=&quot;7&quot; maxThreshold=&quot;32&quot; /&gt;
+  &lt;references type=&quot;weak&quot; candidates=&quot;140&quot; cleared=&quot;140&quot; enqueued=&quot;0&quot; /&gt;
+  &lt;stringconstants candidates=&quot;10902&quot; cleared=&quot;0&quot;  /&gt;
+  &lt;object-monitors candidates=&quot;3302&quot; cleared=&quot;3181&quot;  /&gt;
+&lt;/gc-op&gt;
+</code></pre>
+
+<p>For more information about verbose GC logs, see <a href="">Troubleshooting GC</a>.</p>
 <p>The <em>copy forward</em> operation is used by the <a href="../gc/#balanced-policy"><code>balanced GC policy</code></a>.</p>
 <h3 id="gc-classunloading-operation">GC <em>classunloading</em> operation</h3>
 <p>Not parallel, single threaded</p>
+<p>In a verbose GC log, this operation is shown by the <code>&lt;gc-op type="classunload"&gt;</code> XML element, which is similar to the following example:</p>
+<pre><code>&lt;gc-op id=&quot;1481&quot; type=&quot;classunload&quot; timems=&quot;0.036&quot; contextid=&quot;1477&quot; timestamp=&quot;2020-11-13T06:33:40.450&quot;&gt;
+  &lt;classunload-info classloadercandidates=&quot;177&quot; classloadersunloaded=&quot;0&quot; classesunloaded=&quot;0&quot; anonymousclassesunloaded=&quot;0&quot; quiescems=&quot;0.000&quot; setupms=&quot;0.036&quot; scanms=&quot;0.000&quot; postms=&quot;0.000&quot; /&gt;
+&lt;/gc-op&gt;
+</code></pre>
+
+<p>For more information about verbose GC logs, see <a href="">Troubleshooting GC</a>.</p>
 <h3 id="gc-compact-operation">GC <em>compact</em> operation</h3>
 <p>Compaction of the heap is an expensive operation because when objects are moved to defragment the heap, the references to each object change. Therefore, <em>compact</em> operations do not occur by default but only when the following triggers occur:</p>
 <ul>
@@ -4227,6 +4291,14 @@ whole of the Java heap, the cycle is referred to as a <em>global GC cycle</em>; 
 <li><a href="../xcompactgc/"><code>-Xcompactgc</code></a> forces compaction of the heap.</li>
 <li><a href="xnocompactgc.md"><code>-Xnocompactgc</code></a> avoids compaction of the heap as a result of all the triggers shown in the preceding list. However a compaction can still occur in rare circumstances.</li>
 </ul>
+<p>In a verbose GC log, this operation is shown by the <code>&lt;gc-op type="compact"&gt;</code> XML element, which is similar to the following example:</p>
+<pre><code>&lt;gc-op id=&quot;1483&quot; type=&quot;compact&quot; timems=&quot;13.443&quot; contextid=&quot;1477&quot; timestamp=&quot;2020-11-13T06:33:40.465&quot;&gt;
+  &lt;compact-info movecount=&quot;0&quot; movebytes=&quot;0&quot; /&gt;
+  &lt;remembered-set-cleared processed=&quot;6230936&quot; cleared=&quot;373000&quot; durationms=&quot;10.386&quot; /&gt;
+&lt;/gc-op&gt;
+</code></pre>
+
+<p>For more information about verbose GC logs, see <a href="">Troubleshooting GC</a>.</p>
 <h2 id="weak-reference-processing">Weak reference processing</h2>
 <p>Weak reference processing includes <em>soft</em> references, <em>weak</em> references, and <em>phantom</em> references. These references are created by the user for specific use cases and allow
 some level of interaction with the garbage collector. For example, a <em>soft</em> reference to an object allows that object to persist in memory for a longer period of time before being
