@@ -661,13 +661,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#gc-parallel-mark-operation" class="md-nav__link">
-    GC parallel mark operation
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#gc-concurrent-mark-operation" class="md-nav__link">
     GC concurrent mark operation
   </a>
@@ -693,13 +686,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   
     <nav class="md-nav">
       <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#gc-parallel-sweep-operation" class="md-nav__link">
-    GC parallel sweep operation
-  </a>
-  
-</li>
         
           <li class="md-nav__item">
   <a href="#gc-concurrent-sweep-operation" class="md-nav__link">
@@ -741,15 +727,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#gc-mark-compact-operation" class="md-nav__link">
-    GC mark compact operation
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#weak-reference-processing" class="md-nav__link">
+    Weak reference processing
+  </a>
   
 </li>
       
@@ -4010,13 +3996,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#gc-parallel-mark-operation" class="md-nav__link">
-    GC parallel mark operation
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#gc-concurrent-mark-operation" class="md-nav__link">
     GC concurrent mark operation
   </a>
@@ -4042,13 +4021,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   
     <nav class="md-nav">
       <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#gc-parallel-sweep-operation" class="md-nav__link">
-    GC parallel sweep operation
-  </a>
-  
-</li>
         
           <li class="md-nav__item">
   <a href="#gc-concurrent-sweep-operation" class="md-nav__link">
@@ -4090,15 +4062,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#gc-mark-compact-operation" class="md-nav__link">
-    GC mark compact operation
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#weak-reference-processing" class="md-nav__link">
+    Weak reference processing
+  </a>
   
 </li>
       
@@ -4158,7 +4130,7 @@ whole of the Java heap, the cycle is referred to as a <em>global GC cycle</em>; 
 </ul>
 <p>Partial GC cycles are triggered only implicitly under the control of a particular GC policy. For more information about the GC policies available with OpenJ9, see <a href="../gc/">Garbage collection policies</a>.</p>
 <h2 id="gc-operations">GC operations</h2>
-<p>GC operations run discrete functions on the Java heap. For example, a <em>mark</em> operation traces all objects in the heap to determine which ones are reachable. A <em>sweep</em> operation runs to clear away unreachable objects. Together, a <em>mark</em> and <em>sweep</em> operation are capable of reclaiming used memory as part of a GC cycle. Not all GC cycles include operations to reclaim memory. For example, the balanced GC policy involves a global cycle that includes only a <em>mark</em> operation; reclaiming the memory with a <em>sweep</em> operation occurs as part of a separate partial GC cycle.</p>
+<p>GC operations run discrete functions on the Java heap. For example, a <em>mark</em> operation traces all objects in the heap to determine which ones are reachable. A <em>sweep</em> operation runs to clear away unreachable objects. Together, a <em>mark</em> and <em>sweep</em> operation are capable of reclaiming used memory as part of a GC cycle. Not all GC cycles include operations to reclaim memory. For example, the <code>balanced</code> GC policy involves a global cycle that includes only a <em>mark</em> operation; reclaiming the memory with a <em>sweep</em> operation occurs as part of a separate partial GC cycle.</p>
 <p>A GC operation might complete in one step, or it might involve phases. For example, a mark operation consists of three phases, as described in the following section.</p>
 <h3 id="gc-mark-operation">GC <em>mark</em> operation</h3>
 <p>A <em>mark</em> operation identifies which objects on the Java heap are reachable from outside of the heap and which objects are unreachable. Reachable objects are in use and must be retained, whereas unreachable objects are not in use and can be cleared away as <em>garbage</em>.</p>
@@ -4167,40 +4139,33 @@ whole of the Java heap, the cycle is referred to as a <em>global GC cycle</em>; 
 <ol>
 <li>Initial phase</li>
 </ol>
-<p>A root object is an object that is accessible from outside of the heap such as a stack, class static field, or JNI reference. For other objects in the heap to be reachable, they must retain a connection to a root object. In the initial phase, tracing identifies all root objects by running a root scan. Root objects are listed in work packets that can be processed for references to other objects in the heap.</p>
+<p>A root object is an object that is accessible from outside of the heap such as a stack, class static field, or JNI reference. For other objects in the heap to be reachable, they must retain a connection to a root object. In the initial phase, tracing identifies all root objects by running a root scan. Root objects are listed in a work stack that can be processed for references to other objects in the heap.</p>
 <ol start="2">
 <li>Main phase</li>
 </ol>
-<p>The list of reachable root objects in each work packet is recursively traced for references to other objects in the heap. If reachable objects are found, the appropriate bit is set in the <em>mark map</em>.</p>
+<p>The list of reachable root objects in the work stack is recursively traced for references to other objects in the heap. If reachable objects are found, the appropriate bit is set in the <em>mark map</em>.</p>
 <ol start="3">
 <li>Final phase</li>
 </ol>
-<p>The final phase processes weakly reachable roots such as finalizable object lists, soft/weak references, monitor tables, and string tables. If reachable objects are found, the appropriate bit is set in the <em>mark map</em>.</p>
-<h4 id="gc-parallel-mark-operation">GC parallel <em>mark</em> operation</h4>
-<p>On a multi-processor system, helper threads can be used in parallel to speed up <em>mark</em> operations on the heap. The helper threads share the pool of work packets with the application thread and are involved in identifying root objects, tracing objects in the heap, and updating the <em>mark map</em>. By default, the number of helper threads is based on the number of CPUs reported by the operating system. You can control the number of helper threads available by specifying the <a href="../xgcthreads/">-Xgcthreads</a> command line option when starting your application.</p>
+<p>The final phase processes weakly reachable roots such as finalizable objects, weak references, monitor sets, and string sets. If reachable objects are found, the appropriate bit is set in the <em>mark map</em>. For more information about the processing of <em>soft</em>, <em>weak</em>, and <em>phantom</em> references, see <a href="#weak-reference-processing">Weak reference processing</a>.</p>
+<p>In general, helper threads are used in parallel to speed up <em>mark</em> operations on the heap. The helper threads share the work stack with the application thread and are involved in identifying root objects, tracing objects in the heap, and updating the <em>mark map</em>. By default, the number of helper threads is based on the number of CPUs reported by the operating system. You can control the number of helper threads available by specifying the <a href="../xgcthreads/">-Xgcthreads</a> command line option when starting your application.</p>
 <h4 id="gc-concurrent-mark-operation">GC concurrent <em>mark</em> operation</h4>
 <p>A <em>mark</em> operation can run with exclusive access to the heap, which requires application threads to pause while processing takes place. Alternatively, it can run concurrently with application threads to avoid pauses in application processing.</p>
-<p>With concurrent <em>mark</em> operations, the process of root scanning is handed over to application stack threads, which populate work packets with root objects in their stack. The root objects in each work packet are then traced by a background thread and by each application thread during a heap lock allocation to find reachable objects and update the <em>mark map</em>. Because the <em>mark</em> operation runs concurrently with application threads, any changes to objects that are already traced must be updated. This process works by using a write barrier that can flag the update and trigger a further scan of part of the heap.</p>
+<p>With concurrent <em>mark</em> operations, the process of root scanning is handed over to application stack threads, which populate the work stack with root objects in their stack. The root objects in the work stack are then traced by a background thread and by each application thread during a heap lock allocation to find reachable objects and update the <em>mark map</em>. Because the <em>mark</em> operation runs concurrently with application threads, any changes to objects that are already traced must be updated. This process works by using a write barrier that can flag the update and trigger a further scan of part of the heap.</p>
 <p>To track updates to objects, concurrent <em>mark</em> operations use single-byte <em>cards</em> in a <em>card table</em>. Each <em>card</em> corresponds to a 512-byte section of the Java heap. When an object is updated, the start address for the object in the heap is marked on the appropriate card. These cards are used to determine what must be retraced later in the GC cycle.</p>
 <p>A GC cycle that includes concurrent <em>mark</em> operations aims to trace all reachable objects and complete processing at the same time as the heap is exhausted. Continuous adjustments are made to the start time of each cycle to get as close to heap exhaustion as possible. When the heap is exhausted a <em>sweep</em> operation is able to reclaim memory. This operation requires a <em>stop-the-world</em> (STW) pause. Before <em>sweep</em> operations start, the root objects are rescanned and the cards are checked to determine which areas of memory must be retraced.
 <strong>Question: Are these marked now or in the next cycle?</strong></p>
 <p>An advantage of concurrent <em>mark</em> operations over STW <em>mark</em> operations is reduced pause times, because the garbage collector is able to identify garbage without halting application threads. Pause times are also more consistent because the collector is able to tune start times to maximize heap usage.</p>
 <p>Disadvantages of concurrent <em>mark</em> operations include the additional CPU for operating the write barrier and additional work for application threads to trace objects when requesting a heap lock.</p>
-<p>Concurrent <em>mark</em> operations are used by the following GC policies:</p>
-<ul>
-<li><a href="../gc/#gencon-policy-default"><code>gencon</code></a></li>
-<li><a href="../gc/#optavgpause-policy"><code>optavgpause</code></a></li>
-</ul>
+<p>Concurrent <em>mark</em> operations are used by the <a href="../gc/#gencon-policy-default"><code>gencon</code> GC policy</a> and the <a href="../gc/#optavgpause-policy"><code>optavgpause</code> GC policy</a>.</p>
 <h4 id="gc-incremental-concurrent-mark-operation">GC incremental concurrent <em>mark</em> operation</h4>
-<p>Incremental concurrent mark operations are used in the <code>balanced</code> GC policy to even out pause times by avoiding global STW garbage collections. These operations are also known as the <em>global mark phase</em>, whereby <em>mark</em> operations take place incrementally across the entire heap. The global <em>mark</em> operations are interleaved with a partial GC cycle that is responsible for moving objects and clearing unreachable objects in the heap.</p>
+<p>Incremental concurrent mark operations even out pause times by avoiding global STW garbage collections. These operations are also known as the <em>global mark phase</em>, whereby <em>mark</em> operations take place incrementally across the entire heap. The global <em>mark</em> operations are interleaved with a partial GC cycle that is responsible for moving objects and clearing unreachable objects in the heap.</p>
 <p>These operations also use <em>cards</em> in a <em>card table</em> to manage updates to objects that occur whilst <em>mark</em> operations are in progress. However, unlike the concurrent <em>mark</em> operations used by other policies, application threads are not involved in tracing objects; only background threads are used to trace objects and update the <em>cards</em>.</p>
-<p>For more information about GC operations for the <code>balanced</code> GC policy, see <a href="../gc/#balanced-policy">Garbage collection policies</a></p>
+<p>Incremental concurrent <em>mark</em> operations are used by the <a href="../gc/#balanced-policy"><code>balanced GC policy</code></a>.</p>
 <h3 id="gc-sweep-operation">GC <em>sweep</em> operation</h3>
 <p>The purpose of a <em>sweep</em> operation is to identify memory that can be reclaimed for object allocation and update a central record, known as the <em>freelist</em>.</p>
-<h4 id="gc-parallel-sweep-operation">GC parallel <em>sweep</em> operation</h4>
-<p>Similar to the parallel <em>mark</em> operation, multiple helper threads can be used to <em>sweep</em> the Java heap to speed up processing times. Because these helper threads are the same ones that are used for parallel <em>mark</em> operations, the number of threads can be controlled by using the <a href="../xgcthreads/">-Xgcthreads</a> option.</p>
+<p>As with <em>mark</em> operations, multiple helper threads can be used to <em>sweep</em> the Java heap in parallel to speed up processing times. Because these helper threads are the same ones that are used for parallel <em>mark</em> operations, the number of threads can be controlled by using the <a href="../xgcthreads/">-Xgcthreads</a> option.</p>
 <p>Parallel <em>sweep</em> operations run on 256 KB sections of the heap. Each helper thread scans a section at a time. The results are stored and used to generate a <em>freelist</em> of empty regions.</p>
-<p>This GC operation is used on the <code>balanced</code> GC policy, where the heap is divided into thousands of regions.</p>
 <h4 id="gc-concurrent-sweep-operation">GC concurrent <em>sweep</em> operation</h4>
 <p>Concurrent <em>sweep</em> operations occur in 2 phases:</p>
 <ol>
@@ -4214,16 +4179,59 @@ whole of the Java heap, the cycle is referred to as a <em>global GC cycle</em>; 
 <p>Concurrent <em>sweep</em> operations work in tandem with concurrent <em>mark</em> operations and use the same <em>mark map</em>. Concurrent <em>sweep</em> operations start after a STW collection and complete a section of the heap before concurrent <em>mark</em> operations continue.</p>
 <p>Concurrent <em>sweep</em> is used by the <code>optavgpause</code> GC policy.</p>
 <h3 id="gc-scavenge-operation">GC <em>scavenge</em> operation</h3>
-<p>A GC <em>scavenge</em> operation is used by the <code>gencon</code> policy to move an object in the heap to create space for new object allocations. The object is copied from the <em>nursery</em> area of the heap to the <em>tenure</em> area, which is reserved for older generations of objects.</p>
+<p>A GC <em>scavenge</em> operation moves an object in the heap to create space for new object allocations. The object is typically copied from the <em>allocate</em> to <em>survivor</em> space in the <em>nursery</em> area or to the <em>tenure</em> area if the object has reached a particular age.</p>
+<p>The <em>scavenge</em> operation is used by the <a href="../gc/#gencon-policy-default"><code>gencon</code> GC policy</a>.</p>
 <h3 id="gc-copy-forward-operation">GC <em>copy forward</em> operation</h3>
-<p>A GC <em>copy forward</em> operation is similar to a <em>scavenge</em> operation. The <em>copy forward</em> operation is used by the <code>balanced</code> GC Policy to move an object from a younger region to an older region in the heap. The operation aims to empty or <em>evacuate</em> fragmented regions that then become available for new object allocation.</p>
+<p>A GC <em>copy forward</em> operation is similar to a <em>scavenge</em> operation. The <em>copy forward</em> operation moves an object from a younger region to an older region in the heap. The operation aims to empty or <em>evacuate</em> fragmented regions that then become available for new object allocation.</p>
+<p>The <em>copy forward</em> operation is used by the <a href="../gc/#balanced-policy"><code>balanced GC policy</code></a>.</p>
 <h3 id="gc-classunloading-operation">GC <em>classunloading</em> operation</h3>
 <h3 id="gc-compact-operation">GC <em>compact</em> operation</h3>
-<p>Compaction of the heap is an expensive operation because when objects are moved to defragment the heap, the references to each object change. Therefore, <em>compact</em> operations do not occur by default but only when certain triggers occur.</p>
-<p><strong>Add the triggers:</strong></p>
-<p>Two options are available to control <em>compact</em> operations; <a href="../xcompactgc/"><code>-Xcompactgc</code></a> and <a href="xnocompactgc.md"><code>-Xnocompactgc</code></a>. If <code>-Xnocompactgc</code> is specified, compaction occurs only in rare circumstances.</p>
-<h3 id="gc-mark-compact-operation">GC <em>mark compact</em> operation</h3>
-<p>A GC <em>mark compact</em> operation is sometimes used instead of a <em>copy forward</em> operation by the <code>balanced</code> GC policy. Rather than moving or <em>evacuating</em> objects to empty regions, objects within a region are <em>marked</em> and the region <em>compacted</em> to free up contiguous space.</p>
+<p>Compaction of the heap is an expensive operation because when objects are moved to defragment the heap, the references to each object change. Therefore, <em>compact</em> operations do not occur by default but only when the following triggers occur:</p>
+<ul>
+<li>The <code>-Xcompactgc</code> option is specified on the command line.</li>
+<li>After sweeping the heap, there is not enough free space available to satisfy an allocation request.</li>
+<li>A <code>System.gc()</code> is requested and the last allocation failure that triggered a global GC cycle did not compact or <code>-Xcompactexplicitgc</code> is specified.</li>
+<li>At least half the previously available memory has been consumed by TLH allocations (ensuring an accurate sample) and the average TLH size falls to less than 1024 bytes.</li>
+<li>The largest object that the <code>gencon</code> GC policy failed to move to the <em>tenure</em> area in the most recent <em>scavenge</em> operation is bigger than the largest free slot in the <em>tenure</em> area.</li>
+<li>The heap is fully expanded and less than 4% of the <em>tenure</em> area is free.</li>
+<li>Less than 128 KB of the heap is free.</li>
+</ul>
+<p>The following two options can be used to control compaction:</p>
+<ul>
+<li><a href="../xcompactgc/"><code>-Xcompactgc</code></a> forces compaction of the heap.</li>
+<li><a href="xnocompactgc.md"><code>-Xnocompactgc</code></a> avoids compaction of the heap as a result of all the triggers shown in the preceding list. However a compaction can still occur in rare circumstances.</li>
+</ul>
+<h2 id="weak-reference-processing">Weak reference processing</h2>
+<p>Weak reference processing includes <em>soft</em> references, <em>weak</em> references, and <em>phantom</em> references. These references are created by the user for specific use cases and allow
+some level of interaction with the garbage collector. For example, a <em>soft</em> reference to an object allows that object to persist in memory for a longer period of time before being
+cleared. For example, a software cache. The garbage collector handles the reference types in the order shown and with the behavior detailed in the following table:</p>
+<table>
+<thead>
+<tr>
+<th>Reference type</th>
+<th>Class</th>
+<th>Garbage collector behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>soft</em></td>
+<td><code>java.lang.ref.SoftReference</code></td>
+<td>A <em>soft</em> reference is cleared only when its <em>referent</em> has not been marked for a number of GC cycles or if space on the heap is likely to cause an out of memory error. Use the <a href="../xsoftrefthreshold/">-Xsoftrefthreshold</a> option to control the collection of <em>soft</em> reference objects.</td>
+</tr>
+<tr>
+<td><em>weak</em></td>
+<td><code>java.lang.ref.WeakReference</code></td>
+<td>A <em>weak</em> reference is cleared as soon as the object it references is removed.</td>
+</tr>
+<tr>
+<td><em>phantom</em></td>
+<td><code>java.lang.ref.PhantomReference</code></td>
+<td>A <em>phantom</em> reference is added to a reference queue and cleared after any objects that require finalization.</td>
+</tr>
+</tbody>
+</table>
+<p>If your application uses the Java Native Interface (JNI) to interact with other application types, you can also create <em>weak</em> JNI object references. These references have a similar life cycle to a <em>weak</em> Java reference. The garbage collector processes <em>weak</em> JNI references after all other Java reference types.</p>
 <!-- ==== END OF TOPIC ==== gc_overview.md ==== -->
                 
                   

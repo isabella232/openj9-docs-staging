@@ -637,19 +637,59 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     The allocator
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#allocation-caches" class="md-nav__link">
     Allocation caches
   </a>
   
 </li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
         <li class="md-nav__item">
+  <a href="#heap-configuration" class="md-nav__link">
+    Heap configuration
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#area-based-heaps" class="md-nav__link">
+    Area-based heaps
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#soa-and-loa" class="md-nav__link">
     SOA and LOA
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#region-based-heaps" class="md-nav__link">
+    Region-based heaps
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arraylets" class="md-nav__link">
+    Arraylets
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -3917,19 +3957,59 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     The allocator
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#allocation-caches" class="md-nav__link">
     Allocation caches
   </a>
   
 </li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
         <li class="md-nav__item">
+  <a href="#heap-configuration" class="md-nav__link">
+    Heap configuration
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#area-based-heaps" class="md-nav__link">
+    Area-based heaps
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#soa-and-loa" class="md-nav__link">
     SOA and LOA
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#region-based-heaps" class="md-nav__link">
+    Region-based heaps
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arraylets" class="md-nav__link">
+    Arraylets
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -3994,12 +4074,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>The allocator manages pools of free memory and how the free memory is consumed. It is also responsible for allocating areas of storage in the Java heap for objects at the request of applications, class libraries, or the VM.</p>
 <p>Every allocation requires a <em>heap lock</em> to stop concurrent threads trying to access the same area of memory at the same time. When an object is allocated, the heap lock is released. If there is insufficient space to allocate the object, allocation fails, the heap lock is released, and the GC is called. If the GC manages to recover some space on the heap, the allocator can resume operations. If the GC does not recover enough space, it returns an <code>OutOfMemoryError</code> exception.</p>
 <p>Acquiring a heap lock for every allocation would be an intensive operation with a knock on impact to performance. To get around this problem, small objects are allocated to allocation caches.</p>
-<h2 id="allocation-caches">Allocation caches</h2>
+<h3 id="allocation-caches">Allocation caches</h3>
 <p>To improve performance, allocation caches are reserved in the heap for different threads. These allocation caches are known as thread local heaps (TLH) and allow each thread to allocate memory from its cache without acquiring the heap lock. A TLH is typically used for small objects of less than 512 bytes (768 bytes on 64-bit VMs) although larger objects can be allocated from the cache if there is sufficient space.</p>
 <p>If a thread allocates a lot of objects, the allocator gives that thread a larger TLH to reduce contention on the heap lock.</p>
 <p>A TLH is predefined with an initial default size of 2 KB. On every TLH refresh, the requested size for that thread
 is increased by an increment (default 4 KB). The requested size can grow up to a predefined maximum (default 128 KB).</p>
-<p>After every garbage colletion cycle, the TLH requested size for each thread is reduced, sometimes by as much as 50%, to take account of threads that
+<p>After every garbage collection cycle, the TLH requested size for each thread is reduced, sometimes by as much as 50%, to take account of threads that
 reduce their allocation rate and no longer need large TLHs.</p>
 <p>For very inactive threads, the requested size can even drop below the initial value, down to the predefined minimum (512/768 bytes).
 For very active threads, the maximum TLH requested size might be reached before the next GC occurs.</p>
@@ -4012,8 +4092,12 @@ For very active threads, the maximum TLH requested size might be reached before 
 </ul>
 <p>Typically, when the maximum TLH size is increased, you should also increase the increment proportionally, so that active threads can
 reach the maximum requested TLH size more quickly.</p>
-<h2 id="soa-and-loa">SOA and LOA</h2>
-<p>Some GC policies subdivide areas of the heap for object allocation into the Small Object Area (SOA) and the Large Object Area (LOA).</p>
+<h2 id="heap-configuration">Heap configuration</h2>
+<p>Depending on the memory management strategy in force, the Java heap can be configured in a number of ways. The simplest configuration consists of a single area of memory, often referred to as a <em>flat</em> heap. Other configurations divide the heap into different <em>areas</em> or <em>regions</em>, which might contain objects of different ages (generations) or sizes.</p>
+<h3 id="area-based-heaps">Area-based heaps</h3>
+<p>The default GC policy for OpenJ9 uses a heap configuration that is divided into two main areas: the <em>nursery</em> area for new object allocation, and the <em>tenure</em> area for objects that continue to be reachable for a longer period of time. Most objects have short lifecycles and can be reclaimed by the garbage collector more quickly by focusing only on the nursery area. Global GC cycles that cause application pauses in order to clear and defragment the <em>tenure</em> area are less frequent.</p>
+<h3 id="soa-and-loa">SOA and LOA</h3>
+<p>Some GC policies subdivide a <em>flat</em> heap or an <em>area</em> of the heap for object allocation into the Small Object Area (SOA) and the Large Object Area (LOA).</p>
 <p>The allocator initially attempts to allocate objects in the SOA, regardless of size. If the allocation cannot be satisfied the following actions are possible, depending on object size:</p>
 <ul>
 <li>If the object is smaller than 64 KB, an allocation failure occurs, which triggers a GC action.</li>
@@ -4022,7 +4106,22 @@ reach the maximum requested TLH size more quickly.</p>
 <p>The GC action that is triggered by the allocation failure depends on the GC policy in force.</p>
 <p>The overall size of the LOA is calculated when the heap is initialized, and recalculated at the end of each global GC cycle. The GC can expand or shrink the LOA, depending on usage, to avoid allocation failures.</p>
 <p>You can control the size of the LOA by using the <code>-Xloainitial</code>, <code>-Xloaminimum</code>, and <code>-Xloamaximum</code> command line options (See <a href="../xloaminimum/">LOA sizing options</a>). If the LOA is not used, the GC shrinks the LOA after a few cycles, down to the value of <code>-Xloaminimum</code>. You can also specify <a href="../xloa/"><code>-Xnoloa</code></a> to prevent an LOA being created.</p>
-<p>An SOA and LOA are used by the OpenJ9 standard GC policies: <code>gencon</code>, <code>optavgpause</code> and <code>optthruput</code>. However, the <code>balanced</code> and <code>metronome</code> GC policies use a heap configuration that does not include the SOA or LOA. For more information about policies, see <a href="../gc/">Garbage collection policies</a>.</p>
+<p>An SOA and LOA are used by the OpenJ9 GC policies: <code>gencon</code>, <code>optavgpause</code> and <code>optthruput</code>. For the <code>gencon</code> policy, the LOA and SOA are contained within the <em>tenure</em> area, which is designated for ageing objects. For more information about policies, see <a href="../gc/">Garbage collection policies</a>.</p>
+<h3 id="region-based-heaps">Region-based heaps</h3>
+<p>The Java heap can also be subdivided into multiple regions. The <code>balanced</code> GC policy uses a heap that is divided into thousands of equal size regions in order to manage multiple generations of objects. The <code>metronome</code> GC policy also uses multiple regions, but each region is segregated by class size to manage a singe generation of objects. Both of these policies also use structures called <em>arraylets</em> to store large arrays in the heap.</p>
+<h3 id="arraylets">Arraylets</h3>
+<p>A Java heap that is subdivided into regions might not be able to contain a large enough region for data arrays. This problem is solved by using <em>arraylets</em>. An <em>arraylet</em> has a <em>spine</em>, which contains the class pointer and size, and <em>leaves</em>, which contain the data associated with the array. The <em>spine</em> also contains <em>arrayoids</em>, which are pointers to the respective <em>arraylet leaves</em>, as shown in the following diagram.</p>
+<p><img alt="The diagram is explained in the surrounding text" src="../cr/arraylet_diagram1.png" title="Arraylet diagram" /></p>
+<p>There are a number of advantages to using <em>arraylets</em>.</p>
+<ul>
+<li>
+<p>Because the heap tends to fragment over time, some GC policies might be forced to run a global garbage collection and defragmentation (compaction) to recover sufficient contiguous memory to allocate a large array. By removing the requirement for large arrays to be allocated in contiguous memory, the garbage collector is more likely to be able to satisfy such an allocation without requiring unscheduled garbage collection, particularly a global defragmentation operation.</p>
+</li>
+<li>
+<p>Additionally, the garbage collector never needs to move an <em>arraylet leaf</em> once it has been allocated. The cost of relocating an array is therefore limited to the cost of relocating the <em>spine</em>, so large arrays do not contribute to higher defragmentation times.</p>
+</li>
+</ul>
+<p><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Note:</strong> Despite the general advantage of using <em>arraylets</em>, they can slow down processing when the Java Native Interface (JNI) is being used. The JNI provides flexibility by enabling Java programs to call native code; for example C or C++, and if direct addressability to the inside of an object is needed, a JNI critical section can be used. However, that requires the object to be in a contiguous region of memory, or at least <em>appear</em> to be so. The JNI therefore creates a temporary contiguous array that is the same size as the original array and copies everything, element by element, to the temporary array. After the JNI critical section is finished, everything is copied from the temporary array back to the <em>arraylet</em>, element by element.</p>
 <h2 id="compressed-references">Compressed references</h2>
 <p>On 64-bit systems, the VM can use compressed references to decrease the size of Java objects and make better use of the available space in the Java heap. By storing objects in a 32-bit representation, the object size is identical to a 32-bit object, which occupies a smaller memory footprint. These 4 byte (32-bit) compressed references are converted to 64-bit values at runtime with minimal overhead. Smaller objects enable larger heap sizes that result in less frequent garbage collection and improve memory cache utilization. Overall, the performance of 64-bit applications that store compressed rather than uncompressed 64-bit object references is significantly improved.</p>
 <p>Compressed references are used by default when the maximum Java heap size is in the range 0 - 57 GB on AIX&reg;, Linux&reg;, and Windows&reg; systems. The upper limit is also 57 GB on z/OS&reg; systems that have APAR OA49416
