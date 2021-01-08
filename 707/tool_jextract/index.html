@@ -1,5 +1,5 @@
 <!--
-* Copyright (c) 2017, 2020 IBM Corp. and others
+* Copyright (c) 2017, 2021 IBM Corp. and others
 *
 * This program and the accompanying materials are made
 * available under the terms of the Eclipse Public License 2.0
@@ -89,6 +89,8 @@
     
     <link rel="stylesheet" href="../assets/fonts/material-icons.css">
     
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
       <link rel="stylesheet" href="../stylesheets/oj9.css">
     
     
@@ -123,7 +125,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     
     
       <!--
-* Copyright (c) 2017, 2020 IBM Corp. and others
+* Copyright (c) 2017, 2021 IBM Corp. and others
 *
 * This program and the accompanying materials are made
 * available under the terms of the Eclipse Public License 2.0
@@ -350,6 +352,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
   <li class="md-nav__item">
+    <a href="../version0.24/" title="Version 0.24.0" class="md-nav__link">
+      Version 0.24.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../version0.23/" title="Version 0.23.0" class="md-nav__link">
       Version 0.23.0
     </a>
@@ -385,6 +399,25 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           
 
 
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-6" type="checkbox" id="nav-5-6">
+    
+    <label class="md-nav__link" for="nav-5-6">
+      Earlier releases
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-6">
+        Earlier releases
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
   <li class="md-nav__item">
     <a href="../version0.20/" title="Version 0.20.0" class="md-nav__link">
       Version 0.20.0
@@ -403,25 +436,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </a>
   </li>
 
-        
-          
-          
-          
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-7" type="checkbox" id="nav-5-7">
-    
-    <label class="md-nav__link" for="nav-5-7">
-      Earlier releases
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-5-7">
-        Earlier releases
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
         
           
           
@@ -590,8 +604,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
   <li class="md-nav__item">
-    <a href="../allocator/" title="Memory allocation" class="md-nav__link">
-      Memory allocation
+    <a href="../gc_overview/" title="Overview" class="md-nav__link">
+      Overview
     </a>
   </li>
 
@@ -602,8 +616,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
   <li class="md-nav__item">
-    <a href="../gc/" title="Garbage collection" class="md-nav__link">
-      Garbage collection
+    <a href="../gc/" title="Garbage collection policies" class="md-nav__link">
+      Garbage collection policies
     </a>
   </li>
 
@@ -614,8 +628,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
   <li class="md-nav__item">
-    <a href="../vgclog/" title="Verbose garbage collection logs" class="md-nav__link">
-      Verbose garbage collection logs
+    <a href="../vgclog/" title="Verbose Garbage collection logs" class="md-nav__link">
+      Verbose Garbage collection logs
     </a>
   </li>
 
@@ -2734,6 +2748,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
   <li class="md-nav__item">
+    <a href="../xsyslog/" title="-Xsyslog" class="md-nav__link">
+      -Xsyslog
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../xtgc/" title="-Xtgc" class="md-nav__link">
       -Xtgc
     </a>
@@ -3192,6 +3218,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <li class="md-nav__item">
     <a href="../xxlazysymbolresolution/" title="-XX:[+|-]LazySymbolResolution" class="md-nav__link">
       -XX:[+|-]LazySymbolResolution
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xxlegacyxlogoption/" title="-XX:[+|-]LegacyXLogOption" class="md-nav__link">
+      -XX:[+|-]LegacyXLogOption
     </a>
   </li>
 
@@ -3925,16 +3963,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p><strong>(AIX&reg;, Linux&reg;, macOS&reg;)</strong></p>
 <p>On some operating systems, copies of executable files and libraries are required for a full analysis of a core dump (you can get some information from the dump without these files, but not as much). Run the <code>jextract</code> utility to collect these extra files and package them into an archive file along with the core dump. To analyze the output, use the <a href="../tool_jdmpview/">dump viewer (<code>jdmpview</code>)</a>.</p>
 <h2 id="syntax">Syntax</h2>
-<pre><code>    jextract &lt;core file name&gt; [&lt;zip_file&gt;]
+<pre><code>    jextract [-r] &lt;core file name&gt; [&lt;zip_file&gt;]
 </code></pre>
 <p>where:</p>
 <ul>
+<li><code>-r</code> forces the <code>jextract</code> utility to proceed when the system dump is created from an SDK with a different build ID. See <strong>Restriction</strong>.</li>
 <li><code>&lt;core file name&gt;</code> is the name of the system dump.</li>
 <li><code>&lt;zip_file&gt;</code> is the name you want to give to the processed file. If you do not specify a name, output is written to <code>&lt;core file name&gt;.zip</code> by default. The output is written to the same directory as the core file.</li>
 </ul>
-<dl>
-<dd><i class="fa fa-exclamation-triangle"></i> <strong>Restriction: </strong> You must run <code>jextract</code> on the same system that produced the system dump in order to collect the correct executables and libraries referenced in the system dump. You should also run <code>jextract</code> using the same VM level, to avoid any problems.</dd>
-</dl>
+<p><i class="fa fa-exclamation-triangle"></i> <strong>Restriction:</strong> You should run <code>jextract</code> on the same system that produced the system dump in order to collect the correct executables and libraries referenced in the system dump. You should also run <code>jextract</code> using the same VM level, to avoid any problems. From Eclipse OpenJ9 V0.24.0, the utility always checks that the build ID of the SDK that created the dump file matches the <code>jextract</code> build ID. Where these IDs do not match, the following exception is thrown:</p>
+<pre><code>J9RAS.buildID is incorrect (found XXX, expecting YYY). This version of jextract is incompatible with this dump (use '-r' option to relax this check).
+</code></pre>
+
+<p>To continue, despite the mismatch, use the <code>-r</code> option.</p>
 <h2 id="see-also">See also</h2>
 <ul>
 <li><a href="../tool_jdmpview/">Dump viewer (<code>jdmpview</code>)</a></li>
@@ -3958,7 +3999,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       </main>
       
         <!--
-* Copyright (c) 2017, 2020 IBM Corp. and others
+* Copyright (c) 2017, 2021 IBM Corp. and others
 *
 * This program and the accompanying materials are made
 * available under the terms of the Eclipse Public License 2.0
