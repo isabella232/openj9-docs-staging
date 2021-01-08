@@ -1,0 +1,4771 @@
+<!--
+* Copyright (c) 2017, 2020 IBM Corp. and others
+*
+* This program and the accompanying materials are made
+* available under the terms of the Eclipse Public License 2.0
+* which accompanies this distribution and is available at
+* https://www.eclipse.org/legal/epl-2.0/ or the Apache
+* License, Version 2.0 which accompanies this distribution and
+* is available at https://www.apache.org/licenses/LICENSE-2.0.
+*
+* This Source Code may also be made available under the
+* following Secondary Licenses when the conditions for such
+* availability set forth in the Eclipse Public License, v. 2.0
+* are satisfied: GNU General Public License, version 2 with
+* the GNU Classpath Exception [1] and GNU General Public
+* License, version 2 with the OpenJDK Assembly Exception [2].
+*
+* [1] https://www.gnu.org/software/classpath/license.html
+* [2] http://openjdk.java.net/legal/assembly-exception.html
+*
+* SPDX-License-Identifier: EPL-2.0 OR Apache-2.0 OR GPL-2.0 WITH
+* Classpath-exception-2.0 OR LicenseRef-GPL-2.0 WITH Assembly-exception
+-->
+
+
+
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Eclipse OpenJ9 documentation">
+      
+      
+        <link rel="canonical" href="https://www.eclipse.org/openj9/docs/vgclog/">
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="">
+      
+        <meta name="lang:clipboard.copied" content="">
+      
+        <meta name="lang:search.language" content="">
+      
+        <meta name="lang:search.pipeline.stopwords" content="">
+      
+        <meta name="lang:search.pipeline.trimmer" content="">
+      
+        <meta name="lang:search.result.none" content="">
+      
+        <meta name="lang:search.result.one" content="">
+      
+        <meta name="lang:search.result.other" content="">
+      
+        <meta name="lang:search.tokenizer" content="">
+      
+      <link rel="shortcut icon" href="../cr/oj9logo_img9.ico">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-3.0.4">
+    
+    
+      
+        <title>Verbose garbage collection logs -  </title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/application.1b62728e.css">
+      
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.a8b3c06d.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#00bcd4">
+      
+    
+    
+      <script src="../assets/javascripts/modernizr.268332fc.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../assets/fonts/material-icons.css">
+    
+      <link rel="stylesheet" href="../stylesheets/oj9.css">
+    
+    
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f (https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore%28j,f) );
+})(window,document,'script','dataLayer','GTM-5WLCZXC');</script>
+<!-- End Google Tag Manager -->  
+  </head>
+  
+    
+    
+    <body dir="" data-md-color-primary="cyan" data-md-color-accent="cyan">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="../#verbose-garbage-collection-logs" tabindex="1" class="md-skip">
+        
+      </a>
+    
+    
+      <!--
+* Copyright (c) 2017, 2020 IBM Corp. and others
+*
+* This program and the accompanying materials are made
+* available under the terms of the Eclipse Public License 2.0
+* which accompanies this distribution and is available at
+* https://www.eclipse.org/legal/epl-2.0/ or the Apache
+* License, Version 2.0 which accompanies this distribution and
+* is available at https://www.apache.org/licenses/LICENSE-2.0.
+*
+* This Source Code may also be made available under the
+* following Secondary Licenses when the conditions for such
+* availability set forth in the Eclipse Public License, v. 2.0
+* are satisfied: GNU General Public License, version 2 with
+* the GNU Classpath Exception [1] and GNU General Public
+* License, version 2 with the OpenJDK Assembly Exception [2].
+*
+* [1] https://www.gnu.org/software/classpath/license.html
+* [2] http://openjdk.java.net/legal/assembly-exception.html
+*
+* SPDX-License-Identifier: EPL-2.0 OR Apache-2.0 OR GPL-2.0 WITH
+* Classpath-exception-2.0 OR LicenseRef-GPL-2.0 WITH Assembly-exception
+-->
+<header class="md-header" data-md-component="header">
+    <nav class="md-header-nav md-grid">
+      <div class="md-flex">
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <a href="https://www.eclipse.org/openj9/docs" title=" " class="md-header-nav__button md-logo">
+            
+              <img src="../cr/openj9_6b.png">
+            
+          </a>
+        </div>
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+        </div>
+        <div class="md-flex__cell md-flex__cell--stretch">
+          <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          </div>
+        </div>
+        <div class="md-flex__cell md-flex__cell--shrink">
+          
+            
+              <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
+              
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+            
+          
+        </div>
+        
+          <div class="md-flex__cell md-flex__cell--shrink">
+            <div class="md-header-nav__source">
+              
+
+
+  
+
+<a href="https://github.com/eclipse/openj9/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    eclipse/openj9
+  </div>
+</a>
+            </div>
+          </div>
+          
+  
+      </div>
+    </nav>
+  </header>
+  
+    
+    <div class="md-container">
+      <!--Staging site notice --><div class="md-container"><div style="margin:-5rem 0 -5rem 0; background: linear-gradient(white, #69c1bd, white); color:white; text-align:center; font-size:1.5rem; font-weight:bold; text-shadow: 2px 2px 4px #000000;"><p style="padding:2rem 0 2rem 0;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> CAUTION: This site is for reviewing draft documentation. For published content, visit <a style="color:#af6e3d; text-shadow:none; padding-left:1rem;" href="http://www.eclipse.org/openj9/docs/index.html">www.eclipse.org/openj9/docs</a></p></div>
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://www.eclipse.org/openj9/docs" title=" " class="md-nav__button md-logo">
+      
+        <img src="../cr/openj9_6b.png" width="48" height="48">
+      
+    </a>
+     
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/eclipse/openj9/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    eclipse/openj9
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href=".." title="About the docs" class="md-nav__link">
+      About the docs
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../adoptopenjdk/" title="AdoptOpenJDK builds" class="md-nav__link">
+      AdoptOpenJDK builds
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../introduction/" title="Getting started" class="md-nav__link">
+      Getting started
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../openj9_newuser/" title="New to OpenJ9?" class="md-nav__link">
+      New to OpenJ9?
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Release notes
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Release notes
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../openj9_releases/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../version0.23/" title="Version 0.23.0" class="md-nav__link">
+      Version 0.23.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../version0.22/" title="Version 0.22.0" class="md-nav__link">
+      Version 0.22.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../version0.21/" title="Version 0.21.0" class="md-nav__link">
+      Version 0.21.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../version0.20/" title="Version 0.20.0" class="md-nav__link">
+      Version 0.20.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../version0.19/" title="Version 0.19.0" class="md-nav__link">
+      Version 0.19.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-7" type="checkbox" id="nav-5-7">
+    
+    <label class="md-nav__link" for="nav-5-7">
+      Earlier releases
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-7">
+        Earlier releases
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../version0.18/" title="Version 0.18.1" class="md-nav__link">
+      Version 0.18.1
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../version0.17/" title="Version 0.17.0" class="md-nav__link">
+      Version 0.17.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../version0.16/" title="Version 0.16.0" class="md-nav__link">
+      Version 0.16.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../version0.15/" title="Version 0.15.1" class="md-nav__link">
+      Version 0.15.1
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../version0.14/" title="Version 0.14.0" class="md-nav__link">
+      Version 0.14.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../version0.13/" title="Version 0.13.0" class="md-nav__link">
+      Version 0.13.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../version0.12/" title="Version 0.12.0" class="md-nav__link">
+      Version 0.12.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../version0.11/" title="Version 0.11.0" class="md-nav__link">
+      Version 0.11.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../version0.10/" title="Version 0.10.0" class="md-nav__link">
+      Version 0.10.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../version0.9/" title="Version 0.9.0" class="md-nav__link">
+      Version 0.9.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../version0.8/" title="Version 0.8.0" class="md-nav__link">
+      Version 0.8.0
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6" checked>
+    
+    <label class="md-nav__link" for="nav-6">
+      Memory management
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        Memory management
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../allocator/" title="Memory allocation" class="md-nav__link">
+      Memory allocation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../gc/" title="Garbage collection" class="md-nav__link">
+      Garbage collection
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Verbose garbage collection logs
+      </label>
+    
+    <a href="./" title="Verbose garbage collection logs" class="md-nav__link md-nav__link--active">
+      Verbose garbage collection logs
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">On this page ...</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-generate-a-verbose-garbage-collection-log" class="md-nav__link">
+    How to generate a verbose garbage collection log
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../jit/" title="JIT Compiler" class="md-nav__link">
+      JIT Compiler
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../jitserver/" title="JITServer (tech. preview)" class="md-nav__link">
+      JITServer (tech. preview)
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../aot/" title="AOT Compiler" class="md-nav__link">
+      AOT Compiler
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10">
+    
+    <label class="md-nav__link" for="nav-10">
+      Class data sharing
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-10">
+        Class data sharing
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../shrc/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../shrc_diag_util/" title="Diagnostic cache utilities" class="md-nav__link">
+      Diagnostic cache utilities
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../attachapi/" title="Java Attach API" class="md-nav__link">
+      Java Attach API
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-12" type="checkbox" id="nav-12">
+    
+    <label class="md-nav__link" for="nav-12">
+      Diagnostics
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-12">
+        Diagnostics
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../diag_overview/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-12-2" type="checkbox" id="nav-12-2">
+    
+    <label class="md-nav__link" for="nav-12-2">
+      Dumps
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-12-2">
+        Dumps
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../dump_javadump/" title="Java dump" class="md-nav__link">
+      Java dump
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../dump_heapdump/" title="Heap dump" class="md-nav__link">
+      Heap dump
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../dump_systemdump/" title="System dump" class="md-nav__link">
+      System dump
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-12-3" type="checkbox" id="nav-12-3">
+    
+    <label class="md-nav__link" for="nav-12-3">
+      Tools
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-12-3">
+        Tools
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../tool_jextract/" title="Dump extractor" class="md-nav__link">
+      Dump extractor
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../tool_jdmpview/" title="Dump viewer" class="md-nav__link">
+      Dump viewer
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../tool_traceformat/" title="Trace formatter" class="md-nav__link">
+      Trace formatter
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../tool_builder/" title="Option builder" class="md-nav__link">
+      Option builder
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../tool_jcmd/" title="Java command (jcmd) tool" class="md-nav__link">
+      Java command (jcmd) tool
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../tool_jmap/" title="Java memory map (jmap) tool" class="md-nav__link">
+      Java memory map (jmap) tool
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../tool_jps/" title="Java process status (jps)" class="md-nav__link">
+      Java process status (jps)
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../tool_jstack/" title="Java stack (jstack) tool" class="md-nav__link">
+      Java stack (jstack) tool
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../tool_jstat/" title="Java statistics monitoring (jstat) tool" class="md-nav__link">
+      Java statistics monitoring (jstat) tool
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../tool_migration/" title="Switching to OpenJ9" class="md-nav__link">
+      Switching to OpenJ9
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-12-4" type="checkbox" id="nav-12-4">
+    
+    <label class="md-nav__link" for="nav-12-4">
+      Interfaces
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-12-4">
+        Interfaces
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../interface_jvmti/" title="JVMTI" class="md-nav__link">
+      JVMTI
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../interface_dtfj/" title="DTFJ" class="md-nav__link">
+      DTFJ
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../interface_lang_management/" title="Language Management" class="md-nav__link">
+      Language Management
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-13" type="checkbox" id="nav-13">
+    
+    <label class="md-nav__link" for="nav-13">
+      Command-line options
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-13">
+        Command-line options
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../cmdline_specifying/" title="Specifying options" class="md-nav__link">
+      Specifying options
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../cmdline_general/" title="Standard options" class="md-nav__link">
+      Standard options
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../cmdline_migration/" title="Switching to OpenJ9" class="md-nav__link">
+      Switching to OpenJ9
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-13-4" type="checkbox" id="nav-13-4">
+    
+    <label class="md-nav__link" for="nav-13-4">
+      System property options
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-13-4">
+        System property options
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../d_jvm_commands/" title="Using System properties" class="md-nav__link">
+      Using System properties
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../dcomibmenableclasscaching/" title="-Dcom.ibm.enableClassCaching" class="md-nav__link">
+      -Dcom.ibm.enableClassCaching
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../dcomibmenablelegacydumpsecurity/" title="-Dcom.ibm.enableLegacyDumpSecurity" class="md-nav__link">
+      -Dcom.ibm.enableLegacyDumpSecurity
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../dcomibmenablelegacylogsecurity/" title="-Dcom.ibm.enableLegacyLogSecurity" class="md-nav__link">
+      -Dcom.ibm.enableLegacyLogSecurity
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../dcomibmenablelegacytracesecurity/" title="-Dcom.ibm.enableLegacyTraceSecurity" class="md-nav__link">
+      -Dcom.ibm.enableLegacyTraceSecurity
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../dcomibmgpudisable/" title="-Dcom.ibm.gpu.disable" class="md-nav__link">
+      -Dcom.ibm.gpu.disable
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../dcomibmgpuenable/" title="-Dcom.ibm.gpu.enable" class="md-nav__link">
+      -Dcom.ibm.gpu.enable
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../dcomibmgpuverbose/" title="-Dcom.ibm.gpu.verbose" class="md-nav__link">
+      -Dcom.ibm.gpu.verbose
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../dcomibmlangmanagementosmxbeaniscputime100ns/" title="-Dcom.ibm.lang.management.OperatingSystemMXBean.isCpuTime100ns" class="md-nav__link">
+      -Dcom.ibm.lang.management.OperatingSystemMXBean.isCpuTime100ns
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../dcomibmlangmanagementverbose/" title="-Dcom.ibm.lang.management.verbose" class="md-nav__link">
+      -Dcom.ibm.lang.management.verbose
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../dcomibmtoolsattachcommand_timeout/" title="-Dcom.ibm.tools.attach.command_timeout" class="md-nav__link">
+      -Dcom.ibm.tools.attach.command_timeout
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../dcomibmtoolsattachdirectory/" title="-Dcom.ibm.tools.attach.directory" class="md-nav__link">
+      -Dcom.ibm.tools.attach.directory
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../dcomibmtoolsattachdisplayname/" title="-Dcom.ibm.tools.attach.displayName" class="md-nav__link">
+      -Dcom.ibm.tools.attach.displayName
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../dcomibmtoolsattachenable/" title="-Dcom.ibm.tools.attach.enable" class="md-nav__link">
+      -Dcom.ibm.tools.attach.enable
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../dcomibmtoolsattachid/" title="-Dcom.ibm.tools.attach.id" class="md-nav__link">
+      -Dcom.ibm.tools.attach.id
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../dcomibmtoolsattachlogging/" title="-Dcom.ibm.tools.attach.logging" class="md-nav__link">
+      -Dcom.ibm.tools.attach.logging
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../dcomibmtoolsattachlogname/" title="-Dcom.ibm.tools.attach.log.name" class="md-nav__link">
+      -Dcom.ibm.tools.attach.log.name
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../dcomibmtoolsattachshutdown_timeout/" title="-Dcom.ibm.tools.attach.shutdown_timeout" class="md-nav__link">
+      -Dcom.ibm.tools.attach.shutdown_timeout
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../dcomibmtoolsattachtimeout/" title="-Dcom.ibm.tools.attach.timeout" class="md-nav__link">
+      -Dcom.ibm.tools.attach.timeout
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../dfileencoding/" title="-Dfile.encoding" class="md-nav__link">
+      -Dfile.encoding
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../djavacompiler/" title="-Djava.compiler" class="md-nav__link">
+      -Djava.compiler
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../djavalangstringsubstringnocopy/" title="-Djava.lang.string.substring.nocopy" class="md-nav__link">
+      -Djava.lang.string.substring.nocopy
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../djavalangstringbuffergrowaggressively/" title="-Djava.lang.stringBuffer.growAggressively" class="md-nav__link">
+      -Djava.lang.stringBuffer.growAggressively
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../djdknativecbc/" title="-Djdk.nativeCBC" class="md-nav__link">
+      -Djdk.nativeCBC
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../djdknativechacha20/" title="-Djdk.nativeChaCha20" class="md-nav__link">
+      -Djdk.nativeChaCha20
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../djdknativecrypto/" title="-Djdk.nativeCrypto" class="md-nav__link">
+      -Djdk.nativeCrypto
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../djdknativedigest/" title="-Djdk.nativeDigest" class="md-nav__link">
+      -Djdk.nativeDigest
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../djdknativegcm/" title="-Djdk.nativeGCM" class="md-nav__link">
+      -Djdk.nativeGCM
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../djdknativersa/" title="-Djdk.nativeRSA" class="md-nav__link">
+      -Djdk.nativeRSA
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-13-5" type="checkbox" id="nav-13-5">
+    
+    <label class="md-nav__link" for="nav-13-5">
+      JVM -X options
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-13-5">
+        JVM -X options
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../x_jvm_commands/" title="Using -X options" class="md-nav__link">
+      Using -X options
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../x/" title="-X" class="md-nav__link">
+      -X
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xaggressive/" title="-Xaggressive" class="md-nav__link">
+      -Xaggressive
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xalwaysclassgc/" title="-Xalwaysclassgc" class="md-nav__link">
+      -Xalwaysclassgc
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xaot/" title="-Xaot" class="md-nav__link">
+      -Xaot
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xargencoding/" title="-Xargencoding" class="md-nav__link">
+      -Xargencoding
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xbootclasspath/" title="-Xbootclasspath" class="md-nav__link">
+      -Xbootclasspath
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xceehdlr/" title="-XCEEHDLR" class="md-nav__link">
+      -XCEEHDLR
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xcheck/" title="-Xcheck" class="md-nav__link">
+      -Xcheck
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xclassgc/" title="-Xclassgc" class="md-nav__link">
+      -Xclassgc
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xcodecache/" title="-Xcodecache" class="md-nav__link">
+      -Xcodecache
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xcodecachetotal/" title="-Xcodecachetotal" class="md-nav__link">
+      -Xcodecachetotal
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xcomp/" title="-Xcomp" class="md-nav__link">
+      -Xcomp
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xcompactexplicitgc/" title="-Xcompactexplicitgc" class="md-nav__link">
+      -Xcompactexplicitgc
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xcompactgc/" title="-Xcompactgc" class="md-nav__link">
+      -Xcompactgc
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xcompilationthreads/" title="-XcompilationThreads" class="md-nav__link">
+      -XcompilationThreads
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xcompressedrefs/" title="-Xcompressedrefs" class="md-nav__link">
+      -Xcompressedrefs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xconcurrentbackground/" title="-Xconcurrentbackground" class="md-nav__link">
+      -Xconcurrentbackground
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xconcurrentlevel/" title="-Xconcurrentlevel" class="md-nav__link">
+      -Xconcurrentlevel
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xconcurrentslack/" title="-Xconcurrentslack" class="md-nav__link">
+      -Xconcurrentslack
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xconmeter/" title="-Xconmeter" class="md-nav__link">
+      -Xconmeter
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xenableexcessivegc/" title="-Xdisableexcessivegc" class="md-nav__link">
+      -Xdisableexcessivegc
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xenableexplicitgc/" title="-Xdisableexplicitgc" class="md-nav__link">
+      -Xdisableexplicitgc
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xdisablejavadump/" title="-Xdisablejavadump" class="md-nav__link">
+      -Xdisablejavadump
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xenablestringconstantgc/" title="-Xdisablestringconstantgc" class="md-nav__link">
+      -Xdisablestringconstantgc
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xdump/" title="-Xdump" class="md-nav__link">
+      -Xdump
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xenableexcessivegc/" title="-Xenableexcessivegc" class="md-nav__link">
+      -Xenableexcessivegc
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xenableexplicitgc/" title="-Xenableexplicitgc" class="md-nav__link">
+      -Xenableexplicitgc
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xenablestringconstantgc/" title="-Xenablestringconstantgc" class="md-nav__link">
+      -Xenablestringconstantgc
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xfastresolve/" title="-Xfastresolve" class="md-nav__link">
+      -Xfastresolve
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xfuture/" title="-Xfuture" class="md-nav__link">
+      -Xfuture
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xgc/" title="-Xgc" class="md-nav__link">
+      -Xgc
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xgcsplitheap/" title="-Xgc:splitheap" class="md-nav__link">
+      -Xgc:splitheap
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xgcpolicy/" title="-Xgcpolicy" class="md-nav__link">
+      -Xgcpolicy
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xgcthreads/" title="-Xgcthreads" class="md-nav__link">
+      -Xgcthreads
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xgcworkpackets/" title="-Xgcworkpackets" class="md-nav__link">
+      -Xgcworkpackets
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xint/" title="-Xint" class="md-nav__link">
+      -Xint
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xss/" title="-Xiss" class="md-nav__link">
+      -Xiss
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xjit/" title="-Xjit" class="md-nav__link">
+      -Xjit
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xjni/" title="-Xjni" class="md-nav__link">
+      -Xjni
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xlinenumbers/" title="-Xlinenumbers" class="md-nav__link">
+      -Xlinenumbers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xloa/" title="-Xloa" class="md-nav__link">
+      -Xloa
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xloaminimum/" title="-Xloainitial" class="md-nav__link">
+      -Xloainitial
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xloaminimum/" title="-Xloamaximum" class="md-nav__link">
+      -Xloamaximum
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xloaminimum/" title="-Xloaminimum" class="md-nav__link">
+      -Xloaminimum
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xlockreservation/" title="-XlockReservation" class="md-nav__link">
+      -XlockReservation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xlockword/" title="-Xlockword" class="md-nav__link">
+      -Xlockword
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xlog/" title="-Xlog" class="md-nav__link">
+      -Xlog
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xlp/" title="-Xlp" class="md-nav__link">
+      -Xlp
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xlpcodecache/" title="-Xlp:codecache" class="md-nav__link">
+      -Xlp:codecache
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xlpobjectheap/" title="-Xlp:objectheap" class="md-nav__link">
+      -Xlp:objectheap
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xmine/" title="-Xmaxe" class="md-nav__link">
+      -Xmaxe
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xminf/" title="-Xmaxf" class="md-nav__link">
+      -Xmaxf
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xmint/" title="-Xmaxt" class="md-nav__link">
+      -Xmaxt
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xmca/" title="-Xmca" class="md-nav__link">
+      -Xmca
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xmca/" title="-Xmco" class="md-nav__link">
+      -Xmco
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xmcrs/" title="-Xmcrs" class="md-nav__link">
+      -Xmcrs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xmine/" title="-Xmine" class="md-nav__link">
+      -Xmine
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xminf/" title="-Xminf" class="md-nav__link">
+      -Xminf
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xmint/" title="-Xmint" class="md-nav__link">
+      -Xmint
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xmn/" title="-Xmn" class="md-nav__link">
+      -Xmn
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xmn/" title="-Xmns" class="md-nav__link">
+      -Xmns
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xmn/" title="-Xmnx" class="md-nav__link">
+      -Xmnx
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xmo/" title="-Xmo" class="md-nav__link">
+      -Xmo
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xmo/" title="-Xmoi" class="md-nav__link">
+      -Xmoi
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xmo/" title="-Xmos" class="md-nav__link">
+      -Xmos
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xmo/" title="-Xmox" class="md-nav__link">
+      -Xmox
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xmr/" title="-Xmr" class="md-nav__link">
+      -Xmr
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xmr/" title="-Xmrx" class="md-nav__link">
+      -Xmrx
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xms/" title="-Xms" class="md-nav__link">
+      -Xms
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xmso/" title="-Xmso" class="md-nav__link">
+      -Xmso
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xms/" title="-Xmx" class="md-nav__link">
+      -Xmx
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xaot/" title="-Xnoaot" class="md-nav__link">
+      -Xnoaot
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xclassgc/" title="-Xnoclassgc" class="md-nav__link">
+      -Xnoclassgc
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xcompactexplicitgc/" title="-Xnocompactexplicitgc" class="md-nav__link">
+      -Xnocompactexplicitgc
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xcompactgc/" title="-Xnocompactgc" class="md-nav__link">
+      -Xnocompactgc
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xcompressedrefs/" title="-Xnocompressedrefs" class="md-nav__link">
+      -Xnocompressedrefs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xjit/" title="-Xnojit" class="md-nav__link">
+      -Xnojit
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xlinenumbers/" title="-Xnolinenumbers" class="md-nav__link">
+      -Xnolinenumbers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xloa/" title="-Xnoloa" class="md-nav__link">
+      -Xnoloa
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xsigcatch/" title="-Xnosigcatch" class="md-nav__link">
+      -Xnosigcatch
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xsigchain/" title="-Xnosigchain" class="md-nav__link">
+      -Xnosigchain
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xnumanone/" title="-Xnuma:none" class="md-nav__link">
+      -Xnuma:none
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xoptionsfile/" title="-Xoptionsfile" class="md-nav__link">
+      -Xoptionsfile
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xquickstart/" title="-Xquickstart" class="md-nav__link">
+      -Xquickstart
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xrs/" title="-Xrs" class="md-nav__link">
+      -Xrs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xsamplingexpirationtime/" title="-XsamplingExpirationTime" class="md-nav__link">
+      -XsamplingExpirationTime
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xscdmx/" title="-Xscdmx" class="md-nav__link">
+      -Xscdmx
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xscminaot/" title="-Xscmaxaot" class="md-nav__link">
+      -Xscmaxaot
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xscminjitdata/" title="-Xscmaxjitdata" class="md-nav__link">
+      -Xscmaxjitdata
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xscminaot/" title="-Xscminaot" class="md-nav__link">
+      -Xscminaot
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xscminjitdata/" title="-Xscminjitdata" class="md-nav__link">
+      -Xscminjitdata
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xscmx/" title="-Xscmx" class="md-nav__link">
+      -Xscmx
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xshareclasses/" title="-Xshareclasses" class="md-nav__link">
+      -Xshareclasses
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xsigcatch/" title="-Xsigcatch" class="md-nav__link">
+      -Xsigcatch
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xsigchain/" title="-Xsigchain" class="md-nav__link">
+      -Xsigchain
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xsignal/" title="-Xsignal" class="md-nav__link">
+      -Xsignal
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xsoftmx/" title="-Xsoftmx" class="md-nav__link">
+      -Xsoftmx
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xsoftrefthreshold/" title="-Xsoftrefthreshold" class="md-nav__link">
+      -Xsoftrefthreshold
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xss/" title="-Xss" class="md-nav__link">
+      -Xss
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xss/" title="-Xssi" class="md-nav__link">
+      -Xssi
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xtgc/" title="-Xtgc" class="md-nav__link">
+      -Xtgc
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xthr/" title="-Xthr" class="md-nav__link">
+      -Xthr
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xtlhprefetch/" title="-XtlhPrefetch" class="md-nav__link">
+      -XtlhPrefetch
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xtrace/" title="-Xtrace" class="md-nav__link">
+      -Xtrace
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xtunevirtualized/" title="-Xtune:virtualized" class="md-nav__link">
+      -Xtune:virtualized
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xverbosegclog/" title="-Xverbosegclog" class="md-nav__link">
+      -Xverbosegclog
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xverify/" title="-Xverify" class="md-nav__link">
+      -Xverify
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xzero/" title="-Xzero" class="md-nav__link">
+      -Xzero
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-13-6" type="checkbox" id="nav-13-6">
+    
+    <label class="md-nav__link" for="nav-13-6">
+      JVM -XX options
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-13-6">
+        JVM -XX options
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xx_jvm_commands/" title="Using -XX options" class="md-nav__link">
+      Using -XX options
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xxactiveprocessorcount/" title="-XXActiveProcessorCount" class="md-nav__link">
+      -XXActiveProcessorCount
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xxallowvmshutdown/" title="-XXallowvmshutdown" class="md-nav__link">
+      -XXallowvmshutdown
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xxalwayspretouch/" title="-XX:[+|-]AlwaysPreTouch" class="md-nav__link">
+      -XX:[+|-]AlwaysPreTouch
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xxclassrelationshipverifier/" title="-XX:[+|-]ClassRelationshipVerifier" class="md-nav__link">
+      -XX:[+|-]ClassRelationshipVerifier
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xxconcgcthreads/" title="-XX:ConcGCThreads" class="md-nav__link">
+      -XX:ConcGCThreads
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xxcodecachetotal/" title="-XX:codecachetotal" class="md-nav__link">
+      -XX:codecachetotal
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xxcompactstrings/" title="-XX:[+|-]CompactStrings" class="md-nav__link">
+      -XX:[+|-]CompactStrings
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xxdisableexplicitgc/" title="-XX:[+|-]DisableExplicitGC" class="md-nav__link">
+      -XX:[+|-]DisableExplicitGC
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xxdisclaimjitscratch/" title="-XX:[+|-]DisclaimJitScratch" class="md-nav__link">
+      -XX:[+|-]DisclaimJitScratch
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xxenablecpumonitor/" title="-XX:[+|-]EnableCPUMonitor" class="md-nav__link">
+      -XX:[+|-]EnableCPUMonitor
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xxexitonoutofmemoryerror/" title="-XX:[+|-]ExitOnOutOfMemoryError" class="md-nav__link">
+      -XX:[+|-]ExitOnOutOfMemoryError
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xxgloballockreservation/" title="-XX:[+|-]GlobalLockReservation" class="md-nav__link">
+      -XX:[+|-]GlobalLockReservation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xxhandlesigxfsz/" title="-XX:[+|-]HandleSIGXFSZ" class="md-nav__link">
+      -XX:[+|-]HandleSIGXFSZ
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xxhandlesigabrt/" title="-XX:[+|-]HandleSIGABRT" class="md-nav__link">
+      -XX:[+|-]HandleSIGABRT
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xxheapdumponoutofmemory/" title="-XX:[+|-]HeapDumpOnOutOfMemory" class="md-nav__link">
+      -XX:[+|-]HeapDumpOnOutOfMemory
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xxheapdumppath/" title="-XX:HeapDumpPath" class="md-nav__link">
+      -XX:HeapDumpPath
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xxheapmanagementmxbeancompatibility/" title="-XX:[+|-]HeapManagementMXBeanCompatibility" class="md-nav__link">
+      -XX:[+|-]HeapManagementMXBeanCompatibility
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xxidletuningcompactonidle/" title="-XX:[+|-]IdleTuningCompactOnIdle" class="md-nav__link">
+      -XX:[+|-]IdleTuningCompactOnIdle
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xxidletuninggconidle/" title="-XX:[+|-]IdleTuningGcOnIdle" class="md-nav__link">
+      -XX:[+|-]IdleTuningGcOnIdle
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xxidletuningminfreeheaponidle/" title="-XX:IdleTuningMinFreeHeapOnIdle" class="md-nav__link">
+      -XX:IdleTuningMinFreeHeapOnIdle
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xxidletuningminidlewaittime/" title="-XX:IdleTuningMinIdleWaitTime" class="md-nav__link">
+      -XX:IdleTuningMinIdleWaitTime
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xxignoreunrecognizedvmoptions/" title="-XX:[+|-]IgnoreUnrecognizedVMOptions" class="md-nav__link">
+      -XX:[+|-]IgnoreUnrecognizedVMOptions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xxignoreunrecognizedxxcolonoptions/" title="-XX:[+|-]IgnoreUnrecognizedXXColonOptions" class="md-nav__link">
+      -XX:[+|-]IgnoreUnrecognizedXXColonOptions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xxinitialrampercentage/" title="-XX:InitialRAMPercentage" class="md-nav__link">
+      -XX:InitialRAMPercentage
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xxinitialheapsize/" title="-XX:InitialHeapSize" class="md-nav__link">
+      -XX:InitialHeapSize
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xxinterleavememory/" title="-XX:[+|-]InterleaveMemory" class="md-nav__link">
+      -XX:[+|-]InterleaveMemory
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xxjitinlinewatches/" title="-XX:[+|-]JITInlineWatches" class="md-nav__link">
+      -XX:[+|-]JITInlineWatches
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xxlazysymbolresolution/" title="-XX:[+|-]LazySymbolResolution" class="md-nav__link">
+      -XX:[+|-]LazySymbolResolution
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xxmaxdirectmemorysize/" title="-XX:MaxDirectMemorySize" class="md-nav__link">
+      -XX:MaxDirectMemorySize
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xxinitialheapsize/" title="-XX:MaxHeapSize" class="md-nav__link">
+      -XX:MaxHeapSize
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xxinitialrampercentage/" title="-XX:MaxRAMPercentage" class="md-nav__link">
+      -XX:MaxRAMPercentage
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xxonoutofmemoryerror/" title="-XX:OnOutOfMemoryError" class="md-nav__link">
+      -XX:OnOutOfMemoryError
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xxoriginaljdk8heapsizecompatibilitymode/" title="-XX:[+|-]OriginalJDK8HeapSizeCompatibilityMode" class="md-nav__link">
+      -XX:[+|-]OriginalJDK8HeapSizeCompatibilityMode
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xxnosuballoc32bitmem/" title="-XXnosuballoc32bitmem" class="md-nav__link">
+      -XXnosuballoc32bitmem
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xxpagealigndirectmemory/" title="-XX:[+|-]PageAlignDirectMemory" class="md-nav__link">
+      -XX:[+|-]PageAlignDirectMemory
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xxparallelcmsthreads/" title="-XX:ParallelCMSThreads" class="md-nav__link">
+      -XX:ParallelCMSThreads
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xxparallelgcthreads/" title="-XX:ParallelGCThreads" class="md-nav__link">
+      -XX:ParallelGCThreads
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xxportablesharedcache/" title="-XX:[+|-]PortableSharedCache" class="md-nav__link">
+      -XX:[+|-]PortableSharedCache
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xxpositiveidentityhash/" title="-XX:[+|-]PositiveIdentityHash" class="md-nav__link">
+      -XX:[+|-]PositiveIdentityHash
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xxprintcodecache/" title="-XX:[+|-]PrintCodeCache" class="md-nav__link">
+      -XX:[+|-]PrintCodeCache
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xxprintflagsfinal/" title="-XX:[+|-]PrintFlagsFinal" class="md-nav__link">
+      -XX:[+|-]PrintFlagsFinal
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xxreadipinfoforras/" title="-XX:[+|-]ReadIPInfoForRAS" class="md-nav__link">
+      -XX:[+|-]ReadIPInfoForRAS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xxreducecpumonitoroverhead/" title="-XX:[+|-]ReduceCPUMonitorOverhead" class="md-nav__link">
+      -XX:[+|-]ReduceCPUMonitorOverhead
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xxruntimeinstrumentation/" title="-XX:[+|-]RuntimeInstrumentation" class="md-nav__link">
+      -XX:[+|-]RuntimeInstrumentation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xxsethwprefetch/" title="-XXsetHWPrefetch" class="md-nav__link">
+      -XXsetHWPrefetch
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xxshareanonymousclasses/" title="-XX:[+|-]ShareAnonymousClasses" class="md-nav__link">
+      -XX:[+|-]ShareAnonymousClasses
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xxshareclassesenablebci/" title="-XX:ShareClassesDisableBCI" class="md-nav__link">
+      -XX:ShareClassesDisableBCI
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xxshareclassesenablebci/" title="-XX:ShareClassesEnableBCI" class="md-nav__link">
+      -XX:ShareClassesEnableBCI
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xxsharedcachehardlimit/" title="-XX:SharedCacheHardLimit" class="md-nav__link">
+      -XX:SharedCacheHardLimit
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xxshareunsafeclasses/" title="-XX:[+|-]ShareUnsafeClasses" class="md-nav__link">
+      -XX:[+|-]ShareUnsafeClasses
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xxstacktraceinthrowable/" title="-XX:-StackTraceInThrowable" class="md-nav__link">
+      -XX:-StackTraceInThrowable
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xxtransparenthugepage/" title="-XX:[+|-]TransparentHugePage" class="md-nav__link">
+      -XX:[+|-]TransparentHugePage
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xxusecompressedoops/" title="-XX:[+|-]UseCompressedOops" class="md-nav__link">
+      -XX:[+|-]UseCompressedOops
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xxusecontainersupport/" title="-XX:[+|-]UseContainerSupport" class="md-nav__link">
+      -XX:[+|-]UseContainerSupport
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xxusegcstartuphints/" title="-XX:[+|-]UseGCStartupHints" class="md-nav__link">
+      -XX:[+|-]UseGCStartupHints
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xxusenogc/" title="-XX:[+|-]UseNoGC" class="md-nav__link">
+      -XX:[+|-]UseNoGC
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xxverboseverification/" title="-XX:[+|-]VerboseVerification" class="md-nav__link">
+      -XX:[+|-]VerboseVerification
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xxvmlockclassloader/" title="-XX:[+|-]VMLockClassLoader" class="md-nav__link">
+      -XX:[+|-]VMLockClassLoader
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-14" type="checkbox" id="nav-14">
+    
+    <label class="md-nav__link" for="nav-14">
+       Reference
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-14">
+         Reference
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../openj9_support/" title="Supported environments" class="md-nav__link">
+      Supported environments
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../openj9_defaults/" title="Default settings" class="md-nav__link">
+      Default settings
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../openj9_signals/" title="Signal handling" class="md-nav__link">
+      Signal handling
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../openj9_directories/" title="Directory conventions" class="md-nav__link">
+      Directory conventions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../messages_intro/" title="OpenJ9 messages" class="md-nav__link">
+      OpenJ9 messages
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../env_var/" title="Environment variables" class="md-nav__link">
+      Environment variables
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-15" type="checkbox" id="nav-15">
+    
+    <label class="md-nav__link" for="nav-15">
+      API documentation
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-15">
+        API documentation
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api-overview/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-15-2" type="checkbox" id="nav-15-2">
+    
+    <label class="md-nav__link" for="nav-15-2">
+      Java 8 API
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-15-2">
+        Java 8 API
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api-conditionhandling/" title="Condition exception handling" class="md-nav__link">
+      Condition exception handling
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api-cuda/" title="CUDA4J" class="md-nav__link">
+      CUDA4J
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api-daa/" title="Data access acceleration" class="md-nav__link">
+      Data access acceleration
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api-dtfj/" title="DTFJ" class="md-nav__link">
+      DTFJ
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api-gpu/" title="GPU" class="md-nav__link">
+      GPU
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api-jvm/" title="JVM diagnostic utilities" class="md-nav__link">
+      JVM diagnostic utilities
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api-langmgmt/" title="Monitoring and management" class="md-nav__link">
+      Monitoring and management
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api-shrc/" title="Shared classes" class="md-nav__link">
+      Shared classes
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api-jdk11/" title="Java 11 API" class="md-nav__link">
+      Java 11 API
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../legal/" title="Legal" class="md-nav__link">
+      Legal
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">On this page ...</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-generate-a-verbose-garbage-collection-log" class="md-nav__link">
+    How to generate a verbose garbage collection log
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+<!-- this adds 'pencil' icon to H1 so that you can edit the page directly in GitHub
+                
+                  <a href="https://github.com/eclipse/openj9/edit/master/docs/vgclog.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+-->
+                
+                <h1 id="verbose-garbage-collection-logs">Verbose Garbage Collection Logs</h1>
+<p><a href="../gc/">Garbage collection</a>(GC) reclaims used memory in the heap for reuse. During cleanup of the heap, the verbose garbage collection logs, when enabled, capture information about the different garbage collection operations that are involved in the garbage collection cycles. GC operations aim to reorganize or reclaim memory. </p>
+<p>Verbose GC logs contain information on garbage collection operations to assist with the following actions:  </p>
+<ul>
+<li>To tune GC and improve application performance. </li>
+<li>Troubleshooting GC operations and policies. For example, analyzing long pauses, or determining how free memory is divided in the heap before and after a GC cycle.  </li>
+</ul>
+<p>Verbose GC logs, when enabled, begin capturing information as soon as garbage collection is initialized. </p>
+<p>To help you visualize and analyze the garbage collection, you can feed verbose GC log files into various diagnostic tools and interfaces. Examples include tools such as the <a href="https://marketplace.eclipse.org/content/ibm-monitoring-and-diagnostic-tools-garbage-collection-and-memory-visualizer-gcmv">Garbage Collection and memory visualizer extension for Eclipse</a>, and online services such as <a href="https://gceasy.io">GCEasy</a>.  </p>
+<p><strong>Note:</strong> You can run one or more GC traces by using the (<a href="../xtgc/">'-XTgc' option</a>) to get more detailed information to help diagnose GC problems or perform finer tuning. </p>
+<h2 id="how-to-generate-a-verbose-garbage-collection-log">How to generate a verbose garbage collection log</h2>
+<p>You can enable verbose GC logs by specifying the <code>-verbose:gc</code> standard option when you start your application. For more information, see <a href="../cmdline_general/">standard command-line options</a>. </p>
+<p>The output of <code>-verbose:gc</code> is printed to STDERR by default. To print the log output to a file, append the <code>-Xverbosegclog</code> option. You can print the verbose GC log file to a succession of files, where each file logs a specified number of GC cycles, by using extra parameters of <code>-Xverbosegclog</code> option. For more information, see the command-line option <a href="../xverbosegclog/"><code>-Xverbosegclog</code></a>. </p>
+<h1 id="verbose-gc-log-contents">Verbose GC log contents</h1>
+<p>The Verbose garbage collection logs are printed in XML format and consist of the following sections:  </p>
+<ul>
+<li>
+<p>a summary of your GC configuration, which is captured in the <code>&lt;initialized&gt;</code> XML element. </p>
+</li>
+<li>
+<p>sections that contain information about the different GC cycles run, including the GC operations and GC increments that made up the GC cycle.  </p>
+</li>
+</ul>
+<p>The logs record when a GC cycle or increment starts and ends, together with the GC operations that are run to manage or reclaim memory. You can also find out what triggers these activities and the amount of memory available to your application before and after processing.  </p>
+<p>Not all operations that take place during garbage collection are recorded. For example, the logs record when an increment of a concurrent GC cycle starts and ends, but most concurrent GC operations are not recorded.</p>
+<p>For definitions of GC cycles, GC increments, operations, phases, see <a href="../gc/#garbage-collection-policies">Garbage Collection Policies</a>. </p>
+<h2 id="xml-structure">XML Structure</h2>
+<p>GC activities that make up a GC cycle are listed in the XML structure in a linear fashion. Some XML elements contain child XML elements while other XML elements are empty, serving as markers for starting and ending parts of the GC cycle. The XML elements contain attributes that record further information about the activity. </p>
+<p>The start of a GC cycle is recorded by using the <cycle-start> XML element. The trigger reason for the GC cycle is captured in an adjacent XML element, such as <af-start> for an allocation failure or <allocation taxation> for a policy’s memory threshold trigger. </p>
+<p>For example, the following XML structure can be found in the verbose GC logs that are generated from the <code>gencon</code> policy. In this example, the lines are indented to help illustrate the flow and some child XML elements are omitted for clarity: </p>
+<pre><code>&lt;exclusive-start&gt; &lt;/exclusive-start&gt; 
+
+  &lt;af-start/&gt; 
+
+    &lt;cycle-start/&gt; 
+
+      &lt;gc-start&gt; &lt;/gc-start&gt; 
+
+        &lt;allocation-stats&gt; &lt;/allocation-stats&gt; 
+
+        &lt;gc-op&gt; &lt;/gc-op&gt; 
+
+      &lt;gc-end&gt; &lt;/gc-end&gt; 
+
+    &lt;cycle-end/&gt; 
+
+    &lt;allocation-satisfied/&gt; 
+
+  &lt;af-end/&gt; 
+
+&lt;exclusive-end/&gt; 
+ ```
+
+The `&lt;af-start/&gt;`, `&lt;cycle-start/&gt;`, `&lt;cycle-end/&gt;`, `&lt;allocation-satisfied/&gt;`, and `&lt;af-end/&gt;` XML elements are empty and contain only attributes. 
+
+All other XML elements contain child XML elements, which are omitted from this simplified example. 
+
+## GC increments and interleaving 
+
+Some GC policies include more than 1 GC cycle. GC cycles might be divided into multiple GC increments so that GC operations from the different GC cycles can interleave with each other to reduce pause times.  
+
+A GC cycle can be divided into GC increments in different ways. See specific policy details for definitions of the GC increments that make up each cycle and the associated GC increment XML elements. 
+
+The verbose GC log records all GC activities in the order in which they are run, so GC increments and operations of different cycles interleave with each other in the logs. 
+
+Use the `contextid` and `id` attributes to locate the GC increments and operations in the log that are associated with a specific GC cycle:
+
+1. Determine the `id` attribute value associated with your GC cycle’s XML element `&lt;cycle-start&gt;`. Note: the `id` attribute increases incrementally with each GC event.  
+2. Search for the `contextid` attribute values that are equal to your GC cycle’s `id` attribute value. All GC increments, operations, and concurrent events that are associated with a particular cycle have a `contextid` attribute whose value matches the `id` attribute value of the cycle. 
+
+## Gencon Policy 
+
+### Types of GC Cycle
+
+As detailed in [Gencon Policy (Default)](gc.md#gencon-policy-default), the Gencon policy uses two types of cycle to perform garbage collection – a partial GC cycle and a global GC cycle. 
+
+Note: For more information about the cycles used in a particular policy, see [garbage collection policies](gc#garbage-collection-policies). 
+
+You can search for a particular type of cycle in the logs by searching for the “type=&lt;value&gt;” attribute of the &lt;cycle-start&gt; and &lt;cycle-end&gt; XML elements. The following table shows the values of the “type” XML attribute the XML elements that record the cycle trigger for the different Gencon GC cycles:  
+
+| GC cycle | value of `type` XML attribute| XML element for cycle trigger| Triggering reason|
+|----------|----------------------------|------------------------------|------------------|
+|Global    | `global`                   | `&lt;concurrent-kickoff&gt;`       | threshold reached| 
+|Partial (default) | `scavenge`           | `&lt;af-start&gt;`                 |allocation failure|
+|Partial (non-default)| `scavenge`        | `&lt;af-start&gt;`                 |allocation failure|
+
+### Gencon cycle, increment, and operation XML elements
+
+Gencon GC cycles, increments, and operations are recorded in the verbose GC log by using the XML elements that are listed in the following table:  
+
+
+| GC process             | start and end XML elements   | Details |
+|------------------------|------------------------------|------------------------------|
+|GC cycle                |`&lt;cycle-start&gt;`, `&lt;cycle-end&gt;`| The start and end of a GC cycle.|
+|GC STW increment        |`&lt;gc-start&gt;`, `&lt;gc-end&gt;`      | The start and end of a GC increment that begins with a *stop-the-world* pause. 
+|GC STW increment        | `&lt;concurrent-kickoff&gt;`       | The start of the initial GC increment of the global concurrent cycle that begins the initial mark operation 
+|GC *stop-the-world* increment        | `&lt;concurrent-global-final&gt; ` | The start of the final GC increment of the global concurrent cycle that performs the final collection|
+|GC operations and phases| `&lt;gc-op&gt;`                    | A GC operation such as mark or sweep, or a suboperation ‘phase’ such as class unload. |
+
+**Note:** Details of a GC operation or phase are logged by using the single &lt;gc-op&gt; XML element rather than start and end XML elements. 
+
+The following sections give details about specific cycles, including examples of how the cycle appears in the Verbose GC log.
+
+### Partial GC cycle – STW scavenge operation(default) 
+The Gencon policy’s partial cycle, scavenge, is run by default by using only a *stop-the-world* pause. The cycle consists of only one *stop-the-world* scavenge operation, and is run on the nursery area only: 
+
+|GC Operation | GC increment | *stop-the-world* or concurrent| XML element of GC increment          | Details                                                                   |
+|-------------|--------------|-------------------------------|--------------------------------------|---------------------------------------------------------------------------|
+|Scavenge     |Single        | *stop-the-world*              | `&lt;gc-start&gt;`, `&lt;gc-end&gt;`| `&lt;gc-op'&gt;` |Contains detailed information about root scanning and weak roots processing|
+
+
+**EXAMPLE - Gencon’s default partial GC cycle**
+
+A default partial GC cycle is recorded within the following example, which is taken from the verbose GC log output of a Gencon policy garbage collection. The following log content is broken down into sections that describe particular activities of the GC cycle. 
+
+**Initialization** 
+
+The first section of the log, which appears at the start of all verbose GC logs, records the configuration of the garbage collector:  
+</code></pre>
+
+<p><initialized id="1" timestamp="2020-10-18T13:27:07.691"> </p>
+<p><attribute name="gcPolicy" value="-Xgcpolicy:gencon" /> </p>
+<p><attribute name="maxHeapSize" value="0x40000000" /> </p>
+<p><attribute name="initialHeapSize" value="0x40000000" /> </p>
+<p><attribute name="compressedRefs" value="true" /> </p>
+<p>... </p>
+<p><system> </p>
+<p><attribute name="physicalMemory" value="100335456256" /> </p>
+<p><attribute name="numCPUs" value="28" /> </p>
+<p>... </p>
+<p></system> </p>
+<p><vmargs> </p>
+<p><vmarg name="-Xoptionsfile=/java/perffarm/sdks/O11_j9_x64_linux-20201014/sdk/lib/options.default" /> 
+… 
+<vmarg name="-Dsun.java.launcher.pid=6068" /> </p>
+<p></vmargs> </p>
+<p></initialized> </p>
+<p></verbosegc> </p>
+<p>UNNAMED" /&gt; </p>
+<p><vmarg name="--add-opens=java.sql/java.sql=ALL-UNNAMED" /> </p>
+<p><vmarg name="--add-opens=java.management/javax.management=ALL-UNNAMED" /> 
+... </p>
+<p></vmargs> </p>
+<p></initialized> </p>
+<pre><code>
+The verbose GC log then begins recording GC activities and details. 
+
+**XML Structure of partial GC cycle**
+
+The default partial GC cycle follows a general structure in the verbose GC log as shown. The lines are indented to help illustrate the flow and some child XML elements are omitted for clarity: 
+</code></pre>
+
+<p><exclusive-start> </p>
+<p><af-start> </p>
+<pre><code>&lt;cycle-start&gt;
+
+  &lt;gc-start&gt;
+
+    &lt;mem-info&gt;
+
+      &lt;mem&gt;&lt;/mem&gt;
+
+    &lt;/mem-info&gt;
+
+  &lt;/gc-start&gt;
+
+    &lt;gc-op&gt; type="scavenge" &lt;/gc-op&gt;
+
+  &lt;gc-end&gt;
+
+    &lt;mem-info&gt;
+
+      &lt;mem&gt;&lt;/mem&gt;
+
+    &lt;/mem-info&gt; 
+  &lt;/gc-end&gt;
+
+  &lt;cycle-end&gt;
+</code></pre>
+<p><af-end> </p>
+<p><exclusive-end> </p>
+<pre><code>**`&lt;exclusive-start&gt;`**
+
+The cycle begins with a *stop-the-world* pause, recorded by the &lt;exclusive-start&gt; XML element:  
+
+</code></pre>
+
+<p><exclusive-start id="2" timestamp="2020-10-18T13:27:09.603" intervalms="1913.853">  </p>
+<p><response-info timems="0.030" idlems="0.030" threads="0" lastid="0000000000AC4600" lastname="LargeThreadPool-thread-3" />  </p>
+<p></exclusive-start> </p>
+<pre><code>**`&lt;af-start&gt;`**
+
+The `&lt;af-start&gt;` XML element indicates that an allocation failure triggered the *stop-the-world* pause and subsequent GC cycle:
+</code></pre>
+
+<p><af-start id="3" threadId="0000000000AC4F80" totalBytesRequested="272" timestamp="2020-10-18T13:27:09.603" intervalms="1913.921" type="nursery" />  </p>
+<pre><code>**`&lt;cycle-start&gt;`**
+
+The beginning of the GC cycle itself is recorded by the `&lt;cycle-start&gt;` XML element and contains the XML attribute `type=&quot;scavenge&quot;` to describe the GC operation involved in this GC cycle:
+
+</code></pre>
+
+<p><cycle-start id="4" type="scavenge" contextid="0" timestamp="2020-10-18T13:27:09.603" intervalms="1913.959" /> </p>
+<pre><code>
+Logged GC events are labeled with `timestamp`,`id`, and `contextid` XML attributes. The `id` attribute increases incrementally with each GC event. All gc increments, operations, and concurrent XML elements associate with a particular cycle have a `contextid` value that matches the `id` value of the cycle.
+
+**`&lt;gc-start&gt;`** 
+
+The start of the first GC increment is logged by using the XML element `&lt;gc-start&gt;`:   
+
+</code></pre>
+
+<p><gc-start id="5" type="scavenge" contextid="4" timestamp="2020-10-18T13:27:09.603">  </p>
+<p><mem-info id="6" free="802568640" total="1073741824" percent="74">  </p>
+<p><mem type="nursery" free="0" total="268435456" percent="0">  </p>
+<p><mem type="allocate" free="0" total="134217728" percent="0" />  </p>
+<p><mem type="survivor" free="0" total="134217728" percent="0" />  </p>
+<p></mem>  </p>
+<p><mem type="tenure" free="802568640" total="805306368" percent="99">  </p>
+<p><mem type="soa" free="762302912" total="765040640" percent="99" />  </p>
+<p><mem type="loa" free="40265728" total="40265728" percent="100" />  </p>
+<p></mem>  </p>
+<p><remembered-set count="30758" />  </p>
+<p></mem-info>  </p>
+<p></gc-start>  </p>
+<p><allocation-stats totalBytes="136862352" >  </p>
+<p><allocated-bytes non-tlh="7097008" tlh="129765344" />  </p>
+<p><largest-consumer threadName="Start Level: Equinox Container: c25c3c67-836a-49e7-9949-a16d2c2a5a4d" threadId="000000000045E300" bytes="46137952" />  </p>
+<p></allocation-stats>  </p>
+<pre><code>The `&lt;mem-info&gt;` XML element and its child XML elements give detailed information about the amount of memory available and where it is located in the heap. You can determine how the GC operations in the increment modify and reclaim memory by comparing the attribute values of the `&lt;mem-info&gt;` and `&lt;mem&gt;` elements.   
+
+For this example, at the start of the GC increment the available memory is configured in the heap as follows: 
+
+- 0% of the nursery area, which is split between the allocate and survivor spaces, is available as free memory.  
+
+- 99% of the tenure area is available as free memory, which consists of short object allocation and long object allocation areas. 
+
+**`&lt;gc-op&gt;`** 
+
+The `&lt;gc-op&gt;` XML element and its child XML elements contain information about the increment’s operations and phases. The example GC cycle includes only 1 GC operation, which is of type `&quot;scavenge&quot;`: 
+
+</code></pre>
+
+<p><gc-op id="7" type="scavenge" timems="30.675" contextid="4" timestamp="2020-10-18T13:27:09.634">  </p>
+<p><scavenger-info tenureage="1" tenuremask="fffe" tiltratio="50" />  </p>
+<p><memory-copied type="nursery" objects="461787" bytes="25522536" bytesdiscarded="367240" />  </p>
+<p><finalization candidates="317" enqueued="157" />  </p>
+<p><ownableSynchronizers candidates="6711" cleared="2579" />  </p>
+<p><references type="soft" candidates="9233" cleared="0" enqueued="0" dynamicThreshold="32" maxThreshold="32" />  </p>
+<p><references type="weak" candidates="13149" cleared="4781" enqueued="4495" /><br />
+<references type="phantom" candidates="359" cleared="8" enqueued="8" />  </p>
+<p><object-monitors candidates="79" cleared="36" />  </p>
+<p></gc-op>  </p>
+<pre><code>The child XML elements of `&lt;gc-op&gt;` provide details about the operation itself. For example, the `&lt;scavenger-info&gt;` XML element shows that the tenure age is set to `&quot;1&quot;` for this operation. For a tenure age of `&quot;1&quot;`, any objects already copied between the allocate and survivor space once will be moved to the tenure area during the next scavenge operation. 
+
+The `&lt;memory-copied&gt;` XML element indicates that 25 MB (25522536) were reclaimed in the nursery area for new object allocation. For more information about how the scavenge operation acts on the heap, see [Gencon policy(default)](gc.md#gencon-policy-default).
+
+The `contextid=&quot;7&quot;`for the`&lt;gc-start&gt;` and `&lt;gc-op&gt;` XML elements are both ‘7’. The `id` value of the &lt;cycle-start&gt; element of the current partial GC cycle is also `&quot;7&quot;`, so the increment and operations are associated with the partial GC cycle.
+
+**`&lt;gc-end&gt;`** 
+
+The end of the GC increment is recorded with the `&lt;gc-end&gt;` XML element. The child XML elements `&lt;mem-info&gt;` and `&lt;mem&gt;` record details of the current levels of memory in different areas of the heap at the end of the GC increment: 
+</code></pre>
+
+<p><gc-end id="8" type="scavenge" contextid="4" durationms="30.815" usertimems="89.130" systemtimems="3.179" stalltimems="1.944" timestamp="2020-10-18T13:27:09.634" activeThreads="4">  </p>
+<p><mem-info id="9" free="910816000" total="1073741824" percent="84"> </p>
+<p><mem type="nursery" free="108247360" total="268435456" percent="40">  </p>
+<p><mem type="allocate" free="108247360" total="134217728" percent="80" />  </p>
+<p><mem type="survivor" free="0" total="134217728" percent="0" />  </p>
+<p></mem>  </p>
+<p><mem type="tenure" free="802568640" total="805306368" percent="99">  </p>
+<p><mem type="soa" free="762302912" total="765040640" percent="99" />  </p>
+<p><mem type="loa" free="40265728" total="40265728" percent="100" />  </p>
+<p></mem>  </p>
+<p><pending-finalizers system="1" default="156" reference="4503" classloader="0" /> </p>
+<p><remembered-set count="30758" /> </p>
+<p></mem-info>  </p>
+<p></gc-end>  </p>
+<pre><code>The attribute values of `&lt;mem&gt;` and `&lt;mem-info&gt;` show that memory has been released in the nursery area:
+
+- 40% of the nursery area available as free memory. The allocate space of the nursery area is now 80% available memory, and the survivor space is full. 
+- 99% of the tenure area is now available as free memory. 
+
+**`&lt;cycle-end&gt;`** 
+The end of the GC cycle is recorded by the `&lt;cycle-end&gt;` XML element. The GC cycle finishes after only 1 GC increment:  
+
+</code></pre>
+
+<p><cycle-end id="10" type="scavenge" contextid="4" timestamp="2020-10-18T13:27:09.635" />  </p>
+<p><allocation-satisfied id="11" threadId="0000000000AC4600" bytesRequested="272" />  </p>
+<p><af-end id="12" timestamp="2020-10-18T13:27:09.635" threadId="0000000000AC4F80" success="true" from="nursery"/>  </p>
+<p><exclusive-end id="13" timestamp="2020-10-18T13:27:09.635" durationms="31.984" />  </p>
+<pre><code>The `&lt;allocation-satisfied&gt;` XML element indicates that the requested memory reclaim of 272 bytes has been achieved by the GC cycle. The `&lt;exclusive-end&gt;` XML element indicates the end of the *stop-the-world* pause.
+
+
+**Summary of the example**
+
+So from the structure and XML schema of the example, you can determine the following:
+
+- The GC cycle begins with a *stop-the-world* pause due to an allocation failure. 
+
+- All GC events that are associated with this cycle occur during the *stop-the-world* pause 
+
+- The cycle consists of only 1 GC increment, containing only one operation, a ‘scavenge’. 
+
+- The GC cycle reclaims memory in the nursery area.  
+
+### Partial GC cycle – concurrent scavenge operation(non-default)
+
+
+The [partial scavenge GC cycle](vgclog.md#partial-gc-cycle-stw-scavenge-operation-default) can alternatively be run as a [concurrent scavenge cycle](gc.md#concurrent-scavenge). This non-default concurrent scavenge partial GC cycle is divided into 3 GC increments to reduce pause times and maximise throughput as defined in the following table:  
+
+|GC Operation | GC increment | *stop-the-world* or concurrent| XML element of GC increment          | Details                                                                   |
+|-------------|--------------|-------------------------------|--------------------------------------|---------------------------------------------------------------------------|
+|Scavenge     |initial        | *stop-the-world*              | `&lt;gc-start&gt;`, `&lt;gc-end&gt;`|Root scanning, reported as a single scavenge operation |
+|Scavenge     |intermediate        | concurrent         | `&lt;concurrent-start&gt;`, `&lt;concurrent-end&gt;`|`&lt;warning details=””&gt;`  Root scan, live objects traversed and evacuated (copy-forwarded). Reported as a scavenge operation |
+|Scavenge     |final     | *stop-the-world*              | `&lt;gc-start&gt;`, `&lt;gc-end&gt;` |weak roots scanning, reported as a complex scavenge operation (gc-op) containing specific details for each of weak root groups  |
+
+### Global GC cycle 
+
+The Gencon policy’s global GC cycle, which runs when the tenure area is close to full, consists of a mixture of STW and concurrent operations that run on the tenure area.  The initial and final steps of the GC cycle are run during a *stop-the-world* pause. GC operations that are involved in the intermediate step are run concurrently.  
+
+The global GC cycle is divided into GC increments, as shown in the following table: 
+
+|GC Operation         | GC increment| *stop-the-world* or concurrent| XML element of GC increment| Details                         |
+|---------------------|-------------|-------------------------------|--------------------------------------|-----------------------|
+|n/a - initiates cycle|initial      | *stop-the-world*              | `&lt;concurrent-kickoff`        |No `&lt;gc-op&gt;` is logged. This increment just initiates the concurrent mark increment |
+|concurrent mark      |intermediate |concurrent                     | `&lt;gc-start&gt;`, `&lt;gc-end&gt;`     |`&lt;concurrent-trace-info&gt;` records progress of concurrent mark|
+|final collection     |final        | *stop-the-world*              | `&lt;concurrent-global-final&gt;`  |Operations and phases include a final phase of concurrent mark, a sweep, and an optional class unload and compact. Triggered when card-cleaning threshold reached. Child XML element is `&lt;concurrent-trace-info reason=””&gt;`  |
+
+**Interleaving of Gencon GC cycle increments**
+
+While the *stop-the-world* scavenge operation of the partial GC cycle is running on the nursery area, the intermediate increment of the global GC cycle – a concurrent mark-sweep operation - runs concurrently on the tenure area.  
+
+You can see this interleaving of the increments in the verbose GC log, which has a similar structure to the following example (for clarity, not all GC activities are listed):
+
+&lt;table style=&quot;width:100%&quot;&gt;
+
+  &lt;tr&gt;
+    &lt;th&gt;Line Number&lt;/th&gt;
+    &lt;th&gt;Application threads running?&lt;/th&gt;
+    &lt;th colspan=&quot;2&quot;&gt;Logging&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;th&gt;-&lt;/th&gt;
+    &lt;th&gt;-&lt;/th&gt;
+    &lt;th&gt;Gencon global GC cycle status&lt;/th&gt;
+    &lt;th&gt;Gencon partial GC cycle status&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;1-87&lt;/td&gt;
+    &lt;td&gt;✅ &lt;/td&gt;
+    &lt;td colspan=&quot;2&quot;&gt;initialization&lt;/th&gt;
+  &lt;/tr&gt;
+&lt;tr&gt;
+    &lt;td&gt;87-51651&lt;/td&gt;
+    &lt;td&gt;✅ / ❌ &lt;/td&gt;
+    &lt;td&gt; - &lt;/td&gt;
+    &lt;td&gt; series of Gencon partial cycles start and finish &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;tr&gt;
+    &lt;td&gt;51655&lt;/td&gt;
+    &lt;td&gt;❌ &lt;/td&gt;
+    &lt;td&gt; - &lt;/td&gt;
+    &lt;td&gt;partial cycle initializes&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;tr&gt;
+    &lt;td&gt;51656&lt;/td&gt;
+    &lt;td&gt;❌ &lt;/td&gt;
+    &lt;td&gt; - &lt;/td&gt;
+    &lt;td&gt;scavenge increment runs&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;51696&lt;/td&gt;
+    &lt;td&gt;❌ &lt;/td&gt;
+    &lt;td&gt; - &lt;/td&gt;
+    &lt;td&gt;partial cycle ends&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;51700&lt;/td&gt;
+    &lt;td&gt; ✅  &lt;/td&gt;
+    &lt;td&gt; blank line - no activities logged&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;tr&gt;
+    &lt;td&gt;51701&lt;/td&gt;
+    &lt;td&gt; ✅  &lt;/td&gt;
+    &lt;td&gt; global cycle's initial increment marked&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+  &lt;/tr&gt;
+
+  &lt;tr&gt;
+    &lt;td&gt;51707&lt;/td&gt;
+    &lt;td&gt; ❌  &lt;/td&gt;
+    &lt;td&gt; global cycle initializes&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+  &lt;/tr&gt;
+
+  &lt;tr&gt;
+    &lt;td&gt;51709&lt;/td&gt;
+    &lt;td&gt; ✅  &lt;/td&gt;
+    &lt;td&gt; concurrent increment runs (blank line)&lt;/td&gt;
+    &lt;td&gt;-&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;51714&lt;/td&gt;
+    &lt;td&gt; ❌  &lt;/td&gt;
+    &lt;td&gt; concurrent increment runs&lt;/td&gt;
+    &lt;td&gt;partial cycle initializes&lt;/td&gt;
+  &lt;/tr&gt;
+
+  &lt;tr&gt;
+    &lt;td&gt;51715&lt;/td&gt;
+    &lt;td&gt; ❌ &lt;/td&gt;
+    &lt;td&gt; concurrent increment runs&lt;/td&gt;
+    &lt;td&gt;scavenge increment runs&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;51754&lt;/td&gt;
+    &lt;td&gt; ❌ &lt;/td&gt;
+    &lt;td&gt; concurrent increment runs&lt;/td&gt;
+    &lt;td&gt;partial cycle ends&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;51758&lt;/td&gt;
+    &lt;td&gt; ✅  &lt;/td&gt;
+    &lt;td&gt; blank line - no activities logged &lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;51762&lt;/td&gt;
+    &lt;td&gt; ❌  &lt;/td&gt;
+    &lt;td&gt; final collection increment runs &lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;51867&lt;/td&gt;
+    &lt;td&gt; ❌  &lt;/td&gt;
+    &lt;td&gt; global cycle ends&lt;/td&gt;
+    &lt;td&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;/table&gt;
+
+**Example - Gencon’s global GC cycle**
+
+The following example shows how a global GC cycle is recorded in a Gencon policy verbose GC log. The global GC cycle is run after the completion of many partial GC cycles, so the log content in this example begins part way down the full log. For more information about the GC Initialization section and partial cycle log contents, see [Log example: Gencon’s default partial GC cycle](./vgclogs.md/#log-example-gencons-default-partial-gc-cycle). 
+
+ [The global GC cycle is split into increments](./verbosegc.md#global-gc-cycle) that interleave with partial GC cycles. The interleaving can be seen in the following example, where a partial GC cycle is logged between the start and end of the global cycle. 
+
+**XML structure of global GC cycle**
+
+The global GC cycle follows a general structure in the verbose GC log as shown. The lines are indented to help illustrate the flow and some child XML elements are omitted for clarity: 
+</code></pre>
+
+<p><concurrent-kickoff> </p>
+<p><exclusive-start></exclusive-start> </p>
+<p><cycle-start> </p>
+<p><exclusive-end> </p>
+<p>// The logs now record a partial GC cycle that runs from start to finish  </p>
+<p><exclusive-start> </p>
+<p><af-start> </p>
+<p><cycle-start> </p>
+<pre><code>&lt;gc-start&gt;
+
+  &lt;mem-info&gt;
+
+    &lt;mem&gt;&lt;/mem&gt;
+
+  &lt;/mem-info&gt;
+
+&lt;/gc-start&gt;
+
+&lt;gc-op&gt; &lt;/gc-op&gt;
+
+&lt;gc-end&gt;
+
+  &lt;mem-info&gt;
+
+    &lt;mem&gt;&lt;/mem&gt;
+
+  &lt;/mem-info&gt; 
+&lt;/gc-end&gt;
+
+&lt;cycle-end&gt;
+</code></pre>
+<p><af-end> </p>
+<p><exclusive-end> </p>
+<p>//the partial GC cycle has ended </p>
+<p>//the final increment of the global GC cycle now runs from start to finish </p>
+<p><exclusive-start> </exclusive-start> </p>
+<p><concurrent-global-final></concurrent-global-final> </p>
+<p><gc-start> </p>
+<p><mem-info> </p>
+<p><mem></mem> </p>
+<p></mem-info> </p>
+<p></gc-start> </p>
+<p><gc-op> “type=rs-scan"</gc-op> </p>
+<p><gc-op>”type=card-cleaning" </gc-op> </p>
+<p><gc-op> “type=mark”</gc-op> </p>
+<p><gc-op> “type=classunload”</gc-op> </p>
+<p><gc-op>”type=sweep” <code>/&gt;</code></p>
+<p><gc-end>  </p>
+<p><mem-info> </p>
+<p><mem></mem> </p>
+<p></mem-info> 
+</gc-end> </p>
+<p></cycle-end> </p>
+<p><exclusive-end> </p>
+<p>// The logs now record a partial GC cycle that runs from start to finish </p>
+<pre><code>
+**`&lt;concurrent-kickoff&gt;`** 
+
+The XML element `&lt;concurrent-kickoff&gt;` records the start of the first increment of the Gencon Global GC cycle. The ‘&lt;kickoff&gt;’ element contains:
+- Details of the reason for the launch of the GC cycle
+- The target number of bytes the cycle aims to free up in the heap
+- The current available memory in the different parts of the heap
+
+</code></pre>
+
+<p><concurrent-kickoff id="12362" timestamp="2020-10-18T13:35:44.341"> </p>
+<p><kickoff reason="threshold reached" targetBytes="239014924" thresholdFreeBytes="33024922" remainingFree="32933776" tenureFreeBytes="42439200" nurseryFreeBytes="32933776" /> </p>
+<p></concurrent-kickoff> </p>
+<pre><code>**Note:** To analyze specific parts of a cycle, you can search for the XML elements that mark a specific increment of the cycle. For example, you can search for the &lt;concurrent-kickoff&gt; XML element to locate the first increment of the Gencon global cycle. See the details of a particular cycle, such as the [Gencon Global Cycle](./vgclog.md/#global-cycle), to determine the XML element names for particular *stop-the-world* or concurrent GC increments or operations. 
+
+**`&lt;exclusive-start&gt;`** 
+
+The `&lt;exclusive-start&gt;` XML element indicates the start of a *stop-the-world* pause. 
+</code></pre>
+
+<p><exclusive-start id="12363" timestamp="2020-10-18T13:35:44.344" intervalms="342.152"> </p>
+<p><response-info timems="0.135" idlems="0.068" threads="3" lastid="00000000015DE600" lastname="LargeThreadPool-thread-24" /> </p>
+<p></exclusive-start> </p>
+<pre><code>
+**`&lt;cycle-start&gt;`** 
+
+The beginning of the global cycle is recorded, indicated by the `&quot;global&quot;` value of the XML `type` attribute. All subsequent GC events recorded in the logs that are associated with this particular cycle have a `contextid` value equal to the `&lt;cycle-start&gt;` `id` attribute value of `“12634”`. 
+</code></pre>
+
+<p><cycle-start id="12364" type="global" contextid="0" timestamp="2020-10-18T13:35:44.344" intervalms="516655.052" /> </p>
+<pre><code>**`&lt;exclusive-end&gt;` and the concurrent GC events** 
+
+The `&lt;exclusive-end&gt;` XML element records the end of the *stop-the-world* pause. 
+</code></pre>
+
+<p><exclusive-end id="12365" timestamp="2020-10-18T13:35:44.344" durationms="0.048" /> </p>
+<pre><code>
+**A blank line**
+A blank line appears in the log before the next section. A blank line indicates that there no *stop-the-world* activities are running. However, concurrent activities might be running, in this case, the concurrent operations, and phases of the second increment of a Gencon global cycle are running.
+
+**A partial GC cycle starts and completes** The next section of the logs records a *stop-the-world* pause associated with an allocation failure. The following XML element, `&lt;cycle-start&gt;`, indicates the start of a scavenge cycle. The ‘’contextid” XML attribute value of the XML elements in the following log section is “12368” not “12364. So the activities that are recorded in the section are associated with this new scavenge cycle rather than the currently running global cycle.  
+
+This new scavenge cycle is a Gencon default partial GC cycle. For more information about how this cycle is recorded in the logs, see the [log example for Gencon’s default partial G cycle](verbosegclog.md#ADD). 
+
+</code></pre>
+
+<p><exclusive-start id="12366" timestamp="2020-10-18T13:35:44.582" intervalms="237.874"> </p>
+<p><response-info timems="0.094" idlems="0.033" threads="5" lastid="00000000014E0F00" lastname="LargeThreadPool-thread-67" /> </p>
+<p></exclusive-start> </p>
+<p><af-start id="12367" threadId="00000000013D7280" totalBytesRequested="96" timestamp="2020-10-18T13:35:44.582" intervalms="580.045" type="nursery" /> </p>
+<p><cycle-start id="12368" type="scavenge" contextid="0" timestamp="2020-10-18T13:35:44.582" intervalms="580.047" /> </p>
+<p><gc-start id="12369" type="scavenge" contextid="12368" timestamp="2020-10-18T13:35:44.582"> </p>
+<p><mem-info id="12370" free="42439200" total="1073741824" percent="3"> </p>
+<p><mem type="nursery" free="0" total="268435456" percent="0"> </p>
+<p><mem type="allocate" free="0" total="241565696" percent="0" /> </p>
+<p><mem type="survivor" free="0" total="26869760" percent="0" /> </p>
+<p></mem> </p>
+<p><mem type="tenure" free="42439200" total="805306368" percent="5"> </p>
+<p><mem type="soa" free="2173472" total="765040640" percent="0" /> </p>
+<p><mem type="loa" free="40265728" total="40265728" percent="100" /> </p>
+<p></mem> </p>
+<p><remembered-set count="23069" /> </p>
+<p></mem-info> </p>
+<p></gc-start> </p>
+<p><allocation-stats totalBytes="235709920" > </p>
+<p><allocated-bytes non-tlh="104" tlh="235709816" /> </p>
+<p><largest-consumer threadName="LargeThreadPool-thread-79" threadId="00000000013F0C00" bytes="7369720" /> </p>
+<p></allocation-stats> </p>
+<p><gc-op id="12371" type="scavenge" timems="11.110" contextid="12368" timestamp="2020-10-18T13:35:44.593"> </p>
+<p><scavenger-info tenureage="14" tenuremask="4000" tiltratio="89" /> </p>
+<p><memory-copied type="nursery" objects="158429" bytes="6018264" bytesdiscarded="108848" /> </p>
+<p><ownableSynchronizers candidates="1701" cleared="1685" /> </p>
+<p><references type="soft" candidates="57" cleared="0" enqueued="0" dynamicThreshold="32" maxThreshold="32" /> </p>
+<p><references type="weak" candidates="514" cleared="406" enqueued="406" /> </p>
+<p><object-monitors candidates="182" cleared="0" /> </p>
+<p></gc-op> </p>
+<p><gc-end id="12372" type="scavenge" contextid="12368" durationms="11.249" usertimems="43.025" systemtimems="0.000" stalltimems="1.506" timestamp="2020-10-18T13:35:44.593" activeThreads="4"> </p>
+<p><mem-info id="12373" free="277876128" total="1073741824" percent="25"> </p>
+<p><mem type="nursery" free="235436928" total="268435456" percent="87"> </p>
+<p><mem type="allocate" free="235436928" total="241565696" percent="97" /> </p>
+<p><mem type="survivor" free="0" total="26869760" percent="0" /> </p>
+<p></mem> </p>
+<p><mem type="tenure" free="42439200" total="805306368" percent="5" macro-fragmented="0"> </p>
+<p><mem type="soa" free="2173472" total="765040640" percent="0" /> </p>
+<p><mem type="loa" free="40265728" total="40265728" percent="100" /> </p>
+<p></mem> </p>
+<p><pending-finalizers system="0" default="0" reference="406" classloader="0" /> </p>
+<p><remembered-set count="17354" /> </p>
+<p></mem-info> </p>
+<p></gc-end> </p>
+<p><cycle-end id="12374" type="scavenge" contextid="12368" timestamp="2020-10-18T13:35:44.594" /> </p>
+<p><allocation-satisfied id="12375" threadId="00000000013D6900" bytesRequested="96" /> </p>
+<p><af-end id="12376" timestamp="2020-10-18T13:35:44.594" threadId="00000000013D7280" success="true" from="nursery"/> </p>
+<p><exclusive-end id="12377" timestamp="2020-10-18T13:35:44.594" durationms="11.816" /> </p>
+<pre><code>
+**`&lt;exclusive-start&gt;` and `&lt;concurrent-global-final&gt;`** 
+
+
+After the partial GC cycle completes and the stop the world pause finishes, the log records a *stop-the-world* pause preceding a `&lt;concurrent-global-final&gt;` XML element. 
+
+The `&lt;concurrent-global-final&gt;` XML element records the start of the third and final increment of the Global partial GC cycle, which consists of *stop-the-world* GC operations and phases. The *stop-the-world* pause is run by the garbage collector to run this final increment.  
+
+The `reason` attribute of the `&lt;concurrent-trace-info&gt;` XML element indicates that the global cycle reached the card cleaning threshold and so can now complete this final increment.  
+
+</code></pre>
+
+<p><exclusive-start id="12378" timestamp="2020-10-18T13:35:44.594" intervalms="12.075"> </p>
+<p><response-info timems="0.108" idlems="0.040" threads="3" lastid="00000000018D3800" lastname="LargeThreadPool-thread-33" /> </p>
+<p></exclusive-start> </p>
+<p><concurrent-global-final id="12379" timestamp="2020-10-18T13:35:44.594" intervalms="516905.029" > </p>
+<p><concurrent-trace-info reason="card cleaning threshold reached" tracedByMutators="200087048" tracedByHelpers="12164180" cardsCleaned="4966" workStackOverflowCount="0" /> </p>
+<p></concurrent-global-final> </p>
+<pre><code>
+**`&lt;gc-start&gt;`** 
+
+A global GC increment begins. You can check that the increment is associated with the GC global cycle in the example by checking the `contextid` XML attribute value matches the `id` XML attribute value of the cycle's &lt;gc-cycle&gt; XML element. For the increment in the example, the` &lt;gc-start&gt;` `contextid` and `&lt;gc-cycle&gt;` `id` value are both `&quot;12364&quot;`.
+
+</code></pre>
+
+<p><gc-start id="12380" type="global" contextid="12364" timestamp="2020-10-18T13:35:44.594"> </p>
+<p><mem-info id="12381" free="277048640" total="1073741824" percent="25"> </p>
+<p><mem type="nursery" free="234609440" total="268435456" percent="87"> </p>
+<p><mem type="allocate" free="234609440" total="241565696" percent="97" /> </p>
+<p><mem type="survivor" free="0" total="26869760" percent="0" /> </p>
+<p></mem> </p>
+<p><mem type="tenure" free="42439200" total="805306368" percent="5"> </p>
+<p><mem type="soa" free="2173472" total="765040640" percent="0" /> </p>
+<p><mem type="loa" free="40265728" total="40265728" percent="100" /> </p>
+<p></mem> </p>
+<p><pending-finalizers system="0" default="0" reference="405" classloader="0" /> </p>
+<p><remembered-set count="17388" /> </p>
+<p></mem-info> </p>
+<p></gc-start> </p>
+<p><allocation-stats totalBytes="827488" > </p>
+<p><allocated-bytes non-tlh="96" tlh="827392" /> </p>
+<p><largest-consumer threadName="LargeThreadPool-thread-68" threadId="00000000013D6900" bytes="65632" /> </p>
+<p></allocation-stats> </p>
+<pre><code>
+
+The child XML element attribute values of the`&lt;mem&gt;` and `&lt;mem-info&gt;` XML elements indicate the configuration of the memory. For this example, at the start of this GC increment, 25% of the total heap is available as free memory. This free memory is split between the following areas of the heap:  
+
+The nursery area, which has 87% of its total memory available as free memory. The free memory is only available in the allocate space of the nursery area. The survivor space has no free memory.  
+
+The tenure area, which has 5% of its total memory available as free memory. All of this free memory is in the long object allocation area. No free memory is available in the short object allocation area.  
+
+**Note:** The global GC cycle runs to free up memory in the tenure area. The freeing up of memory in the nursery area is achieved by using the partial GC cycle. For more information, see [Gencon Policy(default)](gc.md#gencon-policy-(default)). 
+
+**`&lt;gc-op&gt;`** 
+
+The `&lt;gc-op&gt;` XML element and its child XML elements contain information about the increment’s operations and phases. 5 `&lt;gc-op&gt;` XML elements are recorded. The `type` XML attribute records the different operations and phases that are involved: 
+
+1. `Rs-scan`
+2. `Card-cleaning`
+3. `Mark`
+4. `Classunload`
+5. `Sweep`
+
+**Note:** The final increment of a Gencon global cycle can include an optional compact phase.
+</code></pre>
+
+<p><gc-op id="12382" type="rs-scan" timems="3.525" contextid="12364" timestamp="2020-10-18T13:35:44.598"> </p>
+<p><scan objectsFound="11895" bytesTraced="5537600" workStackOverflowCount="0" /> </p>
+<p></gc-op> </p>
+<p><gc-op id="12383" type="card-cleaning" timems="2.910" contextid="12364" timestamp="2020-10-18T13:35:44.601"> </p>
+<p><card-cleaning cardsCleaned="3603" bytesTraced="5808348" workStackOverflowCount="0" /> </p>
+<p></gc-op> </p>
+<p><gc-op id="12384" type="mark" timems="6.495" contextid="12364" timestamp="2020-10-18T13:35:44.607"> </p>
+<p><trace-info objectcount="1936" scancount="1698" scanbytes="61200" /> </p>
+<p><finalization candidates="389" enqueued="1" /> </p>
+<p><ownableSynchronizers candidates="5076" cleared="523" /> </p>
+<p><references type="soft" candidates="18420" cleared="0" enqueued="0" dynamicThreshold="32" maxThreshold="32" /> </p>
+<p><references type="weak" candidates="19920" cleared="114" enqueued="60" /> </p>
+<p><references type="phantom" candidates="671" cleared="50" enqueued="50" /> </p>
+<p><stringconstants candidates="40956" cleared="109" /> </p>
+<p><object-monitors candidates="182" cleared="51" /> </p>
+<p></gc-op> </p>
+<p><gc-op id="12385" type="classunload" timems="1.607" contextid="12364" timestamp="2020-10-18T13:35:44.609"> </p>
+<p><classunload-info classloadercandidates="425" classloadersunloaded="6" classesunloaded="2" anonymousclassesunloaded="1" quiescems="0.000" setupms="1.581" scanms="0.019" postms="0.007" /> </p>
+<p></gc-op> </p>
+<p><gc-op id="12386" type="sweep" timems="9.464" contextid="12364" timestamp="2020-10-18T13:35:44.618" /> </p>
+<pre><code>
+
+**`&lt;gc-end&gt;`** 
+
+The `&lt;gc-end&gt;` XML element logs the end of the final increment of the global cycle. The `&lt;mem&gt;` and `&lt;mem-info&gt;` child XML elements show that after the increment runs, the heap contains 60% free memory. This free memory is split between the following areas of the heap:  
+
+- the nursery area remains unchanged, with 87% of its total memory available as free memory. The free memory is only available in the allocate space of the nursery area. The survivor space has no free memory. 
+- the tenure area, now has 51% of its total memory available as free memory. The memory is split between the small object allocation space, which has 48% of its space available as free memory, and the large object allocation space, which is all available memory.
+
+ ```
+&lt;gc-end id=&quot;12387&quot; type=&quot;global&quot; contextid=&quot;12364&quot; durationms=&quot;24.220&quot; usertimems=&quot;86.465&quot; systemtimems=&quot;0.000&quot; stalltimems=&quot;2.846&quot; timestamp=&quot;2020-10-18T13:35:44.618&quot; activeThreads=&quot;4&quot;&gt; 
+
+&lt;mem-info id=&quot;12388&quot; free=&quot;650476504&quot; total=&quot;1073741824&quot; percent=&quot;60&quot;&gt; 
+
+&lt;mem type=&quot;nursery&quot; free=&quot;235516088&quot; total=&quot;268435456&quot; percent=&quot;87&quot;&gt; 
+
+&lt;mem type=&quot;allocate&quot; free=&quot;235516088&quot; total=&quot;241565696&quot; percent=&quot;97&quot; /&gt; 
+
+&lt;mem type=&quot;survivor&quot; free=&quot;0&quot; total=&quot;26869760&quot; percent=&quot;0&quot; /&gt; 
+
+&lt;/mem&gt; 
+
+&lt;mem type=&quot;tenure&quot; free=&quot;414960416&quot; total=&quot;805306368&quot; percent=&quot;51&quot; micro-fragmented=&quot;98245682&quot; macro-fragmented=&quot;0&quot;&gt; 
+
+&lt;mem type=&quot;soa&quot; free=&quot;374694688&quot; total=&quot;765040640&quot; percent=&quot;48&quot; /&gt; 
+
+&lt;mem type=&quot;loa&quot; free=&quot;40265728&quot; total=&quot;40265728&quot; percent=&quot;100&quot; /&gt; 
+
+&lt;/mem&gt; 
+
+&lt;pending-finalizers system=&quot;1&quot; default=&quot;0&quot; reference=&quot;515&quot; classloader=&quot;0&quot; /&gt; 
+
+&lt;remembered-set count=&quot;13554&quot; /&gt; 
+
+&lt;/mem-info&gt; 
+
+&lt;/gc-end&gt; 
+</code></pre>
+
+<p><strong><code>&lt;cycle-end&gt;</code></strong> </p>
+<p>After the GC operations and phases of the final increment of the global cycle complete, the global cycle ends and the <em>stop-the-world</em> pause ends. </p>
+<pre><code>&lt;cycle-end id=&quot;12389&quot; type=&quot;global&quot; contextid=&quot;12364&quot; timestamp=&quot;2020-10-18T13:35:44.619&quot; /&gt; 
+
+&lt;exclusive-end id=&quot;12391&quot; timestamp=&quot;2020-10-18T13:35:44.619&quot; durationms=&quot;24.679&quot; /&gt; 
+</code></pre>
+
+<p>In summary, by analyzing the structure and XML element details of the example, you have determined the following: </p>
+<ul>
+<li>
+<p>The GC global cycle is triggered when a memory threshold is reached and begins with a <em>stop-the-world</em> pause </p>
+</li>
+<li>
+<p>After the first increment of the GC global cycle completes, the <em>stop-the-world</em> pause ends and the second increment runs concurrently. </p>
+</li>
+<li>
+<p>While the second increment is running concurrently, a partial GC cycle starts and finishes. </p>
+</li>
+<li>
+<p>When the second increment completes, a <em>stop-the-world</em> pause begins so that the third and final increment of the global cycle, which consists of five operations and phases, can run. </p>
+</li>
+<li>
+<p>The global GC cycle reclaims memory in the tenure area. </p>
+</li>
+</ul>
+                
+                  
+                
+              
+<!--
+              
+                
+
+
+              
+-->
+              <!-- This block was originally in the theme's 'footer.html' partial file. It has been moved here in part to resolve issues with the footer being too large. -->
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        <!--
+* Copyright (c) 2017, 2020 IBM Corp. and others
+*
+* This program and the accompanying materials are made
+* available under the terms of the Eclipse Public License 2.0
+* which accompanies this distribution and is available at
+* https://www.eclipse.org/legal/epl-2.0/ or the Apache
+* License, Version 2.0 which accompanies this distribution and
+* is available at https://www.apache.org/licenses/LICENSE-2.0.
+*
+* This Source Code may also be made available under the
+* following Secondary Licenses when the conditions for such
+* availability set forth in the Eclipse Public License, v. 2.0
+* are satisfied: GNU General Public License, version 2 with
+* the GNU Classpath Exception [1] and GNU General Public
+* License, version 2 with the OpenJDK Assembly Exception [2].
+*
+* [1] https://www.gnu.org/software/classpath/license.html
+* [2] http://openjdk.java.net/legal/assembly-exception.html
+*
+* SPDX-License-Identifier: EPL-2.0 OR Apache-2.0 OR GPL-2.0 WITH
+* Classpath-exception-2.0 OR LicenseRef-GPL-2.0 WITH Assembly-exception
+-->
+<cite></cite>
+<footer class="footer">
+  <div class="md-footer-meta">
+    
+
+    <div class="above-line">
+      <div class="above-line-links">
+        <div class="column">
+          <h3 >Docs</h3>
+          <span class="footer-link"><a href="/openj9_newuser/" >New to OpenJ9?</a></span>
+          <span class="footer-link"><a href="/introduction/">Getting started</a></span>
+          <span class="footer-link"><a href="/cmdline_specifying/">Command-line options</a></span>
+        </div>
+  
+        <div class="column">
+          <h3>Resources</h3>
+          <span class="footer-link"><a href="https://www.eclipse.org/openj9/about/" rel="noopener noreferrer" target="_blank">About</a></span>
+          <span class="footer-link"><a href="https://www.eclipse.org/openj9/performance/" rel="noopener noreferrer" target="_blank">Performance</a></span>
+        </div>
+  
+        <div class="column">
+          <h3 >Community</h3>
+          <span class="footer-link"><a href="https://www.eclipse.org/openj9/news/" rel="noopener noreferrer" target="_blank">News</a></span>
+          <span class="footer-link"><a href="https://blog.openj9.org/" rel="noopener noreferrer" target="_blank">Blogs</a></span>
+        </div>
+      </div>
+
+      <div class="column-incubator">
+        <div class="arrange-column">
+          <h3 ><b>OpenJ9 is an Eclipse Incubator project</b></h3>
+          <a class="incubator-image" href="http://wiki.eclipse.org/Development_Resources/Process_Guidelines/What_is_Incubation" target="_blank"><img width="50px" src="../cr/incubator-logo.svg" alt="Eclipse Incubation"></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="horizontal-line"></div>
+
+    <div class="below-line">
+      <span class="below-line-links"><a href="https://www.eclipse.org/" rel="noopener noreferrer" target="_blank">Eclipse Foundation Website </a></span>
+      <span class="below-line-links"><a href="https://www.eclipse.org/legal/privacy.php" rel="noopener noreferrer" target="_blank">Privacy Policy</a></span>
+      <span class="below-line-links"><a href="https://www.eclipse.org/legal/termsofuse.php" rel="noopener noreferrer" target="_blank">Terms of Use</a></span>
+      <span class="below-line-links"><a href="https://www.eclipse.org/legal/copyright.php" rel="noopener noreferrer" target="_blank">Copyright Agent</a></span>
+      <span class="below-line-links"><a href="https://www.eclipse.org/legal/" rel="noopener noreferrer" target="_blank">Legal</a></span>
+      <div class="below-line-social-media-icons">
+        <span class="social-media-link"> <a href="https://twitter.com/openj9/" rel="noopener noreferrer" target="_blank"> <img src="../cr/twitter-logo.svg" alt="Twitter Logo"></img></a></span>
+        <span class="social-media-link"> <a href="https://github.com/eclipse/openj9" rel="noopener noreferrer" target="_blank"> <img src="../cr/github-logo.svg" alt="GitHub Logo"></img></a></span>
+        <span class="social-media-link"> <a href="https://openj9.slack.com/" rel="noopener noreferrer" target="_blank"><img src="../cr/slack-icon.svg" alt="Slack logo"></img></a></span>
+        <span class="social-media-link"> <a href="https://stackoverflow.com/search?q=%23OpenJ9" rel="noopener noreferrer" target="_blank"><img src="../cr/stackoverflow-logo.svg" alt="Stack Overflow logo"></img></a></span>
+      </div>
+    </div>  
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/application.a8b5e56f.js"></script>
+      
+        
+        
+      
+      <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
+      
+        <script src="../javascripts/oj9.js"></script>
+      
+    
+    
+      
+        
+<script>
+  window.ga = window.ga || function() {
+    (ga.q = ga.q || []).push(arguments)
+  }
+  ga.l = +new Date
+  /* Setup integration and send page view */
+  ga("create", "UA-105616558-3", "mkdocs.org")
+  ga("set", "anonymizeIp", true)
+  ga("send", "pageview")
+  /* Register handler to log search on blur */
+  document.addEventListener("DOMContentLoaded", () => {
+    if (document.forms.search) {
+      var query = document.forms.search.query
+      query.addEventListener("blur", function() {
+        if (this.value) {
+          var path = document.location.pathname;
+          ga("send", "pageview", path + "?q=" + this.value)
+        }
+      })
+    }
+  })
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+  </body>
+</html>
