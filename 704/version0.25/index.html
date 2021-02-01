@@ -389,8 +389,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#support-for-verbosemodule-in-java-11" class="md-nav__link">
-    Support for -verbose:module in Java 11+
+  <a href="#binaries-and-supported-environments" class="md-nav__link">
+    Binaries and supported environments
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#support-for-the-verbosemodule-option" class="md-nav__link">
+    Support for the -verbose:module option
   </a>
   
 </li>
@@ -459,31 +466,31 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           
 
 
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-6" type="checkbox" id="nav-5-6">
+    
+    <label class="md-nav__link" for="nav-5-6">
+      Earlier releases
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-6">
+        Earlier releases
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
   <li class="md-nav__item">
     <a href="../version0.21/" title="Version 0.21.0" class="md-nav__link">
       Version 0.21.0
     </a>
   </li>
 
-        
-          
-          
-          
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-7" type="checkbox" id="nav-5-7">
-    
-    <label class="md-nav__link" for="nav-5-7">
-      Earlier releases
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-5-7">
-        Earlier releases
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
         
           
           
@@ -3920,8 +3927,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#support-for-verbosemodule-in-java-11" class="md-nav__link">
-    Support for -verbose:module in Java 11+
+  <a href="#binaries-and-supported-environments" class="md-nav__link">
+    Binaries and supported environments
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#support-for-the-verbosemodule-option" class="md-nav__link">
+    Support for the -verbose:module option
   </a>
   
 </li>
@@ -3960,7 +3974,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 -->
                 
                 <!--
-* Copyright (c) 2021, 2021 IBM Corp. and others
+* Copyright (c) 2017, 2021 IBM Corp. and others
 *
 * This program and the accompanying materials are made
 * available under the terms of the Eclipse Public License 2.0
@@ -3986,11 +4000,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <h1 id="whats-new-in-version-0250">What's new in version 0.25.0</h1>
 <p>The following new features and notable changes since v 0.24.0 are included in this release:</p>
 <ul>
-<li><img alt="Start of content that applies to Java 11 (LTS) and later" src="../cr/java11plus.png" /> <a href="#support-verbose-module-option">Support for -verbose:module in Java 11+</a></li>
+<li><a href="#binaries-and-supported-environments">New binaries and changes to supported environments</a></li>
+<li><img alt="Start of content that applies to Java 11 (LTS) and later" src="../cr/java11plus.png" /> <a href="#support-for-the-verbosemodule-option">Support for the <code>-verbose:module</code> option</a></li>
 </ul>
 <h2 id="features-and-changes">Features and changes</h2>
-<h3 id="support-for-verbosemodule-in-java-11"><img alt="Start of content that applies to Java 11 (LTS) and later" src="../cr/java11plus.png" /> Support for -verbose:module in Java 11+</h3>
-<p>The <code>-verbose:module</code> option is now supported in OpenJ9 for Java 11+. This option writes information to <code>stderr</code> for each module that is loaded and unloaded.</p>
+<h3 id="binaries-and-supported-environments">Binaries and supported environments</h3>
+<p>OpenJ9 release 0.25.0 supports OpenJDK 16. OpenJDK 16 with Eclipse OpenJ9 is <em>not</em> a long term support (LTS) release.</p>
+<p>Windows&reg; builds for Java&trade; 8 are now compiled with Microsoft&reg; Visual Studio 2013. The Visual Studio redistributable files included with the build are updated to match.</p>
+<p>To learn more about support for OpenJ9 releases, including OpenJDK levels and platform support, see <a href="../openj9_support/">Supported environments</a>.</p>
+<h3 id="support-for-the-verbosemodule-option"><img alt="Start of content that applies to Java 11 (LTS) and later" src="../cr/java11plus.png" /> Support for the <code>-verbose:module</code> option</h3>
+<p>The <code>-verbose:module</code> option is now supported for Java 11 and later releases. This option writes information to <code>stderr</code> for each module that is loaded and unloaded.</p>
 <h2 id="full-release-information">Full release information</h2>
 <p>To see a complete list of changes between Eclipse OpenJ9 v 0.24.0 and v 0.25.0 releases, see the <a href="https://github.com/eclipse/openj9/blob/master/doc/release-notes/0.25/0.25.md">Release notes</a>.</p>
 <!-- ==== END OF TOPIC ==== version0.25.md ==== -->
