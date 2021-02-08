@@ -63,7 +63,7 @@
     
     
       
-        <title>Verbose garbage collection Logs -  </title>
+        <title>Overview -  </title>
       
     
     
@@ -595,10 +595,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6" checked>
     
     <label class="md-nav__link" for="nav-6">
       Memory management
@@ -631,6 +633,128 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <a href="../gc/" title="Garbage collection policies" class="md-nav__link">
       Garbage collection policies
     </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-3" type="checkbox" id="nav-6-3" checked>
+    
+    <label class="md-nav__link" for="nav-6-3">
+      Verbose garbage collection logs
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-3">
+        Verbose garbage collection logs
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Overview
+      </label>
+    
+    <a href="./" title="Overview" class="md-nav__link md-nav__link--active">
+      Overview
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">On this page ...</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-generate-a-verbose-gc-log" class="md-nav__link">
+    How to generate a verbose GC log
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verbose-gc-log-contents-and-structure" class="md-nav__link">
+    Verbose GC log contents and structure
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#initialization" class="md-nav__link">
+    Initialization
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gc-cycles" class="md-nav__link">
+    GC Cycles
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gc-increments-and-interleaving" class="md-nav__link">
+    GC increments and interleaving
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../vgclog_examples/" title="Log examples" class="md-nav__link">
+      Log examples
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
   </li>
 
         
@@ -3939,50 +4063,54 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>For definitions of GC cycles, operations, phases, see <a href="../gc/#garbage-collection-policies">Garbage collection policies</a>. For definitions of GC increments, see <a href="#gc-increments-and-interleaving">GC increments and interleaving</a>.</p>
 <p>The logs record when GC cycles and their increments start and end, and list the GC operations that run within these increments to manage or reclaim memory. You can also determine which type of event triggered the cycle or increment, and the amount of memory available to your application before and after processing.  </p>
 <h3 id="initialization">Initialization</h3>
-<p>The first section of the log records the configuration of the garbage collector, for example:  </p>
-<pre><code class="xml">&lt;initialized id=&quot;1&quot; timestamp=&quot;2020-10-18T13:27:07.691&quot;&gt; 
-
-    &lt;attribute name=&quot;gcPolicy&quot; value=&quot;-Xgcpolicy:gencon&quot; /&gt; 
-
-    &lt;attribute name=&quot;maxHeapSize&quot; value=&quot;0x40000000&quot; /&gt; 
-
-    &lt;attribute name=&quot;initialHeapSize&quot; value=&quot;0x40000000&quot; /&gt; 
-
-    &lt;attribute name=&quot;compressedRefs&quot; value=&quot;true&quot; /&gt; 
-
-... 
-
-&lt;system&gt; 
-
-    &lt;attribute name=&quot;physicalMemory&quot; value=&quot;100335456256&quot; /&gt; 
-
-    &lt;attribute name=&quot;numCPUs&quot; value=&quot;28&quot; /&gt; 
-
-... 
-
-&lt;/system&gt; 
-
-&lt;vmargs&gt; 
-
-    &lt;vmarg name=&quot;-Xoptionsfile=/java/perffarm/sdks/O11_j9_x64_linux-20201014/sdk/lib/options.default&quot; /&gt; 
-...
+<p>The log begins by recording the configuration of the OpenJ9 runtime virtual environment (VM) and details of the GC configuration(GC). The configuration is recorded by using child elements of the <code>&lt;initialized&gt;</code> element, for example:  </p>
+<pre><code class="xml">
+&lt;initialized id=&quot;1&quot; timestamp=&quot;2020-10-18T13:27:07.691&quot;&gt;
+  &lt;attribute name=&quot;gcPolicy&quot; value=&quot;-Xgcpolicy:gencon&quot; /&gt;
+  &lt;attribute name=&quot;maxHeapSize&quot; value=&quot;0x40000000&quot; /&gt;
+  &lt;attribute name=&quot;initialHeapSize&quot; value=&quot;0x40000000&quot; /&gt;
+  &lt;attribute name=&quot;compressedRefs&quot; value=&quot;true&quot; /&gt;
+  &lt;attribute name=&quot;compressedRefsDisplacement&quot; value=&quot;0x0&quot; /&gt;
+  &lt;attribute name=&quot;compressedRefsShift&quot; value=&quot;0x0&quot; /&gt;
+  &lt;attribute name=&quot;pageSize&quot; value=&quot;0x1000&quot; /&gt;
+  &lt;attribute name=&quot;pageType&quot; value=&quot;not used&quot; /&gt;
+  &lt;attribute name=&quot;requestedPageSize&quot; value=&quot;0x1000&quot; /&gt;
+  &lt;attribute name=&quot;requestedPageType&quot; value=&quot;not used&quot; /&gt;
+  &lt;attribute name=&quot;gcthreads&quot; value=&quot;4&quot; /&gt;
+  &lt;attribute name=&quot;gcthreads Concurrent Mark&quot; value=&quot;1&quot; /&gt;
+  &lt;attribute name=&quot;packetListSplit&quot; value=&quot;1&quot; /&gt;
+  &lt;attribute name=&quot;cacheListSplit&quot; value=&quot;1&quot; /&gt;
+  &lt;attribute name=&quot;splitFreeListSplitAmount&quot; value=&quot;1&quot; /&gt;
+  &lt;attribute name=&quot;numaNodes&quot; value=&quot;0&quot; /&gt;
+  &lt;system&gt;
+    &lt;attribute name=&quot;physicalMemory&quot; value=&quot;100335456256&quot; /&gt;
+    &lt;attribute name=&quot;numCPUs&quot; value=&quot;28&quot; /&gt;
+    &lt;attribute name=&quot;architecture&quot; value=&quot;amd64&quot; /&gt;
+    &lt;attribute name=&quot;os&quot; value=&quot;Linux&quot; /&gt;
+    &lt;attribute name=&quot;osVersion&quot; value=&quot;3.10.0-1160.el7.x86_64&quot; /&gt;
+  &lt;/system&gt;
+  &lt;vmargs&gt;
+    &lt;vmarg name=&quot;-Xoptionsfile=/java/perffarm/sdks/O11_j9_x64_linux-20201014/sdk/lib/options.default&quot; /&gt;
+    ...
+    &lt;vmarg name=&quot;-Dcom.ibm.oti.vm.bootstrap.library.path=/java/perffarm/sdks/O11_j9_x64_linux-20201014/sdk/lib/compressedrefs:/java/perffarm/sdk...&quot; /&gt;
+    ...
     &lt;vmarg name=&quot;-Xms1024m&quot; /&gt;
     &lt;vmarg name=&quot;-Xmx1024m&quot; /&gt;
-...
-    &lt;vmarg name=&quot;-Dsun.java.launcher.pid=6068&quot; /&gt; 
-
-&lt;/vmargs&gt; 
-
+    ...
+    &lt;vmarg name=&quot;-Xverbosegclog:verbosegc.xml&quot; /&gt;
+    ...
+  &lt;/vmargs&gt;
 &lt;/initialized&gt; 
-
 </code></pre>
 
-<p>ADD DETAILS ABOUT THE INITIATISATION SECTION</p>
-<p>The first set of <attribute> XML elements record the GC policy type and its settings. 
-The child <attribute> XML elements of the <system> stanza records information about the....
-<region> XML elements...
-<vmargs>....</p>
-<p>The verbose GC log then begins recording GC activities and details. </p>
+<p>The first set of <code>&lt;attribute&gt;</code> elements record the configuration of the garbage collector, such as the GC policy type, configuration of the heap, and the number of threads that are used for garbage collection. For example, the <code>GCThreads</code> attribute records that the garbage collector is configured to use 4 threads.</p>
+<p>The <code>&lt;system&gt;</code> section records information about the operating system, such as the physical memory, number of CPUs, and operating system type and version. In the example, the VM is running on Linux amd64 V3.10 which has access to 28 CPUs and over 100Gb.</p>
+<p>The <code>&lt;vmargs&gt;</code> section records any VM configuration <a href="../cmdline_specifying/">command-line options</a> (VM arguments) that have been specified. These Command-line options, set by using the command line or by passing a manifest file, options file or environment variables to the VM, include:</p>
+<ul>
+<li>non-standard <a href="../x_jvm_commands/">JVM <code>-X</code> options</a> and <a href="../xx_jvm_commands/">JVM <code>-XX</code> options</a>.  In the example output, the log has recorded the location of the file that contains VM options and definitions as <code>java/perffarm/sdks/O11_j9_x64_linux-20201014/sdk/lib/options.default</code>. The log also shows that the <code>-xverbose</code> option has been set to <code>-Xverbosegclog:verbosegc.xml</code> to write the verbose GC log output to an xml file and that the initial/minimum and maximum heap sizes have been set to 1024kb by using the <code>-Xms</code> and <code>-Xmx</code> options.</li>
+<li><a href="../d_jvm_commands/">system property options</a>. In the example output, the system property <code>com.ibm.oti.vm.bootstrap.library.path</code> has been set.</li>
+</ul>
+<p>After recording the configuration in the <em>Initialization</em> section of the logs, the verbose GC log begins recording GC activities and details. </p>
 <h3 id="gc-cycles">GC Cycles</h3>
 <p>The start of a GC cycle is recorded by the <code>&lt;cycle-start&gt;</code> XML element. The trigger for the start of a GC cycle is captured in a preceding element to the <code>&lt;cycle-start&gt;</code>. The most common triggers for starting or ending a GC cycle or GC increment are:</p>
 <ul>

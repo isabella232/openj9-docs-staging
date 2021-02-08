@@ -634,6 +634,54 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-3" type="checkbox" id="nav-6-3">
+    
+    <label class="md-nav__link" for="nav-6-3">
+      Verbose garbage collection logs
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-3">
+        Verbose garbage collection logs
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../vgclog/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../vgclog_examples/" title="Log examples" class="md-nav__link">
+      Log examples
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -3973,18 +4021,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <tbody>
 <tr>
 <td><code>-Xenableexplicitgc</code></td>
-<td>Enable GC</td>
+<td>Enable explicit GC calls</td>
 <td align="center"><i class="fa fa-check" aria-hidden="true"></i><span class="sr-only">yes</span></td>
 </tr>
 <tr>
 <td><code>-Xdisableexplicitgc</code></td>
-<td>Disable GC</td>
+<td>Disable explicit GC calls</td>
 <td align="center"></td>
 </tr>
 </tbody>
 </table>
 <h2 id="explanation">Explanation</h2>
-<p>Although it is possible to programmatically trigger a garbage collection by calling <code>System.gc()</code>, performance can be adversely affected by halting the application before it is really necessary. Use this option to prevent the VM responding to application requests for a garage collection cycle.</p>
+<p>Although it is possible to programmatically trigger a global GC by calling <code>System.gc()</code>, performance can be adversely affected by halting the application before it is really necessary. Use this option to prevent the VM responding to application requests for a GC cycle.</p>
+<p>The default for all OpenJ9 GC policies is <code>-Xenableexplicitgc</code> except for <a href="../xgcpolicy/#nogc"><code>-Xgcpolicy:nogc</code></a>, where the default is <code>-Xdisableexplicitgc</code>.</p>
 <!-- ==== END OF TOPIC ==== xenableexplicitgc.md ==== -->
 
 <!-- ==== END OF TOPIC ==== xdisableexplicitgc.md ==== -->
