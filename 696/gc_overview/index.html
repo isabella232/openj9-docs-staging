@@ -285,8 +285,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
   <li class="md-nav__item">
-    <a href="../adoptopenjdk/" title="AdoptOpenJDK builds" class="md-nav__link">
-      AdoptOpenJDK builds
+    <a href="../builds/" title="OpenJ9 builds" class="md-nav__link">
+      OpenJ9 builds
     </a>
   </li>
 
@@ -352,6 +352,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
   <li class="md-nav__item">
+    <a href="../version0.25/" title="Version 0.25.0" class="md-nav__link">
+      Version 0.25.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../version0.24/" title="Version 0.24.0" class="md-nav__link">
       Version 0.24.0
     </a>
@@ -387,18 +399,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           
 
 
-  <li class="md-nav__item">
-    <a href="../version0.21/" title="Version 0.21.0" class="md-nav__link">
-      Version 0.21.0
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
   <li class="md-nav__item md-nav__item--nested">
     
       <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-6" type="checkbox" id="nav-5-6">
@@ -412,6 +412,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../version0.21/" title="Version 0.21.0" class="md-nav__link">
+      Version 0.21.0
+    </a>
+  </li>
+
         
           
           
@@ -4120,17 +4132,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 -->
 
 <h1 id="garbage-collection">Garbage collection</h1>
-<p>To prevent applications running out of memory, objects in the Java heap that are no longer required must be reclaimed. This process is known as <em>garbage collection</em> (GC). When garbage is collected, the garbage collector must obtain exclusive access to the heap, which causes an application to pause while the clean up is done. This pause is often referred to as a <em>stop-the-world</em> (STW) pause because an application must halt until the process completes. In general, the first step in the GC process is to <em>mark</em> the objects that are reachable, which means they are still in use. The next step is to <em>sweep</em> away the unmarked objects to reclaim memory. The final step is to <em>compact</em> the heap if the heap is badly fragmented.</p>
+<p>To prevent applications running out of memory, objects in the Java heap that are no longer required must be reclaimed. This process is known as <em>garbage collection</em> (GC). When garbage is collected, the garbage collector must obtain exclusive access to the heap, which causes an application to pause while the cleanup is done. This pause is often referred to as a <em>stop-the-world</em> (STW) pause because an application must halt until the process completes. In general, the first step in the GC process is to <em>mark</em> the objects that are reachable, which means they are still in use. The next step is to <em>sweep</em> away the unmarked objects to reclaim memory. The final step is to <em>compact</em> the heap if the heap is badly fragmented.</p>
 <p>A GC cycle is a repeatable process that involves a set of GC operations. These operations process all or parts of the Java heap. When operating on the
 whole of the Java heap, the cycle is referred to as a <em>global GC cycle</em>; When operating on part of the heap, the cycle is referred to as a <em>partial GC cycle</em>.</p>
 <p>A global GC cycle can be triggered explicitly or implicitly according to the following rules:</p>
 <ul>
-<li>A global GC cycle is triggered implicitly if it occurs because of internal mechanisms, such as an allocation failure or a taxation threshold being reached.</li>
+<li>A global GC cycle is triggered implicitly if it occurs because of internal mechanisms, such as an allocation failure or a <em>taxation</em> threshold being reached.</li>
 <li>A global GC cycle is triggered explicitly if it is started directly by an application calling <code>System.gc()</code> or indirectly, for example when requesting a heap dump.</li>
 </ul>
 <p>Partial GC cycles are triggered only implicitly under the control of a particular GC policy. For more information about the GC policies available with OpenJ9, see <a href="../gc/">Garbage collection policies</a>.</p>
 <h2 id="gc-operations">GC operations</h2>
-<p>GC operations run discrete functions on the Java heap. For example, a <em>mark</em> operation traces all objects in the heap to determine which ones are reachable. A <em>sweep</em> operation runs to clear away unreachable objects. Together, a <em>mark</em> and <em>sweep</em> operation are capable of reclaiming used memory as part of a GC cycle. Not all GC cycles include operations to reclaim memory. For example, the <code>balanced</code> GC policy involves a global cycle that includes only a <em>mark</em> operation; reclaiming the memory with a <em>sweep</em> operation occurs as part of a separate partial GC cycle.</p>
+<p>GC operations run discrete functions on the Java heap. For example, a <em>mark</em> operation traces all objects in the heap to determine which ones are reachable. A <em>sweep</em> operation runs to clear away unreachable objects. Together, a <em>mark</em> and <em>sweep</em> operation are capable of reclaiming used memory as part of a GC cycle. Not all GC cycles include operations to reclaim memory. For example, the <code>balanced</code> GC policy involves a global cycle that includes only a <em>mark</em> operation; reclaiming the memory with a <em>sweep</em> operation occurs as part of a separate partial GC cycle that <em>evacuates</em> younger regions and defragments older regions.</p>
 <p>A GC operation might complete in one step, or it might involve phases. For example, a mark operation consists of three phases, as described in the following section.</p>
 <h3 id="gc-mark-operation">GC <em>mark</em> operation</h3>
 <p>A <em>mark</em> operation identifies which objects on the Java heap are reachable from outside of the heap and which objects are unreachable. Reachable objects are in use and must be retained, whereas unreachable objects are not in use and can be cleared away as <em>garbage</em>.</p>
@@ -4143,11 +4155,11 @@ whole of the Java heap, the cycle is referred to as a <em>global GC cycle</em>; 
 </li>
 <li>
 <p>Main phase</p>
-<p>The list of reachable root objects in the work stack is recursively traced for references to other objects in the heap. If new objects are found, they are added to the work stack. If an object is reachable, the appropriate bit is set in the <em>mark map</em>.</p>
+<p>The list of reachable root objects in the work stack is recursively traced for references to other objects in the heap. Objects that are not marked are new objects and these are added to the work stack. If an object is reachable, the appropriate bit is set in the <em>mark map</em>.</p>
 </li>
 <li>
 <p>Final phase</p>
-<p>The final phase processes weakly reachable roots such as finalizable objects, weak references, monitor sets, and string sets. If reachable objects are found, the appropriate bit is set in the <em>mark map</em>. For more information about the processing of <em>soft</em>, <em>weak</em>, and <em>phantom</em> references, see <a href="#weak-reference-processing">Weak reference processing</a>.</p>
+<p>The final phase processes weakly reachable roots such as finalizable objects, weak references, monitor sets, and string sets. For more information about the processing of <em>soft</em>, <em>weak</em>, and <em>phantom</em> references, see <a href="#weak-reference-processing">Weak reference processing</a>.</p>
 </li>
 </ol>
 <p>In general, helper threads are used in parallel to speed up <em>mark</em> operations on the heap. The helper threads share the work stack with the application thread and are involved in identifying root objects, tracing objects in the heap, and updating the <em>mark map</em>. By default, the number of helper threads is based on the number of CPUs reported by the operating system. You can control the number of helper threads available by specifying the <a href="../xgcthreads/">-Xgcthreads</a> command line option when starting your application.</p>
@@ -4184,7 +4196,7 @@ whole of the Java heap, the cycle is referred to as a <em>global GC cycle</em>; 
 <p>Concurrent <em>sweep</em> processing works in tandem with concurrent <em>mark</em> processing and uses the same <em>mark map</em>. Concurrent <em>sweep</em> operations start after a STW collection and complete a section of the heap before concurrent <em>mark</em> operations continue.</p>
 <p>Concurrent <em>sweep</em> is used by the <code>optavgpause</code> GC policy.</p>
 <h3 id="gc-scavenge-operation">GC <em>scavenge</em> operation</h3>
-<p>A GC <em>scavenge</em> operation occurs in 3 phases:</p>
+<p>A GC <em>scavenge</em> operation is triggered by an allocation failure in the <em>nursery</em> area of the heap. The operation occurs in the following 3 phases:</p>
 <ol>
 <li>
 <p>Initial phase</p>
@@ -4196,13 +4208,13 @@ whole of the Java heap, the cycle is referred to as a <em>global GC cycle</em>; 
 </li>
 <li>
 <p>Final phase</p>
-<p>The final phase processes weakly reachable roots such as finalizable objects, weak references, monitor sets, and string sets. If reachable objects are found, the appropriate bit is set in the <em>mark map</em>. For more information about the processing of <em>soft</em>, <em>weak</em>, and <em>phantom</em> references, see <a href="#weak-reference-processing">Weak reference processing</a>.</p>
+<p>The final phase processes weakly reachable roots such as finalizable objects, weak references, monitor sets, and string sets. For more information about the processing of <em>soft</em>, <em>weak</em>, and <em>phantom</em> references, see <a href="#weak-reference-processing">Weak reference processing</a>.</p>
 </li>
 </ol>
 <p>In a verbose GC log, this operation is shown by the <code>&lt;gc-op type="scavenge"&gt;</code> XML element. For more information, see <a href="vgclog.md">Verbose GC logs</a>.</p>
 <p>The <em>scavenge</em> operation is used by the <a href="../gc/#gencon-policy-default"><code>gencon</code> GC policy</a>.</p>
 <h3 id="gc-copy-forward-operation">GC <em>copy forward</em> operation</h3>
-<p>A GC <em>copy forward</em> operation is similar to a <em>scavenge</em> operation and also occurs in 3 phases:</p>
+<p>A GC <em>copy forward</em> operation is similar to a <em>scavenge</em> operation but is triggered by a <em>taxation</em> threshold being reached. The operation occurs in the following 3 phases:</p>
 <ol>
 <li>
 <p>Initial phase</p>
@@ -4214,7 +4226,7 @@ whole of the Java heap, the cycle is referred to as a <em>global GC cycle</em>; 
 </li>
 <li>
 <p>Final phase</p>
-<p>The final phase processes weakly reachable roots such as finalizable objects, weak references, monitor sets, and string sets. If reachable objects are found, the appropriate bit is set in the <em>mark map</em>. For more information about the processing of <em>soft</em>, <em>weak</em>, and <em>phantom</em> references, see <a href="#weak-reference-processing">Weak reference processing</a>.</p>
+<p>The final phase processes weakly reachable roots such as finalizable objects, weak references, monitor sets, and string sets. For more information about the processing of <em>soft</em>, <em>weak</em>, and <em>phantom</em> references, see <a href="#weak-reference-processing">Weak reference processing</a>.</p>
 </li>
 </ol>
 <p>The operation aims to empty or <em>evacuate</em> fragmented regions that can then be reclaimed for new object allocation.</p>
@@ -4321,17 +4333,17 @@ cleared. For example, a software cache. The garbage collector handles the refere
       <div class="above-line-links">
         <div class="column">
           <h3 >Docs</h3>
-          <span class="footer-link"><a href="/openj9_newuser/" >New to OpenJ9?</a></span>
-          <span class="footer-link"><a href="/introduction/">Getting started</a></span>
-          <span class="footer-link"><a href="/cmdline_specifying/">Command-line options</a></span>
+          <span class="footer-link"><a href="/openj9/docs/openj9_newuser/" >New to OpenJ9?</a></span>
+          <span class="footer-link"><a href="/openj9/docs/introduction/">Getting started</a></span>
+          <span class="footer-link"><a href="/openj9/docs/cmdline_specifying/">Command-line options</a></span>
         </div>
-  
+
         <div class="column">
           <h3>Resources</h3>
           <span class="footer-link"><a href="https://www.eclipse.org/openj9/about/" rel="noopener noreferrer" target="_blank">About</a></span>
           <span class="footer-link"><a href="https://www.eclipse.org/openj9/performance/" rel="noopener noreferrer" target="_blank">Performance</a></span>
         </div>
-  
+
         <div class="column">
           <h3 >Community</h3>
           <span class="footer-link"><a href="https://www.eclipse.org/openj9/news/" rel="noopener noreferrer" target="_blank">News</a></span>
@@ -4361,7 +4373,7 @@ cleared. For example, a software cache. The garbage collector handles the refere
         <span class="social-media-link"> <a href="https://openj9.slack.com/" rel="noopener noreferrer" target="_blank"><img src="../cr/slack-icon.svg" alt="Slack logo"></img></a></span>
         <span class="social-media-link"> <a href="https://stackoverflow.com/search?q=%23OpenJ9" rel="noopener noreferrer" target="_blank"><img src="../cr/stackoverflow-logo.svg" alt="Stack Overflow logo"></img></a></span>
       </div>
-    </div>  
+    </div>
   </div>
 </footer>
       

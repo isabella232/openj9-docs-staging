@@ -285,8 +285,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
   <li class="md-nav__item">
-    <a href="../adoptopenjdk/" title="AdoptOpenJDK builds" class="md-nav__link">
-      AdoptOpenJDK builds
+    <a href="../builds/" title="OpenJ9 builds" class="md-nav__link">
+      OpenJ9 builds
     </a>
   </li>
 
@@ -344,6 +344,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <li class="md-nav__item">
     <a href="../openj9_releases/" title="Overview" class="md-nav__link">
       Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../version0.25/" title="Version 0.25.0" class="md-nav__link">
+      Version 0.25.0
     </a>
   </li>
 
@@ -503,18 +515,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           
 
 
-  <li class="md-nav__item">
-    <a href="../version0.21/" title="Version 0.21.0" class="md-nav__link">
-      Version 0.21.0
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
   <li class="md-nav__item md-nav__item--nested">
     
       <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-6" type="checkbox" id="nav-5-6">
@@ -528,6 +528,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../version0.21/" title="Version 0.21.0" class="md-nav__link">
+      Version 0.21.0
+    </a>
+  </li>
+
         
           
           
@@ -4110,12 +4122,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </ul>
 <h2 id="features-and-changes">Features and changes</h2>
 <h3 id="binaries-and-supported-environments">Binaries and supported environments</h3>
-<p>OpenJ9 release 0.24.0 supports OpenJDK 8, 11, and 15. Binaries are available from the AdoptOpenJDK community at the following links:</p>
-<ul>
-<li><a href="https://adoptopenjdk.net/archive.html?variant=openjdk8&amp;jvmVariant=openj9">OpenJDK version 8</a></li>
-<li><a href="https://adoptopenjdk.net/archive.html?variant=openjdk11&amp;jvmVariant=openj9">OpenJDK version 11</a></li>
-<li><a href="https://adoptopenjdk.net/archive.html?variant=openjdk15&amp;jvmVariant=openj9">OpenJDK version 15</a></li>
-</ul>
+<p>OpenJ9 release 0.24.0 supports OpenJDK 8, 11, and 15.</p>
 <p>Windows&reg; builds for Java&trade; 8 are now compiled with Microsoft&reg; Visual Studio 2013. The Visual Studio redistributable files included with the build are updated to match.</p>
 <p>To learn more about support for OpenJ9 releases, including OpenJDK levels and platform support, see <a href="../openj9_support/">Supported environments</a>.</p>
 <h3 id="changes-to-message-logging">Changes to message logging</h3>
@@ -4133,7 +4140,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <h3 id="-xx-portablesharedcache-option-support-update"><code>-XX:[+|-]PortableSharedCache</code> option support update</h3>
 <p>The <code>-XX:[+|-]PortableSharedCache</code> option is now supported on IBM Z&reg; and POWER&reg; platforms. AOT-compiled code that is generated with this option is guaranteed to be portable across IBM z10 or newer microarchitectures on IBM Z platforms and IBM POWER8&reg; or newer microarchitectures on POWER platforms. See <a href="../xxportablesharedcache/"><code>-XX:[+|-]PortableSharedCache</code></a> for more details about this option.</p>
 <h3 id="-xx-shareanonymousclasses-option-behavior-update"><img alt="Start of content that applies to Java 15+" src="../cr/java15plus.png" /> <code>-XX:[+|-]ShareAnonymousClasses</code> option behavior update</h3>
-<p>In earlier OpenJ9 releases, the <code>-XX:[+|-]ShareAnonymousClasses</code> option enables and disables the storage of VM anonymous classes in the shared classes cache. From 0.24.0 (OpenJDK 15 only), this option also enables and disables the storage of hidden classes in the shared classes cache. See <a href="../xxshareanonymousclasses/"><code>-XX:[+|-]ShareAnonymousClasses</code></a> for more details about this option.</p>
+<p>In earlier releases of OpenJ9, the <code>-XX:[+|-]ShareAnonymousClasses</code> option enables and disables the storage of VM anonymous classes in the shared classes cache. From OpenJ9 0.24.0 for OpenJDK 15 binaries, this option also controls the storage of hidden classes. See <a href="../xxshareanonymousclasses/"><code>-XX:[+|-]ShareAnonymousClasses</code></a> for more details about this option.</p>
 <h3 id="additional-parameters-for-jcmd-dump-commands">Additional parameters for <code>jcmd Dump</code> commands</h3>
 <p>You can now include additional parameters for <code>jcmd Dump</code> commands as indicated in the following list:</p>
 <ul>
@@ -4199,17 +4206,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <div class="above-line-links">
         <div class="column">
           <h3 >Docs</h3>
-          <span class="footer-link"><a href="/openj9_newuser/" >New to OpenJ9?</a></span>
-          <span class="footer-link"><a href="/introduction/">Getting started</a></span>
-          <span class="footer-link"><a href="/cmdline_specifying/">Command-line options</a></span>
+          <span class="footer-link"><a href="/openj9/docs/openj9_newuser/" >New to OpenJ9?</a></span>
+          <span class="footer-link"><a href="/openj9/docs/introduction/">Getting started</a></span>
+          <span class="footer-link"><a href="/openj9/docs/cmdline_specifying/">Command-line options</a></span>
         </div>
-  
+
         <div class="column">
           <h3>Resources</h3>
           <span class="footer-link"><a href="https://www.eclipse.org/openj9/about/" rel="noopener noreferrer" target="_blank">About</a></span>
           <span class="footer-link"><a href="https://www.eclipse.org/openj9/performance/" rel="noopener noreferrer" target="_blank">Performance</a></span>
         </div>
-  
+
         <div class="column">
           <h3 >Community</h3>
           <span class="footer-link"><a href="https://www.eclipse.org/openj9/news/" rel="noopener noreferrer" target="_blank">News</a></span>
@@ -4239,7 +4246,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <span class="social-media-link"> <a href="https://openj9.slack.com/" rel="noopener noreferrer" target="_blank"><img src="../cr/slack-icon.svg" alt="Slack logo"></img></a></span>
         <span class="social-media-link"> <a href="https://stackoverflow.com/search?q=%23OpenJ9" rel="noopener noreferrer" target="_blank"><img src="../cr/stackoverflow-logo.svg" alt="Stack Overflow logo"></img></a></span>
       </div>
-    </div>  
+    </div>
   </div>
 </footer>
       
