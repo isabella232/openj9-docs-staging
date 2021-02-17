@@ -409,13 +409,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#jpackage-packaging-tool" class="md-nav__link">
-    jpackage packaging tool
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -3961,13 +3954,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#jpackage-packaging-tool" class="md-nav__link">
-    jpackage packaging tool
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -4031,14 +4017,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li><a href="#binaries-and-supported-environments">New binaries and changes to supported environments</a></li>
 <li><img alt="Start of content that applies to Java 16" src="../cr/java16.png" /> <a href="#new-jdk-16-features">New JDK 16 features</a></li>
 <li><img alt="Start of content that applies to Java 11 (LTS) and later" src="../cr/java11plus.png" /> <a href="#support-for-the-verbosemodule-option">Support for the <code>-verbose:module</code> option</a></li>
-<li><a href="#jpackage-packaging-tool">jpackage packaging tool</a></li>
 </ul>
 <h2 id="features-and-changes">Features and changes</h2>
 <h3 id="binaries-and-supported-environments">Binaries and supported environments</h3>
 <p>OpenJ9 release 0.25.0 supports OpenJDK 16. OpenJDK 16 with Eclipse OpenJ9 is <em>not</em> a long term support (LTS) release.</p>
 <p>Although it might be possible to build an OpenJDK 8 or OpenJDK 11 with OpenJ9 release 0.25.0, testing at the project is not complete and therefore support for new features that apply to these Java versions is not available.</p>
 <p>To learn more about support for OpenJ9 releases, including OpenJDK levels and platform support, see <a href="../openj9_support/">Supported environments</a>.</p>
-<h3 id="new-jdk-16-features"><img alt="Start of content that applies to Java 16" src="../cr/java16.png" /> New JDK 16 features</h3>
+<h3 id="new-jdk-16-features"><img alt="Start of content that applies to Java 16 plus" src="../cr/java16plus.png" /> New JDK 16 features</h3>
 <p>The following features are supported by OpenJ9:</p>
 <ul>
 <li><a href="https://openjdk.java.net/jeps/338">JEP 338</a>: Vector API (incubator)<ul>
@@ -4060,7 +4045,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li><a href="https://openjdk.java.net/jeps/380">JEP 380</a>: Unix-domain socket channels</li>
 <li><a href="https://openjdk.java.net/jeps/394">JEP 394</a>: Pattern matching for <code>instanceof</code></li>
 <li><a href="https://openjdk.java.net/jeps/396">JEP 396</a>: Strongly encapsulate JDK internals by default</li>
-<li><a href="https://openjdk.java.net/jeps/392">JEP 392</a>: Packaging tool</li>
+<li><a href="https://openjdk.java.net/jeps/392">JEP 392</a>: Packaging tool<ul>
+<li><strong>(Linux&reg;, macOS&reg;, and Windows&trade; only)</strong> Promoted from incubation to a production-ready feature in this release. See <a href="../introduction/#using-jpackage">Using <code>jpackage</code></a></li>
+</ul>
+</li>
 </ul>
 <p>You can find the full list of features for JDK 16 at the <a href="http://openjdk.java.net/projects/jdk/16/">OpenJDK project</a>. Any remaining features that are listed do not apply to OpenJ9.</p>
 <p><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Note:</strong> Applications might be adversely affected by
@@ -4074,9 +4062,6 @@ WARNING: All illegal access operations will be denied in a future release
 
 <h3 id="support-for-the-verbosemodule-option"><img alt="Start of content that applies to Java 11 (LTS) and later" src="../cr/java11plus.png" /> Support for the <code>-verbose:module</code> option</h3>
 <p>The <code>-verbose:module</code> option is now supported for Java 11 and later releases. This option writes information to <code>stderr</code> for each module that is loaded and unloaded.</p>
-<h3 id="jpackage-packaging-tool">jpackage packaging tool</h3>
-<p><strong>(Linux&reg;, macOS&reg;, and Windows&trade; only)</strong></p>
-<p>The <code>jpackage</code> packaging tool "packages a Java application into a platform-specific package that includes all of the necessary dependencies." It was first introduced into OpenJ9 in <a href="../version0.19/#jpackage-packaging-tool-platform-support">version 0.19.0</a> and has now been promoted from incubation to a production-ready feature. Full details of this version of the tool are available at <a href="https://openjdk.java.net/jeps/392">JEP 392: Packaging Tool</a>. Instructions for using the tool are documented in the Oracle Tool Specifications: <a href="https://docs.oracle.com/en/java/javase/14/docs/specs/man/jpackage.html">The jpackage Command</a>.</p>
 <h2 id="full-release-information">Full release information</h2>
 <p>To see a complete list of changes between Eclipse OpenJ9 v 0.24.0 and v 0.25.0 releases, see the <a href="https://github.com/eclipse/openj9/blob/master/doc/release-notes/0.25/0.25.md">Release notes</a>.</p>
 <!-- ==== END OF TOPIC ==== version0.25.md ==== -->
