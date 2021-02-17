@@ -1331,6 +1331,11 @@
      <changefreq>daily</changefreq>
     </url>
     <url>
+     <loc>https://www.eclipse.org/openj9/docs/api-jdk16/</loc>
+     <lastmod>2021-02-17</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
      <loc>https://www.eclipse.org/openj9/docs/legal/</loc>
      <lastmod>2021-02-17</lastmod>
      <changefreq>daily</changefreq>
