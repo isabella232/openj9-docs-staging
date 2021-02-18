@@ -4102,14 +4102,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 -->
 
 <h1 id="configuring-your-system">Configuring your system</h1>
-<p>When you install a Java runtime environment on your system you must set the <strong>PATH</strong> environment variable so that the operating system can find the Java programs and utilities to run your application. If your application requires a different library or class file, you must also set the <strong>CLASSPATH</strong> environment variable. How to set these environment variables is covered in many publications about Java, such as <a href="https://docs.oracle.com/javase/tutorial/essential/environment/paths.html">The Java Tutorials</a>.</p>
+<p>When you install a Java&trade; runtime environment on your system you must set the <strong>PATH</strong> environment variable so that the operating system can find the Java programs and utilities to run your application. If your application requires a different library or class file that is not on the <strong>PATH</strong>, you must also set the <strong>CLASSPATH</strong> environment variable. How to set these environment variables is covered in many publications about Java, such as <a href="https://docs.oracle.com/javase/tutorial/essential/environment/paths.html">The Java Tutorials: PATH and CLASSPATH</a>.</p>
 <p>On some systems, a further environment variable is required if your application requires shared libraries and these libraries are located in a different directory to the one that is specified in the application's header section. Set the following environment variables to specify the directory location of the shared libraries:</p>
 <ul>
-<li><strong>LIBPATH</strong> (AIX)</li>
-<li><strong>LD_LIBRARY_PATH</strong> (Linux)</li>
-<li><strong>DYLD_LIBRARY_PATH</strong> (macOS)  </li>
+<li><strong>LIBPATH</strong> (AIX&reg;)</li>
+<li><strong>LD_LIBRARY_PATH</strong> (Linux&reg;)</li>
+<li><strong>DYLD_LIBRARY_PATH</strong> (macOS&reg;)  </li>
 </ul>
-<p>[<img alt="Start of content that applies to Java 14+" src="../cr/java14plus.png" /> On AIX systems, you must have the <a href="https://www.ibm.com/support/pages/xl-cc-runtime-aix-v16101-fix-pack-december-2018">XL C++ Runtime</a> installed.</p>
+<p><img alt="Start of content that applies to Java 14+" src="../cr/java14plus.png" /> On AIX systems, you must have the <a href="https://www.ibm.com/support/pages/xl-cc-runtime-aix-v16101-fix-pack-december-2018">XL C++ Runtime</a> installed.</p>
 <h2 id="setting-resource-limits-aix-linux-and-macos">Setting resource limits (AIX, Linux, and macOS)</h2>
 <p>The operating system sets resource limits per user for running processes to ensure that a single process cannot consume all available resources. However, these limits can affect certain operations that might need to run for a Java application, such as producing a dump file.</p>
 <p>Limits are controlled by the <strong>ulimit</strong> command and are referred to as a <em>hard</em> limit when set by the <strong>ROOT</strong> user, and a <em>soft</em> limit when set by other users. To see the <em>soft</em> limits set for a system, run <code>ulimit -a</code>. The output is similar to the following example:</p>
@@ -4201,7 +4201,7 @@ virtual memory          (kbytes, -v) unlimited
 <li>The <code>-Xlp:objectheap</code> option requests that the Java object heap is allocated by using large pages.</li>
 <li>The <code>-Xlp:codecache</code> option requests that the JIT code cache is allocated by using large pages.</li>
 </ul>
-<p>You must also enable large pages on your local system, which differs according to operating system.</p>
+<p>You must also enable large pages on your local system. This process differs according to the operating system.</p>
 <h3 id="aix-systems">AIX systems</h3>
 <h3 id="linux-systems">Linux systems</h3>
 <p>To configure large page memory allocation on Linux, the kernel must support large pages. If large pages are supported, the following lines are present in the <strong>proc/meminfo</strong> file:</p>
@@ -4251,8 +4251,8 @@ Hugepagesize:
 </tr>
 </tbody>
 </table>
-<p><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Note:</strong> The Flash Express feature (#0402) avoids demoting 1 MB pageable pages to 4 KB pages during periods of high memory usage.</p>
-<p>If a particular page size cannot be allocated, a smaller page size is attempted, in descending order. For example, if 2 GB nonpageable pages are requested but not available, the VM tries to allocate 1MB nonpageable pages. If the 1 MB nonpageable pages are not available, the VM tries to allocate 1MB pageable pages. If large pages are not available, 4 KB pages are allocated.</p>
+<p><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Note:</strong> The Flash Express feature (#0402) helps avoids demoting 1 MB pageable pages to 4 KB pages during periods of high memory usage.</p>
+<p>If a particular page size cannot be allocated, a smaller page size is attempted, in descending order. For example, if 2 GB nonpageable pages are requested but not available, the VM tries to allocate 1MB nonpageable pages. If 1 MB nonpageable pages are not available, the VM tries to allocate 1MB pageable pages. If large pages are not available, 4 KB pages are allocated.</p>
 <p>If you want to use nonpageable large pages for the object heap, a system programmer must configure z/OS for nonpageable large pages in the <strong>IEASYxx</strong> parmlib member. Users who require large pages must also be authorized to the <strong>IARRSM.LRGPAGES</strong> resource in the RACF FACILITY class with read authority.</p>
 <p>Use the following z/OS system command to show large page usage for an LPAR:</p>
 <pre><code>DISPLAY VS,LFAREA

@@ -858,8 +858,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#enabling-a-full-system-dump-aix-and-linux" class="md-nav__link">
-    Enabling a full system dump (AIX and Linux)
+  <a href="#enabling-a-full-system-dump-aix-linux-and-macos" class="md-nav__link">
+    Enabling a full system dump (AIX, Linux, and macOS)
   </a>
   
 </li>
@@ -3918,8 +3918,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#enabling-a-full-system-dump-aix-and-linux" class="md-nav__link">
-    Enabling a full system dump (AIX and Linux)
+  <a href="#enabling-a-full-system-dump-aix-linux-and-macos" class="md-nav__link">
+    Enabling a full system dump (AIX, Linux, and macOS)
   </a>
   
 </li>
@@ -3976,17 +3976,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <pre><code>Help &gt; Install New Software &gt; Work with &quot;IBM Diagnostic Tool Framework for Java&quot; &gt; IBM Monitoring and Diagnostic Tools &gt; Diagnostic Tool Framework for Java   
 </code></pre>
 
-<h2 id="enabling-a-full-system-dump-aix-and-linux">Enabling a full system dump (AIX and Linux)</h2>
-<p>If you require a system dump that contains details of all the native threads that are running, you must change the resource limits for your operating system. Otherwise, the only the native thread details that are stored in the dump are for the native thread that was running when the VM ended.</p>
+<h2 id="enabling-a-full-system-dump-aix-linux-and-macos">Enabling a full system dump (AIX, Linux, and macOS)</h2>
+<p>If you require a system dump that contains details of all the native threads that are running, you must change the resource limits for your operating system. Otherwise, the native thread details that are stored in the dump are only for the native thread that was running when the VM ended.</p>
 <ol>
 <li>Set the system resource limits by running the following commands:</li>
 </ol>
-<pre><code>ulimit -c unlimited      
-ulimit -n unlimited      
-ulimit -d unlimited      
-ulimit -f unlimited      
-</code></pre>
-
+<p><code>ulimit -c unlimited        
+  ulimit -n unlimited        
+  ulimit -d unlimited        
+  ulimit -f unlimited</code></p>
 <p>Where:</p>
 <ul>
 <li><code>-c</code> sets core files</li>
@@ -3997,9 +3995,7 @@ ulimit -f unlimited
 <ol start="2">
 <li>For AIX systems, use the system management interface tool (SMIT) to enable a full CORE dump that is not a <em>pre-430 style CORE dump</em>. You can also set this configuration with the following command line option:</li>
 </ol>
-<pre><code>chdev -l sys0 -a fullcore='true' -a pre430core='false'
-</code></pre>
-
+<p><code>chdev -l sys0 -a fullcore='true' -a pre430core='false'</code></p>
 <!-- ==== END OF TOPIC ==== dump_systemdump.md ==== -->
                 
                   
