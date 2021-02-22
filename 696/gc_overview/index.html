@@ -3954,6 +3954,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api-jdk16/" title="Java 16 API" class="md-nav__link">
+      Java 16 API
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -4268,12 +4280,12 @@ cleared. For example, a software cache. The garbage collector handles the refere
 <tr>
 <td><em>soft</em></td>
 <td><code>java.lang.ref.SoftReference</code></td>
-<td>A <em>soft</em> reference is cleared only when its <em>referent</em> has not been marked for a number of GC cycles or if space on the heap is likely to cause an out of memory error. Use the <a href="../xsoftrefthreshold/">-Xsoftrefthreshold</a> option to control the collection of <em>soft</em> reference objects.</td>
+<td>A <em>soft</em> reference is cleared only when its <em>referent</em> is not marked for a number of GC cycles or if space on the heap is likely to cause an out of memory error. Use the <a href="../xsoftrefthreshold/">-Xsoftrefthreshold</a> option to control the collection of <em>soft</em> reference objects.</td>
 </tr>
 <tr>
 <td><em>weak</em></td>
 <td><code>java.lang.ref.WeakReference</code></td>
-<td>A <em>weak</em> reference is cleared as soon as the object it references is removed.</td>
+<td>A <em>weak</em> reference is cleared as soon as its <em>referent</em> is not marked by a GC cycle.</td>
 </tr>
 <tr>
 <td><em>phantom</em></td>

@@ -4028,6 +4028,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api-jdk16/" title="Java 16 API" class="md-nav__link">
+      Java 16 API
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -4380,7 +4392,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>Regions impose a maximum object size. Objects are always allocated within the bounds of a single region and are never permitted to span regions. The region size is always a power of two; for example, 512 KB, 1 MB, and so on (where KB is 2<sup>10</sup> bytes and MB is 2<sup>20</sup> bytes). The region size is selected at startup based on the maximum heap size. The collector chooses the smallest power of two which will result in less than 2048 regions, with a minimum region size of 512 KB. Except for small heaps (less than about 512 MB) the VM aims to have between 1024 and 2047 regions.</p>
 <p>Object ages are tracked for each region with a maximum of 24 possible generations. The following diagram illustrates the structure of the object heap:</p>
 <p><img alt="The diagram is explained in the surrounding text" src="../cr/balanced_regions.png" title="Region structure and characteristics found in the object heap" /></p>
-<p>The <em>eden</em> space is a set of regions of age 0, which contain the newest objects allocated. The size of the <em>eden</em> space is determined by the number of regions that it contains. When the region count for the <em>eden</em> space reaches a predetermined  threshold (<em>taxation</em> threshold), a partial GC cycle runs to reduce the number of regions, typically by using a <em>copy forward</em> operation. Empty regions can then be assigned to the <em>eden</em> space from the pool. In specific cases, <em>mark</em> and <em>compact</em> operations might be used, for example, when there are not enough free survivor regions available. The partial GC cycle is a STW operation that always includes the <em>eden</em> space, but might include older regions. Objects from collectible regions of age N are moved into another region of the same age N or to an empty region that is assigned an age of N. Then, the ages of all regions across the heap are incremented by 1, except for the maximum age 24 regions. Regions of age 24 are included in partial GC collection sets in order to defragment them.</p>
+<p>The <em>eden</em> space is a set of regions of age 0, which contain the newest objects allocated. The size of the <em>eden</em> space is determined by the number of regions that it contains. When the region count for the <em>eden</em> space reaches a predetermined  threshold (<em>taxation</em> threshold), a partial GC cycle runs to reduce the number of used regions, typically by using a <em>copy forward</em> operation. Empty regions can then be assigned to the <em>eden</em> space from the pool. In specific cases, <em>mark</em> and <em>compact</em> operations might be used, for example, when there are not enough free survivor regions available. The partial GC cycle is a STW operation that always includes the <em>eden</em> space, but might include older regions. Objects from collectible regions of age N are moved into another region of the same age N or to an empty region that is assigned an age of N. Then, the ages of all regions across the heap are incremented by 1, except for the maximum age 24 regions. Regions of age 24 are included in partial GC collection sets in order to defragment them.</p>
 <p>Partial GC cycles work to reclaim free regions in the heap for allocating new objects. Because some objects from <em>eden</em> regions always survive, a partial GC cycle can reclaim only about 90% of this memory. To keep up with object allocation, partial GC cycles also reclaim free regions by defragmenting older regions. For example, a partial GC cycle that moves objects from 5 fragmented older regions into 2 empty regions, reclaims 3 regions for new object allocation. However, over time the overall amount of fragmented memory decreases and records about object liveness in older regions become less accurate. Eventually, the work done by partial GC cycles to reclaim memory cannot keep pace with memory consumption. Free regions become so scarce that a global <em>mark</em> operation (GMP), which is triggered by another <em>taxation</em> threshold, is required to build a new record of object liveness across the heap. A <em>sweep</em> operation uses this record to measure the amount of free memory in fragmented older regions, which later partial GC cycles can act upon to move objects and reclaim free regions.</p>
 <p>A global <em>sweep</em> operation also runs to reclaim memory so that it can create empty regions. The global <em>sweep</em> operation, while logically associated with the global <em>mark</em> operation, runs in the same STW increment as the first partial GC cycle after the <em>mark</em> operation completes. Because the GC cycle responsible for the global <em>mark</em> operation runs concurrently, it might overlap and interleave with a few partial GC cycles.</p>
 <p>With the <code>balanced</code> policy, a global GC cycle is sometimes required in addition to the global <em>mark</em> operations and partial GC cycle. This global GC cycle is rare, occurring only in very tight memory conditions when other GC cycles cannot free enough memory on the heap.</p>
