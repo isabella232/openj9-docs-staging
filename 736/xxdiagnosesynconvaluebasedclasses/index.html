@@ -3972,12 +3972,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <h1 id="-xxdiagnosesynconvaluebasedclasses">-XX:DiagnoseSyncOnValueBasedClasses</h1>
 <p><img alt="Start of content that applies only to Java 16 and later" src="../cr/java16plus.png" /> This option provides warnings about improper attempts to synchronize on instances of a value-based class. <img alt="End of content that applies only to Java 16 or later" src="../cr/java_close.png" /></p>
 <h2 id="syntax">Syntax</h2>
-<pre><code>    -XX:DiagnoseSyncOnValueBasedClasses=1
+<pre><code>    -XX:DiagnoseSyncOnValueBasedClasses=&lt;number&gt;
 </code></pre>
-<p>OpenJ9 throws a VirtualMachineError on improper attempts to synchronize on instances of value-based classes.</p>
-<pre><code>    -XX:DiagnoseSyncOnValueBasedClasses=2
-</code></pre>
-<p>OpenJ9 prints out a warning message on improper attempts to synchronize on instances of value-based classes.</p>
+<p>Where <number> is one of the following values:</p>
+<ul>
+<li>1: OpenJ9 throws a VirtualMachineError on improper attempts to synchronize on instances of value-based classes.</li>
+<li>2: OpenJ9 prints a warning message on improper attempts to synchronize on instances of value-based classes.</li>
+</ul>
 <!-- ==== END OF TOPIC ==== xxdiagnosesynconvaluebasedclasses.md ==== -->
                 
                   
