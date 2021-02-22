@@ -996,6 +996,11 @@
      <changefreq>daily</changefreq>
     </url>
     <url>
+     <loc>https://www.eclipse.org/openj9/docs/xxdiagnosesynconvaluebasedclasses/</loc>
+     <lastmod>2021-02-22</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
      <loc>https://www.eclipse.org/openj9/docs/xxdisableexplicitgc/</loc>
      <lastmod>2021-02-22</lastmod>
      <changefreq>daily</changefreq>
