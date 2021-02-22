@@ -4155,23 +4155,23 @@ whole of the Java heap, the cycle is referred to as a <em>global GC cycle</em>; 
 <p>Partial GC cycles are triggered only implicitly under the control of a particular GC policy. For more information about the GC policies available with OpenJ9, see <a href="../gc/">Garbage collection policies</a>.</p>
 <h2 id="gc-operations">GC operations</h2>
 <p>GC operations run discrete functions on the Java heap. For example, a <em>mark</em> operation traces all objects in the heap to determine which ones are reachable. A <em>sweep</em> operation runs to clear away unreachable objects. Together, a <em>mark</em> and <em>sweep</em> operation are capable of reclaiming used memory as part of a GC cycle. Not all GC cycles include operations to reclaim memory. For example, the <code>balanced</code> GC policy involves a global cycle that includes only a <em>mark</em> operation; reclaiming the memory with a <em>sweep</em> operation occurs as part of a separate partial GC cycle that <em>evacuates</em> younger regions and defragments older regions.</p>
-<p>A GC operation might complete in one step, or it might involve phases. For example, a mark operation consists of three phases, as described in the following section.</p>
+<p>A GC operation might complete in one step, or it might involve multiple steps. For example, a mark operation consists of three steps, as described in the following section.</p>
 <h3 id="gc-mark-operation">GC <em>mark</em> operation</h3>
 <p>A <em>mark</em> operation identifies which objects on the Java heap are reachable from outside of the heap and which objects are unreachable. Reachable objects are in use and must be retained, whereas unreachable objects are not in use and can be cleared away as <em>garbage</em>.</p>
 <p>The process of marking involves a bit array called a <em>mark map</em> that is allocated by the VM at startup, based on the maximum heap size setting. Each bit in the <em>mark map</em> corresponds to 8 bytes of heap space. When an object is <em>marked</em>, its location in the heap is recorded by setting the appropriate bit in the <em>mark map</em>.</p>
-<p>A <em>mark</em> operation can be broken down into the following phases:</p>
+<p>A <em>mark</em> operation can be broken down into the following steps:</p>
 <ol>
 <li>
-<p>Initial phase</p>
-<p>A root object is an object that is accessible from outside of the heap such as a stack, class static field, or JNI reference. For other objects in the heap to be reachable, they must retain a connection from a root object. In the initial phase, tracing identifies all root objects by running a root scan. Root objects are pushed onto a work stack for processing in the next phase.</p>
+<p>Initial</p>
+<p>A root object is an object that is accessible from outside of the heap such as a stack, class static field, or JNI reference. For other objects in the heap to be reachable, they must retain a connection from a root object. In the initial step, tracing identifies all root objects by running a root scan. Root objects are pushed onto a work stack for processing in the next step.</p>
 </li>
 <li>
-<p>Main phase</p>
+<p>Main</p>
 <p>The list of reachable root objects in the work stack is recursively traced for references to other objects in the heap. Objects that are not marked are new objects and these are added to the work stack. If an object is reachable, the appropriate bit is set in the <em>mark map</em>.</p>
 </li>
 <li>
-<p>Final phase</p>
-<p>The final phase processes weakly reachable roots such as finalizable objects, weak references, monitor sets, and string sets. For more information about the processing of <em>soft</em>, <em>weak</em>, and <em>phantom</em> references, see <a href="#weak-reference-processing">Weak reference processing</a>.</p>
+<p>Final</p>
+<p>The final step processes weakly reachable roots such as finalizable objects, weak references, monitor sets, and string sets. For more information about the processing of <em>soft</em>, <em>weak</em>, and <em>phantom</em> references, see <a href="#weak-reference-processing">Weak reference processing</a>.</p>
 </li>
 </ol>
 <p>In general, helper threads are used in parallel to speed up <em>mark</em> operations on the heap. The helper threads share the work stack with the application thread and are involved in identifying root objects, tracing objects in the heap, and updating the <em>mark map</em>. By default, the number of helper threads is based on the number of CPUs reported by the operating system. You can control the number of helper threads available by specifying the <a href="../xgcthreads/">-Xgcthreads</a> command line option when starting your application.</p>
@@ -4190,14 +4190,14 @@ whole of the Java heap, the cycle is referred to as a <em>global GC cycle</em>; 
 <p>Incremental concurrent <em>mark</em> operations are used by the <a href="../gc/#balanced-policy"><code>balanced GC policy</code></a>.</p>
 <h3 id="gc-sweep-operation">GC <em>sweep</em> operation</h3>
 <p>The purpose of a <em>sweep</em> operation is to identify memory that can be reclaimed for object allocation and update a central record, known as the <em>freelist</em>.</p>
-<p><em>sweep</em> operations occur in 2 phases:</p>
+<p><em>sweep</em> operations occur in 2 steps:</p>
 <ol>
 <li>
-<p>Initial phase</p>
-<p>This phase analyzes the <em>mark map</em> for free memory.</p>
+<p>Initial</p>
+<p>This step analyzes the <em>mark map</em> for free memory.</p>
 </li>
 <li>
-<p>Final phase</p>
+<p>Final</p>
 <p>Based on the analysis, the sections of the heap are connected to the <em>freelist</em>.</p>
 </li>
 </ol>
@@ -4208,37 +4208,37 @@ whole of the Java heap, the cycle is referred to as a <em>global GC cycle</em>; 
 <p>Concurrent <em>sweep</em> processing works in tandem with concurrent <em>mark</em> processing and uses the same <em>mark map</em>. Concurrent <em>sweep</em> operations start after a STW collection and complete a section of the heap before concurrent <em>mark</em> operations continue.</p>
 <p>Concurrent <em>sweep</em> is used by the <code>optavgpause</code> GC policy.</p>
 <h3 id="gc-scavenge-operation">GC <em>scavenge</em> operation</h3>
-<p>A GC <em>scavenge</em> operation is triggered by an allocation failure in the <em>nursery</em> area of the heap. The operation occurs in the following 3 phases:</p>
+<p>A GC <em>scavenge</em> operation is triggered by an allocation failure in the <em>nursery</em> area of the heap. The operation occurs in the following 3 steps:</p>
 <ol>
 <li>
-<p>Initial phase</p>
-<p>A root object is an object that is accessible from outside of the heap such as a stack, class static field, or JNI reference. For other objects in the heap to be reachable, they must retain a connection from a root object. In the initial phase, tracing identifies all root objects by running a root scan. Root objects are pushed onto a work stack for processing in the next phase.</p>
+<p>Initial</p>
+<p>A root object is an object that is accessible from outside of the heap such as a stack, class static field, or JNI reference. For other objects in the heap to be reachable, they must retain a connection from a root object. In the initial step, tracing identifies all root objects by running a root scan. Root objects are pushed onto a work stack for processing in the next step.</p>
 </li>
 <li>
-<p>Main phase</p>
+<p>Main</p>
 <p>The list of reachable root objects in the work stack is recursively traced for references to other objects in the heap. If new objects are found, they are added to the work stack. If an object is reachable, it is copied from the <em>allocate</em> space to the <em>survivor</em> space in the <em>nursery</em> area or to the <em>tenure</em> area if the object has reached a particular age.</p>
 </li>
 <li>
-<p>Final phase</p>
-<p>The final phase processes weakly reachable roots such as finalizable objects, weak references, monitor sets, and string sets. For more information about the processing of <em>soft</em>, <em>weak</em>, and <em>phantom</em> references, see <a href="#weak-reference-processing">Weak reference processing</a>.</p>
+<p>Final</p>
+<p>The final step processes weakly reachable roots such as finalizable objects, weak references, monitor sets, and string sets. For more information about the processing of <em>soft</em>, <em>weak</em>, and <em>phantom</em> references, see <a href="#weak-reference-processing">Weak reference processing</a>.</p>
 </li>
 </ol>
 <p>In a verbose GC log, this operation is shown by the <code>&lt;gc-op type="scavenge"&gt;</code> XML element. For more information, see <a href="vgclog.md">Verbose GC logs</a>.</p>
 <p>The <em>scavenge</em> operation is used by the <a href="../gc/#gencon-policy-default"><code>gencon</code> GC policy</a>.</p>
 <h3 id="gc-copy-forward-operation">GC <em>copy forward</em> operation</h3>
-<p>A GC <em>copy forward</em> operation is similar to a <em>scavenge</em> operation but is triggered by a <em>taxation</em> threshold being reached. The operation occurs in the following 3 phases:</p>
+<p>A GC <em>copy forward</em> operation is similar to a <em>scavenge</em> operation but is triggered by a <em>taxation</em> threshold being reached. The operation occurs in the following 3 steps:</p>
 <ol>
 <li>
-<p>Initial phase</p>
-<p>A root object is an object that is accessible from outside of the heap such as a stack, class static field, or JNI reference. For other objects in the heap to be reachable, they must retain a connection from a root object. In the initial phase, tracing identifies all root objects by running a root scan. Root objects are pushed onto a work stack for processing in the next phase.</p>
+<p>Initial</p>
+<p>A root object is an object that is accessible from outside of the heap such as a stack, class static field, or JNI reference. For other objects in the heap to be reachable, they must retain a connection from a root object. In the initial step, tracing identifies all root objects by running a root scan. Root objects are pushed onto a work stack for processing in the next step.</p>
 </li>
 <li>
-<p>Main phase</p>
+<p>Main</p>
 <p>The list of reachable root objects in the work stack is recursively traced for references to other objects in the heap. If new objects are found, they are added to the work stack. If an object is reachable, it is moved to another region of the same age or to an empty region of the same age in the heap. The age of all regions in the heap is then incremented by 1, except for the oldest region (age 24).</p>
 </li>
 <li>
-<p>Final phase</p>
-<p>The final phase processes weakly reachable roots such as finalizable objects, weak references, monitor sets, and string sets. For more information about the processing of <em>soft</em>, <em>weak</em>, and <em>phantom</em> references, see <a href="#weak-reference-processing">Weak reference processing</a>.</p>
+<p>Final</p>
+<p>The final step processes weakly reachable roots such as finalizable objects, weak references, monitor sets, and string sets. For more information about the processing of <em>soft</em>, <em>weak</em>, and <em>phantom</em> references, see <a href="#weak-reference-processing">Weak reference processing</a>.</p>
 </li>
 </ol>
 <p>The operation aims to empty or <em>evacuate</em> fragmented regions that can then be reclaimed for new object allocation.</p>
