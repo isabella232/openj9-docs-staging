@@ -3985,12 +3985,25 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p><img alt="Start of content that applies only to Java 16 and later" src="../cr/java16plus.png" /> This HotSpot option provides warnings about improper attempts to synchronize on instances of a value-based class. The option is recognized by OpenJ9 for compatibility.</p>
 <h2 id="syntax">Syntax</h2>
 <pre><code>    -XX:DiagnoseSyncOnValueBasedClasses=&lt;number&gt;
-
-    | `&lt;number&gt;` value  | Effect                                       |
-    |-------------------|----------------------------------------------|
-    | 1                 | Generate `VirtualMachineError` error         |
-    | 2                 | Print a warning message                      |
 </code></pre>
+<table>
+<thead>
+<tr>
+<th><code>&lt;number&gt;</code> value</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Generate <code>VirtualMachineError</code> error</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Print a warning message</td>
+</tr>
+</tbody>
+</table>
 <!-- ==== END OF TOPIC ==== xxdiagnosesynconvaluebasedclasses.md ==== -->
                 
                   
