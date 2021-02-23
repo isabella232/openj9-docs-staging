@@ -618,8 +618,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
   <li class="md-nav__item">
-    <a href="../gc_overview/" title="Overview" class="md-nav__link">
-      Overview
+    <a href="../allocation/" title="Heap allocation" class="md-nav__link">
+      Heap allocation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../gc_overview/" title="Garbage collection" class="md-nav__link">
+      Garbage collection
     </a>
   </li>
 
@@ -645,13 +657,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-3" type="checkbox" id="nav-6-3" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-4" type="checkbox" id="nav-6-4" checked>
     
-    <label class="md-nav__link" for="nav-6-3">
+    <label class="md-nav__link" for="nav-6-4">
       Verbose garbage collection logs
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-6-3">
+      <label class="md-nav__title" for="nav-6-4">
         Verbose garbage collection logs
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -3071,6 +3083,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
   <li class="md-nav__item">
+    <a href="../xxdiagnosesynconvaluebasedclasses/" title="-XX:DiagnoseSyncOnValueBasedClasses" class="md-nav__link">
+      -XX:DiagnoseSyncOnValueBasedClasses
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../xxdisableexplicitgc/" title="-XX:[+|-]DisableExplicitGC" class="md-nav__link">
       -XX:[+|-]DisableExplicitGC
     </a>
@@ -3958,6 +3982,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api-jdk16/" title="Java 16 API" class="md-nav__link">
+      Java 16 API
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -4086,9 +4122,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <thead>
 <tr>
 <th>GC cycle</th>
-<th>Value of <code>type</code> attribute</th>
-<th>Element for cycle trigger</th>
-<th>Triggering reason</th>
+<th>Value of <code>type</code> attribute of the <code>&lt;cycle-start&gt;</code> and <code>&lt;cycle-end</code> ``elements</th>
+<th>Element that logs the cycle trigger</th>
+<th>Trigger reason</th>
 </tr>
 </thead>
 <tbody>
@@ -4096,17 +4132,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <td>Global</td>
 <td><code>global</code></td>
 <td><code>&lt;concurrent-kickoff&gt;</code></td>
-<td>Threshold reached. Cycle trigger element is located after the `cycle-start&gt;' element</td>
+<td>Low free memory tenure area threshold reached. Cycle trigger element is located before the <code>&lt;cycle-start&gt;</code> element</td>
 </tr>
 <tr>
 <td>Partial</td>
 <td><code>scavenge</code></td>
 <td><code>&lt;af-start&gt;</code></td>
-<td>Allocation failure. Cycle trigger element is located before the <code>cycle-start</code> element</td>
+<td>Allocation failure. Cycle trigger element is located before the <code>&lt;cycle-start&gt;</code> element</td>
 </tr>
 </tbody>
 </table>
-<p>To locate a particular type of cycle, you can search for the elements that log the cycle trigger.</p>
+<p>You can use the <code>type</code> attribute of the <code>&lt;gc-start&gt;</code> and <code>&lt;gc-end&gt;</code> elements to locate a particular cycle. YOu can also locate a particular type of cycle by searching for the element that records the cycle trigger, which is located before the <code>&lt;cycle-start&gt;</code> element.</p>
 <p>You can analyze the increments and operations that are associated with a particular type of cycle by locating and interpreting the elements in the following table:</p>
 <table>
 <thead>
@@ -4138,9 +4174,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <td>The start of the final GC increment of the global concurrent cycle that executes the final collection</td>
 </tr>
 <tr>
-<td>GC operations and phases</td>
+<td>GC operations and sub-operations</td>
 <td><code>&lt;gc-op&gt;</code></td>
-<td>A GC operation such as mark or sweep, or a suboperation phase such as class unload.</td>
+<td>A GC operation such as mark or sweep, or a suboperation such as class unload.</td>
 </tr>
 </tbody>
 </table>
@@ -4148,6 +4184,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>The following examples use log excerpts to show how the different types of <code>gencon</code> cycle are logged.</p>
 <h3 id="scavenge-partial-gc-cycle">Scavenge partial GC cycle</h3>
 <p>The following example is taken from a <code>gencon</code> log. The output is broken down into sections with supporting text to explain the GC processing that is taking place.</p>
+<p>To search for a scavenge partial GC cycle, you can search for the <code>type</code> attribute value <code>scavenge</code> in <code>cycle-start</code> and <code>cycle-end</code> elements, or search for the <code>&lt;af&gt;</code> element that logs the allocation failure trigger.</p>
 <p>By default, the <code>gencon</code> partial GC cycle runs by using a single <em>stop-the-world</em> (STW) pause. The cycle performs only 1 operation,  a <em>scavenge</em> operation, which runs only on the <em>nursery</em> area. The cycle consists of a single GC increment, which is labelled using the elements shown in the following table:</p>
 <table>
 <thead>
@@ -4165,7 +4202,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <td>Single</td>
 <td>STW</td>
 <td><code>&lt;gc-start&gt;</code>, <code>&lt;gc-end&gt;</code></td>
-<td>Contains detailed information about root scanning and weak roots processing</td>
+<td>Contains detailed information about objects being copied and weak roots processing</td>
 </tr>
 </tbody>
 </table>
@@ -4187,7 +4224,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 &lt;/gc-start&gt;
 
-&lt;allocation-stats/&gt;         (memory allocation status)
+&lt;allocation-stats/&gt;         (snapshot of application threads status taken before cycle started)
 
 &lt;gc-op&gt; “scavenge&quot;&lt;/gc-op&gt;  (scavenge operation completed)
 
@@ -4216,143 +4253,118 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 the garbage collector exclusive access to the heap:</p>
 <pre><code class="xml">&lt;!-- Start of gencon scavenge partial GC cycle example --&gt;
 
-&lt;exclusive-start id=&quot;2&quot; timestamp=&quot;2020-10-18T13:27:09.603&quot; intervalms=&quot;1913.853&quot;&gt;
-
-&lt;response-info timems=&quot;0.030&quot; idlems=&quot;0.030&quot; threads=&quot;0&quot; lastid=&quot;0000000000AC4600&quot; lastname=&quot;LargeThreadPool-thread-3&quot; /&gt;
-
+&lt;exclusive-start id=&quot;12392&quot; timestamp=&quot;2020-10-18T13:35:45.000&quot; intervalms=&quot;406.180&quot;&gt;
+  &lt;response-info timems=&quot;0.070&quot; idlems=&quot;0.070&quot; threads=&quot;0&quot; lastid=&quot;00000000013D6900&quot; lastname=&quot;LargeThreadPool-thread-68&quot; /&gt;
 &lt;/exclusive-start&gt;
 </code></pre>
 
-<p>The <code>&lt;af-start&gt;</code> element tells you that the cycle was triggered by an allocation failure in the <em>nursery</em> (<code>type="nursery"</code>) area of the heap:</p>
-<pre><code class="xml">&lt;af-start id=&quot;3&quot; threadId=&quot;0000000000AC4F80&quot; totalBytesRequested=&quot;272&quot; timestamp=&quot;2020-10-18T13:27:09.603&quot; intervalms=&quot;1913.921&quot; type=&quot;nursery&quot; /&gt;
+<p>The <code>&lt;af-start&gt;</code> element indicates that the cycle was triggered by an allocation failure in the <em>nursery</em> (<code>type="nursery"</code>) area of the heap:</p>
+<pre><code class="xml">&lt;af-start id=&quot;12393&quot; threadId=&quot;00000000013D7280&quot; totalBytesRequested=&quot;8200&quot; timestamp=&quot;2020-10-18T13:35:45.000&quot; intervalms=&quot;418.233&quot; type=&quot;nursery&quot; /&gt;
 </code></pre>
 
 <p>The <code>&lt;cycle-start&gt;</code> element marks the start of the cycle. The attribute <code>type="scavenge"</code> confirms that this activity is a <em>scavenge</em> partial GC cycle:</p>
-<pre><code class="xml">&lt;cycle-start id=&quot;4&quot; type=&quot;scavenge&quot; contextid=&quot;0&quot; timestamp=&quot;2020-10-18T13:27:09.603&quot; intervalms=&quot;1913.959&quot; /&gt;
+<pre><code class="xml">&lt;cycle-start id=&quot;12394&quot; type=&quot;scavenge&quot; contextid=&quot;0&quot; timestamp=&quot;2020-10-18T13:35:45.000&quot; intervalms=&quot;418.231&quot; /&gt;
 </code></pre>
 
-<p>Most elements are labeled with an <code>id</code> attribute that increases in value incrementally, a<code>timestamp</code> attribute, and a <code>contextid</code> attribute. All elements that record GC increments and operations that are associated with a particular cycle have a <code>contextid</code> value that matches the <code>id</code> value of the cycle. The <code>&lt;cycle-start&gt;</code> element of this example cycle has a <code>id="4"</code>, so all subsequent elements that have a <code>contextid="4"</code>, such as the <code>&lt;gc-start&gt;</code> increment element and the <code>&lt;gc-op&gt;</code> operation element, are associated with this particular example cycle.  </p>
+<p>Most elements are labeled with an <code>id</code> attribute that increases in value incrementally, a<code>timestamp</code> attribute, and a <code>contextid</code> attribute. All elements that record GC increments and operations that are associated with a particular cycle have a <code>contextid</code> value that matches the <code>id</code> value of the cycle. The <code>&lt;cycle-start&gt;</code> element of this example cycle has an <code>id="12394"</code>, so all subsequent elements that have a <code>contextid="4"</code>, such as the <code>&lt;gc-start&gt;</code> increment element and the <code>&lt;gc-op&gt;</code> operation element, are associated with this particular example cycle.  </p>
 <p>The <code>&lt;gc-start&gt;</code> element records the first GC increment. In this section, you can find information about the amount of memory available (<code>&lt;mem-info&gt;</code>) and where it is located in the heap.</p>
-<p>This snapshot is taken before the <em>scavenge</em> operation and can be compared with a similar snapshot that is taken afterwards to understand the effect on the heap.</p>
-<pre><code class="xml">&lt;gc-start id=&quot;5&quot; type=&quot;scavenge&quot; contextid=&quot;4&quot; timestamp=&quot;2020-10-18T13:27:09.603&quot;&gt;
-
-&lt;mem-info id=&quot;6&quot; free=&quot;802568640&quot; total=&quot;1073741824&quot; percent=&quot;74&quot;&gt;
-
-&lt;mem type=&quot;nursery&quot; free=&quot;0&quot; total=&quot;268435456&quot; percent=&quot;0&quot;&gt;
-
-&lt;mem type=&quot;allocate&quot; free=&quot;0&quot; total=&quot;134217728&quot; percent=&quot;0&quot; /&gt;
-
-&lt;mem type=&quot;survivor&quot; free=&quot;0&quot; total=&quot;134217728&quot; percent=&quot;0&quot; /&gt;
-
-&lt;/mem&gt;
-
-&lt;mem type=&quot;tenure&quot; free=&quot;802568640&quot; total=&quot;805306368&quot; percent=&quot;99&quot;&gt;
-
-&lt;mem type=&quot;soa&quot; free=&quot;762302912&quot; total=&quot;765040640&quot; percent=&quot;99&quot; /&gt;
-
-&lt;mem type=&quot;loa&quot; free=&quot;40265728&quot; total=&quot;40265728&quot; percent=&quot;100&quot; /&gt;
-
-&lt;/mem&gt;
-
-&lt;remembered-set count=&quot;30758&quot; /&gt;
-
-&lt;/mem-info&gt;
-
+<p>The memory snapshot within the <code>&lt;gc-start&gt;</code> element is taken before the <em>scavenge</em> operation and can be compared with a similar snapshot that is taken afterwards to understand the effect on the heap.</p>
+<pre><code class="xml">&lt;gc-start id=&quot;12395&quot; type=&quot;scavenge&quot; contextid=&quot;12394&quot; timestamp=&quot;2020-10-18T13:35:45.000&quot;&gt;
+  &lt;mem-info id=&quot;12396&quot; free=&quot;414960320&quot; total=&quot;1073741824&quot; percent=&quot;38&quot;&gt;
+    &lt;mem type=&quot;nursery&quot; free=&quot;0&quot; total=&quot;268435456&quot; percent=&quot;0&quot;&gt;
+      &lt;mem type=&quot;allocate&quot; free=&quot;0&quot; total=&quot;241565696&quot; percent=&quot;0&quot; /&gt;
+      &lt;mem type=&quot;survivor&quot; free=&quot;0&quot; total=&quot;26869760&quot; percent=&quot;0&quot; /&gt;
+    &lt;/mem&gt;
+    &lt;mem type=&quot;tenure&quot; free=&quot;414960320&quot; total=&quot;805306368&quot; percent=&quot;51&quot;&gt;
+      &lt;mem type=&quot;soa&quot; free=&quot;374694592&quot; total=&quot;765040640&quot; percent=&quot;48&quot; /&gt;
+      &lt;mem type=&quot;loa&quot; free=&quot;40265728&quot; total=&quot;40265728&quot; percent=&quot;100&quot; /&gt;
+    &lt;/mem&gt;
+    &lt;remembered-set count=&quot;21474&quot; /&gt;
+  &lt;/mem-info&gt;
 &lt;/gc-start&gt;
+</code></pre>
 
-&lt;allocation-stats totalBytes=&quot;136862352&quot; &gt;
-
-&lt;allocated-bytes non-tlh=&quot;7097008&quot; tlh=&quot;129765344&quot; /&gt;
-
-&lt;largest-consumer threadName=&quot;Start Level: Equinox Container: c25c3c67-836a-49e7-9949-a16d2c2a5a4d&quot; threadId=&quot;000000000045E300&quot; bytes=&quot;46137952&quot; /&gt;
-
+<p>The heap memory allocation at the start of the increment is as follows:</p>
+<ul>
+<li>The <em>allocate</em> space of the <em>nursery</em> area is full, or close to full. The allocation failure was triggered by the lack of available memory in this space.</li>
+<li>The <em>survivor</em> space of the <em>nursery</em> area is reported as 'full' to reflect that no available memory is available to allocate to the mutator threads. The entire <em>survivor</em> space is reserved for GC operations during the GC increment. </li>
+<li>The <em>tenure</em> area has 414.96MB (414960320) of free memory available.</li>
+</ul>
+<p>The next element <code>&lt;allocation-stats&gt;</code> shows a snapshot, which was taken before the cycle started, of the allocation status of the mutator threads. In this example, the thread that used the most memory was <code>LargeThreadPool-thread-79</code>.</p>
+<pre><code class="xml">&lt;allocation-stats totalBytes=&quot;235362176&quot; &gt;
+  &lt;allocated-bytes non-tlh=&quot;32880&quot; tlh=&quot;235329296&quot; /&gt;
+  &lt;largest-consumer threadName=&quot;LargeThreadPool-thread-79&quot; threadId=&quot;00000000013F0C00&quot; bytes=&quot;6288544&quot; /&gt;
 &lt;/allocation-stats&gt;
 </code></pre>
 
-<p>In this example, the <em>nursery</em> area has no free space available in either the <em>allocate</em> or <em>survivor</em> spaces. The <em>tenure</em> area has 99% free in the small object area (SOA). The large object area (LOA) contains no objects.</p>
-<p>The <em>scavenge</em> GC operation starts with the <code>&lt;gc-op&gt;</code> element; child elements record details about the operation. For example, <code>&lt;scavenger-info&gt;</code> shows that the <em>tenure age</em> is set to <code>1</code>. For a <em>tenure age</em> of <code>1</code>, any objects that are copied between the <em>allocate</em> and <em>survivor</em> space once are moved to the <em>tenure</em> area during the next <em>scavenge</em> operation.</p>
-<pre><code class="xml">&lt;gc-op id=&quot;7&quot; type=&quot;scavenge&quot; timems=&quot;30.675&quot; contextid=&quot;4&quot; timestamp=&quot;2020-10-18T13:27:09.634&quot;&gt;
-
-&lt;scavenger-info tenureage=&quot;1&quot; tenuremask=&quot;fffe&quot; tiltratio=&quot;50&quot; /&gt;
-
-&lt;memory-copied type=&quot;nursery&quot; objects=&quot;461787&quot; bytes=&quot;25522536&quot; bytesdiscarded=&quot;367240&quot; /&gt;
-
-&lt;finalization candidates=&quot;317&quot; enqueued=&quot;157&quot; /&gt;
-
-&lt;ownableSynchronizers candidates=&quot;6711&quot; cleared=&quot;2579&quot; /&gt;
-
-&lt;references type=&quot;soft&quot; candidates=&quot;9233&quot; cleared=&quot;0&quot; enqueued=&quot;0&quot; dynamicThreshold=&quot;32&quot; maxThreshold=&quot;32&quot; /&gt;
-
-&lt;references type=&quot;weak&quot; candidates=&quot;13149&quot; cleared=&quot;4781&quot; enqueued=&quot;4495&quot; /&gt;
-&lt;references type=&quot;phantom&quot; candidates=&quot;359&quot; cleared=&quot;8&quot; enqueued=&quot;8&quot; /&gt;
-
-&lt;object-monitors candidates=&quot;79&quot; cleared=&quot;36&quot; /&gt;
-
+<p>The <em>scavenge</em> GC operation is recorded by the <code>&lt;gc-op&gt;</code> element; child elements record details about the operation. For example, </p>
+<pre><code class="xml">&lt;gc-op id=&quot;12397&quot; type=&quot;scavenge&quot; timems=&quot;11.649&quot; contextid=&quot;12394&quot; timestamp=&quot;2020-10-18T13:35:45.012&quot;&gt;
+  &lt;scavenger-info tenureage=&quot;7&quot; tenuremask=&quot;4080&quot; tiltratio=&quot;89&quot; /&gt;
+  &lt;memory-copied type=&quot;nursery&quot; objects=&quot;154910&quot; bytes=&quot;6027440&quot; bytesdiscarded=&quot;394832&quot; /&gt;
+  &lt;memory-copied type=&quot;tenure&quot; objects=&quot;16171&quot; bytes=&quot;562848&quot; bytesdiscarded=&quot;3064&quot; /&gt;
+  &lt;ownableSynchronizers candidates=&quot;10838&quot; cleared=&quot;10824&quot; /&gt;
+  &lt;references type=&quot;soft&quot; candidates=&quot;24&quot; cleared=&quot;0&quot; enqueued=&quot;0&quot; dynamicThreshold=&quot;16&quot; maxThreshold=&quot;32&quot; /&gt;
+  &lt;references type=&quot;weak&quot; candidates=&quot;390&quot; cleared=&quot;269&quot; enqueued=&quot;269&quot; /&gt;
+  &lt;references type=&quot;phantom&quot; candidates=&quot;1&quot; cleared=&quot;0&quot; enqueued=&quot;0&quot; /&gt;
+  &lt;object-monitors candidates=&quot;132&quot; cleared=&quot;0&quot;  /&gt;
 &lt;/gc-op&gt;
 </code></pre>
 
-<p>The <code>&lt;memory-copied&gt;</code> element indicates that 25 MB (25522536) of reachable objects were moved by the <em>scavenge</em> operation. For more information about how the scavenge operation acts on the heap, see <a href="../gc/#gencon-policy-default"><code>gencon</code> policy(default)</a>.</p>
-<p>The end of the increment is recorded with <code>&lt;gc-end&gt;</code> and provides another snapshot of memory allocation on the heap, similar to <code>&lt;gc-start&gt;</code>. In the example, 40% of the <em>nursery</em> area is now free as a result of the <em>scavenge</em> operation. All reachable objects are in the <em>survivor</em> area, freeing up space in the <em>allocate</em> area for new objects. The <em>tenure</em> area remains at 99% free, which means that the <em>scavenge</em> operation reclaimed memory from the <em>nursery</em> area; no objects reached the specified <em>tenure age</em> that triggers a move to the <em>tenure</em> area.</p>
-<pre><code class="xml">&lt;gc-end id=&quot;8&quot; type=&quot;scavenge&quot; contextid=&quot;4&quot; durationms=&quot;30.815&quot; usertimems=&quot;89.130&quot; systemtimems=&quot;3.179&quot; stalltimems=&quot;1.944&quot; timestamp=&quot;2020-10-18T13:27:09.634&quot; activeThreads=&quot;4&quot;&gt;
-
-&lt;mem-info id=&quot;9&quot; free=&quot;910816000&quot; total=&quot;1073741824&quot; percent=&quot;84&quot;&gt;
-
-&lt;mem type=&quot;nursery&quot; free=&quot;108247360&quot; total=&quot;268435456&quot; percent=&quot;40&quot;&gt;
-
-&lt;mem type=&quot;allocate&quot; free=&quot;108247360&quot; total=&quot;134217728&quot; percent=&quot;80&quot; /&gt;
-
-&lt;mem type=&quot;survivor&quot; free=&quot;0&quot; total=&quot;134217728&quot; percent=&quot;0&quot; /&gt;
-
-&lt;/mem&gt;
-
-&lt;mem type=&quot;tenure&quot; free=&quot;802568640&quot; total=&quot;805306368&quot; percent=&quot;99&quot;&gt;
-
-&lt;mem type=&quot;soa&quot; free=&quot;762302912&quot; total=&quot;765040640&quot; percent=&quot;99&quot; /&gt;
-
-&lt;mem type=&quot;loa&quot; free=&quot;40265728&quot; total=&quot;40265728&quot; percent=&quot;100&quot; /&gt;
-
-&lt;/mem&gt;
-
-&lt;pending-finalizers system=&quot;1&quot; default=&quot;156&quot; reference=&quot;4503&quot; classloader=&quot;0&quot; /&gt;
-
-&lt;remembered-set count=&quot;30758&quot; /&gt;
-
-&lt;/mem-info&gt;
-
+<p>The <code>&lt;memory-copied&gt;</code> element indicates that 6 MB (6,027,440) of reachable objects were moved by the <em>scavenge</em> operation from the allocate space to the survivor space in the nursery area, and 562KB(562,848) were moved to the tenure area. </p>
+<p>The <code>&lt;scavenger-info&gt;</code> element shows that the <em>tenure age</em> is set to <code>7</code>. Any object in the <em>allocate</em> space with age below or equal to a tenure age of <code>7</code> is copied to the survivor space during this <code>scavenge</code>operation. Any object that has been copied between the <em>allocate</em> and <em>survivor</em> areas more than <code>7</code> times is moved to the tenure area. </p>
+<p>For more information about how the scavenge operation acts on the heap, see <a href="../gc_overview/#gencon-policy-default"><code>gencon</code> policy(default)</a>.</p>
+<p>The end of the increment is recorded with <code>&lt;gc-end&gt;</code> and provides another snapshot of memory allocation on the heap, similar to <code>&lt;gc-start&gt;</code>. </p>
+<pre><code class="xml">&lt;gc-end id=&quot;12398&quot; type=&quot;scavenge&quot; contextid=&quot;12394&quot; durationms=&quot;11.785&quot; usertimems=&quot;46.278&quot; systemtimems=&quot;0.036&quot; stalltimems=&quot;0.145&quot; timestamp=&quot;2020-10-18T13:35:45.012&quot; activeThreads=&quot;4&quot;&gt;
+  &lt;mem-info id=&quot;12399&quot; free=&quot;649473560&quot; total=&quot;1073741824&quot; percent=&quot;60&quot;&gt;
+    &lt;mem type=&quot;nursery&quot; free=&quot;235142120&quot; total=&quot;268435456&quot; percent=&quot;87&quot;&gt;
+      &lt;mem type=&quot;allocate&quot; free=&quot;235142120&quot; total=&quot;241565696&quot; percent=&quot;97&quot; /&gt;
+      &lt;mem type=&quot;survivor&quot; free=&quot;0&quot; total=&quot;26869760&quot; percent=&quot;0&quot; /&gt;
+    &lt;/mem&gt;
+    &lt;mem type=&quot;tenure&quot; free=&quot;414331440&quot; total=&quot;805306368&quot; percent=&quot;51&quot; macro-fragmented=&quot;0&quot;&gt;
+      &lt;mem type=&quot;soa&quot; free=&quot;374065712&quot; total=&quot;765040640&quot; percent=&quot;48&quot; /&gt;
+      &lt;mem type=&quot;loa&quot; free=&quot;40265728&quot; total=&quot;40265728&quot; percent=&quot;100&quot; /&gt;
+    &lt;/mem&gt;
+    &lt;pending-finalizers system=&quot;0&quot; default=&quot;0&quot; reference=&quot;269&quot; classloader=&quot;0&quot; /&gt;
+    &lt;remembered-set count=&quot;13792&quot; /&gt;
+  &lt;/mem-info&gt;
 &lt;/gc-end&gt;
 </code></pre>
 
-<p>After the end of the GC cycle (<code>&lt;cycle-end&gt;</code>),  the <code>&lt;allocation-satisfied&gt;</code> element indicates that the allocation request that caused the allocation failure should now be able to
-complete successfully. The STW pause ends with the <code>&lt;exclusive-end&gt;</code> element:</p>
-<pre><code class="xml">&lt;cycle-end id=&quot;10&quot; type=&quot;scavenge&quot; contextid=&quot;4&quot; timestamp=&quot;2020-10-18T13:27:09.635&quot; /&gt;
-
-&lt;allocation-satisfied id=&quot;11&quot; threadId=&quot;0000000000AC4600&quot; bytesRequested=&quot;272&quot; /&gt;
-
-&lt;af-end id=&quot;12&quot; timestamp=&quot;2020-10-18T13:27:09.635&quot; threadId=&quot;0000000000AC4F80&quot; success=&quot;true&quot; from=&quot;nursery&quot;/&gt;
-
-&lt;exclusive-end id=&quot;13&quot; timestamp=&quot;2020-10-18T13:27:09.635&quot; durationms=&quot;31.984&quot; /&gt;
+<p>The heap memory allocation at the end of the increment is as follows:</p>
+<ul>
+<li>97% of the <em>allocate</em> space of the <em>nursery</em> area is now available as free memory.</li>
+<li>The <em>survivor</em> space of the <em>nursery</em> area is still reported as 'full' to reflect that the entire <em>survivor</em> space is reserved for GC operations during the next GC increment. </li>
+<li>The <em>tenure</em> region has 414.33MB (414,331,440) of free memory available. The <em>scavenge</em> operation copied 562kB from the <em>nursery</em> region to the <em>tenure</em> region so less memory is now available in the <em>tenure</em> region.</li>
+</ul>
+<p>The <em>scavenge</em> operation has successfully reclaimed memory in the <em>allocate</em> space of the nursery region by copying objects from the <em>allocate</em> space into the <em>survivor</em> space of the nursery region and tenure region.</p>
+<p>The cycle ends (<code>&lt;cycle-end&gt;</code>). The following <code>&lt;allocation-satisfied&gt;</code> element indicates that the allocation request that caused the allocation failure should now be able to complete successfully. The STW pause ends with the <code>&lt;exclusive-end&gt;</code> element:</p>
+<pre><code class="xml">&lt;cycle-end id=&quot;12400&quot; type=&quot;scavenge&quot; contextid=&quot;12394&quot; timestamp=&quot;2020-10-18T13:35:45.012&quot; /&gt;
+&lt;allocation-satisfied id=&quot;12401&quot; threadId=&quot;00000000013D6900&quot; bytesRequested=&quot;8200&quot; /&gt;
+&lt;af-end id=&quot;12402&quot; timestamp=&quot;2020-10-18T13:35:45.012&quot; threadId=&quot;00000000013D7280&quot; success=&quot;true&quot; from=&quot;nursery&quot;/&gt;
+&lt;exclusive-end id=&quot;12403&quot; timestamp=&quot;2020-10-18T13:35:45.012&quot; durationms=&quot;12.319&quot; /&gt;
 
 &lt;!-- End of gencon partial GC cycle example --&gt;
 </code></pre>
 
 <h4 id="summary-of-the-example">Summary of the example</h4>
-<p>By analyzing the structure and elements of the example log output, this example shows that the global cycle has the following characteristics:</p>
+<p>Analyzing the structure and elements of this example log output shows that this example global cycle has the following characteristics:</p>
 <ul>
 <li>
 <p>The GC cycle begins with a STW pause due to an allocation failure.</p>
 </li>
 <li>
-<p>All GC events that are associated with this cycle occur during the STW pause</p>
+<p>All GC operations and sub-operations that are associated with this cycle occur during the STW pause</p>
 </li>
 <li>
-<p>The cycle consists of only 1 GC increment, containing only a <em>scavenge</em> operation.</p>
+<p>The cycle consists of only 1 GC increment which runs a single <em>scavenge</em> operation.</p>
 </li>
 <li>
-<p>The GC cycle reclaims memory in the <em>nursery</em> area.</p>
+<p>The GC cycle reclaims memory in the <em>allocate</em> area of the <em>nursery</em> region by coping objects from the <em>allocate</em> area to the <em>survivor</em> area and also to the <em>tenure</em> region.</p>
 </li>
 </ul>
 <h3 id="concurrent-scavenge-partial-gc-cycle-non-default">Concurrent scavenge partial GC cycle (non-default)</h3>
-<p>When concurrent scavenge mode is enabled, the partial GC cycle is run as a<a href="../gc/#concurrent-scavenge">concurrent scavenge cycle</a>. When this mode is enabled, the scavenge partial GC cycle is divided into increments to enable part of the cycle to run in parallel to running application threads. Specifically, the cycle is divided into 3 GC increments as defined in the following table:</p>
+<p>When concurrent scavenge mode is enabled, the partial GC cycle is run as a <a href="../gc/#concurrent-scavenge">concurrent scavenge cycle</a>. When this mode is enabled, the scavenge partial GC cycle is divided into increments to enable the majority of the scavenge operation to run concurrently with running application threads. The concurrent increment can run while application threads run, and also while the intermediate concurrent increment of the global GC cycle runs. The interleaving of the concurrent scavenge partial GC cycle with the global cycle can be seen in the logs.</p>
+<p>The following elements log the GC increments and operations of the concurrent scavenge partial GC cycle:</p>
 <table>
 <thead>
 <tr>
@@ -4387,10 +4399,13 @@ complete successfully. The STW pause ends with the <code>&lt;exclusive-end&gt;</
 </tr>
 </tbody>
 </table>
+<p>To search for a concurrent scavenge partial GC cycle, you can search for the <code>type</code> attribute value <code>scavenge</code> in <code>cycle-start</code> and <code>cycle-end</code> elements, or search for the <code>&lt;af&gt;</code> element that logs the allocation failure trigger. </p>
+<p>You can locate the concurrent scavenge partial cycle's concurrent increment by searching for <code>&lt;concurrent-start&gt;</code> and <code>&lt;concurrent-end&gt;</code>. The global cycle's intermediate concurrent increment, which can run at the same time, is not logged by an element, but begins immediately after application threads are restarted following the <code>&lt;cycle-start type="global"/&gt;</code> element. For more information about the global cycle's intermediate concurrent increment, see <a href="./#global-gc-cycle">Log examples - Global GC Cycle</a>. For more information about GC increments, see <a href="../vgclog/#gc-increments-and-interleaving">GC increments and interleaving</a>.</p>
 <h3 id="global-gc-cycle">Global GC cycle</h3>
 <p>The following example shows how a global GC cycle is recorded in a <code>gencon</code> policy verbose GC log. The output is broken down into sections with supporting text to explain the GC processing that is taking place.</p>
 <p>The global GC cycle runs when the <em>tenure</em> area is close to full, which typically occurs after many partial cycles. As such, the output can be found part way down the full log. For more information about the GC Initialization section, see <a href="vgclog-md#verbose-gc-log-contents-and-structure">Verbose GC log contents and structure </a>. For an example log output for a <code>gencon</code> partial cycle, see <a href="./vgclogs.md/#example-gencons-default-partial-gc-cycle">Example - <code>gencon</code>’s default partial GC cycle</a>.</p>
-<p><a href="../vgclog/#gc-increments-and-interleaving">The global GC cycle is split into 3 increments</a> that interleave with partial GC cycles. The interleaving can be seen in the following example, where a partial GC cycle is logged between the start and end of the global cycle.</p>
+<p><a href="../vgclog/#gc-increments-and-interleaving">The global GC cycle is split into 3 increments</a>. Splitting the cycle operations into the following increments reduces pause times by running the majority of the GC work concurrently. The concurrent increment pauses when a partial GC cycle is triggered and resumes after the partial GC cycle(s) have completed. The interleaving of partial GC cycles with the global cycle's intermediate concurrent increment can be seen in the following example, where a single partial GC cycle is logged between the initial and final increments of the global cycle.</p>
+<p>To search for a global cycle, you can search for the <code>type</code> attribute value <code>global</code> in <code>cycle-start</code> and <code>cycle-end</code> elements, or search for the element that logs the initial concurrent increment, <code>&lt;concurrent-kickoff&gt;</code>.</p>
 <p>The following elements log the GC increments and operations of the global GC cycle:</p>
 <table>
 <thead>
@@ -4414,7 +4429,7 @@ complete successfully. The STW pause ends with the <code>&lt;exclusive-end&gt;</
 <td>concurrent mark</td>
 <td>intermediate</td>
 <td>concurrent</td>
-<td><code>&lt;gc-start&gt;</code>, <code>&lt;gc-end&gt;</code></td>
+<td>none</td>
 <td><code>&lt;concurrent-trace-info&gt;</code> records the progress of the concurrent mark increment</td>
 </tr>
 <tr>
@@ -4422,11 +4437,11 @@ complete successfully. The STW pause ends with the <code>&lt;exclusive-end&gt;</
 <td>final</td>
 <td>STW</td>
 <td><code>&lt;concurrent-global-final&gt;</code></td>
-<td>Triggered when the card-cleaning threshold is reached. Child element is <code>&lt;concurrent-trace-info reason=””&gt;</code>. Operations and phases include a final phase of concurrent mark, a sweep, and an optional class unload and compact.</td>
+<td>The increment is typically triggered when a card cleaning threshold is reached. The completion of a tracing phase can also trigger the increment. Operations include a final concurrent mark, a sweep, and an optional class unload and compact.</td>
 </tr>
 </tbody>
 </table>
-<p>The global GC cycle follows a general structure in the verbose GC log as shown. The lines are indented to help illustrate the flow and attributes and some child elements are omitted for clarity. The structure includes a partial GC cycle that starts and finishes within the global cycle:</p>
+<p>The global GC cycle follows a general structure in the verbose GC log as shown. The lines are indented to help illustrate the flow and attributes and some child elements are omitted for clarity. Multiple partial GC cycles can start and finish between the start and end of a global GC cycle. In this example, the structure includes a single partial GC cycle within the global cycle:</p>
 <pre><code class="xml">
 &lt;concurrent-kickoff/&gt;       (global cycle 1st increment recorded)
 
@@ -4436,8 +4451,7 @@ complete successfully. The STW pause ends with the <code>&lt;exclusive-end&gt;</
 
 &lt;exclusive-end/&gt;            (STW pause ends)
 
-
-(global cycle 2nd increment running concurrently)
+(mutator threads running, global cycle concurrent increment running concurrently)
 
 
 &lt;exclusive-start/&gt;          (STW for partial GC cycle starts)
@@ -4448,13 +4462,15 @@ complete successfully. The STW pause ends with the <code>&lt;exclusive-end&gt;</
 
 &lt;exclusive-end/&gt;            (STW for partial GC cycle ends)
 
+(mutator threads running, global cycle concurrent increment running concurrently)
+
 &lt;exclusive-start/&gt;          (STW pause starts)
 
 &lt;concurrent-global-final/&gt;  (global cycle final increment recorded)
 
 &lt;gc-start/&gt;                 (global cycle final increment starts)
 
-&lt;allocation-stats/&gt;
+&lt;allocation-stats/&gt;         (snapshot of application threads status taken before cycle started)
 
 &lt;mem-info&gt;                  (memory status before operations)
 
@@ -4464,11 +4480,11 @@ complete successfully. The STW pause ends with the <code>&lt;exclusive-end&gt;</
 
 &lt;/gc-start&gt;
 
-&lt;gc-op&gt; “type=rs-scan&quot;&lt;/gc-op&gt;        (roots scanning completed)
+&lt;gc-op&gt; “type=rs-scan&quot;&lt;/gc-op&gt;        (remembered set scan completed)
 
 &lt;gc-op&gt;”type=card-cleaning&quot; &lt;/gc-op&gt;  (card cleaning completed)
 
-&lt;gc-op&gt; “type=mark”&lt;/gc-op&gt;           (mark operation completed)
+&lt;gc-op&gt; “type=mark”&lt;/gc-op&gt;           (final mark operation and weak roots processing completed)
 
 &lt;gc-op&gt; “type=classunload”&lt;/gc-op&gt;    (class unload operation completed)
 
@@ -4493,12 +4509,11 @@ complete successfully. The STW pause ends with the <code>&lt;exclusive-end&gt;</
 
 </code></pre>
 
-<p>The first activity in the cycle is recorded by a <code>&lt;concurrent-kickoff&gt;</code> element, which records the start of the first of three increments that make up a <code>gencon</code> Global GC cycle.</p>
-<p>The <code>&lt;kickoff&gt;</code> element contains:</p>
+<p>The first activity in the cycle is recorded by a <code>&lt;concurrent-kickoff&gt;</code> element, which records the start of the first of three increments that make up a <code>gencon</code> Global GC cycle. The <code>&lt;concurrent-kickoff&gt;</code> element records:</p>
 <ul>
-<li>Details of the reason for the launch of the GC cycle</li>
-<li>The target number of bytes the cycle aims to reclaim in the heap</li>
-<li>The current available memory in the different parts of the heap</li>
+<li>the reason why the GC cycle was triggered. For a <code>gencon</code> global cycle, the cycle is triggered when the amount of free memory has decreased to a threshold value, the <code>thresholdFreeBytes</code> value. </li>
+<li>The target number of bytes, <code>targetBytes</code>, that the cycle aims to mark concurrently</li>
+<li>The current available memory in the different parts of the heap.</li>
 </ul>
 <pre><code class="xml">&lt;concurrent-kickoff id=&quot;12362&quot; timestamp=&quot;2020-10-18T13:35:44.341&quot;&gt;
 
@@ -4507,6 +4522,8 @@ complete successfully. The STW pause ends with the <code>&lt;exclusive-end&gt;</
 &lt;/concurrent-kickoff&gt;
 </code></pre>
 
+<p>For this example, the <code>remainingFree</code> bytes value of 32.9MB (32933776) is approaching the <code>thresholdFreeBytes</code> value of 33.0MB (33024922) so a global cycle is triggered.  </p>
+<p>This cycle aims to trace 239MB (239014924) during the concurrent increment. If the concurrent increment is interrupted by a card cleaning threshold value before it has traced 239MB, the final STW increment will complete the tracing during the STW pause.</p>
 <p><strong>Note:</strong> To analyze specific parts of a cycle, you can search for the elements that mark a specific increment of the cycle. For example, you can search for the <concurrent-global-final> element to locate the final increment of the <code>gencon</code> global cycle. See the details of a particular cycle, such as the <a href="./vgclog.md/#global-gc-cycle"><code>gencon</code> Global Cycle</a>, to determine the element names for particular STW or concurrent GC increments or operations.</p>
 <p>The next element recorded in the log, the <code>&lt;exclusive-start&gt;</code>element, tells you that a STW pause has started:</p>
 <pre><code class="xml">&lt;exclusive-start id=&quot;12363&quot; timestamp=&quot;2020-10-18T13:35:44.344&quot; intervalms=&quot;342.152&quot;&gt;
@@ -4525,8 +4542,8 @@ complete successfully. The STW pause ends with the <code>&lt;exclusive-end&gt;</
 <pre><code class="xml">&lt;exclusive-end id=&quot;12365&quot; timestamp=&quot;2020-10-18T13:35:44.344&quot; durationms=&quot;0.048&quot; /&gt;
 </code></pre>
 
-<p>The operations and phases of the second increment of the <code>gencon</code> global cycle are now running concurrently. </p>
-<!--A blank line appears in the log after this `<exclusive-end>` line and before the next section, which tells you that no STW activities are running. However, concurrent activities might be running. In this case, the concurrent operations  and phases of the second increment of the `gencon` global cycle are running.-->
+<p>The operations and sub-operations of the second increment of the <code>gencon</code> global cycle are now running concurrently. </p>
+<!--A blank line appears in the log after this `<exclusive-end>` line and before the next section, which tells you that no STW activities are running. However, concurrent activities might be running. In this case, the concurrent operations  and sub-operations of the second increment of the `gencon` global cycle are running.-->
 
 <p>The next section of the logs records an STW pause that is associated with an allocation failure. The <code>&lt;cycle-start&gt;</code> element that follows this STW pause indicates that the cycle is a <code>scavenge</code> cycle, which is the partial GC cycle used by the <code>gencon</code> GC:</p>
 <pre><code class="xml">...
@@ -4556,7 +4573,8 @@ complete successfully. The STW pause ends with the <code>&lt;exclusive-end&gt;</
 
 --->
 
-<p>The operations and phases of the second increment of the <code>gencon</code> global cycle are still running concurrently. After the partial GC cycle completes and the STW pause finishes, the log records a new STW pause, which is triggered to enable the final <code>gencon</code> global GC increment to run. The <code>&lt;exclusive-start&gt;</code> element is followed by a <code>&lt;concurrent-global-final&gt;</code> element which logs the beginning of this final increment (and by implication, the end of the second increment).</p>
+<p>The operations and sub-operations of the second, concurrent increment of the <code>gencon</code> global cycle are paused while the STW <code>scavenge</code> operation is running, and resume when the STW pause finishes. </p>
+<p>After the partial GC cycle completes and the STW pause finishes, the log records a new STW pause, which is triggered to enable the final <code>gencon</code> global GC increment to run. This final increment finishes marking the nursery area and completes the global cycle. The <code>&lt;exclusive-start&gt;</code> element is followed by a <code>&lt;concurrent-global-final&gt;</code> element which logs the beginning of this final increment (and by implication, the end of the second increment).</p>
 <pre><code class="xml">&lt;exclusive-start id=&quot;12378&quot; timestamp=&quot;2020-10-18T13:35:44.594&quot; intervalms=&quot;12.075&quot;&gt;
 
 &lt;response-info timems=&quot;0.108&quot; idlems=&quot;0.040&quot; threads=&quot;3&quot; lastid=&quot;00000000018D3800&quot; lastname=&quot;LargeThreadPool-thread-33&quot; /&gt;
@@ -4570,8 +4588,8 @@ complete successfully. The STW pause ends with the <code>&lt;exclusive-end&gt;</
 &lt;/concurrent-global-final&gt;
 </code></pre>
 
-<p>The final increment of a global cycle is triggered when the card-cleaning threshold is reached, indicated by the <code>reason</code> attribute of the <code>&lt;concurrent-trace-info&gt;</code> element.</p>
-<p>In the next section that begins with the <code>gc-start</code> element, you can find information about the amount of memory available (<code>&lt;mem-info&gt;</code>) and where it is located in the heap. This snapshot is taken before the final increment's operations and phases are run and can be compared with a similar snapshot that is taken afterwards to understand the effect on the heap. The child element attribute values of the<code>&lt;mem&gt;</code> and <code>&lt;mem-info&gt;</code> elements indicate the status of the memory. </p>
+<p>The <code>reason</code> attribute of the <code>&lt;concurrent-trace-info&gt;</code> child element indicates that this final STW increment of the global cycle was triggered because a card-cleaning threshold was reached. The concurrent tracing was terminated prematurely and the <code>targetBytes</code> concurrent tracing target, recorded at the cycle start by <code>&lt;concurrent-kickoff&gt;</code>, was not achieved concurrently. If the concurrent tracing completes without interruption, the <code>&lt;concurrent-trace-info</code> element logs <code>reason=tracing completed</code>.  </p>
+<p>In the next section that begins with the <code>gc-start</code> element, you can find information about the amount of memory available (<code>&lt;mem-info&gt;</code>) and where it is located in the heap. This snapshot is taken before the final increment's operations and sub-operations are run and can be compared with a similar snapshot that is taken afterwards to understand the effect on the heap. The child element attribute values of the<code>&lt;mem&gt;</code> and <code>&lt;mem-info&gt;</code> elements indicate the status of the memory.</p>
 <p><strong>Note:</strong> You can double check that the increment is associated with the GC global cycle in the example by checking the <code>contextid</code> attribute value matches the <code>id=12364</code> attribute value of the cycle's <gc-cycle> element.</p>
 <pre><code class="xml">&lt;gc-start id=&quot;12380&quot; type=&quot;global&quot; contextid=&quot;12364&quot; timestamp=&quot;2020-10-18T13:35:44.594&quot;&gt;
 
@@ -4610,16 +4628,13 @@ complete successfully. The STW pause ends with the <code>&lt;exclusive-end&gt;</
 &lt;/allocation-stats&gt;
 </code></pre>
 
-<p>For this example, at the start of this GC increment, 25% of the total heap is available as free memory. This free memory is split between the following areas of the heap:</p>
+<p>The element <code>&lt;allocation-stats&gt;</code> shows a snapshot, which was taken before the cycle started, of the allocation status of the mutator threads. In this example, the thread that used the most memory was <code>LargeThreadPool-thread-68</code>.</p>
+<p>For this example, at the start of this GC increment, the <em>tenure</em> area is low on free memory, as expected. 25% of the total heap is available as free memory, which is split between the following areas of the heap:</p>
 <ul>
-<li>
-<p>The <em>nursery</em> area, which has 87% of its total memory available as free memory. The free memory is only available in the <em>allocate</em> space of the <em>nursery</em> area. The <em>survivor</em> space has no free memory.</p>
-</li>
-<li>
-<p>The <em>tenure</em> area, which has 5% of its total memory available as free memory. All of this free memory is in the long object allocation area(LOA). No free memory is available in the short object allocation area(SOA).</p>
-</li>
+<li>The <em>nursery</em> area, which has 234.6MB (234,609,440MB) of free memory available. The free memory is only available in the <em>allocate</em> space of the <em>nursery</em> area.The <em>survivor</em> space of the <em>nursery</em> area is reported as 'full' to reflect that no available memory is available to allocate to the mutator threads. The entire <em>survivor</em> space is reserved for GC operations during the GC increment. </li>
+<li>The <em>tenure</em> area, which has 42MB (42,439,200MB) available as free memory, which is only 5% of its total memory. Most of this free memory is in the large object allocation area(LOA). Almost no free memory is available in the small object allocation area(SOA). </li>
 </ul>
-<p>The <code>&lt;gc-op&gt;</code> elements and their child elements contain information about the increment’s operations and phases. The final increment of the <code>gencon</code> global cycle consists of multiple operations, each logged with a <code>&lt;gc-op&gt;</code> element. The type of operation is shown by the <code>&lt;gc-op&gt;</code> <code>type</code> attribute. There are 5 types of operation involved in the final increment of the example log:</p>
+<p>The <code>&lt;gc-op&gt;</code> elements and their child elements contain information about the increment’s operations and sub-operations. The final increment of the <code>gencon</code> global cycle consists of multiple operations, each logged with a <code>&lt;gc-op&gt;</code> element. The type of operation is shown by the <code>&lt;gc-op&gt;</code> <code>type</code> attribute. There are 5 types of operation involved in the final increment of the example log:</p>
 <ol>
 <li><code>Rs-scan</code></li>
 <li><code>Card-cleaning</code></li>
@@ -4627,7 +4642,7 @@ complete successfully. The STW pause ends with the <code>&lt;exclusive-end&gt;</
 <li><code>Classunload</code></li>
 <li><code>Sweep</code></li>
 </ol>
-<p><strong>Note:</strong> The final increment of a <code>gencon</code> global cycle can include an optional compact phase. </p>
+<p><strong>Note:</strong> The final increment of a <code>gencon</code> global cycle can include an optional compact sub-operation. </p>
 <p><strong>Note:</strong> For more information about the different types of GC operation, see <a href="../gc_overview/#gc-operations">GC Operations</a>.</p>
 <pre><code class="xml">&lt;gc-op id=&quot;12382&quot; type=&quot;rs-scan&quot; timems=&quot;3.525&quot; contextid=&quot;12364&quot; timestamp=&quot;2020-10-18T13:35:44.598&quot;&gt;
 
@@ -4670,8 +4685,7 @@ complete successfully. The STW pause ends with the <code>&lt;exclusive-end&gt;</
 &lt;gc-op id=&quot;12386&quot; type=&quot;sweep&quot; timems=&quot;9.464&quot; contextid=&quot;12364&quot; timestamp=&quot;2020-10-18T13:35:44.618&quot; /&gt;
 </code></pre>
 
-<p>The end of the increment is recorded with <code>&lt;gc-end&gt;</code> and provides another snapshot of memory in the heap, similar to <code>&lt;gc-start&gt;</code>. In the example, 60% of the heap now contains free memory as a result of the final global cycle increment. The <em>nursery</em> area remains unchanged which means the final increment reclaimed memory only in the <em>tenure</em> space, which now has 51% of free memory available. The LOA is now all available as free memory. The SOA has 48% of it's memory available as free memory.</p>
-<p><strong>Note:</strong> The global GC cycle runs to reclaim memory in the <em>tenure</em> area. The freeing up of memory in the <em>nursery</em> area is achieved by using the partial GC cycle. For more information, see <a href="../gc/#gencon-policy-(default)"><code>gencon</code> Policy(default)</a>.</p>
+<p>The end of the increment is recorded with <code>&lt;gc-end&gt;</code> and provides another snapshot of memory in the heap, similar to <code>&lt;gc-start&gt;</code>. </p>
 <pre><code class="xml">&lt;gc-end id=&quot;12387&quot; type=&quot;global&quot; contextid=&quot;12364&quot; durationms=&quot;24.220&quot; usertimems=&quot;86.465&quot; systemtimems=&quot;0.000&quot; stalltimems=&quot;2.846&quot; timestamp=&quot;2020-10-18T13:35:44.618&quot; activeThreads=&quot;4&quot;&gt;
 
 &lt;mem-info id=&quot;12388&quot; free=&quot;650476504&quot; total=&quot;1073741824&quot; percent=&quot;60&quot;&gt;
@@ -4701,14 +4715,20 @@ complete successfully. The STW pause ends with the <code>&lt;exclusive-end&gt;</
 &lt;/gc-end&gt;
 </code></pre>
 
-<p>After the GC operations and phases of the final increment of the global cycle complete, the global cycle ends and the STW pause ends, as shown in the following output:</p>
+<p>60% of the heap now contains free memory as a result of the final global cycle increment, which is split between the following areas of the heap:</p>
+<ul>
+<li>The <em>nursery</em> area, which has gained 0.91MB of of free memory (the *nursery area now has 235.2MB (235,516,088MB) available as free memory. At the start of the final increment the area had 234.6MB (234,609,440MB) of free memory available).</li>
+<li>The <em>tenure</em> area, which has gained 372MB (372,521,216MB) of free memory. (the <em>tenure</em> area now has 414MB (414,960,416MB) available as free memory. At the start of the final increment area had 42MB (42,439,200MB) of free memory available.</li>
+</ul>
+<p><strong>Note:</strong> The global GC cycle runs to reclaim memory in the <em>tenure</em> area. The freeing up of memory in the <em>nursery</em> area is achieved by using the partial GC cycle. For more information, see <a href="../gc/#gencon-policy-(default)"><code>gencon</code> Policy(default)</a>.</p>
+<p>After the final increment of the global cycle completes, the global cycle ends and the STW pause ends, as shown in the following output:</p>
 <pre><code class="xml">&lt;cycle-end id=&quot;12389&quot; type=&quot;global&quot; contextid=&quot;12364&quot; timestamp=&quot;2020-10-18T13:35:44.619&quot; /&gt;
 
 &lt;exclusive-end id=&quot;12391&quot; timestamp=&quot;2020-10-18T13:35:44.619&quot; durationms=&quot;24.679&quot; /&gt;
 </code></pre>
 
 <h3 id="summary-of-the-example_1">Summary of the example</h3>
-<p>By analyzing the structure and elements of the example log output, this example shows that the global cycle has the following characteristics:</p>
+<p>Analyzing the structure and elements of this example log output shows that this example global cycle has the following characteristics:</p>
 <ul>
 <li>
 <p>The GC global cycle is triggered when a memory threshold is reached and begins with an STW pause</p>
@@ -4717,14 +4737,12 @@ complete successfully. The STW pause ends with the <code>&lt;exclusive-end&gt;</
 <p>After the first increment of the GC global cycle completes, the STW pause ends and the second increment runs concurrently.</p>
 </li>
 <li>
-<p>While the second increment is running concurrently, a partial GC cycle starts and finishes.</p>
+<p>A single partial GC cycle starts and finishes between the start and end of the concurrent increment.</p>
 </li>
-<li>
-<p>When the second increment completes, an STW pause begins so that the third and final increment of the global cycle, which consists of five operations and phases, can run.</p>
-</li>
-<li>
-<p>The global GC cycle reclaims memory in the <em>tenure</em> area.--&gt;</p>
-</li>
+</ul>
+<p>-A STW pause begins after the concurrent increments completes, during which the third and final increment of the global cycle, which consists of five operations, runs.</p>
+<ul>
+<li>The global GC cycle reclaims memory in the <em>tenure</em> area and a small amount of memory in the <em>nursery</em> area.</li>
 </ul>
 <h2 id="balanced-example"><code>balanced</code> example</h2>
 <p>Add here</p>

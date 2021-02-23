@@ -380,6 +380,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#hardware-acceleration" class="md-nav__link">
+    Hardware acceleration
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -401,7 +408,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       
         <li class="md-nav__item">
   <a href="#using-jlink" class="md-nav__link">
-    Using Jlink
+    Using jlink
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-jpackage" class="md-nav__link">
+    Using jpackage
   </a>
   
 </li>
@@ -737,8 +751,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
   <li class="md-nav__item">
-    <a href="../gc_overview/" title="Overview" class="md-nav__link">
-      Overview
+    <a href="../allocation/" title="Heap allocation" class="md-nav__link">
+      Heap allocation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../gc_overview/" title="Garbage collection" class="md-nav__link">
+      Garbage collection
     </a>
   </li>
 
@@ -762,13 +788,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-3" type="checkbox" id="nav-6-3">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-4" type="checkbox" id="nav-6-4">
     
-    <label class="md-nav__link" for="nav-6-3">
+    <label class="md-nav__link" for="nav-6-4">
       Verbose garbage collection logs
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-6-3">
+      <label class="md-nav__title" for="nav-6-4">
         Verbose garbage collection logs
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -3096,6 +3122,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
   <li class="md-nav__item">
+    <a href="../xxdiagnosesynconvaluebasedclasses/" title="-XX:DiagnoseSyncOnValueBasedClasses" class="md-nav__link">
+      -XX:DiagnoseSyncOnValueBasedClasses
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../xxdisableexplicitgc/" title="-XX:[+|-]DisableExplicitGC" class="md-nav__link">
       -XX:[+|-]DisableExplicitGC
     </a>
@@ -3983,6 +4021,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../api-jdk16/" title="Java 16 API" class="md-nav__link">
+      Java 16 API
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -4077,6 +4127,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#hardware-acceleration" class="md-nav__link">
+    Hardware acceleration
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -4098,7 +4155,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       
         <li class="md-nav__item">
   <a href="#using-jlink" class="md-nav__link">
-    Using Jlink
+    Using jlink
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-jpackage" class="md-nav__link">
+    Using jpackage
   </a>
   
 </li>
@@ -4181,7 +4245,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <h2 id="performance-tuning">Performance tuning</h2>
 <p>OpenJ9 is configured to start with a set of default options that provide the optimal runtime environment for Java applications with typical workloads. However, if your application is atypical, you can improve performance by tuning the OpenJ9 VM. You can also improve performance by enabling hardware features or using specific APIs in your application code.</p>
 <h3 id="garbage-collection-policies">Garbage collection policies</h3>
-<p>OpenJ9 includes several garbage collection policies. To learn more about these policies and the types of application workload that can benefit from them, see <a href="../gc/">Garbage Collection</a>.</p>
+<p>OpenJ9 includes several garbage collection policies. To learn more about these policies and the types of application workload that can benefit from them, see <a href="../gc/">Garbage collection policies</a>.</p>
 <h3 id="class-data-sharing">Class data sharing</h3>
 <p>You can share class data between running VMs, which can reduce the startup time for a VM once the cache has been created. For more information, see <a href="../shrc/">Class Data Sharing</a>.</p>
 <h3 id="native-data-operations">Native data operations</h3>
@@ -4246,13 +4310,18 @@ system properties are available for tuning the implementation.</p>
 which enables you to develop applications that can take advantage of graphics processing unit (GPU) processing for suitable functions, such as sorting arrays. You can also enable the JIT compiler to offload certain processing tasks to a GPU by specifying the <a href="../xjit/#enablegpu"><code>-Xjit:enableGPU</code></a> option on the command line. When enabled, the JIT compiler determines when to offload tasks based on performance heuristics.</p>
 <p>GPU processing is supported only on Linux little-endian systems, such as x86-64 and IBM Power LE, and Windows x86-64 systems. For more information about enabling GPU processing, see <a href="https://www.ibm.com/support/knowledgecenter/SSYKE2_8.0.0/com.ibm.java.vm.80.doc/docs/gpu_overview.html">Exploiting graphics processing units</a>.</p>
 <p>Special consideration is needed when using the WDDM driver model for GPUs on Windows. Using the WDDM driver model means the GPU is also used as a display device and as such is subject to the <a href="https://docs.microsoft.com/en-us/windows-hardware/drivers/display/timeout-detection-and-recovery">Timeout Detection and Recovery (TDR) mechanism</a> of Windows. If you are running demanding GPU workloads, you should increase the timeout from the default 2 seconds. More detail may be found in <a href="https://docs.nvidia.com/cuda/cuda-installation-guide-microsoft-windows/index.html#driver-model">NVIDIA's Installation Guide for Windows</a>.</p>
+<h3 id="hardware-acceleration">Hardware acceleration</h3>
+<p>On AIX&reg; systems that contain the Nest accelerator (NX) co-processor, OpenJ9 can take advantage of the <code>zlibNX</code> library. This library is an enhanced version of the <code>zlib</code> compression library that supports hardware-accelerated data compression and decompression. The <code>zlibNX</code> library is supported on AIX version 7.2 TL4 and later and must be installed on the system. The Nest accelerator (NX) co-processor is available on IBM POWER9&reg; systems. To learn more about <code>zlibNX</code>, see <a href="https://www.ibm.com/support/knowledgecenter/ssw_aix_72/performance/zlibNX.html">Data compression by using the zlibNX library</a>.</p>
 <h2 id="runtime-options">Runtime options</h2>
 <p>Runtime options are specified on the command line and include system properties, standard options, nonstandard (<strong>-X</strong>) options, and <strong>-XX</strong> options. For a detailed list of runtime options, see <a href="../cmdline_specifying/">OpenJ9 command-line options</a></p>
 <h2 id="default-settings">Default settings</h2>
 <p>If you do not specify any options on the command line at run time, the OpenJ9 VM starts with default settings that define how it operates. For more information about these settings, see <a href="../openj9_defaults/">Default settings for the OpenJ9 VM</a>.</p>
-<h2 id="using-jlink"><img alt="Start of content that applies to Java 11 (LTS) and later" src="../cr/java11plus.png" /> Using Jlink</h2>
+<h2 id="using-jlink"><img alt="Start of content that applies to Java 11 (LTS) and later" src="../cr/java11plus.png" /> Using jlink</h2>
 <p>On Java 11 and later, you can use the <code>jlink</code> utility to create a custom OpenJ9 runtime image, which allows you to optimize image size.
 If you do not require translations from the English language, the translation files can be removed to further optimize the size. You can achieve this by specifying the <code>--exclude-files=**java_**.properties</code> option when you run <code>jlink</code>. The default English <code>java.properties</code> file is unaffected.</p>
+<h2 id="using-jpackage">Using jpackage</h2>
+<p><strong>(Linux, macOS, and Windows only)</strong></p>
+<p>You can use the <code>jpackage</code> utility to package a Java application into a platform-specific package that includes all of the necessary dependencies. Full details of the tool are available at <a href="https://openjdk.java.net/jeps/392">JEP 392: Packaging Tool</a>. Instructions for using it and the various options available, are documented in the Oracle Tool Specifications: <a href="https://docs.oracle.com/en/java/javase/14/docs/specs/man/jpackage.html">The jpackage Command</a>.</p>
 <h2 id="troubleshooting">Troubleshooting</h2>
 <p>The OpenJ9 diagnostic component contains extensive features to assist with problem determination. Diagnostic data is produced under default conditions, but can also be controlled by starting the VM with the <a href="../xdump/">-Xdump option</a> or using the <code>com.ibm.jvm.Dump</code> API. You can also trace Java applications, methods, and VM operations by using the <a href="../xtrace/">-Xtrace option</a>.</p>
 <p>To get started, read <a href="../diag_overview/">Diagnostic tools and data</a>.</p>
