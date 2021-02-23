@@ -63,7 +63,7 @@
     
     
       
-        <title>Overview -  </title>
+        <title>Verbose garbage collection logs -  </title>
       
     
     
@@ -660,11 +660,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-4" type="checkbox" id="nav-6-4" checked>
     
     <label class="md-nav__link" for="nav-6-4">
-      Verbose garbage collection logs
+      Troubleshooting garbage collection
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
       <label class="md-nav__title" for="nav-6-4">
-        Verbose garbage collection logs
+        Troubleshooting garbage collection
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
@@ -684,11 +684,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
-        Overview
+        Verbose garbage collection logs
       </label>
     
-    <a href="./" title="Overview" class="md-nav__link md-nav__link--active">
-      Overview
+    <a href="./" title="Verbose garbage collection logs" class="md-nav__link md-nav__link--active">
+      Verbose garbage collection logs
     </a>
     
       
@@ -4197,7 +4197,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <h3 id="gc-increments-and-interleaving">GC increments and interleaving</h3>
 <p>Some GC cycle types are executed in piecemeal blocks of operations called GC increments. This reduces pause times by enabling blocks of operations or operation steps to interleave with operations or operation steps from other types of cycle. </p>
 <p>For example, consider the garbage collector for the <code>gencon</code> policy, which uses partial cycles and global cycles. The partial cycle consists of just 1 GC operation, scavenge, that runs on the <em>nursery</em> area during an STW pause. However, the <code>gencon</code> global cycle, which runs when the <em>tenure</em> area is close to full, is split into three increments. The initial and final global cycle increments run during a relatively short STW pause. The intermediate global cycle increment, which consists of the majority of the GC cycle's work, runs its GC operations concurrently.</p>
-<p>Splitting the global cycle operations into these increments reduces pause times by running most of the GC operations concurrently with application threads. The <code>gencon</code> global cycle's concurrent increment is paused when a <code>gencon</code> partial GC cycle is triggered and resumes when the partial cycle completes. In some policies, concurrent operations are split further into <em>multiple</em> concurrent increments that have a good chance of completing before a different STW cycle is triggered. In this way, a global cycle can progress while other types of cycle are run.</p>
+<p>Splitting the global cycle operations into these increments reduces pause times by running most of the GC operations concurrently with application threads. The <code>gencon</code> global cycle's concurrent increment is paused when a <code>gencon</code> partial GC cycle is triggered and resumes when the partial cycle(s) completes. In this way,a global cycle can progress while other types of cycle are run by pausing and resuming the concurrent work. In some policies, concurrent operations are split further into <em>multiple</em> concurrent increments for better control of progress of the concurrent operation.</p>
 <p>You can see this interleaving of the increments in the verbose GC log. The following table illustrates how the different increments of an example log interleave for the <code>gencon</code> policy (for clarity, not all GC activities are listed):</p>
 <table style="width:100%">
 

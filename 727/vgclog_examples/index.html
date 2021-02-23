@@ -660,11 +660,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-4" type="checkbox" id="nav-6-4" checked>
     
     <label class="md-nav__link" for="nav-6-4">
-      Verbose garbage collection logs
+      Troubleshooting garbage collection
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
       <label class="md-nav__title" for="nav-6-4">
-        Verbose garbage collection logs
+        Troubleshooting garbage collection
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
@@ -675,8 +675,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
   <li class="md-nav__item">
-    <a href="../vgclog/" title="Overview" class="md-nav__link">
-      Overview
+    <a href="../vgclog/" title="Verbose garbage collection logs" class="md-nav__link">
+      Verbose garbage collection logs
     </a>
   </li>
 
@@ -4288,7 +4288,7 @@ the garbage collector exclusive access to the heap:</p>
 <ul>
 <li>The <em>allocate</em> space of the <em>nursery</em> area is full, or close to full. The allocation failure was triggered by the lack of available memory in this space.</li>
 <li>The <em>survivor</em> space of the <em>nursery</em> area is reported as 'full' to reflect that no available memory is available to allocate to the mutator threads. The entire <em>survivor</em> space is reserved for GC operations during the GC increment. </li>
-<li>The <em>tenure</em> area has 414.96MB (414960320) of free memory available.</li>
+<li>The <em>tenure</em> area has 395.7MB (414,960,320B) of free memory available.</li>
 </ul>
 <p>The next element <code>&lt;allocation-stats&gt;</code> shows a snapshot, which was taken before the cycle started, of the allocation status of the mutator threads. In this example, the thread that used the most memory was <code>LargeThreadPool-thread-79</code>.</p>
 <pre><code class="xml">&lt;allocation-stats totalBytes=&quot;235362176&quot; &gt;
@@ -4310,7 +4310,7 @@ the garbage collector exclusive access to the heap:</p>
 &lt;/gc-op&gt;
 </code></pre>
 
-<p>The <code>&lt;memory-copied&gt;</code> element indicates that 6 MB (6,027,440) of reachable objects were moved by the <em>scavenge</em> operation from the allocate space to the survivor space in the nursery area, and 562KB(562,848) were moved to the tenure area. </p>
+<p>The <code>&lt;memory-copied&gt;</code> element indicates that 5.75MB (6,027,440B) of reachable objects were moved by the <em>scavenge</em> operation from the allocate space to the survivor space in the nursery area, and 0.54MB(562,848B) were moved to the tenure area. </p>
 <p>The <code>&lt;scavenger-info&gt;</code> element shows that the <em>tenure age</em> is set to <code>7</code>. Any object in the <em>allocate</em> space with age below or equal to a tenure age of <code>7</code> is copied to the survivor space during this <code>scavenge</code>operation. Any object that has been copied between the <em>allocate</em> and <em>survivor</em> areas more than <code>7</code> times is moved to the tenure area. </p>
 <p>For more information about how the scavenge operation acts on the heap, see <a href="../gc_overview/#gencon-policy-default"><code>gencon</code> policy(default)</a>.</p>
 <p>The end of the increment is recorded with <code>&lt;gc-end&gt;</code> and provides another snapshot of memory allocation on the heap, similar to <code>&lt;gc-start&gt;</code>. </p>
@@ -4334,7 +4334,7 @@ the garbage collector exclusive access to the heap:</p>
 <ul>
 <li>97% of the <em>allocate</em> space of the <em>nursery</em> area is now available as free memory.</li>
 <li>The <em>survivor</em> space of the <em>nursery</em> area is still reported as 'full' to reflect that the entire <em>survivor</em> space is reserved for GC operations during the next GC increment. </li>
-<li>The <em>tenure</em> region has 414.33MB (414,331,440) of free memory available. The <em>scavenge</em> operation copied 562kB from the <em>nursery</em> region to the <em>tenure</em> region so less memory is now available in the <em>tenure</em> region.</li>
+<li>The <em>tenure</em> region has 395MB (414,331,440B) of free memory available. The <em>scavenge</em> operation copied 562kB from the <em>nursery</em> region to the <em>tenure</em> region so less memory is now available in the <em>tenure</em> region.</li>
 </ul>
 <p>The <em>scavenge</em> operation has successfully reclaimed memory in the <em>allocate</em> space of the nursery region by copying objects from the <em>allocate</em> space into the <em>survivor</em> space of the nursery region and tenure region.</p>
 <p>The cycle ends (<code>&lt;cycle-end&gt;</code>). The following <code>&lt;allocation-satisfied&gt;</code> element indicates that the allocation request that caused the allocation failure should now be able to complete successfully. The STW pause ends with the <code>&lt;exclusive-end&gt;</code> element:</p>
@@ -4388,7 +4388,7 @@ the garbage collector exclusive access to the heap:</p>
 <td>intermediate</td>
 <td>concurrent</td>
 <td><code>&lt;concurrent-start&gt;</code>, <code>&lt;concurrent-end&gt;</code></td>
-<td><code>&lt;warning details=&gt;</code>  Root scan, live objects traversed and evacuated (copy-forwarded). Reported as a scavenge operation</td>
+<td><code>&lt;warning details=&gt;</code>  Live objects traversed and evacuated (copy-forwarded). Reported as a scavenge operation</td>
 </tr>
 <tr>
 <td>Scavenge</td>
@@ -4522,8 +4522,8 @@ the garbage collector exclusive access to the heap:</p>
 &lt;/concurrent-kickoff&gt;
 </code></pre>
 
-<p>For this example, the <code>remainingFree</code> bytes value of 32.9MB (32933776) is approaching the <code>thresholdFreeBytes</code> value of 33.0MB (33024922) so a global cycle is triggered.  </p>
-<p>This cycle aims to trace 239MB (239014924) during the concurrent increment. If the concurrent increment is interrupted by a card cleaning threshold value before it has traced 239MB, the final STW increment will complete the tracing during the STW pause.</p>
+<p>For this example, the <code>remainingFree</code> bytes value of 31.4MB (32,933,776B) is approaching the <code>thresholdFreeBytes</code> value of 31.5MB (33,024,922B) so a global cycle is triggered.  </p>
+<p>This cycle aims to trace 228MB (239,014,924B) during the concurrent increment. If the concurrent increment is interrupted by a card cleaning threshold value before it has traced 228MB, the final STW increment will complete the tracing during the STW pause.</p>
 <p><strong>Note:</strong> To analyze specific parts of a cycle, you can search for the elements that mark a specific increment of the cycle. For example, you can search for the <concurrent-global-final> element to locate the final increment of the <code>gencon</code> global cycle. See the details of a particular cycle, such as the <a href="./vgclog.md/#global-gc-cycle"><code>gencon</code> Global Cycle</a>, to determine the element names for particular STW or concurrent GC increments or operations.</p>
 <p>The next element recorded in the log, the <code>&lt;exclusive-start&gt;</code>element, tells you that a STW pause has started:</p>
 <pre><code class="xml">&lt;exclusive-start id=&quot;12363&quot; timestamp=&quot;2020-10-18T13:35:44.344&quot; intervalms=&quot;342.152&quot;&gt;
@@ -4631,8 +4631,8 @@ the garbage collector exclusive access to the heap:</p>
 <p>The element <code>&lt;allocation-stats&gt;</code> shows a snapshot, which was taken before the cycle started, of the allocation status of the mutator threads. In this example, the thread that used the most memory was <code>LargeThreadPool-thread-68</code>.</p>
 <p>For this example, at the start of this GC increment, the <em>tenure</em> area is low on free memory, as expected. 25% of the total heap is available as free memory, which is split between the following areas of the heap:</p>
 <ul>
-<li>The <em>nursery</em> area, which has 234.6MB (234,609,440MB) of free memory available. The free memory is only available in the <em>allocate</em> space of the <em>nursery</em> area.The <em>survivor</em> space of the <em>nursery</em> area is reported as 'full' to reflect that no available memory is available to allocate to the mutator threads. The entire <em>survivor</em> space is reserved for GC operations during the GC increment. </li>
-<li>The <em>tenure</em> area, which has 42MB (42,439,200MB) available as free memory, which is only 5% of its total memory. Most of this free memory is in the large object allocation area(LOA). Almost no free memory is available in the small object allocation area(SOA). </li>
+<li>The <em>nursery</em> area, which has 223.7MB (234,609,440B) of free memory available. The free memory is only available in the <em>allocate</em> space of the <em>nursery</em> area.The <em>survivor</em> space of the <em>nursery</em> area is reported as 'full' to reflect that no available memory is available to allocate to the mutator threads. The entire <em>survivor</em> space is reserved for GC operations during the GC increment. </li>
+<li>The <em>tenure</em> area, which has 40.5MB (42,439,200B) available as free memory, which is only 5% of its total memory. Most of this free memory is in the large object allocation area(LOA). Almost no free memory is available in the small object allocation area(SOA). </li>
 </ul>
 <p>The <code>&lt;gc-op&gt;</code> elements and their child elements contain information about the increment’s operations and sub-operations. The final increment of the <code>gencon</code> global cycle consists of multiple operations, each logged with a <code>&lt;gc-op&gt;</code> element. The type of operation is shown by the <code>&lt;gc-op&gt;</code> <code>type</code> attribute. There are 5 types of operation involved in the final increment of the example log:</p>
 <ol>
@@ -4717,8 +4717,8 @@ the garbage collector exclusive access to the heap:</p>
 
 <p>60% of the heap now contains free memory as a result of the final global cycle increment, which is split between the following areas of the heap:</p>
 <ul>
-<li>The <em>nursery</em> area, which has gained 0.91MB of of free memory (the *nursery area now has 235.2MB (235,516,088MB) available as free memory. At the start of the final increment the area had 234.6MB (234,609,440MB) of free memory available).</li>
-<li>The <em>tenure</em> area, which has gained 372MB (372,521,216MB) of free memory. (the <em>tenure</em> area now has 414MB (414,960,416MB) available as free memory. At the start of the final increment area had 42MB (42,439,200MB) of free memory available.</li>
+<li>The <em>nursery</em> area, which has gained 0.9MB of of free memory (the *nursery area now has 224.6MB (235,516,088B) available as free memory. At the start of the final increment the area had 223.7MB (234,609,440B) of free memory available).</li>
+<li>The <em>tenure</em> area, which has gained 355.2MB (372,521,216B) of free memory. (the <em>tenure</em> area now has 395.7MB (414,960,416B) available as free memory. At the start of the final increment area had 40.5MB (42,439,200B) of free memory available.</li>
 </ul>
 <p><strong>Note:</strong> The global GC cycle runs to reclaim memory in the <em>tenure</em> area. The freeing up of memory in the <em>nursery</em> area is achieved by using the partial GC cycle. For more information, see <a href="../gc/#gencon-policy-(default)"><code>gencon</code> Policy(default)</a>.</p>
 <p>After the final increment of the global cycle completes, the global cycle ends and the STW pause ends, as shown in the following output:</p>
