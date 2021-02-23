@@ -628,8 +628,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
   <li class="md-nav__item">
-    <a href="../gc_overview/" title="Overview" class="md-nav__link">
-      Overview
+    <a href="../allocation/" title="Heap allocation" class="md-nav__link">
+      Heap allocation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../gc_overview/" title="Garbage collection" class="md-nav__link">
+      Garbage collection
     </a>
   </li>
 
@@ -3255,6 +3267,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
   <li class="md-nav__item">
+    <a href="../xxdiagnosesynconvaluebasedclasses/" title="-XX:DiagnoseSyncOnValueBasedClasses" class="md-nav__link">
+      -XX:DiagnoseSyncOnValueBasedClasses
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../xxdisableexplicitgc/" title="-XX:[+|-]DisableExplicitGC" class="md-nav__link">
       -XX:[+|-]DisableExplicitGC
     </a>
@@ -4782,7 +4806,7 @@ Registered dump agents
 </code></pre>
 
 <h3 id="dump-agent-tokens">Dump agent tokens</h3>
-<p>You can use tokens to add context to dump file names and directories, and to pass command-line arguments to the tool agent. The tokens available are listed in the following table:</p>
+<p>You can use tokens to add context to dump file names and directories, and to pass command-line arguments to the tool agent. The tokens available are listed in the following tables:</p>
 <table>
 <thead>
 <tr>
@@ -4820,12 +4844,16 @@ Registered dump agents
 <td>Second (2 digits)</td>
 </tr>
 <tr>
-<td>%pid</td>
-<td>Process ID</td>
+<td>%home</td>
+<td>Java home directory</td>
 </tr>
 <tr>
-<td>%uid</td>
-<td>User name</td>
+<td>%last</td>
+<td>Last dump</td>
+</tr>
+<tr>
+<td>%pid</td>
+<td>Process ID</td>
 </tr>
 <tr>
 <td>%seq</td>
@@ -4836,28 +4864,39 @@ Registered dump agents
 <td>msec counter</td>
 </tr>
 <tr>
-<td>%home</td>
-<td>Java home directory</td>
+<td>%uid</td>
+<td>User name</td>
 </tr>
+</tbody>
+</table>
+<p>The following tokens are applicable only to z/OS:</p>
+<table>
+<thead>
 <tr>
-<td>%last</td>
-<td>Last dump</td>
+<th>Token</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>%asid</td>
+<td>Address space ID</td>
 </tr>
 <tr>
 <td>%job</td>
-<td>Job name (z/OS only)</td>
+<td>Job name</td>
 </tr>
 <tr>
 <td>%jobid</td>
-<td>Job ID (z/OS only)</td>
+<td>Job ID</td>
 </tr>
 <tr>
-<td>%asid</td>
-<td>Address space ID (z/OS only)</td>
+<td>%sysname</td>
+<td>SYSNAME sysparm</td>
 </tr>
 <tr>
 <td>&amp;DS</td>
-<td>Dump Section. An incrementing sequence number used for splitting TDUMP files to be less than 2 GB in size. (z/OS 64-bit only)</td>
+<td>Dump Section. An incrementing sequence number used for splitting TDUMP files to be less than 2 GB in size. (64-bit only)</td>
 </tr>
 </tbody>
 </table>

@@ -640,7 +640,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         
           <li class="md-nav__item">
   <a href="#configuring-language-environment-runtime-options" class="md-nav__link">
-    Configuring Language Environment&reg; runtime options
+    Configuring Language Environment runtime options
   </a>
   
 </li>
@@ -734,8 +734,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
   <li class="md-nav__item">
-    <a href="../gc_overview/" title="Overview" class="md-nav__link">
-      Overview
+    <a href="../allocation/" title="Heap allocation" class="md-nav__link">
+      Heap allocation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../gc_overview/" title="Garbage collection" class="md-nav__link">
+      Garbage collection
     </a>
   </li>
 
@@ -3045,6 +3057,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
   <li class="md-nav__item">
+    <a href="../xxdiagnosesynconvaluebasedclasses/" title="-XX:DiagnoseSyncOnValueBasedClasses" class="md-nav__link">
+      -XX:DiagnoseSyncOnValueBasedClasses
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../xxdisableexplicitgc/" title="-XX:[+|-]DisableExplicitGC" class="md-nav__link">
       -XX:[+|-]DisableExplicitGC
     </a>
@@ -3998,7 +4022,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         
           <li class="md-nav__item">
   <a href="#configuring-language-environment-runtime-options" class="md-nav__link">
-    Configuring Language Environment&reg; runtime options
+    Configuring Language Environment runtime options
   </a>
   
 </li>
@@ -4102,8 +4126,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 -->
 
 <h1 id="configuring-your-system">Configuring your system</h1>
-<p>When you install a Java&trade; runtime environment on your system you must set the <strong>PATH</strong> environment variable so that the operating system can find the Java programs and utilities to run your application. If your application requires a different library or class file that is not on the <strong>PATH</strong>, you must also set the <strong>CLASSPATH</strong> environment variable. How to set these environment variables is covered in many publications about Java, such as <a href="https://docs.oracle.com/javase/tutorial/essential/environment/paths.html">The Java Tutorials: PATH and CLASSPATH</a>.</p>
-<p>On some systems, a further environment variable is required if your application requires shared libraries and these libraries are located in a different directory to the one that is specified in the application's header section. Set the following environment variables to specify the directory location of the shared libraries:</p>
+<p>When you install a Java&trade; runtime environment on your system you can set the <strong>PATH</strong> environment variable so that the operating system can find the Java programs and utilities to run your application. If your application requires a different library or class file that is not on the <strong>PATH</strong>, you can also set the <strong>CLASSPATH</strong> environment variable. However, if you set <strong>CLASSPATH</strong> globally, all invocations of Java are affected. How to set these environment variables is covered in many publications about Java, such as <a href="https://docs.oracle.com/javase/tutorial/essential/environment/paths.html">The Java Tutorials: PATH and CLASSPATH</a>.</p>
+<p>On some systems, a further environment variable might be required if your application requires shared libraries but does not specify their exact location. You can set the following environment variables to specify the directory location of the shared libraries, although setting a global value affects all invocations of Java:</p>
 <ul>
 <li><strong>LIBPATH</strong> (AIX&reg;)</li>
 <li><strong>LD_LIBRARY_PATH</strong> (Linux&reg;)</li>
@@ -4111,8 +4135,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </ul>
 <p><img alt="Start of content that applies to Java 14+" src="../cr/java14plus.png" /> On AIX systems, you must have the <a href="https://www.ibm.com/support/pages/xl-cc-runtime-aix-v16101-fix-pack-december-2018">XL C++ Runtime</a> installed.</p>
 <h2 id="setting-resource-limits-aix-linux-and-macos">Setting resource limits (AIX, Linux, and macOS)</h2>
-<p>The operating system sets resource limits per user for running processes to ensure that a single process cannot consume all available resources. However, these limits can affect certain operations that might need to run for a Java application, such as producing a dump file.</p>
-<p>Limits are controlled by the <strong>ulimit</strong> command and are referred to as a <em>hard</em> limit when set by the <strong>ROOT</strong> user, and a <em>soft</em> limit when set by other users. To see the <em>soft</em> limits set for a system, run <code>ulimit -a</code>. The output is similar to the following example:</p>
+<p>The operating system sets resource limits for a shell and to processes started by the shell to ensure that a single process cannot consume all available resources. However, these limits can affect certain operations that might need to run for a Java application, such as producing a dump file.</p>
+<p>Limits are controlled by the <strong>ulimit</strong> command. A <em>soft</em> limit is the value set by the kernel for a resource and a <em>hard</em> limit imposes a maximum value on the soft limit. A privileged process can change either limit, but an unprivileged process can change only its soft limit (between 0 and the hard limit) or irreversibly lower its hard limit. To see the current limits set for a system, run <code>ulimit -a</code>. The output is similar to the following example:</p>
 <pre><code>core file size          (blocks, -c) 0
 data seg size           (kbytes, -d) unlimited
 file size               (blocks, -f) unlimited
@@ -4126,7 +4150,7 @@ max user processes              (-u) 2784
 virtual memory          (kbytes, -v) unlimited
 </code></pre>
 
-<p>To show <em>hard</em> limits, use <code>ulimit -Ha</code>.</p>
+<p>To show hard limits, use <code>ulimit -Ha</code>.</p>
 <p>You can change limits for specific resources on a temporary basis by running the <strong>ulimit</strong> command. Alternatively, you can store limit settings in a configuration file, which is <code>/etc/security/limits</code> for AIX or <code>etc/security/limits.conf</code> for Linux. For more information about configuring resource limits, refer to the documentation for your operating system.   </p>
 <p>The main use case for changing resource limits is when enabling a system dump to ensure that all the required data can be collected for analysis. For more information, see <a href="../dump_systemdump/#enabling-a-full-system-dump-aix-and-linux">Enabling a full system dump</a>.</p>
 <h2 id="setting-resource-limits-zos">Setting resource limits (z/OS)</h2>
@@ -4186,14 +4210,34 @@ virtual memory          (kbytes, -v) unlimited
 </tr>
 </tbody>
 </table>
-<p><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Notes:</strong></p>
-<ol>
-<li>The number of threads that can be created by a Java process is limited by the lower of the two values for <strong>MAXTHREADS</strong> and <strong>MAXTHREADSTASKS</strong>.</li>
-<li>The number of 4K pages that are available for memory-mapped <code>*.jar</code> files is limited by <strong>MAXMAPAREA</strong> through the <strong>JAVA_MMAP_MAXSIZE</strong> environment variable.</li>
-</ol>
+<p><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Note:</strong> The number of threads that can be created by a Java process is limited by the lower of the two values for <strong>MAXTHREADS</strong> and <strong>MAXTHREADSTASKS</strong>.</p>
 <p>You can change these settings dynamically without re-IPLing the system. For example, to set <strong>MACPROCUSER</strong> to 256, run <code>SETOMVS MAXPROCUSER=256</code></p>
 <p>z/OS uses region sizes to determine the amount of storage available to running programs. For a Java runtime environment, the  region size must be sufficiently large to avoid storage related error messages or abends. Rather than restricting region size, allow the VM to use what it needs. Region size can be affected by one of the following parameters: <strong>JCL REGION</strong>, <strong>BPXPRMxx MAXASSIZE</strong>, the RACF OMVS segment <strong>ASSIZEMAX</strong>, or IEFUSI (Step initiation exit).</p>
-<h3 id="configuring-language-environment-runtime-options">Configuring Language Environment&reg; runtime options</h3>
+<h3 id="configuring-language-environment-runtime-options">Configuring Language Environment runtime options</h3>
+<p>Language Environment&reg; runtime options affect performance and storage usage. These options can be optimized for your application.</p>
+<p>Runtime options are typically embedded in programs by using <strong>#pragma runopts</strong> settings. In many cases, these options provide suitable default values that are known to produce good performance results. However, these options can be overridden to tune the runtime environment of your application.</p>
+<p>On 64-bit z/OS systems, the following runtime options affect Java applications:</p>
+<ul>
+<li><strong>HEAP64</strong>: Controls allocation of the user heap. A suggested starting point for an override is <strong>HEAP64(512M,4M,KEEP,16M,4M,KEEP,0K,0K,FREE)</strong>.</li>
+<li><strong>HEAPPOOLS64</strong>: Used to manage Java heap storage above the 2 G bar. The Java USS launcher sets <strong>HEAPPOOLS64(ALIGN)</strong> for more optimal management of multi-threaded applications. Other Java launchers might have different settings. Before you set an override for <strong>HEAPPOOLS64</strong>, use <strong>RPTOPTS(ON)</strong> or <strong>RPTSTG(ON)</strong> and check the result of <strong>#pragma runopts</strong>. Check this result because the host product might have already set cell sizes and numbers that are known to produce good performance.</li>
+<li><strong>STACK64</strong>: Controls the allocation and management of stack storage. A suggested default is <strong>STACK64(1M,1M,128M)</strong>.</li>
+<li><strong>THREADSTACK64</strong>: Controls the allocation of thread-level stack storage for both the upward and downward-growing stack. A suggested default is <strong>THREADSTACK64(OFF,1M,1M,128M)</strong>.</li>
+</ul>
+<p>A suitable <strong>MEMLIMIT</strong> value is also required. The OpenJ9 VM requirement is the sum of the following amounts:</p>
+<ul>
+<li><strong>HEAP64</strong> (minimum 512 M), which should include <strong>HEAPPOOLS64</strong>.</li>
+<li><strong>STACK64</strong> (3 MB multiplied by the expected number of concurrent threads)</li>
+<li><code>-Xmx</code> largest expected VM heap size.</li>
+<li>The JIT data cache maximum size.</li>
+<li>The JIT code cache maximum size, if <strong>RMODE64</strong> is supported.</li>
+</ul>
+<p>The following guides are available to help you configure Language Environment runtime options and callable services:</p>
+<ul>
+<li>See <a href="https://www.ibm.com/support/knowledgecenter/SSLTBW_2.4.0/com.ibm.zos.v2r4.ceea200/abstract.htm">z/OS Language Environment Programming Guide</a> for guidance on how to override the default options. Use <strong>RPTOPTS (ON)</strong> to write the options that are in effect to <em>stderr</em> on termination.</li>
+<li>See <a href="https://www.ibm.com/support/knowledgecenter/SSLTBW_2.4.0/com.ibm.zos.v2r4.ceea300/abstract.htm">z/OS Language Environment Programming Reference</a> for a full list of the available runtime options.</li>
+<li>See <a href="https://www.ibm.com/support/knowledgecenter/SSLTBW_2.4.0/com.ibm.zos.v2r4.ceea100/abstract.htm">z/OS Language Environment Debugging Guide</a> for tuning guidance by using <strong>RPTSTG (ON)</strong>.</li>
+</ul>
+<p><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> <strong>Warning:</strong> Changing the runtime options can often degrade performance.</p>
 <h2 id="configuring-large-page-memory-allocation">Configuring large page memory allocation</h2>
 <p>If your application allocates a large amount of memory and frequently accesses that memory, you might be able to improve performance by enabling large page support on your system.</p>
 <p>Large page support is enabled by setting the <a href="../xlpobjectheap/"><code>-Xlp:objectheap</code></a> and <a href="../xlpcodecache/"><code>-Xlp:codecache</code></a> options on the command line when you start your application. These options have the following effects:</p>
@@ -4213,9 +4257,9 @@ Hugepagesize:
 <p>If these lines do not exist, update your Linux kernel. If <code>HugePages_Total</code> has a value of <code>0</code>, large pages are available, but not enabled.</p>
 <p>Where large page support is available, the following default sizes apply for the object heap:</p>
 <ul>
-<li>Linux on x86: 2 MB large pages</li>
-<li>Linux on IBM POWER: ??</li>
-<li>Linux on IBM Z: 1 MB large pages</li>
+<li>Linux on x86: 2 MB</li>
+<li>Linux on IBM POWER: 16 MB</li>
+<li>Linux on IBM Z: 1 MB</li>
 </ul>
 <h3 id="windows-systems">Windows systems</h3>
 <p>To use large or huge pages on Windows systems, the JVM user must have the Windows <strong>Lock pages in memory</strong> setting enabled in the Local Security Policy.</p>
