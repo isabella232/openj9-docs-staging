@@ -4262,32 +4262,37 @@ virtual memory          (kbytes, -v) unlimited
 <p>For more information, including support considerations, see <a href="https://www.ibm.com/support/knowledgecenter/ssw_aix_72/performance/large_page_ovw.html">Large pages</a> and <a href="https://www.ibm.com/support/knowledgecenter/ssw_aix_72/performance/multiple_page_size_support.html">Multiple page size support</a> in the AIX documentation.</p>
 <p>The 16 MB and 16 GB page sizes, which are intended for very high performance environments, require special user permissions. You must also configure the number of pages that you require, which cannot be adjusted on demand. For 16 MB large pages, you set the number of large pages by using the <code>vmo</code> command. For 64 GB huge pages you must define the number of pages by using the hardware management console. For more information, see <a href="https://www.ibm.com/support/knowledgecenter/ssw_aix_72/performance/page_sizes_very_high-perf_env.html">Page sizes for very high-performance environments</a> in the AIX documentation.</p>
 <h3 id="linux-systems">Linux systems</h3>
-<p>To configure large page memory allocation on Linux, the kernel must support large pages. If large pages are supported, the following lines are present in the <strong>proc/meminfo</strong> file:</p>
+<p>Large pages are typically referred to as <em>huge pages</em> on Linux systems. To configure huge page memory allocation, the kernel must support huge pages. If huge pages are supported, the following lines are present in the <strong>proc/meminfo</strong> file:</p>
 <pre><code>HugePages_Total:    
 HugePages_Free:     
 Hugepagesize:     
 </code></pre>
 
-<p>If these lines do not exist, update your Linux kernel. Typically, large pages are enabled by default. However, if <code>HugePages_Total</code> has a value of <code>0</code>, large pages are available, but not enabled. To enable large pages, add the following line to your <strong>/etc/sysctl.conf</strong> file and reload the configuration by running <code>sysctl -p</code>:</p>
+<p>If these lines do not exist, update your Linux kernel. Typically, huge pages are enabled by default. However, if <code>HugePages_Total</code> has a value of <code>0</code>, huge pages are available, but not enabled. To enable huge pages, add the following line to your <strong>/etc/sysctl.conf</strong> file and reload the configuration by running <code>sysctl -p</code>:</p>
 <pre><code>vm.nr_hugepages=&lt;number&gt;
 </code></pre>
 
-<p>Where <code>&lt;number&gt;</code> is the number of large pages required.</p>
-<p>Configure the number of large pages that you require at boot time to ensure that the VM has access to sufficient contiguous pages. The following kernel parameters must be set appropriately for your system:</p>
+<p>Where <code>&lt;number&gt;</code> is the number of huge pages required.</p>
+<p>Configure the number of huge pages that you require at boot time to ensure that the VM has access to sufficient contiguous pages. The following kernel parameters must be set appropriately for your system:</p>
 <ul>
 <li><strong>SHMMAX</strong>: The maximum size of the shared memory segment (bytes).</li>
 <li><strong>SHMALL</strong>: The total amount of shared memory in the system (bytes or pages).</li>
 </ul>
 <p>The user running the Java process must either be ROOT or have permissions to use huge pages. For the appropriate permissions, the user must be a member of a group that has its group identifier (gid) stored in <strong>/proc/sys/vm/hugetlb_shm_group</strong>. The locked memory limit must also be increased to at least the size of the Java heap by using the <strong>ulimit -l</strong> command.</p>
-<p>To promote all memory allocated to large pages, set the <code>-XX:+TransparentHugePage</code> option on the command line when you start your application and ensure that the Transparent Huge Page option on your system is set to <code>madvise</code>.</p>
-<p>Where large page support is available, the following default sizes apply for the object heap:</p>
+<p>To promote all memory allocated to huge pages, set the <code>-XX:+TransparentHugePage</code> option on the command line when you start your application and ensure that the Transparent Huge Page option on your system is set to <code>madvise</code>.</p>
+<p>Where huge page support is available, the following default sizes apply for the object heap:</p>
 <ul>
 <li>Linux on x86: 2 MB</li>
 <li>Linux on IBM POWER: 16 MB</li>
 <li>Linux on IBM Z: 1 MB</li>
 </ul>
 <h3 id="windows-systems">Windows systems</h3>
-<p>To use large or huge pages on Windows systems, the JVM user must have the Windows <strong>Lock pages in memory</strong> setting enabled in the Local Security Policy.</p>
+<p>On Windows systems, large pages are typically 2 MB in size. To use large pages, the VM user must have the Windows <strong>Lock pages in memory</strong> setting enabled in the Local Security Policy. Applications must also be run with Admin privileges in order to use large page memory allocations.</p>
+<p>For more information, see the following resources from Microsoft:</p>
+<ul>
+<li><a href="https://docs.microsoft.com/en-gb/windows/win32/memory/large-page-support">Large page support</a></li>
+<li><a href="https://docs.microsoft.com/en-gb/windows/win32/api/memoryapi/nf-memoryapi-getlargepageminimum"><code>GetLargePageMinimum</code> function (<code>memoryapi.h</code>)</a></li>
+</ul>
 <h3 id="zos-systems">z/OS systems</h3>
 <p>When available, 1 MB pageable pages are the default size for the object heap and the code cache. Other page sizes are available for the object heap, depending on the system architecture as shown in the following table:</p>
 <table>
