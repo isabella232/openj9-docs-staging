@@ -4126,7 +4126,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 -->
 
 <h1 id="configuring-your-system">Configuring your system</h1>
-<p>When you install a Java&trade; runtime environment on your system you can set the <strong>PATH</strong> environment variable so that the operating system can find the Java programs and utilities to run your application. If your application requires a different library or class file that is not on the <strong>PATH</strong>, you can also set the <strong>CLASSPATH</strong> environment variable. However, if you set <strong>CLASSPATH</strong> globally, all invocations of Java are affected. How to set these environment variables is covered in many publications about Java, such as <a href="https://docs.oracle.com/javase/tutorial/essential/environment/paths.html">The Java Tutorials: PATH and CLASSPATH</a>.</p>
+<p>When you install a Java&trade; runtime environment on your system you can set the <strong>PATH</strong> environment variable so that the operating system can find the Java programs and utilities to run your application. To tell your application where to find user classes, you can use the <strong>-cp</strong> option or set the <strong>CLASSPATH</strong> environment variable. However, if you set <strong>CLASSPATH</strong> globally, all invocations of Java are affected. How to set these environment variables is covered in many publications about Java, such as <a href="https://docs.oracle.com/javase/tutorial/essential/environment/paths.html">The Java Tutorials: PATH and CLASSPATH</a>.</p>
 <p>On some systems, a further environment variable might be required if your application requires shared libraries but does not specify their exact location. You can set the following environment variables to specify the directory location of the shared libraries, although setting a global value affects all invocations of Java:</p>
 <ul>
 <li><strong>LIBPATH</strong> (AIX&reg;)</li>
@@ -4240,7 +4240,7 @@ virtual memory          (kbytes, -v) unlimited
 <p><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> <strong>Warning:</strong> Changing the runtime options can often degrade performance.</p>
 <h2 id="configuring-large-page-memory-allocation">Configuring large page memory allocation</h2>
 <p>If your application allocates a large amount of memory and frequently accesses that memory, you might be able to improve performance by enabling large page support on your system.</p>
-<p>Large page support is enabled by setting the <a href="../xlpobjectheap/"><code>-Xlp:objectheap</code></a> and <a href="../xlpcodecache/"><code>-Xlp:codecache</code></a> options on the command line when you start your application. These options have the following effects:</p>
+<p>Some Linux kernels implement Transparent HugePage Support (THP), which automates the provision of large pages to back virtual memory, as described in <a href="#linux-systems">Linux systems</a>. Alternatively, you can enable large page support by setting the <a href="../xlpobjectheap/"><code>-Xlp:objectheap</code></a> and <a href="../xlpcodecache/"><code>-Xlp:codecache</code></a> options on the command line when you start your application. These options have the following effects:</p>
 <ul>
 <li>The <code>-Xlp:objectheap</code> option requests that the Java object heap is allocated by using large pages.</li>
 <li>The <code>-Xlp:codecache</code> option requests that the JIT code cache is allocated by using large pages.</li>
@@ -4258,17 +4258,16 @@ virtual memory          (kbytes, -v) unlimited
 <pre><code>LDR_CNTRL=TEXTPSIZE=4K@STACKPSIZE=64K@DATAPSIZE=64K
 </code></pre>
 
-<p>The OpenJ9 VM supports large page usage only to back shared memory segments. Large pages are allocated by using <code>shmget()</code> with the <strong>SHM_LGPG</strong> and <strong>SHM_PIN</strong> flags.</p>
 <p>For more information, including support considerations, see <a href="https://www.ibm.com/support/knowledgecenter/ssw_aix_72/performance/large_page_ovw.html">Large pages</a> and <a href="https://www.ibm.com/support/knowledgecenter/ssw_aix_72/performance/multiple_page_size_support.html">Multiple page size support</a> in the AIX documentation.</p>
-<p>The 16 MB and 16 GB page sizes, which are intended for very high performance environments, require special user permissions. You must also configure the number of pages that you require, which cannot be adjusted on demand. For 16 MB large pages, you set the number of large pages by using the <code>vmo</code> command. For 64 GB huge pages you must define the number of pages by using the hardware management console. For more information, see <a href="https://www.ibm.com/support/knowledgecenter/ssw_aix_72/performance/page_sizes_very_high-perf_env.html">Page sizes for very high-performance environments</a> in the AIX documentation.</p>
+<p>The 16 MB and 16 GB page sizes, which are intended for very high performance environments, require special user permissions. You must also configure the number of pages that you require, which cannot be adjusted on demand. For 16 MB large pages, you set the number of large pages by using the <code>vmo</code> command. For 16 GB huge pages you must define the number of pages by using the hardware management console. For more information, see <a href="https://www.ibm.com/support/knowledgecenter/ssw_aix_72/performance/page_sizes_very_high-perf_env.html">Page sizes for very high-performance environments</a> in the AIX documentation.</p>
 <h3 id="linux-systems">Linux systems</h3>
-<p>Large pages are typically referred to as <em>huge pages</em> on Linux systems. To configure huge page memory allocation, the kernel must support huge pages. If huge pages are supported, the following lines are present in the <strong>proc/meminfo</strong> file:</p>
+<p>Large pages are typically referred to as <em>huge pages</em> on Linux systems. To configure huge page memory allocation, the kernel must support huge pages. If huge pages are supported, the following lines are present in the <strong>/proc/meminfo</strong> file:</p>
 <pre><code>HugePages_Total:    
 HugePages_Free:     
 Hugepagesize:     
 </code></pre>
 
-<p>If these lines do not exist, update your Linux kernel. Typically, huge pages are enabled by default. However, if <code>HugePages_Total</code> has a value of <code>0</code>, huge pages are available, but not enabled. To enable huge pages, add the following line to your <strong>/etc/sysctl.conf</strong> file and reload the configuration by running <code>sysctl -p</code>:</p>
+<p>If these lines do not exist, update your Linux kernel. If <code>HugePages_Total</code> has a value of <code>0</code>, huge pages are available, but not enabled. To enable huge pages, add the following line to your <strong>/etc/sysctl.conf</strong> file and reload the configuration by running <code>sysctl -p</code>:</p>
 <pre><code>vm.nr_hugepages=&lt;number&gt;
 </code></pre>
 
@@ -4279,13 +4278,14 @@ Hugepagesize:
 <li><strong>SHMALL</strong>: The total amount of shared memory in the system (bytes or pages).</li>
 </ul>
 <p>The user running the Java process must either be ROOT or have permissions to use huge pages. For the appropriate permissions, the user must be a member of a group that has its group identifier (gid) stored in <strong>/proc/sys/vm/hugetlb_shm_group</strong>. The locked memory limit must also be increased to at least the size of the Java heap by using the <strong>ulimit -l</strong> command.</p>
-<p>To promote all memory allocated to huge pages, set the <code>-XX:+TransparentHugePage</code> option on the command line when you start your application and ensure that the Transparent Huge Page option on your system is set to <code>madvise</code>.</p>
 <p>Where huge page support is available, the following default sizes apply for the object heap:</p>
 <ul>
 <li>Linux on x86: 2 MB</li>
-<li>Linux on IBM POWER: 16 MB</li>
+<li>Linux on IBM POWER: 16 MB and 2MB (See Note)</li>
 <li>Linux on IBM Z: 1 MB</li>
 </ul>
+<p><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Note: IBM POWER9 and later systems support either 16 MB or 2 MB huge pages. However PowerVM LPARs support only 16 MB huge pages, while bare-metal machines support only 2 MB huge pages.</p>
+<p>Transparent HugePage Support (THP) is an automated mechanism of using huge pages to back virtual memory. On Linux kernels that support THP, it is typically enabled by default with the <strong>madvise</strong> option and can be relied on to provide huge pages as required without any user configuration. To disable THP for your application, use the OpenJ9 <a href="../xxtransparenthugepage/"><code>-XX:-TransparentHugePage</code></a> option on the command line. To disable THP system-wide, change the <strong>sysfs</strong> boot time defaults with the command <code>transparent_hugepage=never</code>. For more information about THP see <a href="https://www.kernel.org/doc/html/latest/admin-guide/mm/transhuge.html">Transparent HugePage Support</a>.</p>
 <h3 id="windows-systems">Windows systems</h3>
 <p>On Windows systems, large pages are typically 2 MB in size. To use large pages, the VM user must have the Windows <strong>Lock pages in memory</strong> setting enabled in the Local Security Policy. Applications must also be run with Admin privileges in order to use large page memory allocations.</p>
 <p>For more information, see the following resources from Microsoft:</p>
@@ -4336,11 +4336,23 @@ Hugepagesize:
 <p>For usage information, including examples, see <a href="../xlpobjectheap/#pageablenonpageable"><code>-Xlp:objectheap</code></a>.</p>
 <h2 id="configuring-dynamic-lpar-support-aix-only">Configuring Dynamic LPAR support (AIX only)</h2>
 <p><em>Dynamic logical partitioning</em> (DLPAR) provides a mechanism to add or remove system resources, such as memory or CPU, to or from the operating system in a logical partition without rebooting. Changing these resources dynamically can have an impact on Java applications that are running on the LPAR.</p>
-<p>To enable an application to respond to DLPAR events, you can use OpenJ9 extensions to the <code>java.lang.management</code> API. These extensions can listen for events and trigger any necessary adjustments to the runtime environment. For example, if a Java VM is running in an LPAR with 2GB of memory, but the available memory might be adjusted between 1GB and 8GB, you might set the following options for the Java heap at run time:</p>
+<p>To enable an application to respond to DLPAR events, you can use OpenJ9 MXBean extensions to the <code>java.lang.management</code> API. The following classes are available in the <code>com.ibm.lang.management</code> package:</p>
+<ul>
+<li><code>AvailableProcessorsNotificationInfo</code>: Use to listen for changes to the number of available processors.</li>
+<li><code>ProcessingCapacityNotificationInfo</code>: Use to listen for changes to processing capacity.</li>
+<li><code>TotalPhysicalMemoryNotificationInfo</code>: Use to listen for changes to the total amount of physical memory that is available.</li>
+</ul>
+<p>These extensions can listen for events and trigger any necessary adjustments to the runtime environment. For example, if a Java VM is running in an LPAR with 2GB of memory, but the available memory might be adjusted between 1GB and 8GB, you might set the following options for the Java heap at run time:</p>
 <pre><code>–Xms1g –Xsoftmx2g –Xmx8g
 </code></pre>
 
-<p>This command-line string sets an initial heap size of 1 GB, a <em>soft</em> (adjustable) maximum heap size of 2 GB, and a maximum heap size of 8 GB. You can then use the API to adjust the size of <a href="../xsoftmx/"><code>-Xsoftmx</code></a> dynamically in response to changes in memory resources.  </p>
+<p>This command-line string sets an initial heap size of 1 GB, a <em>soft</em> (adjustable) maximum heap size of 2 GB, and a maximum heap size of 8 GB. You can then use the <code>MemoryMXBean</code> API to dynamically respond to changes in memory resources. The following classes can be used:</p>
+<ul>
+<li><code>getMaxHeapSize()</code>: Query the maximum heap size.</li>
+<li><code>isSetMaxHeapSizeSupported()</code>: Query whether the VM can support dynamic updates.</li>
+<li><code>setMaxHeapSize()</code>: Adjust the maximum heap size.</li>
+</ul>
+<p>For more information about the <code>com.ibm.lang.managment</code> package, which extends the <code>jdk.management</code> module, see the <a href="../api-overview/#monitoring-and-management">API documentation</a>.</p>
 <!-- ==== END OF TOPIC ==== configuring.md ==== -->
                 
                   
