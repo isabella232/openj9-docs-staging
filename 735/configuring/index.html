@@ -4225,12 +4225,13 @@ virtual memory          (kbytes, -v) unlimited
 </ul>
 <p>A suitable <strong>MEMLIMIT</strong> value is also required. The OpenJ9 VM requirement is the sum of the following amounts:</p>
 <ul>
-<li>User Heap Storage required by the VM and native libraries, as controlled by <strong>HEAP64</strong> (minimum 512 M) settings.</li>
-<li>User Stack Storage (3 MB multiplied by the expected number of concurrent threads), as controlled by <strong>STACK64</strong> settings.</li>
+<li>User heap storage required by the VM and native libraries, as controlled by <strong>HEAP64</strong> (minimum 512 M) settings.</li>
+<li>User stack storage (3 MB multiplied by the expected number of concurrent threads), as controlled by <strong>STACK64</strong> settings.</li>
 <li><code>-Xmx</code> largest expected VM heap size.</li>
 <li>The JIT data cache maximum size.</li>
 <li>The JIT code cache maximum size, if <strong>RMODE64</strong> is supported.</li>
 </ul>
+<p><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Note:</strong> If you intend to use the Concurrent Scavenge mode of the default Generational Concurrent (<code>gencon</code>) garbage collection policy by using hardware-based support, the virtual storage used might exceed the Java maximum heap size. Set the z/OS memory limit to a larger value than the maximum heap size. For more information, see <a href="../xgc/#concurrentscavenge"><code>-Xgc:concurrentScavenge</code></a>.</p>
 <p>The following guides are available to help you configure Language Environment runtime options and callable services:</p>
 <ul>
 <li>See <a href="https://www.ibm.com/support/knowledgecenter/SSLTBW_2.4.0/com.ibm.zos.v2r4.ceea200/abstract.htm">z/OS Language Environment Programming Guide</a> for guidance on how to override the default options. Use <strong>RPTOPTS (ON)</strong> to write the options that are in effect to <em>stderr</em> on termination.</li>
