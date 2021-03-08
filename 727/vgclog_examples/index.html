@@ -4169,7 +4169,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <tr>
 </table>
 
-<p><strong>Note:</strong> For more information about the XML structure of GC cycles, see <a href="../vgclog/#gc-cycles">GC cycles</a>. For more information about GC cycle increments, see <a href="../vgclog/#gc-increments-and-interleaving">GC increments and interleaving</a>.</p>
+<p><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Note:</strong> For more information about the XML structure of GC cycles, see <a href="../vgclog/#gc-cycles">GC cycles</a>. For more information about GC cycle increments, see <a href="../vgclog/#gc-increments-and-interleaving">GC increments and interleaving</a>.</p>
 <p>The following examples use log excerpts to show how the different types of <code>gencon</code> cycle are logged.</p>
 <h3 id="scavenge-partial-gc-cycle">Scavenge partial GC cycle</h3>
 <p>The following example is taken from a <code>gencon</code> log. The output is broken down into sections with supporting text to explain the GC processing that is taking place.</p>
@@ -4508,7 +4508,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p>For this example, the <code>remainingFree</code> bytes value of 31.4 MB (32,933,776B) is approaching the <code>thresholdFreeBytes</code> value of 31.5 MB (33,024,922B) so a global cycle is triggered.  </p>
 <p>This cycle aims to trace 228 MB (239,014,924B) during the concurrent increment. If the concurrent increment is interrupted by a card cleaning threshold value before it traces all 228 MB, the final STW increment completes the tracing during the STW pause.</p>
-<p><strong>Note:</strong> To analyze specific parts of a cycle, you can search for the elements that mark a specific increment of the cycle. For example, you can search for the <concurrent-global-final> element to locate the final increment of the <code>gencon</code> global cycle. See the details of a particular cycle, such as the <a href="./vgclog.md/#global-gc-cycle"><code>gencon</code> Global Cycle</a>, to determine the element names for particular STW or concurrent GC increments or operations.</p>
+<p><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Note:</strong> To analyze specific parts of a cycle, you can search for the elements that mark a specific increment of the cycle. For example, you can search for the <concurrent-global-final> element to locate the final increment of the <code>gencon</code> global cycle. See the details of a particular cycle, such as the <a href="./vgclog.md/#global-gc-cycle"><code>gencon</code> Global Cycle</a>, to determine the element names for particular STW or concurrent GC increments or operations.</p>
 <p>The next element recorded in the log, the <code>&lt;exclusive-start&gt;</code>element, records the start of an STW pause:</p>
 <pre><code class="xml">&lt;exclusive-start id=&quot;12363&quot; timestamp=&quot;2020-10-18T13:35:44.344&quot; intervalms=&quot;342.152&quot;&gt;
 
@@ -4574,7 +4574,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <p>The <code>reason</code> attribute of the <code>&lt;concurrent-trace-info&gt;</code> child element indicates that this final STW increment of the global cycle was triggered because a card-cleaning threshold was reached. The concurrent tracing was stopped prematurely and the <code>targetBytes</code> concurrent tracing target, recorded at the cycle start by <code>&lt;concurrent-kickoff&gt;</code>, was not achieved concurrently. If the concurrent tracing completes without interruption, the <code>&lt;concurrent-trace-info</code> element logs <code>reason=tracing completed</code>.  </p>
 <p>In the next section that begins with the <code>gc-start</code> element, you can find information about the amount of memory available (<code>&lt;mem-info&gt;</code>) and where it is located in the java&trade; object heap. This snapshot is taken before the final increment's operations and suboperations are run and can be compared with a similar snapshot that is taken afterward to understand the effect on the heap. The child element attribute values of the<code>&lt;mem&gt;</code> and <code>&lt;mem-info&gt;</code> elements indicate the status of the memory.</p>
-<p><strong>Note:</strong> You can double check that the increment is associated with the GC global cycle in the example by checking the <code>contextid</code> attribute value matches the <code>id=12364</code> attribute value of the cycle's <gc-cycle> element.</p>
+<p><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Note:</strong> You can double check that the increment is associated with the GC global cycle in the example by checking the <code>contextid</code> attribute value matches the <code>id=12364</code> attribute value of the cycle's <gc-cycle> element.</p>
 <pre><code class="xml">&lt;gc-start id=&quot;12380&quot; type=&quot;global&quot; contextid=&quot;12364&quot; timestamp=&quot;2020-10-18T13:35:44.594&quot;&gt;
 
 &lt;mem-info id=&quot;12381&quot; free=&quot;277048640&quot; total=&quot;1073741824&quot; percent=&quot;25&quot;&gt;
@@ -4626,8 +4626,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li><code>Classunload</code></li>
 <li><code>Sweep</code></li>
 </ol>
-<p><strong>Note:</strong> The final increment of a <code>gencon</code> global cycle can include an optional compact suboperation. </p>
-<p><strong>Note:</strong> For more information about the different types of GC operation, see <a href="../gc_overview/#gc-operations">GC operations</a>.</p>
+<p><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Note:</strong> The final increment of a <code>gencon</code> global cycle can include an optional compact suboperation. </p>
+<p><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Note:</strong> For more information about the different types of GC operation, see <a href="../gc_overview/#gc-operations">GC operations</a>.</p>
 <pre><code class="xml">&lt;gc-op id=&quot;12382&quot; type=&quot;rs-scan&quot; timems=&quot;3.525&quot; contextid=&quot;12364&quot; timestamp=&quot;2020-10-18T13:35:44.598&quot;&gt;
 
 &lt;scan objectsFound=&quot;11895&quot; bytesTraced=&quot;5537600&quot; workStackOverflowCount=&quot;0&quot; /&gt;
@@ -4704,7 +4704,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li>The nursery area, which gained 0.9 MB of free memory. The nursery area now has 224.6 MB (235,516,088B) available as free memory. At the start of the final increment, the nursery area had 223.7 MB (234,609,440B) of free memory available.</li>
 <li>The tenure area, which gained 355.2 MB (372,521,216B) of free memory. (the tenure area now has 395.7 MB (414,960,416B) available as free memory. At the start of the final increment, the tenure area had 40.5 MB (42,439,200B) of free memory available).</li>
 </ul>
-<p><strong>Note:</strong> The global GC cycle runs to reclaim memory in the tenure area. The freeing up of memory in the nursery area is achieved by using the partial GC cycle. For more information, see <a href="../gc/#gencon-policy-(default)"><code>gencon</code> Policy(default)</a>.</p>
+<p><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Note:</strong> The global GC cycle runs to reclaim memory in the tenure area. The freeing up of memory in the nursery area is achieved by using the partial GC cycle. For more information, see <a href="../gc/#gencon-policy-(default)"><code>gencon</code> Policy(default)</a>.</p>
 <p>After the final increment of the global cycle completes, the global cycle ends and the STW pause ends, as shown in the following output:</p>
 <pre><code class="xml">&lt;cycle-end id=&quot;12389&quot; type=&quot;global&quot; contextid=&quot;12364&quot; timestamp=&quot;2020-10-18T13:35:44.619&quot; /&gt;
 
