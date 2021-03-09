@@ -1,5 +1,5 @@
 <!--
-* Copyright (c) 2017, 2021 IBM Corp. and others
+* Copyright (c) 2017, 2020 IBM Corp. and others
 *
 * This program and the accompanying materials are made
 * available under the terms of the Eclipse Public License 2.0
@@ -89,8 +89,6 @@
     
     <link rel="stylesheet" href="../assets/fonts/material-icons.css">
     
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    
       <link rel="stylesheet" href="../stylesheets/oj9.css">
     
     
@@ -125,7 +123,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     
     
       <!--
-* Copyright (c) 2017, 2021 IBM Corp. and others
+* Copyright (c) 2017, 2020 IBM Corp. and others
 *
 * This program and the accompanying materials are made
 * available under the terms of the Eclipse Public License 2.0
@@ -285,8 +283,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
   <li class="md-nav__item">
-    <a href="../builds/" title="OpenJ9 builds" class="md-nav__link">
-      OpenJ9 builds
+    <a href="../adoptopenjdk/" title="AdoptOpenJDK builds" class="md-nav__link">
+      AdoptOpenJDK builds
     </a>
   </li>
 
@@ -380,13 +378,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#hardware-acceleration" class="md-nav__link">
-    Hardware acceleration
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -408,14 +399,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       
         <li class="md-nav__item">
   <a href="#using-jlink" class="md-nav__link">
-    Using jlink
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#using-jpackage" class="md-nav__link">
-    Using jpackage
+    Using Jlink
   </a>
   
 </li>
@@ -487,19 +471,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
   <li class="md-nav__item">
-    <a href="../version0.25/" title="Version 0.25.0" class="md-nav__link">
-      Version 0.25.0
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../version0.24/" title="Version 0.24.0" class="md-nav__link">
+    <a href="../version0.24.md" title="Version 0.24.0" class="md-nav__link">
       Version 0.24.0
     </a>
   </li>
@@ -534,6 +506,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           
 
 
+  <li class="md-nav__item">
+    <a href="../version0.21/" title="Version 0.21.0" class="md-nav__link">
+      Version 0.21.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
   <li class="md-nav__item md-nav__item--nested">
     
       <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-6" type="checkbox" id="nav-5-6">
@@ -547,18 +531,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../version0.21/" title="Version 0.21.0" class="md-nav__link">
-      Version 0.21.0
-    </a>
-  </li>
-
         
           
           
@@ -751,20 +723,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
   <li class="md-nav__item">
-    <a href="../allocation/" title="Heap allocation" class="md-nav__link">
-      Heap allocation
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../gc_overview/" title="Garbage Collection(GC)" class="md-nav__link">
-      Garbage Collection(GC)
+    <a href="../gc_overview.md" title="Garbage Collection (GC)" class="md-nav__link">
+      Garbage Collection (GC)
     </a>
   </li>
 
@@ -788,13 +748,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-4" type="checkbox" id="nav-6-4">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-3" type="checkbox" id="nav-6-3">
     
-    <label class="md-nav__link" for="nav-6-4">
+    <label class="md-nav__link" for="nav-6-3">
       Troubleshooting GC
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-6-4">
+      <label class="md-nav__title" for="nav-6-3">
         Troubleshooting GC
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -2894,7 +2854,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
   <li class="md-nav__item">
-    <a href="../xsyslog/" title="-Xsyslog" class="md-nav__link">
+    <a href="../xsyslog.md" title="-Xsyslog" class="md-nav__link">
       -Xsyslog
     </a>
   </li>
@@ -3112,18 +3072,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <li class="md-nav__item">
     <a href="../xxcompactstrings/" title="-XX:[+|-]CompactStrings" class="md-nav__link">
       -XX:[+|-]CompactStrings
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../xxdiagnosesynconvaluebasedclasses/" title="-XX:DiagnoseSyncOnValueBasedClasses" class="md-nav__link">
-      -XX:DiagnoseSyncOnValueBasedClasses
     </a>
   </li>
 
@@ -3386,7 +3334,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
   <li class="md-nav__item">
-    <a href="../xxlegacyxlogoption/" title="-XX:[+|-]LegacyXLogOption" class="md-nav__link">
+    <a href="../xxlegacyxlogoption.md" title="-XX:[+|-]LegacyXLogOption" class="md-nav__link">
       -XX:[+|-]LegacyXLogOption
     </a>
   </li>
@@ -4021,18 +3969,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   </li>
 
         
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../api-jdk16/" title="Java 16 API" class="md-nav__link">
-      Java 16 API
-    </a>
-  </li>
-
-        
       </ul>
     </nav>
   </li>
@@ -4127,13 +4063,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#hardware-acceleration" class="md-nav__link">
-    Hardware acceleration
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -4155,14 +4084,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       
         <li class="md-nav__item">
   <a href="#using-jlink" class="md-nav__link">
-    Using jlink
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#using-jpackage" class="md-nav__link">
-    Using jpackage
+    Using Jlink
   </a>
   
 </li>
@@ -4196,7 +4118,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 -->
                 
                 <!--
-* Copyright (c) 2017, 2021 IBM Corp. and others
+* Copyright (c) 2017, 2020 IBM Corp. and others
 *
 * This program and the accompanying materials are made
 * available under the terms of the Eclipse Public License 2.0
@@ -4245,7 +4167,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <h2 id="performance-tuning">Performance tuning</h2>
 <p>OpenJ9 is configured to start with a set of default options that provide the optimal runtime environment for Java applications with typical workloads. However, if your application is atypical, you can improve performance by tuning the OpenJ9 VM. You can also improve performance by enabling hardware features or using specific APIs in your application code.</p>
 <h3 id="garbage-collection-policies">Garbage collection policies</h3>
-<p>OpenJ9 includes several garbage collection policies. To learn more about these policies and the types of application workload that can benefit from them, see <a href="../gc/">Garbage collection policies</a>.</p>
+<p>OpenJ9 includes several garbage collection policies. To learn more about these policies and the types of application workload that can benefit from them, see <a href="../gc/">Garbage Collection</a>.</p>
 <h3 id="class-data-sharing">Class data sharing</h3>
 <p>You can share class data between running VMs, which can reduce the startup time for a VM once the cache has been created. For more information, see <a href="../shrc/">Class Data Sharing</a>.</p>
 <h3 id="native-data-operations">Native data operations</h3>
@@ -4279,7 +4201,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>OpenJDK uses the in-built Java cryptographic implementation by default. However, native cryptographic implementations
 typically provide better performance. OpenSSL is a native open source cryptographic toolkit for Transport Layer Security (TLS) and
 Secure Sockets Layer (SSL) protocols, which is well established and used with many enterprise applications. The OpenSSL V1.0.x and V1.1.x implementations are currently supported for the Digest, CBC, GCM, and RSA algorithms. The OpenSSL V1.1.x implementation is also supported for the ChaCha20 and ChaCha20-Poly1305 algorithms.</p>
-<p>On Linux and AIX platforms, the OpenSSL 1.0.x or 1.1.x library is expected to be found on the system path. If you use a package manager to install OpenSSL, the system path will be updated automatically. On other platforms, the OpenSSL 1.1.x library is typically bundled.</p>
+<p>On Linux and AIX platforms, the OpenSSL 1.0.x or 1.1.x library is expected to be found on the system path. If you use a package manager to install OpenSSL, the system path will be updated automatically. On other platforms, the OpenSSL 1.1.x library is currently bundled with the binaries from AdoptOpenJDK.</p>
 <p>OpenSSL support is enabled by default for all supported algorithms. If you want to limit support to specific algorithms, a number of
 system properties are available for tuning the implementation.</p>
 <p>Each algorithm can be disabled individually by setting the following system properties on the command line:</p>
@@ -4300,28 +4222,23 @@ system properties are available for tuning the implementation.</p>
 <li><a href="https://github.com/eclipse/openj9/blob/master/doc/build-instructions/Build_Instructions_V11.md">OpenJDK 11 with OpenJ9</a>.</li>
 <li><a href="https://github.com/eclipse/openj9/blob/master/doc/build-instructions/Build_Instructions_V15.md">OpenJDK 15 with OpenJ9</a>.</li>
 </ul>
-<p><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Note:</strong> If you obtain an OpenJDK with OpenJ9 build that includes OpenSSL or build a version yourself that includes OpenSSL support, the following acknowledgements apply in accordance with the license terms:</p>
+<p><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Note:</strong> If you obtain an OpenJDK with OpenJ9 build from <a href="https://adoptopenjdk.net/">AdoptOpenJDK</a> that includes OpenSSL or build a version yourself that includes OpenSSL support, the following acknowledgements apply in accordance with the license terms:</p>
 <ul>
 <li><em>This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit. (http://www.openssl.org/).</em></li>
 <li><em>This product includes cryptographic software written by Eric Young (eay@cryptsoft.com).</em></li>
 </ul>
 <h3 id="exploiting-gpus">Exploiting GPUs</h3>
 <p>OpenJ9 provides both the <a href="../api-cuda/">CUDA4J API</a> <!-- Link to API --> and the <a href="../api-gpu/">GPU API</a>, <!-- Link to API -->
-which enables you to develop applications that can take advantage of graphics processing unit (GPU) processing for suitable functions, such as sorting arrays. You can also enable the JIT compiler to offload certain processing tasks to a GPU by specifying the <a href="../xjit/#enablegpu"><code>-Xjit:enableGPU</code></a> option on the command line. When enabled, the JIT compiler determines when to offload tasks based on performance heuristics.</p>
-<p>GPU processing is supported only on Linux little-endian systems, such as x86-64 and IBM Power LE, and Windows x86-64 systems. For more information about enabling GPU processing, see <a href="https://www.ibm.com/support/knowledgecenter/SSYKE2_8.0.0/com.ibm.java.vm.80.doc/docs/gpu_overview.html">Exploiting graphics processing units</a>.</p>
+which enables you to develop applications that can take advantage of graphics processing unit (GPU) processing for suitable functions, such as code page conversion. You can also enable the JIT compiler to offload certain processing tasks to a GPU by specifying the <a href="../xjit/#enablegpu"><code>-Xjit:enableGPU</code></a> option on the command line. When enabled, the JIT compiler determines when to offload tasks based on performance heuristics.</p>
+<p>GPU processing is supported only on Windows (x86-64) and Linux (x86-64 and IBM Power LE) systems. For more information about enabling GPU processing, see <a href="https://www.ibm.com/support/knowledgecenter/SSYKE2_8.0.0/com.ibm.java.vm.80.doc/docs/gpu_overview.html">Exploiting graphics processing units</a>.</p>
 <p>Special consideration is needed when using the WDDM driver model for GPUs on Windows. Using the WDDM driver model means the GPU is also used as a display device and as such is subject to the <a href="https://docs.microsoft.com/en-us/windows-hardware/drivers/display/timeout-detection-and-recovery">Timeout Detection and Recovery (TDR) mechanism</a> of Windows. If you are running demanding GPU workloads, you should increase the timeout from the default 2 seconds. More detail may be found in <a href="https://docs.nvidia.com/cuda/cuda-installation-guide-microsoft-windows/index.html#driver-model">NVIDIA's Installation Guide for Windows</a>.</p>
-<h3 id="hardware-acceleration">Hardware acceleration</h3>
-<p>On AIX&reg; systems that contain the Nest accelerator (NX) co-processor, OpenJ9 can take advantage of the <code>zlibNX</code> library. This library is an enhanced version of the <code>zlib</code> compression library that supports hardware-accelerated data compression and decompression. The <code>zlibNX</code> library is supported on AIX version 7.2 TL4 and later and must be installed on the system. The Nest accelerator (NX) co-processor is available on IBM POWER9&reg; systems. To learn more about <code>zlibNX</code>, see <a href="https://www.ibm.com/support/knowledgecenter/ssw_aix_72/performance/zlibNX.html">Data compression by using the zlibNX library</a>.</p>
 <h2 id="runtime-options">Runtime options</h2>
 <p>Runtime options are specified on the command line and include system properties, standard options, nonstandard (<strong>-X</strong>) options, and <strong>-XX</strong> options. For a detailed list of runtime options, see <a href="../cmdline_specifying/">OpenJ9 command-line options</a></p>
 <h2 id="default-settings">Default settings</h2>
 <p>If you do not specify any options on the command line at run time, the OpenJ9 VM starts with default settings that define how it operates. For more information about these settings, see <a href="../openj9_defaults/">Default settings for the OpenJ9 VM</a>.</p>
-<h2 id="using-jlink"><img alt="Start of content that applies to Java 11 (LTS) and later" src="../cr/java11plus.png" /> Using jlink</h2>
+<h2 id="using-jlink"><img alt="Start of content that applies to Java 11 (LTS) and later" src="../cr/java11plus.png" /> Using Jlink</h2>
 <p>On Java 11 and later, you can use the <code>jlink</code> utility to create a custom OpenJ9 runtime image, which allows you to optimize image size.
 If you do not require translations from the English language, the translation files can be removed to further optimize the size. You can achieve this by specifying the <code>--exclude-files=**java_**.properties</code> option when you run <code>jlink</code>. The default English <code>java.properties</code> file is unaffected.</p>
-<h2 id="using-jpackage">Using jpackage</h2>
-<p><strong>(Linux, macOS, and Windows only)</strong></p>
-<p>You can use the <code>jpackage</code> utility to package a Java application into a platform-specific package that includes all of the necessary dependencies. Full details of the tool are available at <a href="https://openjdk.java.net/jeps/392">JEP 392: Packaging Tool</a>. Instructions for using it and the various options available, are documented in the Oracle Tool Specifications: <a href="https://docs.oracle.com/en/java/javase/14/docs/specs/man/jpackage.html">The jpackage Command</a>.</p>
 <h2 id="troubleshooting">Troubleshooting</h2>
 <p>The OpenJ9 diagnostic component contains extensive features to assist with problem determination. Diagnostic data is produced under default conditions, but can also be controlled by starting the VM with the <a href="../xdump/">-Xdump option</a> or using the <code>com.ibm.jvm.Dump</code> API. You can also trace Java applications, methods, and VM operations by using the <a href="../xtrace/">-Xtrace option</a>.</p>
 <p>To get started, read <a href="../diag_overview/">Diagnostic tools and data</a>.</p>
@@ -4344,7 +4261,7 @@ If you do not require translations from the English language, the translation fi
       </main>
       
         <!--
-* Copyright (c) 2017, 2021 IBM Corp. and others
+* Copyright (c) 2017, 2020 IBM Corp. and others
 *
 * This program and the accompanying materials are made
 * available under the terms of the Eclipse Public License 2.0
@@ -4375,17 +4292,17 @@ If you do not require translations from the English language, the translation fi
       <div class="above-line-links">
         <div class="column">
           <h3 >Docs</h3>
-          <span class="footer-link"><a href="/openj9/docs/openj9_newuser/" >New to OpenJ9?</a></span>
-          <span class="footer-link"><a href="/openj9/docs/introduction/">Getting started</a></span>
-          <span class="footer-link"><a href="/openj9/docs/cmdline_specifying/">Command-line options</a></span>
+          <span class="footer-link"><a href="/openj9_newuser/" >New to OpenJ9?</a></span>
+          <span class="footer-link"><a href="/introduction/">Getting started</a></span>
+          <span class="footer-link"><a href="/cmdline_specifying/">Command-line options</a></span>
         </div>
-
+  
         <div class="column">
           <h3>Resources</h3>
           <span class="footer-link"><a href="https://www.eclipse.org/openj9/about/" rel="noopener noreferrer" target="_blank">About</a></span>
           <span class="footer-link"><a href="https://www.eclipse.org/openj9/performance/" rel="noopener noreferrer" target="_blank">Performance</a></span>
         </div>
-
+  
         <div class="column">
           <h3 >Community</h3>
           <span class="footer-link"><a href="https://www.eclipse.org/openj9/news/" rel="noopener noreferrer" target="_blank">News</a></span>
@@ -4415,7 +4332,7 @@ If you do not require translations from the English language, the translation fi
         <span class="social-media-link"> <a href="https://openj9.slack.com/" rel="noopener noreferrer" target="_blank"><img src="../cr/slack-icon.svg" alt="Slack logo"></img></a></span>
         <span class="social-media-link"> <a href="https://stackoverflow.com/search?q=%23OpenJ9" rel="noopener noreferrer" target="_blank"><img src="../cr/stackoverflow-logo.svg" alt="Stack Overflow logo"></img></a></span>
       </div>
-    </div>
+    </div>  
   </div>
 </footer>
       

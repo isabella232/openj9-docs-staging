@@ -1,5 +1,5 @@
 <!--
-* Copyright (c) 2017, 2021 IBM Corp. and others
+* Copyright (c) 2017, 2020 IBM Corp. and others
 *
 * This program and the accompanying materials are made
 * available under the terms of the Eclipse Public License 2.0
@@ -89,8 +89,6 @@
     
     <link rel="stylesheet" href="../assets/fonts/material-icons.css">
     
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    
       <link rel="stylesheet" href="../stylesheets/oj9.css">
     
     
@@ -125,7 +123,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     
     
       <!--
-* Copyright (c) 2017, 2021 IBM Corp. and others
+* Copyright (c) 2017, 2020 IBM Corp. and others
 *
 * This program and the accompanying materials are made
 * available under the terms of the Eclipse Public License 2.0
@@ -285,8 +283,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
   <li class="md-nav__item">
-    <a href="../builds/" title="OpenJ9 builds" class="md-nav__link">
-      OpenJ9 builds
+    <a href="../adoptopenjdk/" title="AdoptOpenJDK builds" class="md-nav__link">
+      AdoptOpenJDK builds
     </a>
   </li>
 
@@ -352,19 +350,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
   <li class="md-nav__item">
-    <a href="../version0.25/" title="Version 0.25.0" class="md-nav__link">
-      Version 0.25.0
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../version0.24/" title="Version 0.24.0" class="md-nav__link">
+    <a href="../version0.24.md" title="Version 0.24.0" class="md-nav__link">
       Version 0.24.0
     </a>
   </li>
@@ -399,6 +385,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           
 
 
+  <li class="md-nav__item">
+    <a href="../version0.21/" title="Version 0.21.0" class="md-nav__link">
+      Version 0.21.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
   <li class="md-nav__item md-nav__item--nested">
     
       <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-6" type="checkbox" id="nav-5-6">
@@ -412,18 +410,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../version0.21/" title="Version 0.21.0" class="md-nav__link">
-      Version 0.21.0
-    </a>
-  </li>
-
         
           
           
@@ -616,20 +602,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
   <li class="md-nav__item">
-    <a href="../allocation/" title="Heap allocation" class="md-nav__link">
-      Heap allocation
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../gc_overview/" title="Garbage Collection(GC)" class="md-nav__link">
-      Garbage Collection(GC)
+    <a href="../gc_overview.md" title="Garbage Collection (GC)" class="md-nav__link">
+      Garbage Collection (GC)
     </a>
   </li>
 
@@ -653,13 +627,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-4" type="checkbox" id="nav-6-4">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-3" type="checkbox" id="nav-6-3">
     
-    <label class="md-nav__link" for="nav-6-4">
+    <label class="md-nav__link" for="nav-6-3">
       Troubleshooting GC
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-6-4">
+      <label class="md-nav__title" for="nav-6-3">
         Troubleshooting GC
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -2149,16 +2123,71 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </li>
       
         <li class="md-nav__item">
-  <a href="#explanation" class="md-nav__link">
-    Explanation
+  <a href="#parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#help" class="md-nav__link">
+    help
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#see-also" class="md-nav__link">
-    See also
+        
+          <li class="md-nav__item">
+  <a href="#error" class="md-nav__link">
+    error
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vital" class="md-nav__link">
+    vital
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#info" class="md-nav__link">
+    info
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#warn" class="md-nav__link">
+    warn
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#config" class="md-nav__link">
+    config
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#all" class="md-nav__link">
+    all
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#none" class="md-nav__link">
+    none
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -2815,7 +2844,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
   <li class="md-nav__item">
-    <a href="../xsyslog/" title="-Xsyslog" class="md-nav__link">
+    <a href="../xsyslog.md" title="-Xsyslog" class="md-nav__link">
       -Xsyslog
     </a>
   </li>
@@ -3033,18 +3062,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <li class="md-nav__item">
     <a href="../xxcompactstrings/" title="-XX:[+|-]CompactStrings" class="md-nav__link">
       -XX:[+|-]CompactStrings
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../xxdiagnosesynconvaluebasedclasses/" title="-XX:DiagnoseSyncOnValueBasedClasses" class="md-nav__link">
-      -XX:DiagnoseSyncOnValueBasedClasses
     </a>
   </li>
 
@@ -3307,7 +3324,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
   <li class="md-nav__item">
-    <a href="../xxlegacyxlogoption/" title="-XX:[+|-]LegacyXLogOption" class="md-nav__link">
+    <a href="../xxlegacyxlogoption.md" title="-XX:[+|-]LegacyXLogOption" class="md-nav__link">
       -XX:[+|-]LegacyXLogOption
     </a>
   </li>
@@ -3942,18 +3959,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   </li>
 
         
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../api-jdk16/" title="Java 16 API" class="md-nav__link">
-      Java 16 API
-    </a>
-  </li>
-
-        
       </ul>
     </nav>
   </li>
@@ -3999,16 +4004,71 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </li>
       
         <li class="md-nav__item">
-  <a href="#explanation" class="md-nav__link">
-    Explanation
+  <a href="#parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#help" class="md-nav__link">
+    help
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#see-also" class="md-nav__link">
-    See also
+        
+          <li class="md-nav__item">
+  <a href="#error" class="md-nav__link">
+    error
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vital" class="md-nav__link">
+    vital
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#info" class="md-nav__link">
+    info
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#warn" class="md-nav__link">
+    warn
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#config" class="md-nav__link">
+    config
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#all" class="md-nav__link">
+    all
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#none" class="md-nav__link">
+    none
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -4034,7 +4094,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 -->
                 
                 <!--
-* Copyright (c) 2017, 2021 IBM Corp. and others
+* Copyright (c) 2017, 2020 IBM Corp. and others
 *
 * This program and the accompanying materials are made
 * available under the terms of the Eclipse Public License 2.0
@@ -4058,65 +4118,62 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 -->
 
 <h1 id="-xlog">-Xlog</h1>
-<p>This option is supported for better compatibility with the reference implementation. However, only forms of <code>-Xlog</code> that enable garbage collection (GC) logging are recognized. Note that the behavior of this option changed in Eclipse OpenJ9 0.24.0.</p>
+<p>Enables message logging. </p>
+<p><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Note:</strong> Changes made to message logging using the <code>-Xlog</code> option do not affect messages written to the standard error stream (<code>stderr</code>).</p>
 <h2 id="syntax">Syntax</h2>
-<pre><code>    -Xlog[:&lt;parameters&gt;]
+<pre><code>    -Xlog:&lt;parameter&gt;{,&lt;parameter&gt;}
 </code></pre>
-<p><i class="fa fa-pencil-square-o" aria-hidden="true"></i><strong>Note:</strong> In Eclipse OpenJ9 version 0.24.0, the <a href="../xsyslog/"><code>-Xsyslog</code></a> option replaced the existing OpenJ9 <code>-Xlog</code> option for message logging to avoid conflicts with the reference implementation. For backward compatibility, you can control the behavior of the <code>-Xlog</code> option with the <a href="../xxlegacyxlogoption/"><code>-XX:[+|-]LegacyXlogOption</code></a> option.</p>
-<h2 id="explanation">Explanation</h2>
-<p>Use of the <code>-Xlog</code> option is supported for GC logging only. The following table describes the behavior of the option depending on what you specify on the command line.</p>
-<table>
-<thead>
-<tr>
-<th><code>-Xlog</code> option type</th>
-<th>Behavior</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>An option that returns GC data. For example <code>-Xlog:gc</code></td>
-<td>An equivalent OpenJ9 GC logging option is enabled. See the next table for more details.</td>
-</tr>
-<tr>
-<td>An option that, in the reference implementation, returns GC data and also other data. For example: <code>-Xlog</code>, <code>-Xlog:all</code>, <code>-Xlog:gc+&lt;other_tag&gt;</code>, or  <code>-Xlog:gc:stdout</code></td>
-<td>An equivalent OpenJ9 GC logging option is enabled as before but because non-GC data is not supported, the following error message is also produced: <br/> <code>JVMJ9VM007W Command-line option unrecognised: &lt;option&gt;</code></td>
-</tr>
-<tr>
-<td>An option that, in the reference implementation, returns only non-GC data</td>
-<td>Non-GC data is not supported, so the following error message is produced: <br/> <code>JVMJ9VM007W Command-line option unrecognised: &lt;option&gt;</code></td>
-</tr>
-</tbody>
-</table>
-<p>The following table shows some examples of the mapping between <code>-Xlog</code> parameters and the equivalent OpenJ9 GC parameters:</p>
-<table>
-<thead>
-<tr>
-<th><code>-Xlog</code> parameter</th>
-<th>OpenJ9 GC equivalent</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>-Xlog:gc</code> <br/> <code>-Xlog:gc:stderr</code></td>
-<td><code>-verbose:gc</code></td>
-</tr>
-<tr>
-<td><code>-Xlog:gc:&lt;filename&gt;</code> <br/> <code>-Xlog:gc:file=&lt;filename&gt;</code></td>
-<td><code>-Xverbosegclog:&lt;updated_filename&gt;</code></td>
-</tr>
-</tbody>
-</table>
-<p>In the table, the value of <code>&lt;filename&gt;</code> can contain the following tokens, which are processed and passed to the <code>-Xverbosegclog</code> option as <code>&lt;updated_filename&gt;</code>:</p>
-<ul>
-<li><code>%p</code> is replaced with the process ID (equivalent to <a href="../xdump/#dump-agent-tokens">dump agent token <code>%pid</code></a>)</li>
-<li><code>%t</code> is replaced with the dump agent tokens <code>%Y-%m-%d_%H-%M-%S</code>.</li>
-</ul>
-<h2 id="see-also">See also</h2>
-<ul>
-<li><a href="../xsyslog/"><code>-Xsyslog</code></a></li>
-<li><a href="../xverbosegclog/"><code>-Xverbosegclog</code></a></li>
-<li><a href="../xxlegacyxlogoption/"><code>-XX:[+|-]LegacyXlogOption</code></a></li>
-</ul>
+<h2 id="parameters">Parameters</h2>
+<p><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> <strong>Restriction:</strong> The parameters <code>all</code>, <code>none</code> and <code>help</code> must be used on their own and cannot be combined. However, the other parameters can be grouped. For example, to include error, vital and warning messages use <code>-Xlog:error,vital,warn</code>. </p>
+<p>For message details see <a href="../messages_intro/#jvm-messages">OpenJ9 VM messages</a>.</p>
+<h3 id="help"><code>help</code></h3>
+<pre><code>    -Xlog:help
+</code></pre>
+<dl>
+<dd>Gives details the available parameters. (This parameter cannot be combined with others.)</dd>
+</dl>
+<h3 id="error"><code>error</code></h3>
+<pre><code>    -Xlog:error
+</code></pre>
+<dl>
+<dd>Turns on logging for all OpenJ9 VM error messages (default).</dd>
+</dl>
+<h3 id="vital"><code>vital</code></h3>
+<pre><code>    -Xlog:vital
+</code></pre>
+<dl>
+<dd>Turns on logging for selected information messages <code>JVMDUMP006I</code>, <code>JVMDUMP032I</code>, and <code>JVMDUMP033I</code>, which provide valuable additional information about dumps produced by the OpenJ9 VM (default).</dd>
+</dl>
+<h3 id="info"><code>info</code></h3>
+<pre><code>    -Xlog:info
+</code></pre>
+<dl>
+<dd>Turns on logging for all OpenJ9 VM information messages.</dd>
+</dl>
+<h3 id="warn"><code>warn</code></h3>
+<pre><code>    -Xlog:warn
+</code></pre>
+<dl>
+<dd>Turns on logging for all OpenJ9 VM warning messages.</dd>
+</dl>
+<h3 id="config"><code>config</code></h3>
+<pre><code>    -Xlog:config
+</code></pre>
+<dl>
+<dd>Turns on logging for all OpenJ9 VM configuration messages.</dd>
+</dl>
+<h3 id="all"><code>all</code></h3>
+<pre><code>    -Xlog:all
+</code></pre>
+<dl>
+<dd>Turns on logging for all OpenJ9 VM messages. (This parameter cannot be combined with others.)</dd>
+</dl>
+<h3 id="none"><code>none</code></h3>
+<pre><code>    -Xlog:none
+</code></pre>
+<dl>
+<dd>Turns off logging for all OpenJ9 VM messages. (This parameter cannot be combined with others.)</dd>
+</dl>
 <!-- ==== END OF TOPIC ==== xlog.md ==== -->
                 
                   
@@ -4136,7 +4193,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       </main>
       
         <!--
-* Copyright (c) 2017, 2021 IBM Corp. and others
+* Copyright (c) 2017, 2020 IBM Corp. and others
 *
 * This program and the accompanying materials are made
 * available under the terms of the Eclipse Public License 2.0
@@ -4167,17 +4224,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <div class="above-line-links">
         <div class="column">
           <h3 >Docs</h3>
-          <span class="footer-link"><a href="/openj9/docs/openj9_newuser/" >New to OpenJ9?</a></span>
-          <span class="footer-link"><a href="/openj9/docs/introduction/">Getting started</a></span>
-          <span class="footer-link"><a href="/openj9/docs/cmdline_specifying/">Command-line options</a></span>
+          <span class="footer-link"><a href="/openj9_newuser/" >New to OpenJ9?</a></span>
+          <span class="footer-link"><a href="/introduction/">Getting started</a></span>
+          <span class="footer-link"><a href="/cmdline_specifying/">Command-line options</a></span>
         </div>
-
+  
         <div class="column">
           <h3>Resources</h3>
           <span class="footer-link"><a href="https://www.eclipse.org/openj9/about/" rel="noopener noreferrer" target="_blank">About</a></span>
           <span class="footer-link"><a href="https://www.eclipse.org/openj9/performance/" rel="noopener noreferrer" target="_blank">Performance</a></span>
         </div>
-
+  
         <div class="column">
           <h3 >Community</h3>
           <span class="footer-link"><a href="https://www.eclipse.org/openj9/news/" rel="noopener noreferrer" target="_blank">News</a></span>
@@ -4207,7 +4264,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <span class="social-media-link"> <a href="https://openj9.slack.com/" rel="noopener noreferrer" target="_blank"><img src="../cr/slack-icon.svg" alt="Slack logo"></img></a></span>
         <span class="social-media-link"> <a href="https://stackoverflow.com/search?q=%23OpenJ9" rel="noopener noreferrer" target="_blank"><img src="../cr/stackoverflow-logo.svg" alt="Stack Overflow logo"></img></a></span>
       </div>
-    </div>
+    </div>  
   </div>
 </footer>
       
