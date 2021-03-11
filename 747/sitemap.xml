@@ -6,8 +6,8 @@
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc></loc>
-     
+     <loc>https://www.eclipse.org/openj9/docs/builds/</loc>
+     <lastmod>2021-03-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
@@ -22,6 +22,11 @@
     </url>
     <url>
      <loc>https://www.eclipse.org/openj9/docs/openj9_releases/</loc>
+     <lastmod>2021-03-11</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://www.eclipse.org/openj9/docs/version0.25/</loc>
      <lastmod>2021-03-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
@@ -1001,6 +1006,11 @@
      <changefreq>daily</changefreq>
     </url>
     <url>
+     <loc>https://www.eclipse.org/openj9/docs/xxdiagnosesynconvaluebasedclasses/</loc>
+     <lastmod>2021-03-11</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
      <loc>https://www.eclipse.org/openj9/docs/xxdisableexplicitgc/</loc>
      <lastmod>2021-03-11</lastmod>
      <changefreq>daily</changefreq>
@@ -1337,6 +1347,11 @@
     </url>
     <url>
      <loc>https://www.eclipse.org/openj9/docs/api-jdk11/</loc>
+     <lastmod>2021-03-11</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://www.eclipse.org/openj9/docs/api-jdk16/</loc>
      <lastmod>2021-03-11</lastmod>
      <changefreq>daily</changefreq>
     </url>
