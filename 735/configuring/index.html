@@ -746,8 +746,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
   <li class="md-nav__item">
-    <a href="../gc_overview/" title="Garbage collection" class="md-nav__link">
-      Garbage collection
+    <a href="../gc_overview/" title="Garbage Collection (GC)" class="md-nav__link">
+      Garbage Collection (GC)
     </a>
   </li>
 
@@ -758,9 +758,57 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
   <li class="md-nav__item">
-    <a href="../gc/" title="Garbage collection policies" class="md-nav__link">
-      Garbage collection policies
+    <a href="../gc/" title="GC policies" class="md-nav__link">
+      GC policies
     </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-4" type="checkbox" id="nav-7-4">
+    
+    <label class="md-nav__link" for="nav-7-4">
+      Troubleshooting GC
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-7-4">
+        Troubleshooting GC
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../vgclog/" title="Verbose GC logs" class="md-nav__link">
+      Verbose GC logs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../vgclog_examples/" title="Log examples" class="md-nav__link">
+      Log examples
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
   </li>
 
         
@@ -4155,6 +4203,14 @@ virtual memory          (kbytes, -v) unlimited
 <p>The main use case for changing resource limits is when enabling a system dump to ensure that all the required data can be collected for analysis. For more information, see <a href="../dump_systemdump/#enabling-a-full-system-dump-aix-and-linux">Enabling a full system dump</a>.</p>
 <h2 id="setting-resource-limits-zos">Setting resource limits (z/OS)</h2>
 <p>Resource limits imposed by z/OS might affect Java operations. To learn how these resource limits are set, see <a href="https://www.ibm.com/support/knowledgecenter/SSLTBW_2.4.0/com.ibm.zos.v2r4.bpxb200/cusis.htm">Customizing the BPXPRMxx member of SYS1.PARMLIB</a>.</p>
+<p>The OpenJ9 class data sharing feature is implemented by using shared memory segments on z/OS. Special consideration should be given to the following parameters that relate to the shared memory and IPC semaphore settings:</p>
+<ul>
+<li><strong>MAXSHAREPAGES</strong></li>
+<li><strong>IPCSHMSPAGES</strong></li>
+<li><strong>IPCSHMMPAGES</strong></li>
+<li><strong>IPCSHMNSEGS</strong></li>
+</ul>
+<p>Incorrect or suboptimal settings might prevent shared classes from working or impact performance. By default, the VM attempts to create a 16 MB cache. If you set a cache size for your application by specifying the <a href="../xscmx/"><code>-Xscmx</code></a> option on the command line, the VM rounds the value up to the nearest megabyte. Ensure that the value set for <strong>IPCSHMMPAGES</strong> takes this adjustment into consideration.</p>
 <p>To see the current settings, enter the following z/OS operator command:</p>
 <pre><code>D OMVS,O
 </code></pre>
@@ -4199,6 +4255,22 @@ virtual memory          (kbytes, -v) unlimited
 <tr>
 <td><strong>MAXMMAPAREA</strong></td>
 <td>40960</td>
+</tr>
+<tr>
+<td><strong>MAXSHAREPAGES</strong></td>
+<td>?</td>
+</tr>
+<tr>
+<td><strong>IPCSHMSPAGES</strong></td>
+<td>262144</td>
+</tr>
+<tr>
+<td><strong>IPCSHMMPAGES</strong></td>
+<td>256</td>
+</tr>
+<tr>
+<td><strong>IPCSHMNSEGS</strong></td>
+<td>10</td>
 </tr>
 <tr>
 <td><strong>IPCSEMNIDS</strong></td>
