@@ -836,9 +836,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </li>
         
           <li class="md-nav__item">
-  <a href="#wip-balanced-global-cycle-wip" class="md-nav__link">
-    WIP!!! balanced global cycle WIP!!!
+  <a href="#balanced-global-cycle" class="md-nav__link">
+    balanced global cycle
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#summary-of-the-balanced-global-gc-cycle-examples" class="md-nav__link">
+    Summary of the 'balanced' global GC cycle examples
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -4227,9 +4240,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </li>
         
           <li class="md-nav__item">
-  <a href="#wip-balanced-global-cycle-wip" class="md-nav__link">
-    WIP!!! balanced global cycle WIP!!!
+  <a href="#balanced-global-cycle" class="md-nav__link">
+    balanced global cycle
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#summary-of-the-balanced-global-gc-cycle-examples" class="md-nav__link">
+    Summary of the 'balanced' global GC cycle examples
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -4372,7 +4398,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 &lt;/gc-start&gt;
 
-&lt;allocation-stats/&gt;         (snapshot of application threads status taken before cycle started)
+&lt;allocation-stats/&gt;         (Snapshot of how memory was divided up between
+                            ... application threads before current cycle started)
 
 &lt;gc-op&gt; “scavenge&quot;&lt;/gc-op&gt;  (scavenge operation completed)
 
@@ -4437,7 +4464,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li>The <em>survivor</em> space of the nursery area is reported as 'full' to reflect that no available memory is available to allocate to the mutator threads. The entire <em>survivor</em> space is reserved for GC operations during the GC increment. </li>
 <li>The <em>tenure</em> area has 395.7 MB (414,960,320B) of free memory available.</li>
 </ul>
-<p>The next element <code>&lt;allocation-stats&gt;</code> shows a snapshot, which was taken before the cycle started, of the allocation status of the mutator threads. In this example, the thread that used the most memory was <code>LargeThreadPool-thread-79</code>.</p>
+<p>The next element <code>&lt;allocation-stats&gt;</code> shows a snapshot, which was taken before the cycle started, of how memory was divided up between application threads. In this example, the thread that used the most memory was <code>LargeThreadPool-thread-79</code>.</p>
 <pre><code class="xml">&lt;allocation-stats totalBytes=&quot;235362176&quot; &gt;
   &lt;allocated-bytes non-tlh=&quot;32880&quot; tlh=&quot;235329296&quot; /&gt;
   &lt;largest-consumer threadName=&quot;LargeThreadPool-thread-79&quot; threadId=&quot;00000000013F0C00&quot; bytes=&quot;6288544&quot; /&gt;
@@ -4614,7 +4641,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 &lt;gc-start/&gt;                 (global cycle final increment starts)
 
-&lt;allocation-stats/&gt;         (snapshot of application threads status taken before cycle started)
+&lt;allocation-stats/&gt;         (Snapshot of how memory was divided up between
+                            ... application threads before current cycle started)
 
 &lt;mem-info&gt;                  (memory status before operations)
 
@@ -4772,7 +4800,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 &lt;/allocation-stats&gt;
 </code></pre>
 
-<p>The element <code>&lt;allocation-stats&gt;</code> shows a snapshot, which was taken before the cycle started, of the allocation status of the mutator threads. In this example, the thread that used the most memory was <code>LargeThreadPool-thread-68</code>.</p>
+<p>The next element <code>&lt;allocation-stats&gt;</code> shows a snapshot of how memory was divided up between application threads before the current cycle started.In this example, the thread that used the most memory was <code>LargeThreadPool-thread-68</code>.</p>
 <p>For this example, at the start of this GC increment, the tenure area is low on free memory, as expected. 25% of the total heap is available as free memory, which is split between the following areas of the heap:</p>
 <ul>
 <li>The nursery area, which has 223.7 MB (234,609,440B) of free memory available. The free memory is only available in the <em>allocate</em> space of the nursery area. The <em>survivor</em> space of the nursery area is reported as 'full' to reflect that no available memory is available to allocate to the mutator threads. The entire <em>survivor</em> space is reserved for GC operations during the GC increment. </li>
@@ -4941,7 +4969,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </table>
 
 <p>To locate a particular type of cycle, you can search for the <code>type</code> attribute of the <code>&lt;cycle-start&gt;</code> and <code>&lt;cycle-end&gt;</code> elements.</p>
-<p>When memory in the Java&trade; object heap reaches a memory threshold called an allocation taxation threshold,  a GC cycle or GC increment is triggered. Partial GC cycles, global mark cycles, and global cycles set the allocation taxation threshold at the end of their cycle. For <code>balanced</code> cycles, the <em>taxation</em> on the mutator threads refers to pausing the mutator threads while GC work is run.</p>
+<p>When memory in the Java&trade; object heap reaches a memory threshold called an allocation taxation threshold, a GC cycle or GC increment is triggered. Partial GC cycles, global mark cycles, and global cycles set the allocation taxation threshold at the end of their cycle or increment to schedule the next cycle or increment. For <code>balanced</code> cycles, the <em>taxation</em> on the mutator threads refers to pausing the mutator threads while GC work is run.</p>
 <p>If a partial GC cycle is not run between global mark phase increments of a global <em>mark</em> cycle, the allocation taxation threshold is set to trigger the next cycle when the <em>eden</em> space is full. Specifically, at the end of the partial gc cycle, the allocation threshold is set to be equal to the size of the <em>eden</em> space.</p>
 <p>If a partial GC cycle is run within a global <em>mark</em> cycle, the allocation taxation threshold is set to be smaller than the size of the <em>eden</em> space to allow for global mark phase increments to run in between partial GC cycles. Specifically, during the global mark cycle, the allocation taxation threshold is set to be half the size of the eden space.</p>
 <p>Note: For more information about GC increments, see <a href="vglog.md#gc-increments-and-interleaving">GC increments and interleaving</a>.</p>
@@ -5021,8 +5049,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 &lt;/gc-start&gt; 
 
-&lt;allocation-stats&gt;                      (snapshot of application threads status...
-                                          ... taken before the cycle starts)
+&lt;allocation-stats/&gt;                  (Snapshot of how memory was divided up between
+                                     ... application threads before current cycle started)
+
 &lt;gc-op&gt; type=&quot;copy forward&quot; &lt;/gc-op&gt;    (copy forward operation completed)
 
 &lt;gc-op&gt; type=&quot;class unload&quot; &lt;/gc-op&gt;    (class unload operation completed)
@@ -5052,7 +5081,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 &lt;/exclusive-start&gt;
 </code></pre>
 
-<p>A <code>balanced</code> partial GC cycle is triggered when the region count for the <em>eden</em> space reaches the allocation taxation threshold. The logs record this trigger reason by using the<code>&lt;allocation-taxation&gt;</code> element.</p>
+<p>A <code>balanced</code> partial GC cycle is triggered when application threads reach an allocation taxation threshold. During a global mark cycle, the allocation taxation threshold is set by the previous GMP increment to trigger a partial GC cycle when the eden area is full. Else, the previous partial or global GC cycle sets the allocation taxation threshold to trigger a partial GC cycle when the eden is full.</p>
+<p>The logs record this trigger reason by using the<code>&lt;allocation-taxation&gt;</code> element.</p>
 <pre><code class="xml">&lt;allocation-taxation id=&quot;185&quot; taxation-threshold=&quot;2147483648&quot; timestamp=&quot;2021-02-26T11:11:42.311&quot; intervalms=&quot;3745.785&quot; /&gt;
 </code></pre>
 
@@ -5071,11 +5101,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 &lt;/gc-start&gt;
 </code></pre>
 
-<p>As expected, at the start of this increment, the eden region is full. 856MB (897,581,056 B) of the total 4096MB (4294,967,296 B) heap, equivalent to 20% of the heap, is available as free memory.</p>
+<p>As expected, at the start of this increment, the eden regions are full. 856MB (897,581,056 B) of the total 4096MB (4294,967,296 B) heap, equivalent to 20% of the heap, is available as free memory.</p>
 <p>The status of the <em>remembered set</em>, a metastructure specific to openJ9 JVM generational garbage collectors, is reported by the <code>&lt;remembered-set&gt;</code> element. The remembered set metastructure keeps track of any object references that cross different regions. Each region corresponds to a single remembered set. </p>
 <p>The partial gc cycle uses and prunes the remembered set. The <code>regionsoverflowed</code> value records the number of regions that exceeded the non-object-heap memory allocation that is reserved for the remembered set. The partial GC cycle cannot reclaim memory from these overflow regions. The partial GC cycle also cannot reclaim memory from any regions whose remembered set is being rebuilt by an increment of a global mark cycle that is in progress.</p>
 <p>At the start of the partial gc cycle, the remembered set is using 93% of its available memory capacity, with 153.26 MB (160705664 B) available. The set consists of 2,749,664 cards and has 1 overflow region.</p>
-<p>The following element, <code>&lt;allocation-stats&gt;</code>, records information about the status of the application (or <em>mutator</em>) threads before the start of the current cycle. For this example, the thread <code>Group1.Backend.CompositeBackend{Tier1}.7</code> was the largest consumer of memory.</p>
+<p>The following element, <code>&lt;allocation-stats&gt;</code>, records information about how memory was divided up between application (or <em>mutator</em>) threads before the start of the current cycle. For this example, the thread <code>Group1.Backend.CompositeBackend{Tier1}.7</code> was the largest consumer of memory.</p>
 <pre><code class="xml">&lt;allocation-stats totalBytes=&quot;2146431360&quot; &gt;
   &lt;allocated-bytes non-tlh=&quot;96417448&quot; tlh=&quot;2050013912&quot; arrayletleaf=&quot;0&quot;/&gt;
   &lt;largest-consumer threadName=&quot;Group1.Backend.CompositeBackend{Tier1}.7&quot; threadId=&quot;00000000007E9300&quot; bytes=&quot;275750048&quot; /&gt;
@@ -5138,7 +5168,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>The heap memory allocation at the end of the increment is as follows:</p>
 <ul>
 <li>
-<p>The heap now has 2864 MB(3,003,121,664 B) of memory available compared to the 856 MB available at the start of the increment. The increment reclaimed 2,008 MB of memory in the heap, which is slightly less than the size of the eden space, as expected.</p>
+<p>The heap now has 2864 MB(3,003,121,664 B) of memory available compared to the 856 MB available at the start of the increment. The increment reclaimed 2,008 MB of memory in the heap, which is slightly less than the size of the eden space, as is typically the case.</p>
 </li>
 <li>
 <p>The eden space is recorded to have 100% memory available as free memory. (The eden space, which consists of regions containing the newest objects allocated, has been fully recreated by reclaiming almost all of the eden regions - some objects from eden regions always survive - and assigning some other empty regions of the heap to the eden space).</p>
@@ -5498,90 +5528,90 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li>Partial cycles run in between global mark phase increments.</li>
 <li>The final global mark phase increment includes a class unload. The final increment also triggers a sweep phase to run in the next partial cycle.</li>
 </ul>
-<h3 id="wip-balanced-global-cycle-wip">WIP!!! <code>balanced</code> global cycle WIP!!!</h3>
-<p>The following <a href="../gc/#balanced-policy"><code>balanced</code> partial GC cycle</a> example is taken from a <code>balanced</code> verbose GC log. The output is broken down into sections to explain the GC processing that is taking place.</p>
-<p>A <code>balanced</code> global cycle is triggered if the ??? is close to throwing an out of memory exception. This occurs under tight memory conditions, where the <code>balanced</code> policy GC cannot reclaim enough memory using the <code>balanced</code> partial and global <em>mark</em> cycles to prevent the heap becoming completely full.</p>
+<h3 id="balanced-global-cycle"><code>balanced</code> global cycle</h3>
+<p>The following <a href="../gc/#balanced-policy"><code>balanced</code> global GC cycle</a> example is taken from a <code>balanced</code> verbose GC log. The output is broken down into sections to explain the GC processing that is taking place.</p>
+<p>A <code>balanced</code> global cycle is triggered if the JVM is close to throwing an out of memory exception, which only occurs under tight memory conditions. Under these conditions, the <code>balanced</code> GC cannot reclaim enough memory by using only <code>balanced</code> partial and global <em>mark</em> cycles.</p>
+<p><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Note:</strong> The element <code>&lt;sys-start reason="explicit"&gt;</code> is used in the logs to record a cycle that has been triggered by an API rather than the garbage collector.</p>
 <p>To search for a <code>balanced</code> global cycle or increment, you can search for the <code>type</code> attribute value <code>global garbage collect</code> of the cycle or increment element.</p>
-<p>If the <code>balanced</code> global cycle is triggered during a <code>balanced</code> global mark cycle, a new <code>global</code> cycle is not recorded. Instead, the global mark cycle's global mark phase increment switches to a global garbage collect increment that is run as a STW increment. This switch is recorded in the logs using a <code>&lt;cycle-continue&gt;</code> element, which precedes the <code>gc-start</code> element that records the new global garbage collect increment.</p>
+<p>If the <code>balanced</code> global cycle is triggered during a <a href="vgclog_examples#balanced-global-mark-gc-cycle"><code>balanced</code> global mark cycle</a>, a new <code>global</code> cycle is not recorded. Instead, the global mark cycle's global mark phase increment switches to a global garbage collect increment that is run as a STW increment. This switch is recorded in the logs using a <code>&lt;cycle-continue&gt;</code> element, which precedes the <code>gc-start</code> element that records the new global garbage collect increment.</p>
 <p>If the <code>balanced</code> global cycle is not triggered during a <code>balanced</code> global mark cycle, the global cycle is recorded as a new cycle using the <code>&lt;cycle-start&gt;</code> element.</p>
+<p>The element '<sys-start reason="explicit">' is used in the logs to record a cycle that has been triggered by an API rather than the garbage collector.</p>
 <p>The <a href="../gc/">'balanced` global cycle's</a> operations run as a single GC increment during a STW pause.</p>
 <table style="width:100%" align="center">
 <caption>Table showing the <code>balanced</code> global cycle's GC increment and corresponding XML elements.</caption>
 
   <tr>
-    <th align="center" scope="col">GC operation</th>
-    <th align="center" scope="col">GC increment</th>
+    <th align="center" scope="col">GC increment </th>
+    <th align="center" scope="col">GC operations</th>
     <th align="center" scope="col">STW or concurrent</th>
     <th align="center" scope="col">XML element of GC increment</th>
     <th align="center" scope="col">Details</th>
   </tr>
   <tr>
-    <th align="center" scope="col">?</th>
-    <td align="center">single </code></td>
-    <td align="center">*stop-the-world*   </code></td>
+    <td align="center">single</td>
+    <td align="center">STW mark-sweep operations, optionally followed by a compact operation</td>
+    <td align="center">STW</td>
     <td align="center"><code>&lt;cycle-start&gt;</code>, <code>&lt;gc-end&gt;</code></code></td>
-    <td>Contains detailed information about copied objects and the weak roots processing operation</code></td>
+    <td>Contains detailed information about where free memory is located and remembered set statistics</td>
   </tr>
+</table>
 
-The `balanced` partial GC cycle follows a general structure in the verbose GC log as shown. The lines are indented to help illustrate the flow and some child elements are omitted for clarity:
+<p>If the global cycle is triggered during a global <em>mark</em> cycle, the global cycle follows a general structure in the verbose GC log as shown. Some child elements are omitted for clarity:</p>
+<pre><code class="xml">...                                        (global mark cycle increment runs)
 
-CREATE THIS ILLUSTRATION FOR GLOBAL CYCLE - THIS IS CURRENTLY COPIED FROM PARTIAL GC
+&lt;af-start/&gt;                                (allocation failure trigger recorded)
 
+&lt;concurrent-end/&gt;                          (global mark cycle concurrent subincrement finishes )
 
-<pre><code class="xml">&lt;exclusive-start/&gt;                       (STW pause starts)
+&lt;allocation-taxation/&gt;                     (memory threshold trigger recorded)
 
-&lt;allocation-taxation/&gt;                   (memory threshold trigger recorded)
+&lt;cycle-continue/&gt;                          (change of cycle type from global mark to global)
 
-&lt;cycle-start/&gt;                            (partial cycle starts)
+&lt;/gc-start type=&quot;global garbage collect&quot;/&gt; (global cycle STW increment starts)
 
-&lt;gc-start/&gt;                             (partial  cycle increment starts)
+&lt;mem-info&gt;                                 (memory status before operations)
 
-&lt;mem-info&gt;                            (memory status before operations)
-
- &lt;mem&gt;&lt;/mem&gt;                         (status of different types of memory)
-
-&lt;/mem-info&gt;         
-
-&lt;/gc-start&gt; 
-
-&lt;allocation-stats&gt;                      (snapshot of application threads status...
-                                          ... taken before the cycle starts)
-&lt;gc-op&gt; type=&quot;copy forward&quot; &lt;/gc-op&gt;    (copy forward operation completed)
-
-&lt;gc-op&gt; type=&quot;class unload&quot; &lt;/gc-op&gt;    (class unload operation completed)
-
-&lt;gc-op&gt; type=&quot;sweep&quot; &lt;/gc-op&gt;           (sweep operation completed)
-
-&lt;gc-op&gt; type=&quot;compact&quot; &lt;/gc-op&gt;         (compact operation completed)
-
-&lt;gc-end&gt;                                (partial cycle increment ends)
-
-&lt;mem-info&gt;                            (memory status after operations)
-
-&lt;mem&gt;&lt;/mem&gt;                         (status of different types of memory)
+ &lt;mem&gt;&lt;/mem&gt;                               (status of different types of memory)
 
 &lt;/mem-info&gt;         
 
-&lt;/gc-end&gt;
+&lt;/gc-start type=&quot;global garbage collect&quot;/&gt;
 
-&lt;cycle-end&gt;                               (partial cycle ends)
+&lt;allocation-stats/&gt;                        (Snapshot of how memory was divided up between
+                                           ... application threads before current cycle started)
+&lt;gc-op&gt; type=&quot;mark&quot; &lt;/gc-op&gt;                (mark operation completed)
 
-&lt;exclusive-end&gt;                           (STW pause ends)
+&lt;gc-op&gt; type=&quot;class unload&quot; &lt;/gc-op&gt;        (class unload operation completed)
+
+&lt;gc-op&gt; type=&quot;sweep&quot; &lt;/gc-op&gt;               (sweep operation completed)
+
+&lt;gc-op&gt; type=&quot;compact&quot; &lt;/gc-op&gt;             (compact operation completed)
+
+&lt;gc-end type=&quot;global garbage collect&quot;&gt;      (global cycle STW increment ends)
+
+&lt;mem-info&gt;                                  (memory status after operations)
+
+&lt;mem&gt;&lt;/mem&gt;                                 (status of different types of memory)
+
+&lt;/mem-info&gt;         
+
+&lt;/gc-end type=&quot;global garbage collect&quot;&gt;
+
+&lt;cycle-end type = &quot;global garbage collect&quot;/&gt; (cycle ends)
+
+&lt;allocation-satisfed/&gt;                      (required allocation has been achieved)
+
+&lt;exclusive-end&gt;                             (STW pause ends)
 </code></pre>
 
-
-The following example shows a `balanced` global cycle that is triggered during a [global mark cycle's GMP work packet processing subincrement](vgclog_examples.md#balanced-global-mark-gc-cycle). The start of the GMP work processing subincrement, which runs concurrently with application threads, is recorded using the `<concurrent-start>` element.
-
-
+<p>The following example shows a <code>balanced</code> global cycle that is triggered during a <a href="./#balanced-global-mark-gc-cycle">global mark cycle</a>. </p>
+<p>The start of the GMP work processing subincrement of the global mark cycle, which runs concurrently with application threads, is recorded using the <code>&lt;concurrent-start&gt;</code> element.</p>
 <pre><code class="xml">&lt;concurrent-start id=&quot;2009&quot; type=&quot;GMP work packet processing&quot; contextid=&quot;2003&quot; timestamp=&quot;2021-03-05T12:16:43.109&quot;&gt;
   &lt;concurrent-mark-start scanTarget=&quot;18446744073709551615&quot; /&gt;
 &lt;/concurrent-start&gt;
 </code></pre>
 
-
-After the start of the concurrent subincrement, The logs record an allocation failure using `<af-start>`. The `<concurrent-end>` element attribute `terminationReason` shows that a termination of the concurrent increment was requested by the garbage collector. 
-
-
+<p>After the start of the concurrent subincrement, The logs record an allocation failure using <code>&lt;af-start&gt;</code>. The <code>&lt;concurrent-end&gt;</code> element attribute <code>terminationReason</code> shows that a termination of the concurrent increment was requested by the garbage collector. </p>
 <pre><code class="xml">&lt;af-start id=&quot;2010&quot; threadId=&quot;00000000008AA780&quot; totalBytesRequested=&quot;24&quot; timestamp=&quot;2021-03-05T12:16:43.109&quot; intervalms=&quot;1212.727&quot; /&gt;
 &lt;concurrent-end id=&quot;2011&quot; type=&quot;GMP work packet processing&quot; contextid=&quot;2003&quot; timestamp=&quot;2021-03-05T12:16:43.110&quot; terminationReason=&quot;Termination requested&quot;&gt;
 &lt;gc-op id=&quot;2012&quot; type=&quot;mark increment&quot; timems=&quot;0.893&quot; contextid=&quot;2003&quot; timestamp=&quot;2021-03-05T12:16:43.110&quot;&gt;
@@ -5590,14 +5620,9 @@ After the start of the concurrent subincrement, The logs record an allocation fa
 &lt;/concurrent-end&gt;
 </code></pre>
 
-
-The next element, the `<cycle-continue>` element, records information about the switch of cycle type from a global mark cycle, recorded as type `global mark phase`, to a global cycle, recorded as type `global garbage collect`.
-
-<cycle-continue id="2013" oldtype="global mark phase" newtype="global garbage collect" contextid="2003" timestamp="2021-03-05T12:16:43.110" />
-
-A global cycle increment is recorded by `<gc-start>` and has the same `contextid` as the global mark cycle's elements. The global cycle operations are run as a modification to the global mark cycle rather than a completely new cycle.
-
-
+<p>The next element, the <code>&lt;cycle-continue&gt;</code> element, records information about the switch of cycle type from a global mark cycle, recorded as type <code>global mark phase</code>, to a global cycle, recorded as type <code>global garbage collect</code>.</p>
+<p><cycle-continue id="2013" oldtype="global mark phase" newtype="global garbage collect" contextid="2003" timestamp="2021-03-05T12:16:43.110" /></p>
+<p>A global cycle increment is recorded by <code>&lt;gc-start&gt;</code> and has the same <code>contextid</code> as the global mark cycle's elements. The global cycle operations are run during a STW pause and as a modification to the global mark cycle rather than a completely new cycle. The memory snapshot within the <code>&lt;gc-start&gt;</code> element is taken before the global increment's operations run and can be compared with a similar snapshot that is taken afterward to understand the effect on the heap.</p>
 <pre><code class="xml">&lt;gc-start id=&quot;2014&quot; type=&quot;global garbage collect&quot; contextid=&quot;2003&quot; timestamp=&quot;2021-03-05T12:16:43.110&quot;&gt;
   &lt;mem-info id=&quot;2015&quot; free=&quot;0&quot; total=&quot;838860800&quot; percent=&quot;0&quot;&gt;
     &lt;mem type=&quot;eden&quot; free=&quot;0&quot; total=&quot;524288&quot; percent=&quot;0&quot; /&gt;
@@ -5606,15 +5631,21 @@ A global cycle increment is recorded by `<gc-start>` and has the same `contextid
 &lt;/gc-start&gt;
 </code></pre>
 
-
-
+<p>At the start of the global cycle's increment, the amount of memory available in the heap is zero. In some cases, the amount of memory will be close to full, and in other cases, the memory will be full.</p>
+<p>The next element <code>&lt;allocation-stats&gt;</code> shows a snapshot of how memory was divided up between application threads before the current cycle started. In this example WHAT SAY HERE?</p>
 <pre><code class="xml">&lt;allocation-stats totalBytes=&quot;524200&quot; &gt;
   &lt;allocated-bytes non-tlh=&quot;0&quot; tlh=&quot;524200&quot; arrayletleaf=&quot;0&quot;/&gt;
 &lt;/allocation-stats&gt;
 </code></pre>
 
-
-
+<p>The following operations, each recorded by a <code>&lt;gc-op&gt;</code> element, run as part of the global cycle's increment:</p>
+<ul>
+<li><code>global mark</code></li>
+<li><code>class unload</code></li>
+<li><code>sweep</code></li>
+<li><code>compact</code></li>
+</ul>
+<p>WHAT INFO TO PULL OUT HERE, IF ANYTHING?</p>
 <pre><code class="xml">&lt;gc-op id=&quot;2016&quot; type=&quot;global mark&quot; timems=&quot;357.859&quot; contextid=&quot;2003&quot; timestamp=&quot;2021-03-05T12:16:43.468&quot;&gt;
   &lt;trace-info objectcount=&quot;37461962&quot; scancount=&quot;37447916&quot; scanbytes=&quot;828311396&quot; /&gt;
   &lt;cardclean-info objects=&quot;311&quot; bytes=&quot;22632&quot; /&gt;
@@ -5635,8 +5666,7 @@ A global cycle increment is recorded by `<gc-start>` and has the same `contextid
 &lt;/gc-op&gt;
 </code></pre>
 
-
-
+<p>The global cycle's increment ends. The end of the increment is recorded with <code>&lt;gc-end&gt;</code> and provides another snapshot of memory allocation on the heap, similar to <code>&lt;gc-start&gt;</code>.</p>
 <pre><code class="xml">&lt;gc-end id=&quot;2020&quot; type=&quot;global garbage collect&quot; contextid=&quot;2003&quot; durationms=&quot;1126.788&quot; usertimems=&quot;7971.788&quot; systemtimems=&quot;1.000&quot; stalltimems=&quot;1016.256&quot; timestamp=&quot;2021-03-05T12:16:44.237&quot; activeThreads=&quot;8&quot;&gt;
   &lt;mem-info id=&quot;2021&quot; free=&quot;1572864&quot; total=&quot;838860800&quot; percent=&quot;0&quot;&gt;
     &lt;mem type=&quot;eden&quot; free=&quot;1572864&quot; total=&quot;1572864&quot; percent=&quot;100&quot; /&gt;
@@ -5646,105 +5676,77 @@ A global cycle increment is recorded by `<gc-start>` and has the same `contextid
 &lt;/gc-end&gt;
 </code></pre>
 
-
+<p>Comparing the snapshot at the beginning and end of this STW <code>global mark phase</code> subincrement shows that memory has been reclaimed and regions reassigned to create an empty eden space, equal to 1.5MB(1,572,864 B). In some cases, a global cycle also reclaims a small amount of memory from non-eden regions.</p>
+<p>The cycle ends (<code>&lt;cycle-end&gt;</code>). The following <code>&lt;allocation-satisfied&gt;</code> element indicates that the allocation request that caused the allocation failure can now complete successfully.</p>
 <pre><code class="xml">&lt;cycle-end id=&quot;2022&quot; type=&quot;global garbage collect&quot; contextid=&quot;2003&quot; timestamp=&quot;2021-03-05T12:16:44.237&quot; /&gt;
 &lt;allocation-satisfied id=&quot;2023&quot; threadId=&quot;00000000008A9E00&quot; bytesRequested=&quot;24&quot; /&gt;
 &lt;af-end id=&quot;2024&quot; timestamp=&quot;2021-03-05T12:16:44.237&quot; threadId=&quot;00000000008AA780&quot; success=&quot;true&quot; /&gt;
 </code></pre>
 
-
+<p>The STW pause ends with the <code>&lt;exclusive-end&gt;</code> element.</p>
 <pre><code class="xml">&lt;exclusive-end id=&quot;2025&quot; timestamp=&quot;2021-03-05T12:16:44.237&quot; durationms=&quot;1130.358&quot; /&gt;
 </code></pre>
 
+<!---
+NOW SHOW A GLOBAL CYCLE THAT IS TRIGGERED WHEN NO GLOBAL MARK CYCLE IS RUNNING? (this id="2062" example)
 
-NOW SHOW A GLOBAL CYCLE THAT IS TRIGGERED WHEN NO GLOBAL MARK CYCLE IS RUNNING? IF SO, REPLACE THE BELOW EXCERPTS WITH THE id=2062 EXCERPTS!
-
-The first activity of a global cycle is a STW pause, recorded by an `<exclusive-start` element. The following `<sys-start>` element records the trigger reason as `explicit`.
-
-
-<pre><code class="xml">&lt;exclusive-start id=&quot;41&quot; timestamp=&quot;2020-11-13T06:31:42.006&quot; intervalms=&quot;2429.574&quot;&gt;
-  &lt;response-info timems=&quot;2.338&quot; idlems=&quot;0.802&quot; threads=&quot;2&quot; lastid=&quot;000000000074FF00&quot; lastname=&quot;RunDataWriter.1&quot; /&gt;
-&lt;/exclusive-start&gt;
-&lt;sys-start reason=&quot;explicit&quot; id=&quot;42&quot; timestamp=&quot;2020-11-13T06:31:42.006&quot; intervalms=&quot;9987.458&quot; /&gt;
-</code></pre>
-
-
-The start of the cycle is recorded using the `<cycle-start>` element as type `global garbage collect`.
-
-
-<pre><code class="xml">&lt;cycle-start id=&quot;43&quot; type=&quot;global garbage collect&quot; contextid=&quot;0&quot; timestamp=&quot;2020-11-13T06:31:42.007&quot; intervalms=&quot;9987.772&quot; /&gt;
-</code></pre>
-
-
-The 
-
-
-<pre><code class="xml">&lt;gc-start id=&quot;44&quot; type=&quot;global garbage collect&quot; contextid=&quot;43&quot; timestamp=&quot;2020-11-13T06:31:42.007&quot;&gt;
-  &lt;mem-info id=&quot;45&quot; free=&quot;2281852504&quot; total=&quot;3221225472&quot; percent=&quot;70&quot;&gt;
-    &lt;mem type=&quot;eden&quot; free=&quot;151128&quot; total=&quot;130023424&quot; percent=&quot;0&quot; /&gt;
-    &lt;arraylet-reference objects=&quot;4&quot; leaves=&quot;4&quot; largest=&quot;1&quot; /&gt;
-    &lt;arraylet-primitive objects=&quot;1&quot; leaves=&quot;8&quot; largest=&quot;8&quot; /&gt;
-    &lt;remembered-set count=&quot;453472&quot; freebytes=&quot;126964352&quot; totalbytes=&quot;128778240&quot; percent=&quot;98&quot; regionsoverflowed=&quot;4&quot; regionsstable=&quot;0&quot; regionsrebuilding=&quot;0&quot;/&gt;
+<pre><code class="xml">&lt;af-start id=&quot;2061&quot; threadId=&quot;00000000008C2880&quot; totalBytesRequested=&quot;24&quot; timestamp=&quot;2021-03-05T12:16:44.275&quot; intervalms=&quot;1166.130&quot; /&gt;
+&lt;cycle-start id=&quot;2062&quot; type=&quot;global garbage collect&quot; contextid=&quot;0&quot; timestamp=&quot;2021-03-05T12:16:44.275&quot; intervalms=&quot;46936.562&quot; /&gt;
+&lt;gc-start id=&quot;2063&quot; type=&quot;global garbage collect&quot; contextid=&quot;2062&quot; timestamp=&quot;2021-03-05T12:16:44.275&quot;&gt;
+  &lt;mem-info id=&quot;2064&quot; free=&quot;0&quot; total=&quot;838860800&quot; percent=&quot;0&quot;&gt;
+    &lt;remembered-set count=&quot;4768&quot; freebytes=&quot;33363328&quot; totalbytes=&quot;33382400&quot; percent=&quot;99&quot; regionsoverflowed=&quot;0&quot; regionsstable=&quot;1593&quot; regionsrebuilding=&quot;0&quot;/&gt;
   &lt;/mem-info&gt;
 &lt;/gc-start&gt;
-</code></pre>
-
-
-
-<pre><code class="xml">&lt;allocation-stats totalBytes=&quot;127765576&quot; &gt;
-  &lt;allocated-bytes non-tlh=&quot;11566360&quot; tlh=&quot;116199216&quot; arrayletleaf=&quot;0&quot;/&gt;
-  &lt;largest-consumer threadName=&quot;ForkJoinPool-3-worker-5&quot; threadId=&quot;000000000077E900&quot; bytes=&quot;53174768&quot; /&gt;
+&lt;allocation-stats totalBytes=&quot;0&quot; &gt;
+  &lt;allocated-bytes non-tlh=&quot;0&quot; tlh=&quot;0&quot; arrayletleaf=&quot;0&quot;/&gt;
 &lt;/allocation-stats&gt;
-</code></pre>
-
-
-
-<pre><code class="xml">&lt;gc-op id=&quot;46&quot; type=&quot;global mark&quot; timems=&quot;35.727&quot; contextid=&quot;43&quot; timestamp=&quot;2020-11-13T06:31:42.044&quot;&gt;
-  &lt;trace-info objectcount=&quot;1856388&quot; scancount=&quot;1838558&quot; scanbytes=&quot;66324640&quot; /&gt;
-  &lt;finalization candidates=&quot;87&quot; enqueued=&quot;0&quot; /&gt;
-  &lt;ownableSynchronizers candidates=&quot;200093&quot; cleared=&quot;200034&quot; /&gt;
-  &lt;references type=&quot;soft&quot; candidates=&quot;4427&quot; cleared=&quot;0&quot; enqueued=&quot;0&quot; dynamicThreshold=&quot;23&quot; maxThreshold=&quot;32&quot; /&gt;
-  &lt;references type=&quot;weak&quot; candidates=&quot;2968&quot; cleared=&quot;31&quot; enqueued=&quot;29&quot; /&gt;
-  &lt;references type=&quot;phantom&quot; candidates=&quot;97&quot; cleared=&quot;0&quot; enqueued=&quot;0&quot; /&gt;
-  &lt;stringconstants candidates=&quot;8948&quot; cleared=&quot;0&quot;  /&gt;
-  &lt;object-monitors candidates=&quot;20&quot; cleared=&quot;7&quot;  /&gt;
+&lt;gc-op id=&quot;2065&quot; type=&quot;global mark&quot; timems=&quot;363.285&quot; contextid=&quot;2062&quot; timestamp=&quot;2021-03-05T12:16:44.639&quot;&gt;
+  &lt;trace-info objectcount=&quot;37481851&quot; scancount=&quot;37457213&quot; scanbytes=&quot;828974936&quot; /&gt;
+  &lt;finalization candidates=&quot;193&quot; enqueued=&quot;0&quot; /&gt;
+  &lt;ownableSynchronizers candidates=&quot;2089&quot; cleared=&quot;0&quot; /&gt;
+  &lt;references type=&quot;soft&quot; candidates=&quot;3059&quot; cleared=&quot;0&quot; enqueued=&quot;0&quot; dynamicThreshold=&quot;0&quot; maxThreshold=&quot;32&quot; /&gt;
+  &lt;references type=&quot;weak&quot; candidates=&quot;10797&quot; cleared=&quot;0&quot; enqueued=&quot;0&quot; /&gt;
+  &lt;references type=&quot;phantom&quot; candidates=&quot;6&quot; cleared=&quot;0&quot; enqueued=&quot;0&quot; /&gt;
+  &lt;stringconstants candidates=&quot;10031&quot; cleared=&quot;0&quot;  /&gt;
 &lt;/gc-op&gt;
-&lt;gc-op id=&quot;47&quot; type=&quot;classunload&quot; timems=&quot;0.020&quot; contextid=&quot;43&quot; timestamp=&quot;2020-11-13T06:31:42.044&quot;&gt;
-  &lt;classunload-info classloadercandidates=&quot;74&quot; classloadersunloaded=&quot;0&quot; classesunloaded=&quot;0&quot; anonymousclassesunloaded=&quot;0&quot; quiescems=&quot;0.000&quot; setupms=&quot;0.020&quot; scanms=&quot;0.000&quot; postms=&quot;0.000&quot; /&gt;
+&lt;gc-op id=&quot;2066&quot; type=&quot;classunload&quot; timems=&quot;0.122&quot; contextid=&quot;2062&quot; timestamp=&quot;2021-03-05T12:16:44.639&quot;&gt;
+  &lt;classunload-info classloadercandidates=&quot;25&quot; classloadersunloaded=&quot;0&quot; classesunloaded=&quot;0&quot; anonymousclassesunloaded=&quot;0&quot; quiescems=&quot;0.000&quot; setupms=&quot;0.121&quot; scanms=&quot;0.000&quot; postms=&quot;0.000&quot; /&gt;
 &lt;/gc-op&gt;
-&lt;gc-op id=&quot;48&quot; type=&quot;sweep&quot; timems=&quot;2.322&quot; contextid=&quot;43&quot; timestamp=&quot;2020-11-13T06:31:42.047&quot; /&gt;
-&lt;gc-op id=&quot;49&quot; type=&quot;compact&quot; timems=&quot;66.804&quot; contextid=&quot;43&quot; timestamp=&quot;2020-11-13T06:31:42.114&quot;&gt;
-  &lt;compact-info movecount=&quot;1651540&quot; movebytes=&quot;56069168&quot; /&gt;
-  &lt;remembered-set-cleared processed=&quot;37569&quot; cleared=&quot;33373&quot; durationms=&quot;1.000&quot; /&gt;
+&lt;gc-op id=&quot;2067&quot; type=&quot;sweep&quot; timems=&quot;5.080&quot; contextid=&quot;2062&quot; timestamp=&quot;2021-03-05T12:16:44.644&quot; /&gt;
+&lt;gc-op id=&quot;2068&quot; type=&quot;compact&quot; timems=&quot;800.059&quot; contextid=&quot;2062&quot; timestamp=&quot;2021-03-05T12:16:45.445&quot;&gt;
+  &lt;compact-info movecount=&quot;5788073&quot; movebytes=&quot;120581384&quot; /&gt;
+  &lt;remembered-set-cleared processed=&quot;783167&quot; cleared=&quot;783167&quot; durationms=&quot;2.197&quot; /&gt;
 &lt;/gc-op&gt;
-</code></pre>
-
-
-
-<pre><code class="xml">&lt;gc-end id=&quot;50&quot; type=&quot;global garbage collect&quot; contextid=&quot;43&quot; durationms=&quot;107.552&quot; usertimems=&quot;688.000&quot; systemtimems=&quot;36.000&quot; stalltimems=&quot;130.908&quot; timestamp=&quot;2020-11-13T06:31:42.115&quot; activeThreads=&quot;8&quot;&gt;
-  &lt;mem-info id=&quot;51&quot; free=&quot;3128950784&quot; total=&quot;3221225472&quot; percent=&quot;97&quot;&gt;
-    &lt;arraylet-reference objects=&quot;2&quot; leaves=&quot;2&quot; largest=&quot;1&quot; /&gt;
-    &lt;arraylet-primitive objects=&quot;1&quot; leaves=&quot;8&quot; largest=&quot;8&quot; /&gt;
-    &lt;pending-finalizers system=&quot;0&quot; default=&quot;0&quot; reference=&quot;29&quot; classloader=&quot;0&quot; /&gt;
-    &lt;remembered-set count=&quot;26656&quot; freebytes=&quot;128671616&quot; totalbytes=&quot;128778240&quot; percent=&quot;99&quot; regionsoverflowed=&quot;0&quot; regionsstable=&quot;0&quot; regionsrebuilding=&quot;0&quot;/&gt;
+&lt;gc-end id=&quot;2069&quot; type=&quot;global garbage collect&quot; contextid=&quot;2062&quot; durationms=&quot;1169.632&quot; usertimems=&quot;7588.846&quot; systemtimems=&quot;0.000&quot; stalltimems=&quot;1403.135&quot; timestamp=&quot;2021-03-05T12:16:45.445&quot; activeThreads=&quot;8&quot;&gt;
+  &lt;mem-info id=&quot;2070&quot; free=&quot;1572864&quot; total=&quot;838860800&quot; percent=&quot;0&quot;&gt;
+    &lt;mem type=&quot;eden&quot; free=&quot;1572864&quot; total=&quot;1572864&quot; percent=&quot;100&quot; /&gt;
+    &lt;remembered-set count=&quot;879104&quot; freebytes=&quot;29865984&quot; totalbytes=&quot;33382400&quot; percent=&quot;89&quot; regionsoverflowed=&quot;0&quot; regionsstable=&quot;0&quot; regionsrebuilding=&quot;0&quot;/&gt;
   &lt;/mem-info&gt;
 &lt;/gc-end&gt;
+&lt;cycle-end id=&quot;2071&quot; type=&quot;global garbage collect&quot; contextid=&quot;2062&quot; timestamp=&quot;2021-03-05T12:16:45.445&quot; /&gt;
+&lt;allocation-satisfied id=&quot;2072&quot; threadId=&quot;00000000008C1F00&quot; bytesRequested=&quot;24&quot; /&gt;
+&lt;af-end id=&quot;2073&quot; timestamp=&quot;2021-03-05T12:16:45.445&quot; threadId=&quot;00000000008C2880&quot; success=&quot;true&quot; /&gt;
+&lt;exclusive-end id=&quot;2074&quot; timestamp=&quot;2021-03-05T12:16:45.445&quot; durationms=&quot;1177.699&quot; /&gt;
 </code></pre>
 
+-->
 
-
-<pre><code class="xml">&lt;cycle-end id=&quot;52&quot; type=&quot;global garbage collect&quot; contextid=&quot;43&quot; timestamp=&quot;2020-11-13T06:31:42.115&quot; /&gt;
-&lt;sys-end id=&quot;53&quot; timestamp=&quot;2020-11-13T06:31:42.115&quot; /&gt;
-&lt;exclusive-end id=&quot;54&quot; timestamp=&quot;2020-11-13T06:31:42.115&quot; durationms=&quot;108.749&quot; /&gt;
-</code></pre>
-
-
-#### Summary of the 'balanced' global GC cycle examples
-
-ADD HERE
-
-- The cycle has reclaimed memory in the heap that the pgc cannot reclaim
-- Rebuilt overflow regions
+<h4 id="summary-of-the-balanced-global-gc-cycle-examples">Summary of the 'balanced' global GC cycle examples</h4>
+<p>Analyzing the structure and elements of this example log output shows that this example global cycle has the following characteristics:</p>
+<ul>
+<li>
+<p>The global GC cycle was triggered during a global mark GC cycle.</p>
+</li>
+<li>
+<p>The concurrent subincrement of the global mark GC cycle was interrupted by an allocation failure that triggered the concurrent subincrement to end and the <code>global mark</code> cycle type to change to a <code>global</code> type. </p>
+</li>
+<li>
+<p>The global GC cycle consists of only 1 GC increment, which runs mark, sweep and compact operations during an STW pause. </p>
+</li>
+<li>
+<p>The global GC cycle reclaimed the entire eden space of the heap.</p>
+</li>
+</ul>
                 
                   
                 
