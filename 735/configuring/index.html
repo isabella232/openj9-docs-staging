@@ -628,6 +628,26 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     Setting resource limits (AIX, Linux, and macOS)
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setting-ulimit-values" class="md-nav__link">
+    Setting ulimit values
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setting-shared-memory-values" class="md-nav__link">
+    Setting shared memory values
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -4058,6 +4078,26 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     Setting resource limits (AIX, Linux, and macOS)
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setting-ulimit-values" class="md-nav__link">
+    Setting ulimit values
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setting-shared-memory-values" class="md-nav__link">
+    Setting shared memory values
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -4184,7 +4224,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p><img alt="Start of content that applies to Java 14+" src="../cr/java14plus.png" /> On AIX systems, you must have the <a href="https://www.ibm.com/support/pages/xl-cc-runtime-aix-v16101-fix-pack-december-2018">XL C++ Runtime</a> installed.</p>
 <h2 id="setting-resource-limits-aix-linux-and-macos">Setting resource limits (AIX, Linux, and macOS)</h2>
 <p>The operating system sets resource limits for a shell and to processes started by the shell to ensure that a single process cannot consume all available resources. However, these limits can affect certain operations that might need to run for a Java application, such as producing a dump file.</p>
-<p>Limits are controlled by the <strong>ulimit</strong> command. A <em>soft</em> limit is the value set by the kernel for a resource and a <em>hard</em> limit imposes a maximum value on the soft limit. A privileged process can change either limit, but an unprivileged process can change only its soft limit (between 0 and the hard limit) or irreversibly lower its hard limit. To see the current limits set for a system, run <code>ulimit -a</code>. The output is similar to the following example:</p>
+<h3 id="setting-ulimit-values">Setting ulimit values</h3>
+<p>Some resource limits are controlled by the <strong>ulimit</strong> command. A <em>soft</em> limit is the value set by the kernel for a resource and a <em>hard</em> limit imposes a maximum value on the soft limit. A privileged process can change either limit, but an unprivileged process can change only its soft limit (between 0 and the hard limit) or irreversibly lower its hard limit. To see the current limits set for a system, run <code>ulimit -a</code>. The output is similar to the following example:</p>
 <pre><code>core file size          (blocks, -c) 0
 data seg size           (kbytes, -d) unlimited
 file size               (blocks, -f) unlimited
@@ -4200,12 +4241,21 @@ virtual memory          (kbytes, -v) unlimited
 
 <p>To show hard limits, use <code>ulimit -Ha</code>.</p>
 <p>You can change limits for specific resources on a temporary basis by running the <strong>ulimit</strong> command. Alternatively, you can store limit settings in a configuration file, which is <code>/etc/security/limits</code> for AIX or <code>etc/security/limits.conf</code> for Linux. For more information about configuring resource limits, refer to the documentation for your operating system.   </p>
-<p>The main use case for changing resource limits is when enabling a system dump to ensure that all the required data can be collected for analysis. For more information, see <a href="../dump_systemdump/#enabling-a-full-system-dump-aix-and-linux">Enabling a full system dump</a>.</p>
+<p>The main use case for changing <code>ulimit</code> resources is when enabling a system dump to ensure that all the required data can be collected for analysis. For more information, see <a href="../dump_systemdump/#enabling-a-full-system-dump-aix-and-linux">Enabling a full system dump</a>.</p>
+<h3 id="setting-shared-memory-values">Setting shared memory values</h3>
+<p>Another use case for changing resource limits is to ensure that there is sufficient shared memory allocated for class data sharing. By default, the shared classes cache consists of memory-mapped files that are created on disk and <em>persist</em> when the system is restarted. If you choose to use <em>non-persistent</em> caches by setting the <code>-Xshareclasses:nonpersistent</code> option, caches are not retained on startup and are allocated by using the System V IPC shared memory mechanism.</p>
+<ul>
+<li>On AIX systems, the kernel dynamically adjusts the shared memory settings as required. No special configuration is required.</li>
+<li>On Linux systems, the <strong>SHMMAX</strong> setting limits the amount of shared memory that can be allocated, which affects the shared classes cache size. You can find the value of <strong>SHMMAX</strong> for your system in the <code>/proc/sys/kernel/shmmax</code> file. For non-persistent caches, set this value to an appropriate size for your applications. To make these changes permanent, edit <code>/etc/sysctl.conf</code>.</li>
+<li>On macOS systems, you must set <strong>kern.sysv.shmmax</strong> and <strong>kern.sysv.shmall</strong> when using a nonpersistent cache. Modify the settings in your <code>/etc/sysctl.conf</code> file and reboot your system. To check the value, run <code>sysctl kern.sysv.shmmax</code>.</li>
+</ul>
+<p><i class="fa fa-pencil-square-o" aria-hidden="true"></i> <strong>Note:</strong> The virtual address space of a process is shared between the shared classes cache and the Java heap. Increasing the maximum size for the shared classes cache might reduce the size of the Java heap that you can create.</p>
 <h2 id="setting-resource-limits-zos">Setting resource limits (z/OS)</h2>
 <p>Resource limits imposed by z/OS might affect Java operations. To learn how these resource limits are set, see <a href="https://www.ibm.com/support/knowledgecenter/SSLTBW_2.4.0/com.ibm.zos.v2r4.bpxb200/cusis.htm">Customizing the BPXPRMxx member of SYS1.PARMLIB</a>.</p>
 <p>The OpenJ9 class data sharing feature is implemented by using shared memory segments on z/OS. Special consideration should be given to the following parameters that relate to the shared memory and IPC semaphore settings:</p>
+<!-- - **MAXSHAREPAGES** (This no longer seems to do anything, per https://www.ibm.com/support/knowledgecenter/SSLTBW_2.4.0/com.ibm.zos.v2r4.ieae200/spb.htm). Also removed from table below. -->
+
 <ul>
-<li><strong>MAXSHAREPAGES</strong></li>
 <li><strong>IPCSHMSPAGES</strong></li>
 <li><strong>IPCSHMMPAGES</strong></li>
 <li><strong>IPCSHMNSEGS</strong></li>
@@ -4255,10 +4305,6 @@ virtual memory          (kbytes, -v) unlimited
 <tr>
 <td><strong>MAXMMAPAREA</strong></td>
 <td>40960</td>
-</tr>
-<tr>
-<td><strong>MAXSHAREPAGES</strong></td>
-<td>?</td>
 </tr>
 <tr>
 <td><strong>IPCSHMSPAGES</strong></td>
